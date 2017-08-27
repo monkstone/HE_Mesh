@@ -53,7 +53,7 @@ public class HEM_ChamferEdges extends HEM_Modifier {
 	 * @see wblut.hemesh.modifiers.HEB_Modifier#modify(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		if (distance == 0) {
 			return mesh;
 		}
@@ -85,7 +85,7 @@ public class HEM_ChamferEdges extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		if (distance == 0) {
 			return selection.parent;
 		}

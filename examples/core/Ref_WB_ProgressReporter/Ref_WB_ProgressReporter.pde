@@ -11,7 +11,8 @@ WB_ProgressReporter pr;
 void setup() {
   size(1000,1000,P3D);
   smooth(8);
-  pr=new WB_ProgressReporter(5);// maximum depth of reporting
+  pr=new WB_ProgressReporter(10,sketchPath("log.txt"),false);// maximum depth of reporting, logfile, append?
+  //Reporting to console is limited to 2 levels.
   pr.start();
   createMesh();
 

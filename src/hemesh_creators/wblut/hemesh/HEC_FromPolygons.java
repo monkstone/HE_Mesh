@@ -24,12 +24,12 @@ import wblut.geom.WB_Polygon;
 public class HEC_FromPolygons extends HEC_Creator {
 
 	/**
-	 * 
+	 *
 	 */
 	private WB_Polygon[] polygons;
 
 	/**
-	 * 
+	 *
 	 */
 	private boolean checkNormals;
 
@@ -95,7 +95,7 @@ public class HEC_FromPolygons extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param b
 	 * @return
@@ -107,7 +107,7 @@ public class HEC_FromPolygons extends HEC_Creator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.hemesh.HE_Creator#create()
 	 */
 	@Override
@@ -116,21 +116,39 @@ public class HEC_FromPolygons extends HEC_Creator {
 			if (polygons.length > 0) {
 				final int nq = polygons.length;
 				final FastTable<WB_Coord> vertices = new FastTable<WB_Coord>();
-				final int[][] faces = new int[nq][];
+				final FastTable<int[]> faces = new FastTable<int[]>();
 				int id = 0;
 				for (int i = 0; i < nq; i++) {
-					WB_Polygon poly = polygons[i].getSimplePolygon();
-
-					faces[i] = new int[poly.getNumberOfPoints()];
-					for (int j = 0; j < poly.getNumberOfPoints(); j++) {
-						vertices.add(poly.getPoint(j));
-						faces[i][j] = id;
-						id++;
+					WB_Polygon poly = polygons[i];
+					if (poly.isSimple()) {
+						int[] face = new int[poly.getNumberOfPoints()];
+						for (int j = 0; j < poly.getNumberOfPoints(); j++) {
+							vertices.add(poly.getPoint(j));
+							face[j] = id;
+							id++;
+						}
+						faces.add(face);
+					} else {
+						int[] tris = poly.getTriangles();
+						for (int j = 0; j < tris.length; j += 3) {
+							int[] face = new int[3];
+							vertices.add(poly.getPoint(tris[j]));
+							face[0] = id;
+							id++;
+							vertices.add(poly.getPoint(tris[j + 1]));
+							face[1] = id;
+							id++;
+							vertices.add(poly.getPoint(tris[j + 2]));
+							face[2] = id;
+							id++;
+							faces.add(face);
+						}
 					}
 				}
+
 				final HEC_FromFacelist ffl = new HEC_FromFacelist().setVertices(vertices).setFaces(faces)
 						.setDuplicate(true).setCheckNormals(checkNormals);
-				;
+
 				return ffl.createBase();
 			}
 		}

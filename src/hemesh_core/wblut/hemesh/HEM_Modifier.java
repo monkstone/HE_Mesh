@@ -22,17 +22,19 @@ abstract public class HEM_Modifier extends HE_Machine {
 
 	@Override
 	public HE_Mesh apply(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting modifier.", tracker.STARTLVL);
+		tracker.setStartStatus(this, "Starting modifier.");
 		if (mesh == null || mesh.getNumberOfVertices() == 0) {
 			return new HE_Mesh();
 		}
 		HE_Mesh copy = mesh.get();
 		try {
-			tracker.setStatus(this, "Mesh modified.", tracker.STOPLVL);
-			return applyInt(mesh);
+			HE_Mesh result = applySelf(mesh);
+			tracker.setStopStatus(this, "Mesh modified.");
+			return result;
 		} catch (Exception e) {
+			e.printStackTrace();
 			mesh.setNoCopy(copy);
-			tracker.setStatus(this, "Modifier failed. Resetting mesh.", tracker.STOPLVL);
+			tracker.setStopStatus(this, "Modifier failed. Resetting mesh.");
 			return mesh;
 		}
 
@@ -40,24 +42,27 @@ abstract public class HEM_Modifier extends HE_Machine {
 
 	@Override
 	public HE_Mesh apply(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting modifier.", tracker.STARTLVL);
+		tracker.setStartStatus(this, "Starting modifier.");
 		if (selection == null) {
 			return new HE_Mesh();
 		}
 		HE_Mesh copy = selection.parent.get();
 		try {
-			tracker.setStatus(this, "Mesh modified.", tracker.STOPLVL);
-			return applyInt(selection);
+			HE_Mesh result = applySelf(selection);
+			tracker.setStopStatus(this, "Mesh modified.");
+
+			return result;
 		} catch (Exception e) {
+			e.printStackTrace();
 			selection.parent.setNoCopy(copy);
-			tracker.setStatus(this, "Modifier failed. Resetting mesh.", tracker.STOPLVL);
+			tracker.setStopStatus(this, "Modifier failed. Resetting mesh.");
 			return selection.parent;
 		}
 
 	}
 
-	protected abstract HE_Mesh applyInt(final HE_Mesh mesh);
+	protected abstract HE_Mesh applySelf(final HE_Mesh mesh);
 
-	protected abstract HE_Mesh applyInt(final HE_Selection selection);
+	protected abstract HE_Mesh applySelf(final HE_Selection selection);
 
 }

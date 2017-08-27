@@ -3,6 +3,8 @@
  */
 package wblut.processing;
 
+import wblut.geom.WB_Vector;
+
 /**
  * @author FVH
  *
@@ -1014,6 +1016,7 @@ public class WB_Color {
 	// [nm]
 	{
 		double t;
+
 		double r = 0.0;
 		double g = 0.0;
 		double b = 0.0;
@@ -1055,5 +1058,79 @@ public class WB_Color {
 		}
 		return color((int) (256 * r), (int) (256 * g), (int) (256 * b));
 	}
+
+	static double clamp(final double x) {
+		if (x > 1.0) {
+			return 1.0;
+		}
+		if (x < 0.0) {
+			return 0.0;
+		}
+		return x;
+
+	}
+
+	static WB_Vector bump3y(final WB_Vector x, final WB_Vector yoffset) {
+		WB_Vector y = new WB_Vector(1.0 - x.xd() * x.xd(), 1.0 - x.yd() * x.yd(), 1.0 - x.zd() * x.zd());
+		y.subSelf(yoffset);
+		y.set(clamp(y.xf()), clamp(y.yf()), clamp(y.zf()));
+		return y;
+	}
+
+	public static int spectralColorZucconi6(final double wavelength) {
+		WB_Vector x = new WB_Vector(1.0, 1.0, 1.0).mulSelf((wavelength - 400.0) / 300.0);
+
+		WB_Vector c1 = new WB_Vector(3.54585104, 2.93225262, 2.41593945);
+		WB_Vector x1 = new WB_Vector(0.69549072, 0.49228336, 0.27699880);
+		WB_Vector y1 = new WB_Vector(0.02312639, 0.15225084, 0.52607955);
+
+		WB_Vector c2 = new WB_Vector(3.90307140, 3.21182957, 3.96587128);
+		WB_Vector x2 = new WB_Vector(0.11748627, 0.86755042, 0.66077860);
+		WB_Vector y2 = new WB_Vector(0.84897130, 0.88445281, 0.73949448);
+
+		WB_Vector c1xmx1 = x.sub(x1).scaleSelf(c1.xd(), c1.yd(), c1.zd());
+		WB_Vector c2xmx2 = x.sub(x2).scaleSelf(c2.xd(), c2.yd(), c2.zd());
+		WB_Vector result = bump3y(c1xmx1, y1).addSelf(bump3y(c2xmx2, y2));
+		return color((int) (259.99 * result.xd()), (int) (259.99 * result.yd()), (int) (259.99 * result.zd()));
+	}
+	// http://planetpixelemporium.com/tutorialpages/light.html
+
+	static int Candle = color(255, 147, 41);
+
+	static int Tungsten40W = color(255, 197, 143);
+
+	static int Tungsten100W = color(255, 214, 170);
+
+	static int Halogen = color(255, 241, 224);
+
+	static int CarbonArc = color(255, 250, 244);
+
+	static int HighNoonSun = color(255, 255, 251);
+
+	static int DirectSunlight = color(255, 255, 255);
+
+	static int OvercastSky = color(201, 226, 255);
+
+	static int ClearBlueSky = color(64, 156, 255);
+
+	static int WarmFluorescent = color(255, 244, 229);
+
+	static int StandardFluorescent = color(244, 255, 250);
+
+	static int CoolWhiteFluorescent = color(212, 235, 255);
+
+	static int FullSpectrumFluorescent = color(255, 244, 242);
+
+	static int GrowLightFluorescent = color(255, 239, 247);
+
+	static int BlackLightFluorescent = color(167, 0, 255);
+
+	static int MercuryVapor = color(216, 247, 255);
+
+	static int SodiumVapor = color(255, 209, 178);
+
+	static int MetalHalide = color(242, 252, 255);
+
+	static int HighPressureSodium = color(255, 183, 76);
 
 }

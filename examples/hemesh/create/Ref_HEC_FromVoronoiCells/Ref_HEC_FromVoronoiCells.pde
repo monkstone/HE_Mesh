@@ -23,8 +23,8 @@ void setup() {
 }
 
 void createContainer() {
-  container=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(200)); 
-  //container.modify(new HEM_Extrude().setDistance(150).setChamfer(0.5));
+  container=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(320)); 
+  container.modify(new HEM_Extrude().setDistance(150).setChamfer(0.5));
   HE_FaceIterator fitr=container.fItr();
   while (fitr.hasNext()) {
     fitr.next().setColor(color(0, 200, 50));
@@ -40,7 +40,7 @@ void createMesh() {
   }
 
   // generate voronoi cells
-  HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells().setPoints(points).setN(numpoints).setContainer(container).setOffset(0);
+  HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells().setPoints(points).setContainer(container).setOffset(0);
   cells=multiCreator.create();
 
   //color the cells
@@ -75,14 +75,14 @@ void createMesh() {
     ex.printStackTrace();
     fusedcells=tmp;
   } 
-  //fusedcells.clean();
-  HE_Selection.selectFacesWithOtherInternalLabel(fusedcells, -1).subdivide(new HES_CatmullClark());
+fusedcells.triangulate(HE_Selection.selectFacesWithOtherInternalLabel(fusedcells, -1));
+  HE_Selection.selectFacesWithOtherInternalLabel(fusedcells, -1).subdivide(new HES_CatmullClark(),2);
   fusedcells.validate();
   
 }
 
 void draw() {
-  background(50);
+  background(25);
   directionalLight(255, 255, 255, 1, 1, -1);
   directionalLight(127, 127, 127, -1, -1, 1);
   translate(width/2, height/2, 0);

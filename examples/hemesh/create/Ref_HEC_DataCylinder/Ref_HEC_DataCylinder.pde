@@ -14,7 +14,6 @@ void setup() {
   HEC_DataCylinder creator=new HEC_DataCylinder();
   creator.setRadius(150, 50);  
   creator.setHeight(400);
-creator.setChamfer(0.1);
   readData();
 
   creator.setDataFromFloat(fakeData);

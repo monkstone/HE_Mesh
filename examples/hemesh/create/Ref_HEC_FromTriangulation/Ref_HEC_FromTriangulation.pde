@@ -18,7 +18,7 @@ void setup() {
   smooth(8);
   source=new WB_RandomRectangle().setSize(1200, 1200);
   render=new WB_Render3D(this);
-  numPoints=500;
+  numPoints=250;
   points=new WB_Point[numPoints];
   for (int i=0; i<numPoints; i++) {
     points[i]=source.nextPoint();
@@ -26,7 +26,6 @@ void setup() {
   WB_Triangulation2D triangulation=WB_Triangulate.triangulate2D(points);
   triangles=triangulation.getTriangles();// 1D array of indices of triangles, 3 indices per triangle
   mesh=new HE_Mesh(new HEC_FromTriangulation().setTriangulation(triangulation).setPoints(points));
-  mesh.smooth();
   println(WB_Version.version());
 }
 
@@ -38,5 +37,9 @@ void draw() {
   translate(width/2, height/2);
   rotateY(mouseX*1.0f/width*TWO_PI);
   rotateX(mouseY*1.0f/height*TWO_PI);
+  stroke(0);
   render.drawEdges(mesh);
+  fill(255);
+  noStroke();
+  render.drawFaces(mesh);
 }

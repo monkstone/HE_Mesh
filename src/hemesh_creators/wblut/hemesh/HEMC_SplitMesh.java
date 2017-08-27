@@ -104,7 +104,7 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		final HEM_Slice sm = new HEM_Slice();
 		HE_Mesh tmp = mesh.copy();
 		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset).setSimpleCap(simpleCap);
-		sm.applyInt(tmp);
+		sm.applySelf(tmp);
 		tmp.resetFaceInternalLabels();
 		HE_FaceIterator fItr = sm.capFaces.fItr();
 		while (fItr.hasNext()) {
@@ -114,7 +114,7 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		P.flipNormal();
 		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset).setSimpleCap(simpleCap);
 		tmp = mesh.copy();
-		sm.applyInt(tmp);
+		sm.applySelf(tmp);
 		tmp.resetFaceInternalLabels();
 		fItr = sm.capFaces.fItr();
 		while (fItr.hasNext()) {

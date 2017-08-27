@@ -30,6 +30,7 @@ import wblut.math.WB_ScalarParameter;
  *
  */
 public class HEM_Lattice extends HEM_Modifier {
+
 	/**
 	 *
 	 */
@@ -205,22 +206,22 @@ public class HEM_Lattice extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEM_Lattice.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HEM_Lattice.");
 		if (d == null) {
-			tracker.setStatus(this,
-					"Can't create with zero thickness, use HEM_PunchHoles instead. Exiting HEM_Lattice.", -1);
+			tracker.setStopStatus(this,
+					"Can't create with zero thickness, use HEM_PunchHoles instead. Exiting HEM_Lattice.");
 			return mesh;
 		}
 		if (sew == null) {
-			tracker.setStatus(this, "Can't create with zero width. Exiting HEM_Lattice.", -1);
+			tracker.setStopStatus(this, "Can't create with zero width. Exiting HEM_Lattice.");
 			return mesh;
 		}
 		final HEM_Extrude extm = new HEM_Extrude().setDistance(0).setRelative(false).setChamfer(sew).setFuse(fuse)
 				.setHardEdgeChamfer(hew).setFuseAngle(fuseAngle).setThresholdAngle(thresholdAngle);
 		mesh.modify(extm);
 
-		tracker.setStatus(this, "Creating inner mesh.", 0);
+		tracker.setDuringStatus(this, "Creating inner mesh.");
 
 		HEC_Copy cc = new HEC_Copy().setMesh(mesh);
 		final HE_Mesh innerMesh = cc.create();
@@ -228,7 +229,7 @@ public class HEM_Lattice extends HEM_Modifier {
 		TLongLongMap allheCorrelation = cc.halfedgeCorrelation;
 
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
-		tracker.setStatus(this, "Creating face correlations.", counter);
+		tracker.setCounterStatus(this, "Creating face correlations.", counter);
 		final HashMap<Long, Long> faceCorrelation = new HashMap<Long, Long>();
 		final Iterator<HE_Face> fItr1 = mesh.fItr();
 		final Iterator<HE_Face> fItr2 = innerMesh.fItr();
@@ -241,7 +242,7 @@ public class HEM_Lattice extends HEM_Modifier {
 			counter.increment();
 		}
 		counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
-		tracker.setStatus(this, "Creating boundary halfedge correlations.", counter);
+		tracker.setCounterStatus(this, "Creating boundary halfedge correlations.", counter);
 		final HashMap<Long, Long> heCorrelation = new HashMap<Long, Long>();
 		HE_Halfedge he1;
 		HE_Halfedge he2;
@@ -255,10 +256,11 @@ public class HEM_Lattice extends HEM_Modifier {
 			}
 			counter.increment();
 		}
-		tracker.setStatus(this, "Shrinking inner mesh.", 0);
+		tracker.setDuringStatus(this, "Shrinking inner mesh.");
 		final HEM_VertexExpand expm = new HEM_VertexExpand().setDistance(d);
-		innerMesh.modify(expm);
-		HET_MeshOp.flipFaces(innerMesh);
+		expm.applySelf(innerMesh);
+		HEM_FlipFaces ff = new HEM_FlipFaces();
+		ff.applySelf(innerMesh);
 		final int nf = mesh.getNumberOfFaces();
 		final HE_Face[] origFaces = mesh.getFacesAsArray();
 		mesh.addVertices(innerMesh.getVerticesAsArray());
@@ -277,7 +279,7 @@ public class HEM_Lattice extends HEM_Modifier {
 		counter = new WB_ProgressCounter(nf, 10);
 		WB_Coord co, ci;
 		double ob, ib;
-		tracker.setStatus(this, "Connecting outer and inner faces.", counter);
+		tracker.setCounterStatus(this, "Connecting outer and inner faces.", counter);
 		for (int i = 0; i < nf; i++) {
 			fo = origFaces[i];
 
@@ -341,7 +343,7 @@ public class HEM_Lattice extends HEM_Modifier {
 		}
 		counter = new WB_ProgressCounter(heCorrelation.size(), 10);
 
-		tracker.setStatus(this, "Connecting outer and inner boundaries.", counter);
+		tracker.setCounterStatus(this, "Connecting outer and inner boundaries.", counter);
 		final Iterator<Map.Entry<Long, Long>> it = heCorrelation.entrySet().iterator();
 		while (it.hasNext()) {
 			final Map.Entry<Long, Long> pairs = it.next();
@@ -367,7 +369,7 @@ public class HEM_Lattice extends HEM_Modifier {
 			counter.increment();
 		}
 		mesh.pairHalfedges();
-		tracker.setStatus(this, "Exiting HEM_Lattice.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_Lattice.");
 		return mesh;
 	}
 
@@ -377,28 +379,28 @@ public class HEM_Lattice extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting HEM_Lattice.", +1);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		tracker.setStartStatus(this, "Starting HEM_Lattice.");
 		if (d == null) {
-			tracker.setStatus(this,
-					"Can't create with zero thickness, use HEM_PunchHoles instead. Exiting HEM_Lattice.", -1);
+			tracker.setStopStatus(this,
+					"Can't create with zero thickness, use HEM_PunchHoles instead. Exiting HEM_Lattice.");
 			return selection.parent;
 		}
 		if (sew == null) {
-			tracker.setStatus(this, "Can't create with zero width. Exiting HEM_Lattice.", -1);
+			tracker.setStopStatus(this, "Can't create with zero width. Exiting HEM_Lattice.");
 			return selection.parent;
 		}
 		final HEM_Extrude extm = new HEM_Extrude().setDistance(0).setRelative(false).setChamfer(sew).setFuse(fuse)
 				.setHardEdgeChamfer(hew).setFuseAngle(fuseAngle).setThresholdAngle(thresholdAngle);
 		selection.modify(extm);
-		tracker.setStatus(this, "Creating inner mesh.", 0);
+		tracker.setDuringStatus(this, "Creating inner mesh.");
 		HEC_Copy cc = new HEC_Copy().setMesh(selection.parent);
 		final HE_Mesh innerMesh = cc.create();
 		TLongLongMap allheCorrelation = cc.halfedgeCorrelation;
 
 		WB_ProgressCounter counter = new WB_ProgressCounter(selection.parent.getNumberOfFaces(), 10);
 
-		tracker.setStatus(this, "Creating face correlations.", counter);
+		tracker.setCounterStatus(this, "Creating face correlations.", counter);
 		final HashMap<Long, Long> faceCorrelation = new HashMap<Long, Long>();
 		final Iterator<HE_Face> fItr1 = selection.parent.fItr();
 		final Iterator<HE_Face> fItr2 = innerMesh.fItr();
@@ -412,7 +414,7 @@ public class HEM_Lattice extends HEM_Modifier {
 		}
 		counter = new WB_ProgressCounter(selection.parent.getNumberOfHalfedges(), 10);
 
-		tracker.setStatus(this, "Creating boundary halfedge correlations.", counter);
+		tracker.setCounterStatus(this, "Creating boundary halfedge correlations.", counter);
 		final HashMap<Long, Long> heCorrelation = new HashMap<Long, Long>();
 		HE_Halfedge he1;
 		HE_Halfedge he2;
@@ -426,10 +428,11 @@ public class HEM_Lattice extends HEM_Modifier {
 			}
 			counter.increment();
 		}
-		tracker.setStatus(this, "Shrinking inner mesh.", 0);
+		tracker.setDuringStatus(this, "Shrinking inner mesh.");
 		final HEM_VertexExpand expm = new HEM_VertexExpand().setDistance(d);
-		innerMesh.modify(expm);
-		HET_MeshOp.flipFaces(innerMesh);
+		expm.applySelf(innerMesh);
+		HEM_FlipFaces ff = new HEM_FlipFaces();
+		ff.applySelf(innerMesh);
 		final int nf = selection.parent.getNumberOfFaces();
 		final HE_Face[] origFaces = selection.parent.getFacesAsArray();
 		selection.parent.addVertices(innerMesh.getVerticesAsArray());
@@ -447,7 +450,7 @@ public class HEM_Lattice extends HEM_Modifier {
 		counter = new WB_ProgressCounter(nf, 10);
 		WB_Coord co, ci;
 		double ob, ib;
-		tracker.setStatus(this, "Connecting outer and inner faces.", counter);
+		tracker.setCounterStatus(this, "Connecting outer and inner faces.", counter);
 		for (int i = 0; i < nf; i++) {
 			fo = origFaces[i];
 			final Long innerKey = faceCorrelation.get(fo.key());
@@ -509,7 +512,7 @@ public class HEM_Lattice extends HEM_Modifier {
 		}
 		counter = new WB_ProgressCounter(heCorrelation.size(), 10);
 
-		tracker.setStatus(this, "Connecting outer and inner boundaries.", counter);
+		tracker.setCounterStatus(this, "Connecting outer and inner boundaries.", counter);
 		final Iterator<Map.Entry<Long, Long>> it = heCorrelation.entrySet().iterator();
 		while (it.hasNext()) {
 			final Map.Entry<Long, Long> pairs = it.next();
@@ -535,7 +538,7 @@ public class HEM_Lattice extends HEM_Modifier {
 			counter.increment();
 		}
 		selection.parent.pairHalfedges();
-		tracker.setStatus(this, "Exiting HEM_Lattice.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_Lattice.");
 		return selection.parent;
 	}
 }

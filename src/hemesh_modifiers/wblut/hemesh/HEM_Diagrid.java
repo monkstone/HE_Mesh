@@ -51,7 +51,7 @@ public class HEM_Diagrid extends HEM_Modifier {
 	 * @see wblut.hemesh.HEM_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		final HE_Selection sel = HE_Selection.selectAllEdges(mesh);
 		HET_MeshOp.splitFacesTri(mesh);
 		final HE_EdgeIterator eitr = sel.eItr();
@@ -71,7 +71,7 @@ public class HEM_Diagrid extends HEM_Modifier {
 	 * @see wblut.hemesh.HEM_Modifier#apply(wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.collectEdgesByFace();
 		HET_MeshOp.splitFacesTri(selection);
 		final HE_RAS<HE_Halfedge> border = new HE_RAS.HE_RASTrove<HE_Halfedge>();

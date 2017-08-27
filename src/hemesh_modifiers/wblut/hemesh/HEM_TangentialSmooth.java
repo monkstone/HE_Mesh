@@ -102,8 +102,8 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 	 * @see wblut.hemesh.HEM_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEM_TangentialSmooth.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HEM_TangentialSmooth.");
 		WB_AABB box = new WB_AABB();
 		if (autoRescale) {
 			box = mesh.getAABB();
@@ -113,7 +113,7 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 			iter = 1;
 		}
 		WB_ProgressCounter counter = new WB_ProgressCounter(iter * mesh.getNumberOfVertices(), 10);
-		tracker.setStatus(this, "Smoothing vertices.", counter);
+		tracker.setCounterStatus(this, "Smoothing vertices.", counter);
 		for (int r = 0; r < iter; r++) {
 			Iterator<HE_Vertex> vItr = mesh.vItr();
 			HE_Vertex v;
@@ -150,7 +150,7 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 		if (autoRescale) {
 			mesh.fitInAABB(box);
 		}
-		tracker.setStatus(this, "Exiting HEM_TangentialSmooth.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_TangentialSmooth.");
 		return mesh;
 	}
 
@@ -161,8 +161,8 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting HEM_TangentialSmooth.", +1);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		tracker.setStartStatus(this, "Starting HEM_TangentialSmooth.");
 		selection.collectVertices();
 		WB_AABB box = new WB_AABB();
 		if (autoRescale) {
@@ -173,7 +173,7 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 			iter = 1;
 		}
 		WB_ProgressCounter counter = new WB_ProgressCounter(iter * selection.getNumberOfVertices(), 10);
-		tracker.setStatus(this, "Smoothing vertices.", counter);
+		tracker.setCounterStatus(this, "Smoothing vertices.", counter);
 		WB_Plane tangent;
 		for (int r = 0; r < iter; r++) {
 			Iterator<HE_Vertex> vItr = selection.vItr();
@@ -216,7 +216,7 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 		if (autoRescale) {
 			selection.parent.fitInAABB(box);
 		}
-		tracker.setStatus(this, "Exiting HEM_TangentialSmooth.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_TangentialSmooth.");
 		return selection.parent;
 	}
 }

@@ -30,7 +30,7 @@ public class HEM_VertexExpand extends HEM_Modifier {
 	 */
 	public HEM_VertexExpand() {
 		super();
-		d = null;
+		d = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class HEM_VertexExpand extends HEM_Modifier {
 	 * @return
 	 */
 	public HEM_VertexExpand setDistance(final double d) {
-		this.d = new WB_ConstantScalarParameter(d);
+		this.d = d == 0 ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(d);
 		return this;
 	}
 
@@ -55,8 +55,8 @@ public class HEM_VertexExpand extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		if (d == null) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		if (d == WB_ScalarParameter.ZERO) {
 			return mesh;
 		}
 		HE_Vertex v;
@@ -83,16 +83,24 @@ public class HEM_VertexExpand extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		if (d == null) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		if (d == WB_ScalarParameter.ZERO) {
 			return selection.parent;
 		}
-		selection.collectVertices();
-		final Iterator<HE_Vertex> vItr = selection.vItr();
 		HE_Vertex v;
+		Iterator<HE_Vertex> vItr = selection.vItr();
+		final FastTable<WB_Coord> normals = new FastTable<WB_Coord>();
 		while (vItr.hasNext()) {
 			v = vItr.next();
-			v.addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), v.getVertexNormal());
+			normals.add(v.getVertexNormal());
+		}
+		final Iterator<WB_Coord> vnItr = normals.iterator();
+		vItr = selection.vItr();
+		WB_Coord n;
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			n = vnItr.next();
+			v.addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
 		}
 		return selection.parent;
 	}

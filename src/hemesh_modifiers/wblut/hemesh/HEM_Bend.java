@@ -127,7 +127,7 @@ public class HEM_Bend extends HEM_Modifier {
 	 * @see wblut.hemesh.modifiers.HEB_Modifier#modify(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		if (groundPlane != null && bendAxis != null && angleFactor != 0) {
 			HE_Vertex v;
 			final Iterator<HE_Vertex> vItr = mesh.vItr();
@@ -149,7 +149,7 @@ public class HEM_Bend extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		if (groundPlane != null && bendAxis != null && angleFactor != 0) {
 			HE_Vertex v;
 			final Iterator<HE_Vertex> vItr = selection.vItr();

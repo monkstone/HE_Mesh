@@ -2057,10 +2057,10 @@ public class HET_MeshOp {
 	public static HE_MeshStructure cleanUnusedElementsByFace(final HE_MeshStructure mesh) {
 		final HE_RAS<HE_Vertex> cleanedVertices = new HE_RAS.HE_RASTrove<HE_Vertex>();
 		final HE_RAS<HE_Halfedge> cleanedHalfedges = new HE_RAS.HE_RASTrove<HE_Halfedge>();
-		tracker.setStatusStr("HET_MeshOp", "Cleaning unused elements.", tracker.STARTLVL);
+		tracker.setStartStatusStr("HET_MeshOp", "Cleaning unused elements.");
 		HE_Halfedge he;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
-		tracker.setStatusStr("HET_MeshOp", "Processing faces.", counter);
+		tracker.setCounterStatusStr("HET_MeshOp", "Processing faces.", counter);
 		HE_Face f;
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		while (fItr.hasNext()) {
@@ -2079,7 +2079,7 @@ public class HET_MeshOp {
 			counter.increment();
 		}
 		counter = new WB_ProgressCounter(cleanedHalfedges.size(), 10);
-		tracker.setStatusStr("HET_MeshOp", "Processing halfedges.", counter);
+		tracker.setCounterStatusStr("HET_MeshOp", "Processing halfedges.", counter);
 		final int n = cleanedHalfedges.size();
 		for (int i = 0; i < n; i++) {
 			he = cleanedHalfedges.get(i);
@@ -2091,7 +2091,7 @@ public class HET_MeshOp {
 		}
 		mesh.replaceVertices(cleanedVertices.getObjects());
 		mesh.replaceHalfedges(cleanedHalfedges.getObjects());
-		tracker.setStatusStr("HET_MeshOp", "Done cleaning unused elements.", tracker.STOPLVL);
+		tracker.setStopStatusStr("HET_MeshOp", "Done cleaning unused elements.");
 		return mesh;
 	}
 

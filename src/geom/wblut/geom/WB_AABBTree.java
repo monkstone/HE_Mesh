@@ -52,14 +52,14 @@ public class WB_AABBTree {
 	 */
 	private void buildTree(final HE_Mesh mesh) {
 
-		tracker.setStatus(this, "Starting WB_AABBTree construction. Max. number of faces per node: " + maxNumberOfFaces,
-				+1);
+		tracker.setStartStatus(this,
+				"Starting WB_AABBTree construction. Max. number of faces per node: " + maxNumberOfFaces);
 
 		root = new WB_AABBNode();
 		final List<HE_Face> faces = new FastTable<HE_Face>();
 		faces.addAll(mesh.getFaces());
 		buildNode(root, faces, mesh, 0);
-		tracker.setStatus(this, "Exiting WB_AABBTree construction.", -1);
+		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class WB_AABBTree {
 	 * @param level
 	 */
 	private void buildNode(final WB_AABBNode node, final List<HE_Face> faces, final HE_Mesh mesh, final int level) {
-		tracker.setStatus(this, "Splitting WB_AABBNode level " + level + " with " + faces.size() + " faces.", 0);
+		tracker.setDuringStatus(this, "Splitting WB_AABBNode level " + level + " with " + faces.size() + " faces.");
 		node.level = level;
 		node.aabb = new WB_AABB();
 		for (HE_Face f : faces) {

@@ -202,10 +202,12 @@ public class WB_VoronoiCell3D {
 	}
 
 	public void trim(final double d) {
-		for (final WB_Plane P : cell.getPlanes(-d)) {
-			if (cell != null) {
-				P.flipNormal();
-				slice(P);
+		if (!WB_Epsilon.isZero(d)) {
+			for (final WB_Plane P : cell.getPlanes(-d)) {
+				if (cell != null) {
+					P.flipNormal();
+					slice(P);
+				}
 			}
 		}
 

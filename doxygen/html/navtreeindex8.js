@@ -1,5 +1,12 @@
 var NAVTREEINDEX8 =
 {
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a4ea7e05b3328e953798407ced583c1a9":[2,0,0,1,54,1,6],
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a647dc4e0f5813058c5c6d69a20519d75":[2,0,0,1,54,1,10],
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a6cea460ca889477ae9ff951b32b74d7b":[2,0,0,1,54,1,1],
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a6e6f16d446983aa03a50ad0a2184908e":[2,0,0,1,54,1,11],
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a6ece68a8105bf660643d0cc05a3d26bc":[2,0,0,1,54,1,21],
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a6ee12b473bc2c2c4e76305be108bac85":[2,0,0,1,54,1,2],
+"classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a7010646876e80c68e19f988c1926b3f0":[2,0,0,1,54,1,8],
 "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a83b17f608aed810850edd84a0816f9d7":[2,0,0,1,54,1,0],
 "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a89fc9a34e57f3b6220313fde0b22058e":[2,0,0,1,54,1,22],
 "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html#a8e5cb36420b3bdbceccc1f095843985d":[2,0,0,1,54,1,7],
@@ -242,12 +249,5 @@ var NAVTREEINDEX8 =
 "classwblut_1_1geom_1_1_w_b___octagon.html#ae4fa95dcf89224a7e571c9f51fb8a9a3":[2,0,0,1,74,7],
 "classwblut_1_1geom_1_1_w_b___octree.html":[2,0,0,1,75],
 "classwblut_1_1geom_1_1_w_b___octree.html#a027aad216b6088a502c7b7ec8e603c40":[2,0,0,1,75,33],
-"classwblut_1_1geom_1_1_w_b___octree.html#a037aea68f174c75b0ea7bcf5fca148b2":[2,0,0,1,75,17],
-"classwblut_1_1geom_1_1_w_b___octree.html#a215e9970eb3e2caba7a3b7094f21378c":[2,0,0,1,75,14],
-"classwblut_1_1geom_1_1_w_b___octree.html#a2255989215a56fb226eee53195261d15":[2,0,0,1,75,40],
-"classwblut_1_1geom_1_1_w_b___octree.html#a28933bf440d6b4610acec4f592cd5f2c":[2,0,0,1,75,4],
-"classwblut_1_1geom_1_1_w_b___octree.html#a2d0653726987cc28429bce05474db22c":[2,0,0,1,75,41],
-"classwblut_1_1geom_1_1_w_b___octree.html#a3465e6c2ba148690a581ab1289c22445":[2,0,0,1,75,13],
-"classwblut_1_1geom_1_1_w_b___octree.html#a3935415359453c301cf3732cad1f21e5":[2,0,0,1,75,23],
-"classwblut_1_1geom_1_1_w_b___octree.html#a3beb7d84774d9ccd994adf092695f136":[2,0,0,1,75,29]
+"classwblut_1_1geom_1_1_w_b___octree.html#a037aea68f174c75b0ea7bcf5fca148b2":[2,0,0,1,75,17]
 };

@@ -19,8 +19,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javolution.util.FastTable;
+import wblut.geom.WB_AABB;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_GeometryOp;
 import wblut.geom.WB_Point;
 import wblut.geom.WB_Voronoi;
 import wblut.math.WB_ConstantScalarParameter;
@@ -46,8 +48,6 @@ import wblut.math.WB_ScalarParameter;
 public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 	/** Points. */
 	private List<WB_Coord> points;
-	/** Number of points. */
-	private int numberOfPoints;
 	/** Container. */
 	private HE_Mesh container;
 	/** The simple cap. */
@@ -68,6 +68,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 	public HEMC_VoronoiCellsPre() {
 		super();
 		simpleCap = true;
+		offset = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -244,7 +245,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 		public VorResult call() {
 
 			final HEC_VoronoiCell cvc = new HEC_VoronoiCell();
-			cvc.setPoints(points).setN(numberOfPoints).setContainer(container).setOffset(offset).setSimpleCap(simpleCap)
+			cvc.setPoints(points).setContainer(container).setOffset(offset).setSimpleCap(simpleCap)
 					.setLimitPoints(true);
 			cvc.setCellIndex(index);
 			cvc.setPointsToUse(indices);
@@ -255,7 +256,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 
 	@Override
 	void create(final HE_MeshCollection result) {
-		tracker.setStatus(this, "Starting HEMC_VoronoiCells", +1);
+		tracker.setStartStatus(this, "Starting HEMC_VoronoiCellsPre");
 
 		if (container == null) {
 			_numberOfMeshes = 0;
@@ -266,9 +267,6 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 			_numberOfMeshes = 1;
 			return;
 		}
-
-		numberOfPoints = points.size();
-
 		HEMC_VoronoiBox multiCreator = new HEMC_VoronoiBox();
 		multiCreator.setPoints(points);
 		multiCreator.setContainer(container.getAABB());
@@ -277,8 +275,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 		HE_MeshCollection cells = multiCreator.create();
 		int[][] indices = WB_Voronoi.getVoronoi3DNeighbors(points);
 		final HEC_VoronoiCell cvc = new HEC_VoronoiCell();
-		cvc.setPoints(points).setN(numberOfPoints).setContainer(container).setOffset(offset).setSimpleCap(simpleCap)
-				.setLimitPoints(true);
+		cvc.setPoints(points).setContainer(container).setOffset(offset).setSimpleCap(simpleCap).setLimitPoints(true);
 		WB_AABBTree tree = new WB_AABBTree(container, 1);
 		final ArrayList<HE_Selection> linnersel = new ArrayList<HE_Selection>();
 		final ArrayList<HE_Selection> loutersel = new ArrayList<HE_Selection>();
@@ -290,30 +287,27 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 			m = mItr.next();
 			HE_VertexIterator vItr = m.vItr();
 			HE_Vertex v;
-			int in = 0;
-			int out = 0;
-			boolean inside;
+			boolean in = false;
 			while (vItr.hasNext()) {
 				v = vItr.next();
-				inside = HET_MeshOp.isInside(tree, v);
-				if (inside) {
-					in++;
-				} else {
-					out++;
+				in = HET_MeshOp.isInside(tree, v);
+				if (in) {
+					break;
 				}
 			}
-			if (in == 0) {
-				System.out.println(this.getClass().getSimpleName() + ": external cell " + (i + 1) + " of "
-						+ cells.size() + " discarded.");
-			} else if (out == 0) {
-				System.out.println(this.getClass().getSimpleName() + ": internal cell " + (i + 1) + " of "
-						+ cells.size() + " added.");
+			WB_AABB maabb = m.getAABB();
+
+			boolean intersects = WB_GeometryOp.checkIntersection3D(maabb, tree);
+
+			if (!in && !intersects) {
+				tracker.setDuringStatus(this, "Ignoring external cell " + (i + 1) + " of " + cells.size() + ".");
+			} else if (!intersects) {
+				tracker.setDuringStatus(this, "Creating internal cell " + (i + 1) + " of " + cells.size() + ".");
 				result.add(m);
 				linnersel.add(HE_Selection.selectAllFaces(m));
 				loutersel.add(new HE_Selection(m));
 			} else {
-				System.out.println(this.getClass().getSimpleName() + ": surface cell " + (i + 1) + " of " + cells.size()
-						+ " queued.");
+				tracker.setDuringStatus(this, "Qeueing surface cell " + (i + 1) + " of " + cells.size() + ".");
 				int index = m.getInternalLabel();
 				surfaceCells.add(index);
 			}
@@ -335,8 +329,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 				result.add(cell);
 				linnersel.add(vr.inner);
 				loutersel.add(vr.outer);
-				System.out.println(this.getClass().getSimpleName() + ": surface cell " + cell.getInternalLabel()
-						+ " retrieved from queue.");
+				tracker.setDuringStatus(this, "Retrieving surface cell " + cell.getInternalLabel() + ".");
 			}
 
 			executor.shutdown();
@@ -356,7 +349,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 			inner[i] = linnersel.get(i);
 			outer[i] = loutersel.get(i);
 		}
-		tracker.setStatus(this, "Exiting HEMC_VoronoiCells.", -1);
+		tracker.setStopStatus(this, "Exiting HEMC_VoronoiCellsPre.");
 
 	}
 

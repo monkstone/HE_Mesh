@@ -57,6 +57,7 @@ public class HEC_VoronoiCell extends HEC_Creator {
 	public HEC_VoronoiCell() {
 		super();
 		override = true;
+		offset = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -137,18 +138,6 @@ public class HEC_VoronoiCell extends HEC_Creator {
 		for (int i = 0; i < n; i++) {
 			this.pointsToUse[i] = pointsToUse.get(i);
 		}
-		return this;
-	}
-
-	/**
-	 * Set number of points.
-	 *
-	 * @param N
-	 *            number of points
-	 * @return self
-	 */
-	public HEC_VoronoiCell setN(final int N) {
-		numberOfPoints = N;
 		return this;
 	}
 
@@ -250,11 +239,10 @@ public class HEC_VoronoiCell extends HEC_Creator {
 		if (points == null) {
 			return container;
 		}
-		if (numberOfPoints == 0) {
-			numberOfPoints = points.length;
-		}
+		numberOfPoints = points.length;
+
 		if (cellIndex < 0 || cellIndex >= numberOfPoints) {
-			return container;
+			return new HE_Mesh();
 		}
 		final HE_Mesh result = container.copy();
 		result.setInternalLabel(cellIndex);
@@ -308,7 +296,14 @@ public class HEC_VoronoiCell extends HEC_Creator {
 		final HEM_MultiSlice msm = new HEM_MultiSlice();
 		msm.setPlanes(cutPlanes).setCenter(new WB_Point(points[cellIndex])).setCap(!surface).setLabels(labels)
 				.setSimpleCap(simpleCap);
-		result.modify(msm);
+
+		try {
+			msm.applySelf(result);
+
+		} catch (Exception e) {
+			return new HE_Mesh();
+		}
+
 		inner = new HE_Selection(result);
 
 		for (int i = 0; i < labels.length; i++) {

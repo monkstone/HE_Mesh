@@ -188,7 +188,7 @@ public class HET_Fixer {
 		HE_Vertex v;
 		VertexInfo vi;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
-		tracker.setStatus("HET_Fixer", "Classifying halfedges per vertex.", counter);
+		tracker.setCounterStatus("HET_Fixer", "Classifying halfedges per vertex.", counter);
 		HE_HalfedgeIterator heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
@@ -204,7 +204,7 @@ public class HET_Fixer {
 		}
 		final List<HE_Vertex> toUnweld = new FastTable<HE_Vertex>();
 		counter = new WB_ProgressCounter(mesh.getNumberOfVertices(), 10);
-		tracker.setStatus("HET_Fixer", "Checking vertex umbrellas.", counter);
+		tracker.setCounterStatus("HET_Fixer", "Checking vertex umbrellas.", counter);
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		while (vItr.hasNext()) {
 			v = vItr.next();
@@ -216,7 +216,7 @@ public class HET_Fixer {
 		}
 		vItr = toUnweld.iterator();
 		counter = new WB_ProgressCounter(toUnweld.size(), 10);
-		tracker.setStatus("HET_Fixer", "Splitting vertex umbrellas. ", counter);
+		tracker.setCounterStatus("HET_Fixer", "Splitting vertex umbrellas. ", counter);
 
 		while (vItr.hasNext()) {
 			v = vItr.next();

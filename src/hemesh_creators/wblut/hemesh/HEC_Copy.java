@@ -67,10 +67,10 @@ public class HEC_Copy extends HEC_Creator {
 	 */
 	@Override
 	protected HE_Mesh createBase() {
-		tracker.setStatus(this, "Starting HEC_Copy.", +1);
+		tracker.setStartStatus(this, "Starting HEC_Copy.");
 		final HE_Mesh result = new HE_Mesh();
 		if (source == null) {
-			tracker.setStatus(this, "No source mesh. Exiting HEC_Copy.", -1);
+			tracker.setStopStatus(this, "No source mesh. Exiting HEC_Copy.");
 			return result;
 		}
 		result.copyProperties(source);
@@ -83,7 +83,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Vertex rv;
 			HE_Vertex v;
 			WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfVertices(), 10);
-			tracker.setStatus(this, "Creating vertices.", counter);
+			tracker.setCounterStatus(this, "Creating vertices.", counter);
 			final Iterator<HE_Vertex> vItr = mesh.vItr();
 			while (vItr.hasNext()) {
 				v = vItr.next();
@@ -97,7 +97,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Face rf;
 			HE_Face f;
 			counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
-			tracker.setStatus(this, "Creating faces.", counter);
+			tracker.setCounterStatus(this, "Creating faces.", counter);
 			final Iterator<HE_Face> fItr = mesh.fItr();
 			while (fItr.hasNext()) {
 				f = fItr.next();
@@ -111,7 +111,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Halfedge rhe;
 			HE_Halfedge he;
 			counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
-			tracker.setStatus(this, "Creating halfedges.", counter);
+			tracker.setCounterStatus(this, "Creating halfedges.", counter);
 			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RAS.HE_RASTrove<HE_Halfedge>();
 			final Iterator<HE_Halfedge> heItr = mesh.getHalfedges().iterator();
 			while (heItr.hasNext()) {
@@ -124,7 +124,7 @@ public class HEC_Copy extends HEC_Creator {
 			}
 
 			counter = new WB_ProgressCounter(mesh.getNumberOfVertices(), 10);
-			tracker.setStatus(this, "Setting vertex properties.", counter);
+			tracker.setCounterStatus(this, "Setting vertex properties.", counter);
 			HE_Vertex sv;
 			HE_Vertex tv;
 			final Iterator<HE_Vertex> svItr = mesh.vItr();
@@ -144,7 +144,7 @@ public class HEC_Copy extends HEC_Creator {
 			}
 
 			counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
-			tracker.setStatus(this, "Setting face properties.", counter);
+			tracker.setCounterStatus(this, "Setting face properties.", counter);
 			HE_Face sf;
 			HE_Face tf;
 			final Iterator<HE_Face> sfItr = mesh.fItr();
@@ -162,7 +162,7 @@ public class HEC_Copy extends HEC_Creator {
 			}
 
 			counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
-			tracker.setStatus(this, "Setting halfedge properties.", counter);
+			tracker.setCounterStatus(this, "Setting halfedge properties.", counter);
 			HE_Halfedge she;
 			HE_Halfedge the;
 			final Iterator<HE_Halfedge> sheItr = mesh.getHalfedges().iterator();
@@ -200,7 +200,7 @@ public class HEC_Copy extends HEC_Creator {
 				counter.increment();
 			}
 
-			tracker.setStatus(this, "Exiting HEC_Copy.", -1);
+			tracker.setStopStatus(this, "Exiting HEC_Copy.");
 		} else if (source instanceof HE_Selection) {
 			final HE_Selection sel = ((HE_Selection) source).get();
 
@@ -212,7 +212,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Vertex rv;
 			HE_Vertex v;
 			WB_ProgressCounter counter = new WB_ProgressCounter(sel.getNumberOfVertices(), 10);
-			tracker.setStatus(this, "Creating vertices.", counter);
+			tracker.setCounterStatus(this, "Creating vertices.", counter);
 			final Iterator<HE_Vertex> vItr = sel.vItr();
 			while (vItr.hasNext()) {
 				v = vItr.next();
@@ -225,7 +225,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Face rf;
 			HE_Face f;
 			counter = new WB_ProgressCounter(sel.getNumberOfFaces(), 10);
-			tracker.setStatus(this, "Creating faces.", counter);
+			tracker.setCounterStatus(this, "Creating faces.", counter);
 			final Iterator<HE_Face> fItr = sel.fItr();
 			while (fItr.hasNext()) {
 				f = fItr.next();
@@ -239,7 +239,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Halfedge he;
 			counter = new WB_ProgressCounter(sel.getNumberOfHalfedges(), 10);
 			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RASTrove<HE_Halfedge>();
-			tracker.setStatus(this, "Creating halfedges.", counter);
+			tracker.setCounterStatus(this, "Creating halfedges.", counter);
 			final Iterator<HE_Halfedge> heItr = sel.heItr();
 			while (heItr.hasNext()) {
 				he = heItr.next();
@@ -250,7 +250,7 @@ public class HEC_Copy extends HEC_Creator {
 				counter.increment();
 			}
 			counter = new WB_ProgressCounter(sel.getNumberOfVertices(), 10);
-			tracker.setStatus(this, "Setting vertex properties.", counter);
+			tracker.setCounterStatus(this, "Setting vertex properties.", counter);
 			HE_Vertex sv;
 			HE_Vertex tv;
 			final Iterator<HE_Vertex> svItr = sel.vItr();
@@ -269,7 +269,7 @@ public class HEC_Copy extends HEC_Creator {
 				counter.increment();
 			}
 			counter = new WB_ProgressCounter(sel.getNumberOfFaces(), 10);
-			tracker.setStatus(this, "Setting face properties.", counter);
+			tracker.setCounterStatus(this, "Setting face properties.", counter);
 			HE_Face sf;
 			HE_Face tf;
 			final Iterator<HE_Face> sfItr = sel.fItr();
@@ -286,7 +286,7 @@ public class HEC_Copy extends HEC_Creator {
 				counter.increment();
 			}
 			counter = new WB_ProgressCounter(sel.getNumberOfHalfedges(), 10);
-			tracker.setStatus(this, "Setting halfedge properties.", counter);
+			tracker.setCounterStatus(this, "Setting halfedge properties.", counter);
 			HE_Halfedge she;
 			HE_Halfedge the;
 			final Iterator<HE_Halfedge> sheItr = sel.heItr();
@@ -324,7 +324,7 @@ public class HEC_Copy extends HEC_Creator {
 				counter.increment();
 			}
 			result.capHalfedges();
-			tracker.setStatus(this, "Exiting HEC_Copy.", -1);
+			tracker.setStopStatus(this, "Exiting HEC_Copy.");
 		}
 		return result;
 	}

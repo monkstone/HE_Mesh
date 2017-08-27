@@ -119,18 +119,18 @@ public class HES_TriDec extends HES_Simplifier {
 	 * @see wblut.hemesh.HES_Simplifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HES_TriDec.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HES_TriDec.");
 		if (goal == -1) {
 			goal = (int) (mesh.getNumberOfVertices() * fraction);
 		}
 		if (mesh.getNumberOfVertices() <= goal) {
-			tracker.setStatus(this, "Mesh has less vertices than goal. Exiting HES_TriDec.", -1);
+			tracker.setStopStatus(this, "Mesh has less vertices than goal. Exiting HES_TriDec.");
 			return mesh;
 		}
 		_mesh = mesh;
 		if (_mesh.getNumberOfVertices() <= 4) {
-			tracker.setStatus(this, "Mesh has  4 or less vertices. Exiting HES_TriDec.", -1);
+			tracker.setStopStatus(this, "Mesh has  4 or less vertices. Exiting HES_TriDec.");
 			return _mesh;
 		}
 		_mesh.triangulate();
@@ -141,7 +141,7 @@ public class HES_TriDec extends HES_Simplifier {
 		List<HE_Vertex> vertices;
 		final int count = _mesh.getNumberOfVertices() - goal;
 		WB_ProgressCounter pcounter = new WB_ProgressCounter(count, 10);
-		tracker.setStatus(this, "Removing vertices from heap (" + heap.size() + ").", pcounter);
+		tracker.setCounterStatus(this, "Removing vertices from heap (" + heap.size() + ").", pcounter);
 		while (_mesh.getNumberOfVertices() > goal && heap.size() > 0 && _mesh.getNumberOfVertices() > 4) {
 			boolean valid = false;
 			do {
@@ -166,7 +166,7 @@ public class HES_TriDec extends HES_Simplifier {
 			}
 			pcounter.increment();
 		}
-		tracker.setStatus(this, "Exiting HES_TriDec.", -1);
+		tracker.setStopStatus(this, "Exiting HES_TriDec.");
 		return _mesh;
 	}
 
@@ -176,8 +176,8 @@ public class HES_TriDec extends HES_Simplifier {
 	 * @see wblut.hemesh.HES_Simplifier#apply(wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting HES_TriDec.", 1);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		tracker.setStartStatus(this, "Starting HES_TriDec.");
 		selection.collectVertices();
 		_mesh = selection.parent;
 		if (goal == -1) {
@@ -187,11 +187,11 @@ public class HES_TriDec extends HES_Simplifier {
 			goal = selection.parent.getNumberOfVertices() - selection.getNumberOfVertices() + goal;
 		}
 		if (selection.parent.getNumberOfVertices() <= goal) {
-			tracker.setStatus(this, "Mesh has less vertices than goal. Exiting HES_TriDec.", -1);
+			tracker.setStopStatus(this, "Mesh has less vertices than goal. Exiting HES_TriDec.");
 			return selection.parent;
 		}
 		if (_mesh.getNumberOfVertices() <= 4) {
-			tracker.setStatus(this, "Mesh has  4 or less vertices. Exiting HES_TriDec.", -1);
+			tracker.setStopStatus(this, "Mesh has  4 or less vertices. Exiting HES_TriDec.");
 			return _mesh;
 		}
 		_mesh.triangulate();
@@ -202,7 +202,7 @@ public class HES_TriDec extends HES_Simplifier {
 		List<HE_Vertex> vertices;
 		final int count = _mesh.getNumberOfVertices() - goal;
 		WB_ProgressCounter pcounter = new WB_ProgressCounter(count, 10);
-		tracker.setStatus(this, "Removing vertices.", pcounter);
+		tracker.setCounterStatus(this, "Removing vertices.", pcounter);
 		while (_mesh.getNumberOfVertices() > goal && heap.size() > 0 && _mesh.getNumberOfVertices() > 4) {
 			boolean valid = false;
 			do {
@@ -223,7 +223,7 @@ public class HES_TriDec extends HES_Simplifier {
 			pcounter.increment();
 		}
 		selection.clear();
-		tracker.setStatus(this, "Exiting HES_TriDec.", -1);
+		tracker.setStopStatus(this, "Exiting HES_TriDec.");
 		return _mesh;
 	}
 
@@ -234,7 +234,7 @@ public class HES_TriDec extends HES_Simplifier {
 	 */
 	private void buildHeap(final HE_MeshStructure sel) {
 		WB_ProgressCounter pcounter = new WB_ProgressCounter(sel.getNumberOfVertices(), 10);
-		tracker.setStatus(this, "Building vertex removal heap.", pcounter);
+		tracker.setCounterStatus(this, "Building vertex removal heap.", pcounter);
 		counter = 0;
 		heap = new Heap();
 		vertexCost = new TLongDoubleHashMap(10, 0.5f, -1L, Double.NaN);

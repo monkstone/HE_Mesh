@@ -2519,6 +2519,7 @@ public class WB_Render3D extends WB_Render2D {
 
 	public void drawPolygon(final WB_Polygon P) {
 		final int[] tris = P.getTriangles();
+
 		for (int i = 0; i < tris.length; i += 3) {
 			drawTriangle(P.getPoint(tris[i]), P.getPoint(tris[i + 1]), P.getPoint(tris[i + 2]));
 		}
@@ -4715,6 +4716,7 @@ public class WB_Render3D extends WB_Render2D {
 		}
 	}
 
+	@Override
 	public void drawGizmo(final double d) {
 		home.pushStyle();
 		home.noFill();

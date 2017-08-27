@@ -97,32 +97,32 @@ public class HEM_SliceEdges extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEM_SliceEdges.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HEM_SliceEdges.");
 		cut = new HE_Selection(mesh);
 		cutEdges = new HE_Selection(mesh);
 		mesh.resetEdgeInternalLabels();
 		mesh.resetVertexInternalLabels();
 		// no plane defined
 		if (P == null) {
-			tracker.setStatus(this, "No cutplane defined. Exiting HEM_SliceEdges.", -1);
+			tracker.setStopStatus(this, "No cutplane defined. Exiting HEM_SliceEdges.");
 			return mesh;
 		}
 		// empty mesh
 		if (mesh.getNumberOfVertices() == 0) {
-			tracker.setStatus(this, "Empty mesh. Exiting HEM_SliceEdges.", -1);
+			tracker.setStopStatus(this, "Empty mesh. Exiting HEM_SliceEdges.");
 			return mesh;
 		}
 		// check if plane intersects mesh
 		final WB_Plane lP = new WB_Plane(P.getNormal(), -P.d() + offset);
 		if (!WB_GeometryOp3D.checkIntersection3D(mesh.getAABB(), lP)) {
-			tracker.setStatus(this, "Plane doesn't intersect bounding box. Exiting HEM_SliceEdges.", -1);
+			tracker.setStopStatus(this, "Plane doesn't intersect bounding box. Exiting HEM_SliceEdges.");
 			return mesh;
 		}
-		tracker.setStatus(this, "Creating bounding box tree.", 0);
+		tracker.setDuringStatus(this, "Creating bounding box tree.");
 		final WB_AABBTree tree = new WB_AABBTree(mesh, Math.max(64, (int) Math.sqrt(mesh.getNumberOfFaces())));
 		final HE_Selection faces = new HE_Selection(mesh);
-		tracker.setStatus(this, "Retrieving intersection candidates.", 0);
+		tracker.setDuringStatus(this, "Retrieving intersection candidates.");
 		faces.addFaces(HET_MeshOp.getPotentialIntersectedFaces(tree, lP));
 		faces.collectVertices();
 		faces.collectEdgesByFace();
@@ -130,7 +130,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		final HashMap<Long, WB_Classification> vertexClass = new HashMap<Long, WB_Classification>();
 		WB_ProgressCounter counter = new WB_ProgressCounter(faces.getNumberOfVertices(), 10);
 
-		tracker.setStatus(this, "Classifying vertices.", counter);
+		tracker.setCounterStatus(this, "Classifying vertices.", counter);
 		HE_Vertex v;
 		final Iterator<HE_Vertex> vItr = faces.vItr();
 		while (vItr.hasNext()) {
@@ -148,7 +148,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		}
 		counter = new WB_ProgressCounter(faces.getNumberOfEdges(), 10);
 
-		tracker.setStatus(this, "Classifying edges.", counter);
+		tracker.setCounterStatus(this, "Classifying edges.", counter);
 		new ArrayList<HE_Vertex>();
 		final HE_Selection split = new HE_Selection(mesh);
 		final FastMap<Long, Double> edgeInt = new FastMap<Long, Double>();
@@ -181,7 +181,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		}
 		counter = new WB_ProgressCounter(edgeInt.size(), 10);
 
-		tracker.setStatus(this, "Indexing edge intersection.", counter);
+		tracker.setCounterStatus(this, "Indexing edge intersection.", counter);
 		for (final Map.Entry<Long, Double> en : edgeInt.entrySet()) {
 			final HE_Halfedge ce = mesh.getHalfedgeWithKey(en.getKey());
 			final double u = en.getValue();
@@ -204,7 +204,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 			counter.increment();
 		}
 
-		tracker.setStatus(this, "Exiting HEM_SliceEdges.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_SliceEdges.");
 		return mesh;
 	}
 
@@ -214,8 +214,8 @@ public class HEM_SliceEdges extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting HEM_SliceEdges.", +1);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		tracker.setStartStatus(this, "Starting HEM_SliceEdges.");
 		selection.parent.resetEdgeInternalLabels();
 
 		selection.parent.resetVertexInternalLabels();
@@ -223,19 +223,19 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		cutEdges = new HE_Selection(selection.parent);
 		// no plane defined
 		if (P == null) {
-			tracker.setStatus(this, "No cutplane defined. Exiting HEM_SliceEdges.", -1);
+			tracker.setStopStatus(this, "No cutplane defined. Exiting HEM_SliceEdges.");
 			return selection.parent;
 		}
 		// empty mesh
 		if (selection.parent.getNumberOfVertices() == 0) {
-			tracker.setStatus(this, "Empty vertex selection. Exiting HEM_SliceEdges.", -1);
+			tracker.setStopStatus(this, "Empty vertex selection. Exiting HEM_SliceEdges.");
 			return selection.parent;
 		}
 		final WB_Plane lP = new WB_Plane(P.getNormal(), -P.d() + offset);
-		tracker.setStatus(this, "Creating bounding box tree.", 0);
+		tracker.setDuringStatus(this, "Creating bounding box tree.");
 		final WB_AABBTree tree = new WB_AABBTree(selection.parent, 64);
 		final HE_Selection faces = new HE_Selection(selection.parent);
-		tracker.setStatus(this, "Retrieving intersection candidates.", 0);
+		tracker.setDuringStatus(this, "Retrieving intersection candidates.");
 		faces.addFaces(HET_MeshOp.getPotentialIntersectedFaces(tree, lP));
 		final HE_Selection lsel = selection.get();
 		lsel.intersect(faces);
@@ -243,7 +243,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		lsel.collectVertices();
 		// empty mesh
 		if (lsel.getNumberOfVertices() == 0) {
-			tracker.setStatus(this, "Plane doesn't intersect bounding box tree. Exiting HEM_SliceEdges.", -1);
+			tracker.setStopStatus(this, "Plane doesn't intersect bounding box tree. Exiting HEM_SliceEdges.");
 			return lsel.parent;
 		}
 		// check if plane intersects mesh
@@ -254,7 +254,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		HE_Vertex v;
 		WB_ProgressCounter counter = new WB_ProgressCounter(lsel.getNumberOfVertices(), 10);
 
-		tracker.setStatus(this, "Classifying vertices.", counter);
+		tracker.setCounterStatus(this, "Classifying vertices.", counter);
 		final Iterator<HE_Vertex> vItr = lsel.vItr();
 		while (vItr.hasNext()) {
 			v = vItr.next();
@@ -276,7 +276,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 			HE_Halfedge e;
 			counter = new WB_ProgressCounter(lsel.getNumberOfEdges(), 10);
 
-			tracker.setStatus(this, "Classifying edges.", counter);
+			tracker.setCounterStatus(this, "Classifying edges.", counter);
 			while (eItr.hasNext()) {
 				e = eItr.next();
 				if (vertexClass.get(e.getStartVertex().key()) == WB_Classification.ON) {
@@ -303,7 +303,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 			}
 			counter = new WB_ProgressCounter(edgeInt.size(), 10);
 
-			tracker.setStatus(this, "Indexing edge intersection.", counter);
+			tracker.setCounterStatus(this, "Indexing edge intersection.", counter);
 			for (final Map.Entry<Long, Double> en : edgeInt.entrySet()) {
 				final HE_Halfedge ce = lsel.parent.getHalfedgeWithKey(en.getKey());
 				final double u = en.getValue();
@@ -325,7 +325,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 				counter.increment();
 			}
 		}
-		tracker.setStatus(this, "Exiting HEM_SliceEdges.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_SliceEdges.");
 		return lsel.parent;
 	}
 

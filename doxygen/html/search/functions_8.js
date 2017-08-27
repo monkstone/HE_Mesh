@@ -110,6 +110,7 @@ var searchData=
   ['hem_5fextrude',['HEM_Extrude',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a406d5fcdd5b04a75d82ad6c261708d9e',1,'wblut::hemesh::HEM_Extrude']]],
   ['hem_5ffaceexpand',['HEM_FaceExpand',['../classwblut_1_1hemesh_1_1_h_e_m___face_expand.html#a9a9007689e24b125faed7a9c96664446',1,'wblut::hemesh::HEM_FaceExpand']]],
   ['hem_5fflipfaces',['HEM_FlipFaces',['../classwblut_1_1hemesh_1_1_h_e_m___flip_faces.html#a5e9bf69c51571b12a77f58ebb8f8fee0',1,'wblut::hemesh::HEM_FlipFaces']]],
+  ['hem_5fhideedges',['HEM_HideEdges',['../classwblut_1_1hemesh_1_1_h_e_m___hide_edges.html#a3370715a1f3763107284be77158ef734',1,'wblut::hemesh::HEM_HideEdges']]],
   ['hem_5fhybridsplit',['HEM_HybridSplit',['../classwblut_1_1hemesh_1_1_h_e_m___hybrid_split.html#ae212d326a7df7d86516e6bbbf4b25ebf',1,'wblut::hemesh::HEM_HybridSplit']]],
   ['hem_5finflate',['HEM_Inflate',['../classwblut_1_1hemesh_1_1_h_e_m___inflate.html#a7e8443949470e047c4d716cdedfa4bbb',1,'wblut::hemesh::HEM_Inflate']]],
   ['hem_5fkaleidoscope',['HEM_Kaleidoscope',['../classwblut_1_1hemesh_1_1_h_e_m___kaleidoscope.html#aaa001e4132d36fba264fab08a555fa3e',1,'wblut::hemesh::HEM_Kaleidoscope']]],

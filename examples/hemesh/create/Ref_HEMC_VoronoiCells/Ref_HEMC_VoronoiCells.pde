@@ -53,8 +53,6 @@ List <WB_Coord> thesePoints = thisMesh.getPoints();
   // generate voronoi cells
   HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells();
   multiCreator.setPoints(thesePoints);
-  
-  multiCreator.setN(thesePoints.size()/2);//number of points, can be smaller than number of points in input. 
   multiCreator.setContainer(container);// cutoff mesh for the voronoi cells, complex meshes increase the generation time
   multiCreator.setOffset(10);// offset of the bisector cutting planes, sides of the voronoi cells will be separated by twice this distance
   multiCreator.setSurface(false);// is container mesh a volume (false) or a surface (true)

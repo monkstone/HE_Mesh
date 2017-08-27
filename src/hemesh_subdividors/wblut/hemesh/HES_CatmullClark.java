@@ -105,8 +105,8 @@ public class HES_CatmullClark extends HES_Subdividor {
 	 * @see wblut.hemesh.HE_Subdividor#subdivide(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HES_CatmullClark", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HES_CatmullClark");
 		mesh.resetVertexInternalLabels();
 		final HashMap<Long, WB_Point> avgFC = new HashMap<Long, WB_Point>();
 		HE_Vertex v;
@@ -114,7 +114,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 		HE_Halfedge he;
 		WB_Point p;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfVertices(), 10);
-		tracker.setStatus(this, "Creating averaged face center points.", counter);
+		tracker.setCounterStatus(this, "Creating averaged face center points.", counter);
 		while (vItr.hasNext()) {
 			v = vItr.next();
 			he = v.getHalfedge();
@@ -131,13 +131,15 @@ public class HES_CatmullClark extends HES_Subdividor {
 			avgFC.put(v.key(), afc);
 			counter.increment();
 		}
-		HET_MeshOp.splitFacesQuad(mesh);
+		HEM_QuadSplit qs = new HEM_QuadSplit();
+		qs.applySelf(mesh);
+
 		final FastMap<Long, WB_Coord> newPositions = new FastMap<Long, WB_Coord>();
 		final HE_Selection all = HE_Selection.selectAllFaces(mesh);
 		final List<HE_Vertex> boundary = all.getOuterVertices();
 		final List<HE_Vertex> inner = all.getInnerVertices();
 		counter = new WB_ProgressCounter(inner.size(), 10);
-		tracker.setStatus(this, "Creating new positions for inner vertices.", counter);
+		tracker.setCounterStatus(this, "Creating new positions for inner vertices.", counter);
 		HE_Vertex n;
 		List<HE_Vertex> neighbors;
 		vItr = inner.iterator();
@@ -179,7 +181,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 			counter.increment();
 		}
 		counter = new WB_ProgressCounter(boundary.size(), 10);
-		tracker.setStatus(this, "Creating new positions for boundary vertices.", counter);
+		tracker.setCounterStatus(this, "Creating new positions for boundary vertices.", counter);
 		vItr = boundary.iterator();
 		while (vItr.hasNext()) {
 			v = vItr.next();
@@ -203,7 +205,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 			}
 			counter.increment();
 		}
-		tracker.setStatus(this, "Setting new positions.", 0);
+		tracker.setDuringStatus(this, "Setting new positions.");
 		vItr = inner.iterator();
 		while (vItr.hasNext()) {
 			v = vItr.next();
@@ -214,7 +216,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 			v = vItr.next();
 			v.set(newPositions.get(v.key()));
 		}
-		tracker.setStatus(this, "Exiting HEM_CatmullClark.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_CatmullClark.");
 		return mesh;
 	}
 
@@ -226,7 +228,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 	 * .HE_Mesh, wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.parent.resetVertexInternalLabels();
 		final HashMap<Long, WB_Point> avgFC = new HashMap<Long, WB_Point>();
 		HE_Vertex v;
@@ -250,7 +252,9 @@ public class HES_CatmullClark extends HES_Subdividor {
 			afc.divSelf(c);
 			avgFC.put(v.key(), afc);
 		}
-		HET_MeshOp.splitFacesQuad(selection);
+		HEM_QuadSplit qs = new HEM_QuadSplit();
+		qs.applySelf(selection);
+
 		final FastMap<Long, WB_Coord> newPositions = new FastMap<Long, WB_Coord>();
 		selection.collectVertices();
 		final List<HE_Vertex> boundary = selection.getBoundaryVertices();

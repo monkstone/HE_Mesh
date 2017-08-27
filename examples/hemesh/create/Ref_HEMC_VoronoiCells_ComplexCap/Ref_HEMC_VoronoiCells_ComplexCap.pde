@@ -20,9 +20,7 @@ void setup() {
   inner.modify(new HEM_Extrude().setDistance(32).setChamfer(0.8));
   HET_MeshOp.flipFaces(inner);
   container.add(inner);
-
   container.smooth();
-
   HE_FaceIterator fitr=container.fItr();
   while (fitr.hasNext()) {
     fitr.next().setColor(color(0, 200, 50));

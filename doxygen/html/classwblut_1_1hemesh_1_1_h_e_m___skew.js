@@ -1,8 +1,8 @@
 var classwblut_1_1hemesh_1_1_h_e_m___skew =
 [
     [ "HEM_Skew", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#aeeadef5de7a3418e122410a15ee5d415", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#af476daae1857d3a8548fc2060d6025b6", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#a8bf61a89c8649396bc3fc3be8e2204b0", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#a7d7e233179ff5f6d7261e2225ca8fe6b", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#a90214297a3625532e56293e2d2b4be84", null ],
     [ "setGroundPlane", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#a778bfc6afd9fca98b9d21ef97498029c", null ],
     [ "setGroundPlane", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#a1c7b89aad173d0be18dd032cabddda46", null ],
     [ "setPosOnly", "classwblut_1_1hemesh_1_1_h_e_m___skew.html#a8fe8c2930045d407df4d39b921b8a570", null ],

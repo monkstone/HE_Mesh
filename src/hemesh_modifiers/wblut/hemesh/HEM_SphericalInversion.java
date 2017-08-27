@@ -129,7 +129,7 @@ public class HEM_SphericalInversion extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEM_Modifier#modify(wblut.hemesh.core.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		if (center == null) {
 			return mesh;
 		}
@@ -168,7 +168,7 @@ public class HEM_SphericalInversion extends HEM_Modifier {
 	 * HE_Mesh, wblut.hemesh.core.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		if (center == null) {
 			return selection.parent;
 		}

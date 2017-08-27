@@ -1635,7 +1635,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		@Override
 		public HE_Mesh call() {
 			try {
-				return machine.applyInt(mesh.get());
+				return machine.applySelf(mesh.get());
 			} catch (Exception e) {
 				return mesh;
 			}
@@ -1662,7 +1662,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		@Override
 		public HE_Mesh call() {
 			try {
-				return machine.applyInt(mesh.get());
+				return machine.applySelf(mesh.get());
 			} catch (Exception e) {
 				return mesh;
 			}
@@ -1689,7 +1689,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		@Override
 		public HE_Mesh call() {
 			try {
-				return machine.applyInt(mesh.get());
+				return machine.applySelf(mesh.get());
 			} catch (Exception e) {
 				return mesh;
 			}
@@ -1711,6 +1711,10 @@ public class HE_Mesh extends HE_MeshStructure {
 	public boolean isFinished() {
 		return finished;
 
+	}
+
+	public boolean isSurface() {
+		return this.getBoundaryHalfedges().size() > 0;
 	}
 
 }

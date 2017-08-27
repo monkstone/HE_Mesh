@@ -254,7 +254,7 @@ public class HE_MeshCollection {
 				try {
 					System.out.println(
 							modifier.getClass().getSimpleName() + ": mesh " + i + " of " + meshes.size() + ".");
-					HE_Mesh result = modifier.applyInt(meshes.get(i).get());
+					HE_Mesh result = modifier.applySelf(meshes.get(i).get());
 					meshes.set(i, result);
 				} catch (Exception e) {
 					System.out.println(e.getStackTrace());
@@ -288,7 +288,7 @@ public class HE_MeshCollection {
 				try {
 					System.out.println(
 							subdividor.getClass().getSimpleName() + ": mesh " + i + " of " + meshes.size() + ".");
-					HE_Mesh result = subdividor.applyInt(meshes.get(i).get());
+					HE_Mesh result = subdividor.applySelf(meshes.get(i).get());
 					meshes.set(i, result);
 				} catch (Exception e) {
 					System.out.println(e.getStackTrace());
@@ -321,7 +321,7 @@ public class HE_MeshCollection {
 				try {
 					System.out.println(
 							simplifier.getClass().getSimpleName() + ": mesh " + i + " of " + meshes.size() + ".");
-					HE_Mesh result = simplifier.applyInt(meshes.get(i).get());
+					HE_Mesh result = simplifier.applySelf(meshes.get(i).get());
 					meshes.set(i, result);
 				} catch (Exception e) {
 					System.out.println(e.getStackTrace());

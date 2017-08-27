@@ -48,6 +48,9 @@ var dir_167c6ae416135911a71f6703a35ad46b =
     [ "HEM_FlipFaces.java", "_h_e_m___flip_faces_8java.html", [
       [ "HEM_FlipFaces", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces.html", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces" ]
     ] ],
+    [ "HEM_HideEdges.java", "_h_e_m___hide_edges_8java.html", [
+      [ "HEM_HideEdges", "classwblut_1_1hemesh_1_1_h_e_m___hide_edges.html", "classwblut_1_1hemesh_1_1_h_e_m___hide_edges" ]
+    ] ],
     [ "HEM_HybridSplit.java", "_h_e_m___hybrid_split_8java.html", [
       [ "HEM_HybridSplit", "classwblut_1_1hemesh_1_1_h_e_m___hybrid_split.html", "classwblut_1_1hemesh_1_1_h_e_m___hybrid_split" ]
     ] ],

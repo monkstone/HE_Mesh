@@ -1,8 +1,8 @@
 var classwblut_1_1hemesh_1_1_h_e_m___lattice =
 [
     [ "HEM_Lattice", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a1b2d7003080e153ce9198cb0e909b776", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a14cb9bd195674273f14ecd752196163c", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a065411aab91f5d310b5a141fe8f07ce5", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a9f0a471249a1e54ac7ccc743975e5ef4", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a9ac0e92994b9fa55ff86a98ca4123d1d", null ],
     [ "setBulge", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a709a6eefc860eb9167775572bd7de942", null ],
     [ "setBulge", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#abd664814e7c61a99aa2adc254836a5fa", null ],
     [ "setBulge", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a1319a8ce5b5d44e263572dda3302d4af", null ],

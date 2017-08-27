@@ -65,18 +65,7 @@ public class HEC_VoronoiSphere extends HEC_Creator {
 		numTracers = 100;
 		override = true;
 		randomGen = new WB_RandomOnSphere();
-	}
 
-	/**
-	 * Set number of points.
-	 *
-	 * @param N
-	 *            number of points
-	 * @return self
-	 */
-	public HEC_VoronoiSphere setN(final int N) {
-		numberOfPoints = N;
-		return this;
 	}
 
 	/**
@@ -182,9 +171,9 @@ public class HEC_VoronoiSphere extends HEC_Creator {
 		if (points == null) {
 			return new HE_Mesh();
 		}
-		if (numberOfPoints == 0) {
-			numberOfPoints = points.size();
-		}
+
+		numberOfPoints = points.size();
+
 		if (cellIndex < 0 || cellIndex >= numberOfPoints) {
 			return new HE_Mesh();
 		}
@@ -235,7 +224,7 @@ public class HEC_VoronoiSphere extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tracers
 	 * @param index
 	 * @param offset

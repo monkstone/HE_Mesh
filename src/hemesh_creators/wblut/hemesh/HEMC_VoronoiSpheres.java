@@ -187,8 +187,8 @@ public class HEMC_VoronoiSpheres extends HEMC_MultiCreator {
 		numberOfPoints = points.size();
 
 		final HEC_VoronoiSphere cvc = new HEC_VoronoiSphere();
-		cvc.setPoints(points).setN(numberOfPoints).setLevel(level).setCutoff(cutoff).setApprox(approx)
-				.setNumTracers(numTracers).setTraceStep(traceStep).setOffset(offset);
+		cvc.setPoints(points).setLevel(level).setCutoff(cutoff).setApprox(approx).setNumTracers(numTracers)
+				.setTraceStep(traceStep).setOffset(offset);
 		for (int i = 0; i < numberOfPoints; i++) {
 			System.out.println("HEMC_VoronoiSpheres: creating cell " + (i + 1) + " of " + numberOfPoints + ".");
 			cvc.setCellIndex(i);

@@ -87,7 +87,7 @@ public class HES_Smooth extends HES_Subdividor {
 	 * @see wblut.hemesh.HE_Subdividor#subdivide(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		HET_MeshOp.splitFacesQuad(mesh);
 		final WB_Coord[] newPositions = new WB_Coord[mesh.getNumberOfVertices()];
 		final HE_Selection all = HE_Selection.selectAllFaces(mesh);
@@ -157,7 +157,7 @@ public class HES_Smooth extends HES_Subdividor {
 	 * .HE_Mesh, wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		HET_MeshOp.splitFacesQuad(selection);
 		final List<WB_Coord> newPositions = new ArrayList<WB_Coord>();
 		final List<HE_Vertex> boundary = selection.getBoundaryVertices();

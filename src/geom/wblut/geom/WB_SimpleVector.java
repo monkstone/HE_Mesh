@@ -108,12 +108,12 @@ public class WB_SimpleVector extends WB_SimpleVector2D {
 	 * @param x
 	 */
 	public WB_SimpleVector(final double[] x) {
-		if (x.length != 3) {
-			throw new IllegalArgumentException("Array needs to be of length 3.");
+		if (x.length != 3 && x.length != 2) {
+			throw new IllegalArgumentException("Array needs to be of length 2 or 3.");
 		}
 		this.x = x[0];
 		this.y = x[1];
-		this.z = x[2];
+		this.z = x.length > 2 ? x[2] : 0.0;
 	}
 
 	/**
@@ -123,12 +123,12 @@ public class WB_SimpleVector extends WB_SimpleVector2D {
 	 * @param toPoint
 	 */
 	public WB_SimpleVector(final double[] fromPoint, final double[] toPoint) {
-		if (fromPoint.length != 3 || toPoint.length != 3) {
-			throw new IllegalArgumentException("Array needs to be of length 3.");
+		if (fromPoint.length != 3 && fromPoint.length != 2 || toPoint.length != 3 && toPoint.length != 2) {
+			throw new IllegalArgumentException("Array needs to be of length 2 or 3.");
 		}
 		this.x = toPoint[0] - fromPoint[0];
 		this.y = toPoint[1] - fromPoint[1];
-		this.z = toPoint[2] - fromPoint[2];
+		this.z = (toPoint.length > 2 ? toPoint[2] : 0.0) - (fromPoint.length > 2 ? fromPoint[2] : 0.0);
 
 	}
 

@@ -1507,8 +1507,47 @@ public class WB_Subdivision {
 		}
 	}
 
+	public static class P10 implements WB_PentagonSubdivision {
+
+		@Override
+		public WB_SubdivisionResult apply(final WB_Pentagon pentagon) {
+			WB_SubdivisionResult result = new WB_SubdivisionResult();
+			WB_Coord p1 = pentagon.p1;
+			WB_Coord p2 = pentagon.p2;
+			WB_Coord p3 = pentagon.p3;
+			WB_Coord p4 = pentagon.p4;
+			WB_Coord p5 = pentagon.p5;
+
+			result.addQuad(p2, p3, p4, p5);
+
+			result.addTriangle(p1, p2, p5);
+
+			return result;
+		}
+
+	}
+
+	public static class P11 implements WB_PentagonSubdivision {
+
+		@Override
+		public WB_SubdivisionResult apply(final WB_Pentagon pentagon) {
+			WB_SubdivisionResult result = new WB_SubdivisionResult();
+			WB_Coord p1 = pentagon.p1;
+			WB_Coord p2 = pentagon.p2;
+			WB_Coord p3 = pentagon.p3;
+			WB_Coord p4 = pentagon.p4;
+			WB_Coord p5 = pentagon.p5;
+
+			result.addTriangle(p1, p2, p3);
+			result.addTriangle(p1, p3, p4);
+			result.addTriangle(p1, p4, p5);
+			return result;
+		}
+
+	}
+
 	public static WB_PentagonSubdivision[] PSubs = new WB_PentagonSubdivision[] { new P01(), new P02(), new P03(),
-			new P04(), new P05(), new P06(), new P07(), new P08(), new P09() };
+			new P04(), new P05(), new P06(), new P07(), new P08(), new P09(), new P10(), new P11() };
 
 	public static interface WB_HexagonSubdivision {
 		public WB_SubdivisionResult apply(WB_Hexagon hexagon);
@@ -1800,14 +1839,14 @@ public class WB_Subdivision {
 		private double f = 0.5;
 
 		@Override
-		public WB_SubdivisionResult apply(final WB_Hexagon octagon) {
+		public WB_SubdivisionResult apply(final WB_Hexagon hexagon) {
 			WB_SubdivisionResult result = new WB_SubdivisionResult();
-			WB_Coord p1 = octagon.p1;
-			WB_Coord p2 = octagon.p2;
-			WB_Coord p3 = octagon.p3;
-			WB_Coord p4 = octagon.p4;
-			WB_Coord p5 = octagon.p5;
-			WB_Coord p6 = octagon.p6;
+			WB_Coord p1 = hexagon.p1;
+			WB_Coord p2 = hexagon.p2;
+			WB_Coord p3 = hexagon.p3;
+			WB_Coord p4 = hexagon.p4;
+			WB_Coord p5 = hexagon.p5;
+			WB_Coord p6 = hexagon.p6;
 
 			WB_Coord q = gf.createCentroid(p1, p2, p3, p4, p5, p6);
 			WB_Point p12 = WB_Point.interpolate(p1, p2, 0.5);
@@ -1850,8 +1889,50 @@ public class WB_Subdivision {
 		}
 	}
 
+	public static class H10 implements WB_HexagonSubdivision {
+
+		@Override
+		public WB_SubdivisionResult apply(final WB_Hexagon hexagon) {
+			WB_SubdivisionResult result = new WB_SubdivisionResult();
+			WB_Coord p1 = hexagon.p1;
+			WB_Coord p2 = hexagon.p2;
+			WB_Coord p3 = hexagon.p3;
+			WB_Coord p4 = hexagon.p4;
+			WB_Coord p5 = hexagon.p5;
+			WB_Coord p6 = hexagon.p6;
+
+			result.addQuad(p2, p3, p5, p6);
+
+			result.addTriangle(p1, p2, p6);
+			result.addTriangle(p3, p4, p5);
+
+			return result;
+		}
+
+	}
+
+	public static class H11 implements WB_HexagonSubdivision {
+
+		@Override
+		public WB_SubdivisionResult apply(final WB_Hexagon hexagon) {
+			WB_SubdivisionResult result = new WB_SubdivisionResult();
+			WB_Coord p1 = hexagon.p1;
+			WB_Coord p2 = hexagon.p2;
+			WB_Coord p3 = hexagon.p3;
+			WB_Coord p4 = hexagon.p4;
+			WB_Coord p5 = hexagon.p5;
+			WB_Coord p6 = hexagon.p6;
+
+			result.addQuad(p1, p2, p3, p4);
+			result.addQuad(p1, p4, p5, p6);
+
+			return result;
+		}
+
+	}
+
 	public static WB_HexagonSubdivision[] HSubs = new WB_HexagonSubdivision[] { new H01(), new H02(), new H03(),
-			new H04(), new H05(), new H06(), new H07(), new H08(), new H09() };
+			new H04(), new H05(), new H06(), new H07(), new H08(), new H09(), new H10(), new H11() };
 
 	public static interface WB_OctagonSubdivision {
 		public WB_SubdivisionResult apply(WB_Octagon octagon);

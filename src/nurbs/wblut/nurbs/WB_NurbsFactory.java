@@ -120,6 +120,11 @@ public class WB_NurbsFactory {
 		return new WB_RBSplineSurface(points, UKnot, C.knot(), weights);
 	}
 
+	public static WB_RBSplineSurface getFullSurfaceOfRevolution(final WB_BSpline C, final WB_Coord p,
+			final WB_Coord axis) {
+		return getSurfaceOfRevolution(C, p, axis, 2 * Math.PI);
+	}
+
 	/**
 	 *
 	 *
@@ -220,6 +225,11 @@ public class WB_NurbsFactory {
 		}
 		final WB_NurbsKnot UKnot = new WB_NurbsKnot(2, U);
 		return new WB_RBSplineSurface(points, UKnot, C.knot(), weights);
+	}
+
+	public static WB_RBSplineSurface getFullSurfaceOfRevolution(final WB_RBSpline C, final WB_Coord p,
+			final WB_Coord axis) {
+		return getSurfaceOfRevolution(C, p, axis, 2 * Math.PI);
 	}
 
 	/**

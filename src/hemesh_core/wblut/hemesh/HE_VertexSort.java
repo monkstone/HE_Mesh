@@ -20,6 +20,15 @@ public interface HE_VertexSort extends Comparator<HE_Vertex> {
 
 	}
 
+	public static class HE_VertexSortYXZ implements HE_VertexSort {
+
+		@Override
+		public int compare(final HE_Vertex v0, final HE_Vertex v1) {
+			return v0.compareToY1st(v1);
+		}
+
+	}
+
 	public static class HE_VertexSortCenter1D implements HE_VertexSort {
 		int dim = 0;
 

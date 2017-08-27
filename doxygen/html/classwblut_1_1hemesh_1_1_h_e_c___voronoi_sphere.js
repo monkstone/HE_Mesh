@@ -7,7 +7,6 @@ var classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere =
     [ "setCellIndex", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#a4943a149c1089d864b5e0a28f03f0edd", null ],
     [ "setCutoff", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#a2a47b8708104fedfc7b0aa0af556d8f7", null ],
     [ "setLevel", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#a1144057dafe61cf61de4b37e983f0384", null ],
-    [ "setN", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#a7e2005f1aad16d16936ca36276648d9b", null ],
     [ "setNumTracers", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#ac4c6041240427ca0630c82842597b866", null ],
     [ "setOffset", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#abf13260f5e590e247cb6bab9aa7f26c5", null ],
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_sphere.html#a7d39f5dc583e1c58c974d245d301fb9a", null ],

@@ -298,9 +298,16 @@ public class WB_Polygon extends WB_Ring {
 				return WB_PolygonTriangulatorJTS.triangulateQuad(points.get(0), points.get(1), points.get(2),
 						points.get(3));
 			} else {
-				final WB_Triangulation2D triangulation = new WB_PolygonTriangulatorJTS()
-						.triangulatePolygon2D(this.toPolygon2DOrtho(), true);
-				triangles = triangulation.getTriangles();
+
+				if (numberOfContours == 2) {
+					final WB_Triangulation2D triangulation = new WB_PolygonTriangulatorJTS()
+							.triangulatePolygon2D(this.toPolygon2DOrtho(), optimize);
+					triangles = triangulation.getTriangles();
+				} else {
+					final WB_Triangulation2D triangulation = new WB_PolygonTriangulatorEarcut()
+							.triangulatePolygon2D(this.toPolygon2DOrtho());
+					triangles = triangulation.getTriangles();
+				}
 			}
 		}
 		return triangles;

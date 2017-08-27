@@ -64,7 +64,7 @@ var searchData=
   ['refineknotrestricted',['refineKnotRestricted',['../classwblut_1_1nurbs_1_1_w_b___b_spline.html#a5629ee92826d63f70b2cadee7ad78211',1,'wblut.nurbs.WB_BSpline.refineKnotRestricted()'],['../classwblut_1_1nurbs_1_1_w_b___r_b_spline.html#acfe73f866a78ad93248f19eb9cf5de07',1,'wblut.nurbs.WB_RBSpline.refineKnotRestricted()']]],
   ['refineonepass',['refineOnePass',['../classwblut_1_1geom_1_1_w_b___frame.html#aaf6a427b00e561258e2d5883e11587d1',1,'wblut::geom::WB_Frame']]],
   ['reinsertcollinearpoints',['reinsertCollinearPoints',['../classwblut_1_1geom_1_1_w_b___earcut.html#ab11e524386a2ae655e5e0a2fe12e9397',1,'wblut::geom::WB_Earcut']]],
-  ['relative',['relative',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#af3e56950f7335e642605b7318920de8a',1,'wblut::hemesh::HEM_Extrude']]],
+  ['relative',['relative',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#af3e56950f7335e642605b7318920de8a',1,'wblut.hemesh.HEM_Extrude.relative()'],['../classwblut_1_1hemesh_1_1_h_e_m___punch_holes.html#ad60a5e15b61ec9a5cfbbc6614a17128b',1,'wblut.hemesh.HEM_PunchHoles.relative()']]],
   ['relativesideofline2d',['relativeSideOfLine2D',['../classwblut_1_1geom_1_1_w_b___predicates.html#af7a38c11b9ea3de6bdb9530969ffa81d',1,'wblut::geom::WB_Predicates']]],
   ['relativesideofplane3d',['relativeSideOfPlane3D',['../classwblut_1_1geom_1_1_w_b___predicates.html#ac89a2f02e387617e0fa920e446bb7a9c',1,'wblut::geom::WB_Predicates']]],
   ['releaseinfo',['releaseInfo',['../classwblut_1_1core_1_1_w_b___version.html#a44a2bd4fb01b405e89c240b8a4e48ae6',1,'wblut::core::WB_Version']]],

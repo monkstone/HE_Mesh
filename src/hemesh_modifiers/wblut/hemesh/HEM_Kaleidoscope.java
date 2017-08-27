@@ -84,7 +84,7 @@ public class HEM_Kaleidoscope extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		if (n < 2) {
 			return mesh;
 		}
@@ -177,8 +177,8 @@ public class HEM_Kaleidoscope extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		return applyInt(selection.parent);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		return applySelf(selection.parent);
 	}
 
 }

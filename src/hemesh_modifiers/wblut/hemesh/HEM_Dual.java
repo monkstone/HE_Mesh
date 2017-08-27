@@ -23,10 +23,10 @@ public class HEM_Dual extends HEM_Modifier {
 	 *
 	 * @param mesh
 	 * @return
-	 * @see wblut.hemesh.HEM_Modifier#applyInt(wblut.hemesh.HE_Mesh)
+	 * @see wblut.hemesh.HEM_Modifier#applySelf(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		HE_Mesh result = new HE_Mesh(new HEC_Dual(mesh));
 		mesh.set(result);
 		return mesh;
@@ -38,8 +38,8 @@ public class HEM_Dual extends HEM_Modifier {
 	 * @see wblut.hemesh.HEM_Modifier#apply(wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 
-		return applyInt(selection.parent);
+		return applySelf(selection.parent);
 	}
 }

@@ -147,18 +147,19 @@ public class HEM_Slice extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEM_Slice.", tracker.STARTLVL);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		mesh.isSurface();
+		tracker.setStartStatus(this, "Starting HEM_Slice.");
 		cutFaces = new HE_Selection(mesh);
 		capFaces = new HE_Selection(mesh);
 		// no plane defined
 		if (P == null) {
-			tracker.setStatus(this, "No cutplane defined. Exiting HEM_Slice.", tracker.STOPLVL);
+			tracker.setStopStatus(this, "No cutplane defined. Exiting HEM_Slice.");
 			return mesh;
 		}
 		// empty mesh
 		if (mesh.getNumberOfVertices() == 0) {
-			tracker.setStatus(this, "Empty mesh. Exiting HEM_Slice.", tracker.STOPLVL);
+			tracker.setStopStatus(this, "Empty mesh. Exiting HEM_Slice.");
 			return mesh;
 		}
 		WB_Plane lP = P.get();
@@ -172,7 +173,7 @@ public class HEM_Slice extends HEM_Modifier {
 		final HE_Selection newFaces = new HE_Selection(mesh);
 		HE_Face face;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
-		tracker.setStatus(this, "Classifying faces.", counter);
+		tracker.setCounterStatus(this, "Classifying faces.", counter);
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		while (fItr.hasNext()) {
 			face = fItr.next();
@@ -190,12 +191,12 @@ public class HEM_Slice extends HEM_Modifier {
 			}
 			counter.increment();
 		}
-		tracker.setStatus(this, "Removing unwanted faces.", 0);
+		tracker.setDuringStatus(this, "Removing unwanted faces.");
 		mesh.replaceFaces(newFaces.getFacesAsArray());
 		cutFaces.cleanSelection();
 		mesh.cleanUnusedElementsByFace();
 		if (capHoles) {
-			tracker.setStatus(this, "Capping holes.", 0);
+			tracker.setDuringStatus(this, "Capping holes.");
 			if (simpleCap) {
 				HEM_CapHoles ch = new HEM_CapHoles();
 				mesh.modify(ch);
@@ -208,7 +209,7 @@ public class HEM_Slice extends HEM_Modifier {
 					capFaces.addFaces(ch.caps);
 
 				} else {
-					tracker.setStatus(this, "Triangulating cut paths.", 0);
+					tracker.setDuringStatus(this, "Triangulating cut paths.");
 					final long[] triKeys = HET_PlanarPathTriangulator.getTriangleKeys(cutpaths, lP);
 					HE_Face tri = null;
 					HE_Vertex v0, v1, v2;
@@ -247,7 +248,7 @@ public class HEM_Slice extends HEM_Modifier {
 			HET_MeshOp.improveTriangulation(mesh, capFaces);
 
 		}
-		tracker.setStatus(this, "Ending HEM_Slice.", tracker.STOPLVL);
+		tracker.setStopStatus(this, "Ending HEM_Slice.");
 		return mesh;
 	}
 
@@ -258,8 +259,8 @@ public class HEM_Slice extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		return applyInt(selection.parent);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		return applySelf(selection.parent);
 	}
 
 	public static void main(final String[] args) {

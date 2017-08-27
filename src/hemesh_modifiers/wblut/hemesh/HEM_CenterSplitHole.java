@@ -66,7 +66,7 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
 		mesh.modify(ext);
 		mesh.deleteFaces(ext.extruded);
@@ -80,7 +80,7 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
 		selection.modify(ext);
 		selection.parent.deleteFaces(ext.extruded);

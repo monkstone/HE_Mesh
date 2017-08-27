@@ -66,12 +66,12 @@ public class HEM_CenterSplit extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEC_CenterSplit.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HEC_CenterSplit.");
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
 		mesh.modify(ext);
 		selectionOut = ext.extruded;
-		tracker.setStatus(this, "Exiting HEC_CenterSplit.", -1);
+		tracker.setStopStatus(this, "Exiting HEC_CenterSplit.");
 		return mesh;
 	}
 
@@ -81,12 +81,12 @@ public class HEM_CenterSplit extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting HEC_CenterSplit.", +1);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		tracker.setStartStatus(this, "Starting HEC_CenterSplit.");
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
 		selection.modify(ext);
 		selectionOut = ext.extruded;
-		tracker.setStatus(this, "Exiting HEC_CenterSplit.", -1);
+		tracker.setStopStatus(this, "Exiting HEC_CenterSplit.");
 		return selection.parent;
 	}
 

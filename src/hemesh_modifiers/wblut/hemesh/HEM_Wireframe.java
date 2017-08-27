@@ -189,7 +189,7 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * @see wblut.hemesh.creators.HEC_Creator#createBase()
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		if (strutR == null || facetN < 3) {
 			return mesh;
 		}
@@ -214,7 +214,7 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		return applyInt(selection.parent);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		return applySelf(selection.parent);
 	}
 }

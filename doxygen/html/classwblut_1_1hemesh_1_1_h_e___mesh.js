@@ -38,6 +38,7 @@ var classwblut_1_1hemesh_1_1_h_e___mesh =
     [ "getVertexNormal", "classwblut_1_1hemesh_1_1_h_e___mesh.html#aa85c77dc7169c0758913b3306a6227d0", null ],
     [ "getVertexTree", "classwblut_1_1hemesh_1_1_h_e___mesh.html#a46fe13f096faa1dac7b926188f6450cb", null ],
     [ "isFinished", "classwblut_1_1hemesh_1_1_h_e___mesh.html#ad488e766fb5a14060a0321d2216322c9", null ],
+    [ "isSurface", "classwblut_1_1hemesh_1_1_h_e___mesh.html#a686498226fcad7f34186935a874f0578", null ],
     [ "modify", "classwblut_1_1hemesh_1_1_h_e___mesh.html#a653e19cd0404617ce13c975af7c3526a", null ],
     [ "modifyThreaded", "classwblut_1_1hemesh_1_1_h_e___mesh.html#adc15e0780566cf7bc51d4e1d00677fe1", null ],
     [ "move", "classwblut_1_1hemesh_1_1_h_e___mesh.html#ad88d597c46f814b91f8b58b92831bc93", null ],

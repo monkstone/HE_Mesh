@@ -50,7 +50,7 @@ public class HEM_EqualizeValence extends HEM_Modifier {
 	 * @see wblut.hemesh.modifiers.HEB_Modifier#modify(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		mesh.triangulate();
 		HE_Vertex a, b, c, d;
 		int devpre = 0, devpost = 0;
@@ -103,7 +103,7 @@ public class HEM_EqualizeValence extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.parent.triangulate(selection);
 		List<HE_Halfedge> edges = new FastTable<HE_Halfedge>();
 		edges.addAll(selection.getInnerEdges());

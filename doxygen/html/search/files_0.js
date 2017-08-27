@@ -123,6 +123,7 @@ var searchData=
   ['hem_5fextrude_2ejava',['HEM_Extrude.java',['../_h_e_m___extrude_8java.html',1,'']]],
   ['hem_5ffaceexpand_2ejava',['HEM_FaceExpand.java',['../_h_e_m___face_expand_8java.html',1,'']]],
   ['hem_5fflipfaces_2ejava',['HEM_FlipFaces.java',['../_h_e_m___flip_faces_8java.html',1,'']]],
+  ['hem_5fhideedges_2ejava',['HEM_HideEdges.java',['../_h_e_m___hide_edges_8java.html',1,'']]],
   ['hem_5fhybridsplit_2ejava',['HEM_HybridSplit.java',['../_h_e_m___hybrid_split_8java.html',1,'']]],
   ['hem_5finflate_2ejava',['HEM_Inflate.java',['../_h_e_m___inflate_8java.html',1,'']]],
   ['hem_5fkaleidoscope_2ejava',['HEM_Kaleidoscope.java',['../_h_e_m___kaleidoscope_8java.html',1,'']]],

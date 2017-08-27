@@ -54,10 +54,10 @@ public class HEM_TriSplit extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEM_TriSplit.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HEM_TriSplit.");
 		splitFacesTri(HE_Selection.selectAllFaces(mesh), d);
-		tracker.setStatus(this, "Exiting HEM_TriSplit.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_TriSplit.");
 		return mesh;
 	}
 
@@ -67,10 +67,10 @@ public class HEM_TriSplit extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		tracker.setStatus(this, "Starting HEM_TriSplit.", +1);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		tracker.setStartStatus(this, "Starting HEM_TriSplit.");
 		splitFacesTri(selection, d);
-		tracker.setStatus(this, "Exiting HEM_TriSplit.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_TriSplit.");
 		return selection.parent;
 	}
 
@@ -88,7 +88,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 		final HE_Face[] faces = selection.getFacesAsArray();
 		final int n = selection.getNumberOfFaces();
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
-		tracker.setStatus(this, "Splitting faces.", counter);
+		tracker.setCounterStatus(this, "Splitting faces.", counter);
 		for (int i = 0; i < n; i++) {
 			selectionOut.add(splitFaceTri(faces[i], d, selection.parent));
 			counter.increment();

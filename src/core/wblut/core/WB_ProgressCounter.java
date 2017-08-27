@@ -60,9 +60,9 @@ public class WB_ProgressCounter {
 				currentPercentage += percentageStep;
 				nextUpdate = (int) (limit * 0.01 * (currentPercentage + percentageStep));
 			}
-			tracker.setStatusStr(caller, text, this);
+			tracker.setCounterStatusStr(caller, text, this);
 		} else if (count >= limit) {
-			tracker.setStatusStr(caller, text, this);
+			tracker.setCounterStatusStr(caller, text, this);
 		}
 	}
 

@@ -9,7 +9,6 @@ float[][] points;
 int numpoints;
 HE_Mesh container;
 HE_MeshCollection cells;
-int numcells;
 
 WB_Render render;
 
@@ -30,18 +29,19 @@ void setup() {
   HEMC_VoronoiSpheres multiCreator=new HEMC_VoronoiSpheres();
   multiCreator.setPoints(points);
   multiCreator.setLevel(3);// subdivision level for cell spheres
-  multiCreator.setCutoff(200);// maximum radius of cell
-   multiCreator.setApprox(true);// approximate cells by point expansion or precise cells by sphere slicing
+  multiCreator.setCutoff(150);// maximum radius of cell
+  multiCreator.setApprox(true);// approximate cells by point expansion or precise cells by sphere slicing
   multiCreator.setNumTracers(1000);// random points per cell in approcimate mode
   multiCreator.setTraceStep(1);// step size for random points expansion
   multiCreator.setOffset(10);
-  cells=multiCreator.create();
-  numcells=cells.size();
+  cells=new HE_MeshCollection();
+  cells.createThreaded(multiCreator);
   
   render=new WB_Render(this);
 }
 
 void draw() {
+  cells.update();
   background(55);
   directionalLight(255, 255, 255, 1, 1, -1);
   directionalLight(127, 127, 127, -1, -1, 1);

@@ -50,14 +50,14 @@ public class WB_AABBTree2D {
 	 */
 	private void buildTree(final Collection<? extends WB_Triangle> mesh) {
 
-		tracker.setStatus(this, "Starting WB_AABBTree construction. Max. number of faces per node: " + maxNumberOfFaces,
-				+1);
+		tracker.setStartStatus(this,
+				"Starting WB_AABBTree2D construction. Max. number of faces per node: " + maxNumberOfFaces);
 
 		root = new WB_AABBNode2D();
 		final List<WB_Triangle> faces = new FastTable<WB_Triangle>();
 		faces.addAll(mesh);
 		buildNode(root, faces, mesh, 0);
-		tracker.setStatus(this, "Exiting WB_AABBTree construction.", -1);
+		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class WB_AABBTree2D {
 	 */
 	private void buildNode(final WB_AABBNode2D node, final List<WB_Triangle> faces,
 			final Collection<? extends WB_Triangle> mesh, final int level) {
-		tracker.setStatus(this, "Splitting WB_AABBNode level " + level + " with " + faces.size() + " faces.", 0);
+		tracker.setDuringStatus(this, "Splitting WB_AABBNode level " + level + " with " + faces.size() + " faces.");
 		node.level = level;
 		node.aabb = new WB_AABB2D();
 		for (WB_Triangle f : faces) {

@@ -72,7 +72,7 @@ public class HEM_SmoothInset extends HEM_Modifier {
 	 * @see wblut.hemesh.modifiers.HEB_Modifier#modify(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(offset).setRelative(false);
 		mesh.modify(ext);
 		for (int i = 0; i < rep; i++) {
@@ -96,7 +96,7 @@ public class HEM_SmoothInset extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(offset).setRelative(false);
 		selection.modify(ext);
 		for (int i = 0; i < rep; i++) {

@@ -37,13 +37,13 @@ public class HEM_Triangulate extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		triangles = new HE_Selection(mesh);
-		tracker.setStatus(this, "Starting HEM_Triangulate.", +1);
+		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final HE_Face[] f = mesh.getFacesAsArray();
 		final int n = mesh.getNumberOfFaces();
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
-		tracker.setStatus(this, "Triangulating faces.", counter);
+		tracker.setCounterStatus(this, "Triangulating faces.", counter);
 		for (int i = 0; i < n; i++) {
 			if (!WB_Epsilon.isZero(WB_Vector.getLength3D(f[i].getFaceNormal()))) {
 				triangulateNoPairing(f[i], mesh);
@@ -59,7 +59,7 @@ public class HEM_Triangulate extends HEM_Modifier {
 		}
 		mesh.pairHalfedges();
 		mesh.capHalfedges();
-		tracker.setStatus(this, "Exiting HEM_Triangulate.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_Triangulate.");
 		return mesh;
 	}
 
@@ -69,13 +69,13 @@ public class HEM_Triangulate extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		triangles = new HE_Selection(selection.parent);
-		tracker.setStatus(this, "Starting HEM_Triangulate.", +1);
+		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final HE_Face[] f = selection.getFacesAsArray();
 		final int n = selection.getNumberOfFaces();
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
-		tracker.setStatus(this, "Triangulating faces.", counter);
+		tracker.setCounterStatus(this, "Triangulating faces.", counter);
 		for (int i = 0; i < n; i++) {
 			if (!WB_Epsilon.isZero(WB_Vector.getLength3D(f[i].getFaceNormal()))) {
 				triangulateNoPairing(f[i], selection.parent);
@@ -92,7 +92,7 @@ public class HEM_Triangulate extends HEM_Modifier {
 		selection.parent.capHalfedges();
 		selection.clearFaces();
 		selection.add(triangles);
-		tracker.setStatus(this, "Exiting HEM_Triangulate.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_Triangulate.");
 		return selection.parent;
 	}
 

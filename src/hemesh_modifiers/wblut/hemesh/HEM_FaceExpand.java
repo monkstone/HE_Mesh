@@ -51,7 +51,7 @@ public class HEM_FaceExpand extends HEM_Modifier {
 	 */
 	public HEM_FaceExpand() {
 		super();
-		d = null;
+		d = WB_ScalarParameter.ZERO;
 		cutoff2 = 16.0;
 	}
 
@@ -62,7 +62,7 @@ public class HEM_FaceExpand extends HEM_Modifier {
 	 * @return
 	 */
 	public HEM_FaceExpand setDistance(final double d) {
-		this.d = new WB_ConstantScalarParameter(d);
+		this.d = d == 0 ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(d);
 		return this;
 	}
 
@@ -82,8 +82,8 @@ public class HEM_FaceExpand extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		if (d == null) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		if (d == WB_ScalarParameter.ZERO) {
 			return mesh;
 		}
 		HE_Vertex v;
@@ -129,7 +129,7 @@ public class HEM_FaceExpand extends HEM_Modifier {
 					}
 				}
 			}
-			if (uniquePlanes.size() == 1) {
+			if (uniquePlanes.size() == 1 && v.isBoundary()) {
 				LS = WB_Point.addMul(v, ld, v.getVertexNormal());
 
 			} else if (uniquePlanes.size() == 2) {
@@ -169,7 +169,7 @@ public class HEM_FaceExpand extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		if (d == null) {
 			return selection.parent;
 		}

@@ -123,6 +123,7 @@ var namespacewblut_1_1hemesh =
     [ "HEM_Extrude", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html", "classwblut_1_1hemesh_1_1_h_e_m___extrude" ],
     [ "HEM_FaceExpand", "classwblut_1_1hemesh_1_1_h_e_m___face_expand.html", "classwblut_1_1hemesh_1_1_h_e_m___face_expand" ],
     [ "HEM_FlipFaces", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces.html", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces" ],
+    [ "HEM_HideEdges", "classwblut_1_1hemesh_1_1_h_e_m___hide_edges.html", "classwblut_1_1hemesh_1_1_h_e_m___hide_edges" ],
     [ "HEM_HybridSplit", "classwblut_1_1hemesh_1_1_h_e_m___hybrid_split.html", "classwblut_1_1hemesh_1_1_h_e_m___hybrid_split" ],
     [ "HEM_Inflate", "classwblut_1_1hemesh_1_1_h_e_m___inflate.html", "classwblut_1_1hemesh_1_1_h_e_m___inflate" ],
     [ "HEM_Kaleidoscope", "classwblut_1_1hemesh_1_1_h_e_m___kaleidoscope.html", "classwblut_1_1hemesh_1_1_h_e_m___kaleidoscope" ],

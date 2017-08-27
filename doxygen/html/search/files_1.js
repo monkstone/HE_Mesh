@@ -133,6 +133,7 @@ var searchData=
   ['wb_5fprocessing_2ejava',['WB_Processing.java',['../_w_b___processing_8java.html',1,'']]],
   ['wb_5fprogresscounter_2ejava',['WB_ProgressCounter.java',['../_w_b___progress_counter_8java.html',1,'']]],
   ['wb_5fprogressreporter_2ejava',['WB_ProgressReporter.java',['../_w_b___progress_reporter_8java.html',1,'']]],
+  ['wb_5fprogressstatus_2ejava',['WB_ProgressStatus.java',['../_w_b___progress_status_8java.html',1,'']]],
   ['wb_5fprogresstracker_2ejava',['WB_ProgressTracker.java',['../_w_b___progress_tracker_8java.html',1,'']]],
   ['wb_5fpshapefactory_2ejava',['WB_PShapeFactory.java',['../_w_b___p_shape_factory_8java.html',1,'']]],
   ['wb_5fpvector_2ejava',['WB_PVector.java',['../_w_b___p_vector_8java.html',1,'']]],

@@ -10,6 +10,8 @@
 
 package wblut.core;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -17,20 +19,22 @@ import wblut.hemesh.HE_Element;
 
 public class WB_ProgressTracker {
 
-	protected Queue<Status> statuses;
-	protected volatile int depth;
-	private static int indent = 3;
-	protected volatile int maxdepth;
-	public final int STARTLVL = +1;
-	public final int STOPLVL = -1;
+	protected Queue<WB_ProgressStatus> statuses;
+	protected volatile int level;
+	static int indent = 3;
+	protected volatile int maxLevel;
+	final int INCLVL = +1;
+	final int DECLVL = -1;
+
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 	/**
 	 *
 	 */
 	protected WB_ProgressTracker() {
-		statuses = new ConcurrentLinkedQueue<Status>();
-		depth = 0;
-		maxdepth = 2;
+		statuses = new ConcurrentLinkedQueue<WB_ProgressStatus>();
+		level = 0;
+		maxLevel = 2;
 	}
 
 	private static final WB_ProgressTracker tracker = new WB_ProgressTracker();
@@ -59,53 +63,70 @@ public class WB_ProgressTracker {
 	 *
 	 * @return
 	 */
-	protected String getStatus() {
+	protected WB_ProgressStatus getStatus() {
 		if (statuses.size() > 0) {
-			return statuses.poll().getStatus();
+			return statuses.poll();
 		}
-		return "";
+		return null;
 
 	}
 
-	/**
-	 *
-	 *
-	 * @param caller
-	 * @param status
-	 * @param inc
-	 */
-	public void setStatus(final Object caller, final String status, final int inc) {
-		if (inc < 0) {
-			depth = Math.max(0, depth + inc);
-		}
-		if (depth <= maxdepth) {
+	public void setStartStatus(final Object caller, final String status) {
+		if (level <= maxLevel) {
 			String key = "";
 			if (caller instanceof HE_Element) {
 				key = " (key: " + ((HE_Element) caller).getKey() + ")";
 			}
-			statuses.add(new Status(caller.getClass().getSimpleName() + key, status, depth));
+			statuses.add(new WB_ProgressStatus("\u250C", caller.getClass().getSimpleName() + key, status, level,
+					sdf.format(new Date().getTime())));
 		}
-		if (inc > 0) {
-			depth = Math.max(0, depth + inc);
+		level = Math.max(0, level + INCLVL);
+	}
+
+	public void setStopStatus(final Object caller, final String status) {
+		level = Math.max(0, level + DECLVL);
+		if (level <= maxLevel) {
+			String key = "";
+			if (caller instanceof HE_Element) {
+				key = " (key: " + ((HE_Element) caller).getKey() + ")";
+			}
+			statuses.add(new WB_ProgressStatus("\u2514", caller.getClass().getSimpleName() + key, status, level,
+					sdf.format(new Date().getTime())));
 		}
 	}
 
-	/**
-	 *
-	 *
-	 * @param caller
-	 * @param status
-	 * @param inc
-	 */
-	public void setStatusStr(final String caller, final String status, final int inc) {
-		if (inc < 0) {
-			depth = Math.max(0, depth + inc);
+	public void setDuringStatus(final Object caller, final String status) {
+		if (level <= maxLevel) {
+			String key = "";
+			if (caller instanceof HE_Element) {
+				key = " (key: " + ((HE_Element) caller).getKey() + ")";
+			}
+			statuses.add(new WB_ProgressStatus("|", caller.getClass().getSimpleName() + key, status, level,
+					sdf.format(new Date().getTime())));
 		}
-		if (depth <= maxdepth) {
-			statuses.add(new Status(caller, status, depth));
+	}
+
+	public void setStartStatusStr(final String caller, final String status) {
+
+		if (level <= maxLevel) {
+			statuses.add(new WB_ProgressStatus("\u250C", caller, status, level, sdf.format(new Date().getTime())));
 		}
-		if (inc > 0) {
-			depth = Math.max(0, depth + inc);
+
+		level = Math.max(0, level + INCLVL);
+
+	}
+
+	public void setStopStatusStr(final String caller, final String status) {
+
+		level = Math.max(0, level + DECLVL);
+		if (level <= maxLevel) {
+			statuses.add(new WB_ProgressStatus("\u2514", caller, status, level, sdf.format(new Date().getTime())));
+		}
+	}
+
+	public void setDuringStatusStr(final String caller, final String status) {
+		if (level <= maxLevel) {
+			statuses.add(new WB_ProgressStatus("|", caller, status, level, sdf.format(new Date().getTime())));
 		}
 	}
 
@@ -116,7 +137,7 @@ public class WB_ProgressTracker {
 	 * @param status
 	 * @param counter
 	 */
-	public void setStatus(final Object caller, final String status, final WB_ProgressCounter counter) {
+	public void setCounterStatus(final Object caller, final String status, final WB_ProgressCounter counter) {
 
 		if (counter.getLimit() > 0) {
 			String key = "";
@@ -125,9 +146,9 @@ public class WB_ProgressTracker {
 			}
 			counter.caller = caller.getClass().getSimpleName() + key;
 			counter.text = status;
-			if (depth <= maxdepth) {
-
-				statuses.add(new Status(caller.getClass().getSimpleName() + key, status, counter, depth));
+			if (level <= maxLevel) {
+				statuses.add(new WB_ProgressStatus("|", caller.getClass().getSimpleName() + key, status, counter, level,
+						sdf.format(new Date().getTime())));
 			}
 		}
 	}
@@ -139,11 +160,25 @@ public class WB_ProgressTracker {
 	 * @param status
 	 * @param counter
 	 */
-	public void setStatusStr(final String caller, final String status, final WB_ProgressCounter counter) {
+	public void setCounterStatusStr(final String caller, final String status, final WB_ProgressCounter counter) {
 		if (counter.getLimit() > 0) {
-			if (depth <= maxdepth) {
-				statuses.add(new Status(caller, status, counter, depth));
+			if (level <= maxLevel) {
+				statuses.add(
+						new WB_ProgressStatus("|", caller, status, counter, level, sdf.format(new Date().getTime())));
 			}
+		}
+	}
+
+	public void setSpacer(final String caller) {
+		if (level <= maxLevel) {
+			statuses.add(new WB_ProgressStatus(caller, level, sdf.format(new Date().getTime())));
+		}
+	}
+
+	public void setSpacer(final Object caller) {
+		if (level <= maxLevel) {
+			statuses.add(
+					new WB_ProgressStatus(caller.getClass().getSimpleName(), level, sdf.format(new Date().getTime())));
 		}
 	}
 
@@ -158,75 +193,8 @@ public class WB_ProgressTracker {
 
 	}
 
-	class Status {
-		String caller;
-		String text;
-		String counter;
-		String depth;
-		int level;
-
-		/**
-		 *
-		 *
-		 * @param caller
-		 * @param text
-		 * @param counter
-		 * @param depth
-		 */
-		Status(final String caller, final String text, final WB_ProgressCounter counter, final int depth) {
-			this.caller = caller;
-			this.text = text;
-			StringBuffer outputBuffer = new StringBuffer(depth);
-			for (int i = 0; i < depth * indent; i++) {
-				outputBuffer.append(" ");
-			}
-			this.depth = outputBuffer.toString();
-
-			this.counter = counter.getLimit() > 0 ? " (" + counter.getCount() + " of " + counter.getLimit() + ")" : "";
-			level = depth;
-		}
-
-		/**
-		 *
-		 *
-		 * @param caller
-		 * @param text
-		 * @param depth
-		 */
-		Status(final String caller, final String text, final int depth) {
-			this.caller = caller;
-			this.text = text;
-			StringBuffer outputBuffer = new StringBuffer(depth);
-			for (int i = 0; i < depth * indent; i++) {
-				outputBuffer.append(" ");
-			}
-			this.depth = outputBuffer.toString();
-			this.counter = null;
-		}
-
-		/**
-		 *
-		 *
-		 * @return
-		 */
-		String getStatus() {
-			if (caller == null) {
-				return null;
-			}
-			if (text == " ") {
-				return "";
-			}
-			if (counter == null) {
-				return depth + caller + ": " + text;
-			}
-			return depth + caller + ": " + text + counter;
-
-		}
-
-	}
-
-	public void setDepth(final int depth) {
-		maxdepth = depth;
+	public void setMaxLevel(final int maxLevel) {
+		this.maxLevel = maxLevel;
 
 	}
 }

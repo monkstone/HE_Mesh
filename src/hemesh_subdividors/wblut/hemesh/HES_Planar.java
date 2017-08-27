@@ -107,7 +107,7 @@ public class HES_Planar extends HES_Subdividor {
 	 * @see wblut.hemesh.HE_Subdividor#subdivide(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		randomGen.reset();
 		final TLongObjectMap<HE_Vertex> faceVertices = new TLongObjectHashMap<HE_Vertex>(1024, 0.5f, -1L);
 		HE_Face face;
@@ -297,7 +297,7 @@ public class HES_Planar extends HES_Subdividor {
 	 * .HE_Mesh, wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		randomGen.reset();
 		selection.cleanSelection();
 		if (selection.getNumberOfFaces() == 0) {

@@ -5,7 +5,6 @@ var classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell =
     [ "setCellIndex", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#a6bcb5f26e87a6fe859cdd075ecb53bdd", null ],
     [ "setContainer", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#a1799e5e87c58a9dfe764146286ac042e", null ],
     [ "setLimitPoints", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#a796d5b808068f7246ba4517703a96e12", null ],
-    [ "setN", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#abcbdadfee563c6411f5fa315fa6d6649", null ],
     [ "setOffset", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#acc3be9e2df3220b4a03d518c14dd4df5", null ],
     [ "setOffset", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#a5f9abf8a5ce9228315cae2e942cd6a48", null ],
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#ae639c733fa021bdf3922c06d0c185a0b", null ],

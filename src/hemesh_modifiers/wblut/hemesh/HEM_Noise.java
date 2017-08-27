@@ -44,7 +44,7 @@ public class HEM_Noise extends HEM_Modifier {
 	 * @return this
 	 */
 	public HEM_Noise setDistance(final double d) {
-		this.d = new WB_ConstantScalarParameter(d);
+		this.d = d == 0 ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(d);
 		return this;
 	}
 
@@ -77,9 +77,9 @@ public class HEM_Noise extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		rs.reset();
-		if (d == null) {
+		if (d == WB_ScalarParameter.ZERO) {
 			return mesh;
 		}
 		HE_Vertex v;
@@ -100,7 +100,7 @@ public class HEM_Noise extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		rs.reset();
 		selection.collectVertices();
 		final Iterator<HE_Vertex> vItr = selection.vItr();

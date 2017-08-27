@@ -35,8 +35,8 @@ public class HEM_CapHoles extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		tracker.setStatus(this, "Starting HEM_CapHoles.", +1);
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		tracker.setStartStatus(this, "Starting HEM_CapHoles.");
 		caps = new FastTable<HE_Face>();
 		final List<HE_Halfedge> unpairedEdges = mesh.getUnpairedHalfedges();
 		HE_RAS<HE_Halfedge> loopedHalfedges;
@@ -48,7 +48,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 		HE_Halfedge phe;
 		HE_Halfedge nhe;
 		WB_ProgressCounter counter = new WB_ProgressCounter(unpairedEdges.size(), 10);
-		tracker.setStatus(this, "Finding loops and closing holes.", counter);
+		tracker.setCounterStatus(this, "Finding loops and closing holes.", counter);
 		while (unpairedEdges.size() > 0) {
 			boolean abort = false;
 			loopedHalfedges = new HE_RAS.HE_RASTrove<HE_Halfedge>();
@@ -94,7 +94,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 					}
 					sb.append(unpairedEdges.indexOf(loopedHalfedges.get(0)));
 				}
-				tracker.setStatus(this, sb.toString(), 0);
+				tracker.setDuringStatus(this, sb.toString());
 				unpairedEdges.removeAll(loopedHalfedges);
 				if (!noLoopFound) {
 					mesh.add(nf);
@@ -128,7 +128,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 		mesh.cleanUnusedElementsByFace();
 		mesh.capHalfedges();
 
-		tracker.setStatus(this, "Exiting HEM_CapHoles.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_CapHoles.");
 		return mesh;
 	}
 
@@ -138,7 +138,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		return applyInt(selection.parent);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		return applySelf(selection.parent);
 	}
 }

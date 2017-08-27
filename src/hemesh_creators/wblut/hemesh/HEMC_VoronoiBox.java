@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javolution.util.FastTable;
+import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Point;
@@ -44,6 +45,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 	 */
 	public HEMC_VoronoiBox() {
 		super();
+		offset = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 
 	@Override
 	void create(final HE_MeshCollection result) {
-		tracker.setStatus(this, "Starting HEMC_VoronoiCells", +1);
+		tracker.setStartStatus(this, "Starting HEMC_VoronoiBox");
 
 		if (aabb == null) {
 			_numberOfMeshes = 0;
@@ -168,21 +170,24 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 		}
 
 		numberOfPoints = points.size();
-
+		tracker.setDuringStatus(this, "Calculating Voronoi cells.");
 		List<WB_VoronoiCell3D> voronoi = bruteForce
 				? WB_Voronoi.getVoronoi3DBruteForce(points, numberOfPoints, aabb, offset)
 				: WB_Voronoi.getVoronoi3D(points, numberOfPoints, aabb, offset);
 
+		WB_ProgressCounter counter = new WB_ProgressCounter(voronoi.size(), 10);
+		tracker.setCounterStatus(this, "Creating cell mesh.", counter);
 		for (WB_VoronoiCell3D vor : voronoi) {
 			HE_Mesh m = new HE_Mesh(vor.getMesh());
 			m.setInternalLabel(vor.getIndex());
 			m.setLabel(vor.getIndex());
 			result.add(m);
+			counter.increment();
 
 		}
 
 		_numberOfMeshes = result.size();
-		tracker.setStatus(this, "Exiting HEMC_VoronoiCells.", -1);
+		tracker.setStopStatus(this, "Exiting HEMC_VoronoiBox.");
 	}
 
 }

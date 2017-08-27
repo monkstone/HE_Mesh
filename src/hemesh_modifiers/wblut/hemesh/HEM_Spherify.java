@@ -96,7 +96,7 @@ public class HEM_Spherify extends HEM_Modifier {
 	 * @see wblut.hemesh.modifiers.HEM_Modifier#apply(wblut.hemesh.core.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		while (vItr.hasNext()) {
@@ -113,7 +113,7 @@ public class HEM_Spherify extends HEM_Modifier {
 	 * HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		final Iterator<HE_Vertex> vItr = selection.vItr();
 		HE_Vertex v;
 		while (vItr.hasNext()) {

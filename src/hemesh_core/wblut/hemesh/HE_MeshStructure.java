@@ -2563,10 +2563,8 @@ public class HE_MeshStructure extends HE_MeshElement {
 	 * Uncap halfedges.
 	 */
 	public void uncapBoundaryHalfedges() {
-		tracker.setStatus(this, "Uncapping boundary halfedges.", +1);
+		tracker.setStartStatus(this, "Uncapping boundary halfedges.");
 		WB_ProgressCounter counter = new WB_ProgressCounter(getNumberOfHalfedges(), 10);
-		tracker.setStatus(this, "Detecting and uncapping boundary edges.", 0);
-
 		List<HE_Halfedge> halfedges = getHalfedges();
 		final HE_RAS<HE_Halfedge> keep = new HE_RASTrove<HE_Halfedge>();
 		for (HE_Halfedge he : halfedges) {
@@ -2581,7 +2579,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 		}
 		clearHalfedges();
 		addHalfedges(keep);
-		tracker.setStatus(this, "Removing outer boundary halfedges.", -1);
+		tracker.setStopStatus(this, "Removing outer boundary halfedges.");
 
 	}
 
@@ -2590,13 +2588,13 @@ public class HE_MeshStructure extends HE_MeshElement {
 	 */
 	public void capHalfedges() {
 
-		tracker.setStatus(this, "Capping unpaired halfedges.", +1);
+		tracker.setStartStatus(this, "Capping unpaired halfedges.");
 		final List<HE_Halfedge> unpairedHalfedges = getUnpairedHalfedges();
 		final int nuh = unpairedHalfedges.size();
 		final HE_Halfedge[] newHalfedges = new HE_Halfedge[nuh];
 		HE_Halfedge he1, he2;
 		WB_ProgressCounter counter = new WB_ProgressCounter(nuh, 10);
-		tracker.setStatus(this, "Capping unpaired halfedges.", counter);
+		tracker.setCounterStatus(this, "Capping unpaired halfedges.", counter);
 		for (int i = 0; i < nuh; i++) {
 			he1 = unpairedHalfedges.get(i);
 			he2 = new HE_Halfedge();
@@ -2607,7 +2605,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 			counter.increment();
 		}
 		counter = new WB_ProgressCounter(nuh, 10);
-		tracker.setStatus(this, "Cycling new halfedges.", counter);
+		tracker.setCounterStatus(this, "Cycling new halfedges.", counter);
 		for (int i = 0; i < nuh; i++) {
 			he1 = newHalfedges[i];
 			if (he1.getNextInFace() == null) {
@@ -2624,7 +2622,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 			}
 			counter.increment();
 		}
-		tracker.setStatus(this, "Processed unpaired halfedges.", -1);
+		tracker.setStopStatus(this, "Processed unpaired halfedges.");
 	}
 
 	/**
@@ -2672,7 +2670,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 	 * @return
 	 */
 	public List<HE_Halfedge> pairHalfedgesOnePass() {
-		tracker.setStatus(this, "Pairing halfedges.", +1);
+		tracker.setStartStatus(this, "Pairing halfedges.");
 		class VertexInfo {
 			FastTable<HE_Halfedge> out;
 			FastTable<HE_Halfedge> in;
@@ -2683,12 +2681,11 @@ public class HE_MeshStructure extends HE_MeshElement {
 			}
 		}
 		final TLongObjectMap<VertexInfo> vertexLists = new TLongObjectHashMap<VertexInfo>(1024, 0.5f, -1L);
-		tracker.setStatus(this, "Collecting unpaired halfedges.", 0);
 		final List<HE_Halfedge> unpairedHalfedges = getUnpairedHalfedges();
 		HE_Vertex v;
 		VertexInfo vi;
 		WB_ProgressCounter counter = new WB_ProgressCounter(unpairedHalfedges.size(), 10);
-		tracker.setStatus(this, "Classifying unpaired halfedges.", counter);
+		tracker.setCounterStatus(this, "Classifying unpaired halfedges.", counter);
 		for (final HE_Halfedge he : unpairedHalfedges) {
 			v = he.getVertex();
 			vi = vertexLists.get(v.key());
@@ -2709,7 +2706,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 		HE_Halfedge he;
 		HE_Halfedge he2;
 		counter = new WB_ProgressCounter(vertexLists.size(), 10);
-		tracker.setStatus(this, "Pairing unpaired halfedges per vertex.", counter);
+		tracker.setCounterStatus(this, "Pairing unpaired halfedges per vertex.", counter);
 		final TLongObjectIterator<VertexInfo> vitr = vertexLists.iterator();
 		VertexInfo vInfo;
 		final List<HE_Halfedge> mismatchedHalfedges = new FastTable<HE_Halfedge>();
@@ -2743,7 +2740,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 			}
 			counter.increment();
 		}
-		tracker.setStatus(this, "Processed unpaired halfedges.", -1);
+		tracker.setStopStatus(this, "Processed unpaired halfedges.");
 		return mismatchedHalfedges;
 	}
 
@@ -2758,10 +2755,9 @@ public class HE_MeshStructure extends HE_MeshElement {
 	 * Pair halfedges.
 	 *
 	 * @param unpairedHalfedges
-	 *            the unpaired halfedges
 	 */
 	public void pairHalfedges(final List<HE_Halfedge> unpairedHalfedges) {
-		tracker.setStatus(this, "Pairing halfedges.", +1);
+
 		class VertexInfo {
 			FastTable<HE_Halfedge> out;
 			FastTable<HE_Halfedge> in;
@@ -2774,8 +2770,6 @@ public class HE_MeshStructure extends HE_MeshElement {
 		final TLongObjectMap<VertexInfo> vertexLists = new TLongObjectHashMap<VertexInfo>(1024, 0.5f, -1L);
 		HE_Vertex v;
 		VertexInfo vi;
-		WB_ProgressCounter counter = new WB_ProgressCounter(unpairedHalfedges.size(), 10);
-		tracker.setStatus(this, "Classifying unpaired halfedges.", counter);
 		for (final HE_Halfedge he : unpairedHalfedges) {
 			v = he.getVertex();
 			vi = vertexLists.get(v.key());
@@ -2791,12 +2785,9 @@ public class HE_MeshStructure extends HE_MeshElement {
 				vertexLists.put(v.key(), vi);
 			}
 			vi.in.add(he);
-			counter.increment();
 		}
 		HE_Halfedge he;
 		HE_Halfedge he2;
-		counter = new WB_ProgressCounter(vertexLists.size(), 10);
-		tracker.setStatus(this, "Pairing unpaired halfedges per vertex.", counter);
 		final TLongObjectIterator<VertexInfo> vitr = vertexLists.iterator();
 		VertexInfo vInfo;
 		while (vitr.hasNext()) {
@@ -2819,16 +2810,14 @@ public class HE_MeshStructure extends HE_MeshElement {
 						he2 = vInfo.out.get(j);
 						if (he2 != he && he2.getPair() == null) {
 							if (he.getNextInFace().getVertex() == he2.getNextInFace().getVertex()) {
-								System.out.println("Two identical halfedges found!");
+								// Two identical halfedges found!
 								break;
 							}
 						}
 					}
 				}
 			}
-			counter.increment();
 		}
-		tracker.setStatus(this, "Processed unpaired halfedges.", -1);
 	}
 
 	/**

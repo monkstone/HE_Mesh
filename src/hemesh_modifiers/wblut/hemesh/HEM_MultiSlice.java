@@ -178,7 +178,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		origFaces = new HE_Selection(mesh);
 		capFaces = new HE_Selection(mesh);
 		if (planes == null) {
@@ -231,7 +231,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 			}
 			if (unique) {
 				slice.setPlane(Pi);
-				slice.applyInt(mesh);
+				slice.applySelf(mesh);
 				fItr = slice.capFaces.fItr();
 				HE_Face f;
 				while (fItr.hasNext()) {
@@ -264,7 +264,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		return applyInt(selection.parent);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		return applySelf(selection.parent);
 	}
 }

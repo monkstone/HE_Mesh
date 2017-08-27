@@ -22,7 +22,7 @@ public class HES_PlanarMidEdge extends HES_Subdividor {
 	 * @see wblut.hemesh.HE_Subdividor#subdivide(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		HET_MeshOp.splitEdges(mesh);
 		final ArrayList<HE_Face> newFaces = new ArrayList<HE_Face>();
 		HE_Face face;
@@ -74,7 +74,7 @@ public class HES_PlanarMidEdge extends HES_Subdividor {
 	 * .HE_Mesh, wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		HET_MeshOp.splitEdges(selection);
 		final ArrayList<HE_Face> newFaces = new ArrayList<HE_Face>();
 		HE_Face face;

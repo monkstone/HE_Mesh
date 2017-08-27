@@ -1,8 +1,8 @@
 var classwblut_1_1hemesh_1_1_h_e_m___stretch =
 [
     [ "HEM_Stretch", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a553a2cf58011a6b65f75f9879969823e", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a3d884194a4c6c9cae33b0f64637ccbdb", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a33b49b3f5d725e24c2766e8b951fccd1", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a79596e3f481f3807627f91860dc1aace", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a7500a90c2164ec294e59152744d3c88d", null ],
     [ "setCompressionFactor", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a348bd7a57ca695e0a4cdaaa87123518b", null ],
     [ "setGroundPlane", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a108159610876ed9f375463ef659894e0", null ],
     [ "setGroundPlane", "classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a993c2d175f87e0cd6d5e820bca5117fc", null ],

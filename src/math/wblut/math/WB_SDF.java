@@ -472,7 +472,7 @@ public class WB_SDF {
 		for (int i = begin; i <= end; ++i) {
 			d += Math.pow(abs(dot3D(p, GDFVectors[i])), e);
 		}
-		return Math.pow(d, 1 / e) - r;
+		return Math.pow(d, 1.0 / e) - r;
 	}
 
 	// Version with without exponent, creates objects with sharp edges and flat

@@ -9,7 +9,7 @@ WB_Render render;
 WB_Plane P;
 WB_Line L;
 HEM_Bend modifier;
-WB_GeometryFactory gf=WB_GeometryFactory.instance();
+WB_GeometryFactory gf=new WB_GeometryFactory();
 void setup() {
   size(1000,1000,P3D);
   smooth(8);

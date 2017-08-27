@@ -13,8 +13,9 @@ import java.util.Collection;
 import java.util.List;
 
 import javolution.util.FastTable;
-import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_Polygon;
+import wblut.geom.WB_Vector;
+import wblut.math.WB_Epsilon;
 
 /**
  *
@@ -130,15 +131,15 @@ public class HEC_Polygon extends HEC_Creator {
 	 */
 	@Override
 	protected HE_Mesh createBase() {
-		if (polygon == null) {
+		if (polygon == null || polygon.size() == 0) {
 			return new HE_Mesh();
 		}
-		HE_Mesh result = new HE_Mesh();
-		WB_GeometryFactory gf = new WB_GeometryFactory();
-		for (WB_Polygon poly : polygon) {
-
-			result.add(new HE_Mesh(gf.createPrism(poly, thickness, offset)));
-
+		HE_Mesh result = new HE_Mesh(new HEC_FromPolygons().setPolygons(polygon));
+		if (!WB_Epsilon.isZero(thickness)) {
+			WB_Vector N = polygon.get(0).getPlane().getNormal();
+			result.moveSelf(N.mul(-offset));
+			result.modify(new HEM_Shell().setThickness(thickness));
+			// HET_MeshOp.flipFaces(result);
 		}
 		return result;
 

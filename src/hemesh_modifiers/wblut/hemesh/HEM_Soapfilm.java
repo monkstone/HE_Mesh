@@ -68,7 +68,7 @@ public class HEM_Soapfilm extends HEM_Modifier {
 	 * @see wblut.hemesh.HEM_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		mesh.triangulate();
 		WB_AABB box = new WB_AABB();
 		if (autoRescale) {
@@ -110,7 +110,7 @@ public class HEM_Soapfilm extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.collectVertices();
 		selection.parent.triangulate();
 		WB_AABB box = new WB_AABB();

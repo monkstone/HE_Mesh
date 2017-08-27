@@ -27,7 +27,7 @@ public class HEM_MidEdgeSplit extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		HET_MeshOp.splitFacesMidEdge(mesh);
 		return mesh;
 	}
@@ -38,7 +38,7 @@ public class HEM_MidEdgeSplit extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		HET_MeshOp.splitFacesMidEdge(selection);
 		return selection.parent;
 	}

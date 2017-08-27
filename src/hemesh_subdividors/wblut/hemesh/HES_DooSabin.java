@@ -107,7 +107,7 @@ public class HES_DooSabin extends HES_Subdividor {
 	 * @see wblut.hemesh.HES_Subdividor#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		if (HE_Selection.selectBoundaryEdges(mesh).getNumberOfEdges() > 0) {
 			throw new IllegalArgumentException("HES_DooSabin only supports closed meshes at this time.");
 		}
@@ -226,7 +226,7 @@ public class HES_DooSabin extends HES_Subdividor {
 	 * .HE_Mesh, wblut.hemesh.HE_Selection)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		return selection.parent;
 	}
 }

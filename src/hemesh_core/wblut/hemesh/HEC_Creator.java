@@ -234,10 +234,10 @@ public abstract class HEC_Creator extends HE_Machine {
 	 * @return HE_Mesh
 	 */
 	public final HE_Mesh create() {
-		tracker.setStatus(this, "Creating base mesh.", tracker.STARTLVL);
+		tracker.setStartStatus(this, "Creating base mesh.");
 		final HE_Mesh base = createBase();
-		tracker.setStatus(this, "Base mesh created.", tracker.STOPLVL);
-		tracker.setStatus(this, "Transforming base mesh.", tracker.STARTLVL);
+		tracker.setStopStatus(this, "Base mesh created.");
+		tracker.setStartStatus(this, "Transforming base mesh.");
 		WB_Coord ctr = base.getCenter();
 		if (!override) {
 			base.scaleSelf(scale);
@@ -267,13 +267,13 @@ public abstract class HEC_Creator extends HE_Machine {
 				}
 			}
 		}
-		tracker.setStatus(this, "Base mesh transformed.", tracker.STOPLVL);
 
 		if (manifoldCheck) {
-			tracker.setStatus(this, "Checking and fixing manifold.", tracker.STARTLVL);
+			tracker.setStartStatus(this, "Checking and fixing manifold.");
 			HET_Fixer.fixNonManifoldVertices(base);
-			tracker.setStatus(this, "Manifold checked.", tracker.STOPLVL);
+			tracker.setStopStatus(this, "Manifold checked.");
 		}
+		tracker.setStopStatus(this, "Base mesh transformed.");
 		return base;
 	}
 

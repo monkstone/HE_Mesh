@@ -57,6 +57,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 	public HEMC_VoronoiCells() {
 		super();
 		simpleCap = true;
+		offset = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -226,7 +227,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 
 	@Override
 	void create(final HE_MeshCollection result) {
-		tracker.setStatus(this, "Starting HEMC_VoronoiCells", +1);
+		tracker.setStartStatus(this, "Starting HEMC_VoronoiCells");
 
 		if (container == null) {
 			_numberOfMeshes = 0;
@@ -244,11 +245,10 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 		final ArrayList<HE_Selection> loutersel = new ArrayList<HE_Selection>();
 		final HEC_VoronoiCell cvc = new HEC_VoronoiCell();
 		if (bruteForce || numberOfPoints < 10) {
-			cvc.setPoints(points).setN(numberOfPoints).setContainer(container).setSurface(surface).setOffset(offset)
-					.setSimpleCap(simpleCap);
+			cvc.setPoints(points).setContainer(container).setSurface(surface).setOffset(offset).setSimpleCap(simpleCap);
 			for (int i = 0; i < numberOfPoints; i++) {
-				tracker.setStatus(this,
-						"Creating cell " + (i + 1) + " of " + numberOfPoints + " (" + numberOfPoints + " slices).", 0);
+				tracker.setDuringStatus(this,
+						"Creating cell " + (i + 1) + " of " + numberOfPoints + " (" + numberOfPoints + " slices).");
 				cvc.setCellIndex(i);
 				final HE_Mesh mesh = cvc.createBase();
 				linnersel.add(cvc.inner);
@@ -258,11 +258,11 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 		} else {
 
 			final int[][] voronoiIndices = WB_Voronoi.getVoronoi3DNeighbors(points);
-			cvc.setPoints(points).setN(numberOfPoints).setContainer(container).setSurface(surface).setOffset(offset)
-					.setSimpleCap(simpleCap).setLimitPoints(true);
+			cvc.setPoints(points).setContainer(container).setSurface(surface).setOffset(offset).setSimpleCap(simpleCap)
+					.setLimitPoints(true);
 			for (int i = 0; i < numberOfPoints; i++) {
-				tracker.setStatus(this, "Creating cell " + (i + 1) + " of " + numberOfPoints + " ("
-						+ voronoiIndices[i].length + " slices).", 0);
+				tracker.setDuringStatus(this, "Creating cell " + (i + 1) + " of " + numberOfPoints + " ("
+						+ voronoiIndices[i].length + " slices).");
 				System.out.println("Creating cell " + (i + 1) + " of " + numberOfPoints + " ("
 						+ voronoiIndices[i].length + " slices).");
 				cvc.setCellIndex(i);
@@ -283,7 +283,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 			outer[i] = loutersel.get(i);
 		}
 		if (createSkin) {
-			tracker.setStatus(this, "Creating skin.", 0);
+			tracker.setDuringStatus(this, "Creating skin.");
 			final boolean[] on = new boolean[_numberOfMeshes];
 			for (int i = 0; i < _numberOfMeshes; i++) {
 				on[i] = true;
@@ -291,7 +291,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 			result.add(new HE_Mesh(new HEC_FromVoronoiCells().setActive(on).setCells(result.meshes)));
 		}
 		_numberOfMeshes = result.size();
-		tracker.setStatus(this, "Exiting HEMC_VoronoiCells.", -1);
+		tracker.setStopStatus(this, "Exiting HEMC_VoronoiCells.");
 
 	}
 

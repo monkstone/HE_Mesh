@@ -65,13 +65,13 @@ class HET_PlanarPathTriangulator {
 	 */
 	public static long[] getTriangleKeys(final List<? extends HE_Path> paths, final WB_Plane P) {
 
-		tracker.setStatus("HET_PlanarPathTriangulator", "Starting planar path triangulation.", +1);
+		tracker.setStartStatus("HET_PlanarPathTriangulator", "Starting planar path triangulation.");
 		final WB_Map2D emb = new WB_OrthoProject(P);
 		final RingTree ringtree = new RingTree();
 		List<HE_Vertex> vertices;
 		Coordinate[] pts;
 		final WB_KDTree<WB_Point, Long> vertextree = new WB_KDTree<WB_Point, Long>();
-		tracker.setStatus("HET_PlanarPathTriangulator", "Building contours tree.", 0);
+		tracker.setDuringStatus("HET_PlanarPathTriangulator", "Building contours tree.");
 		for (int i = 0; i < paths.size(); i++) {
 			final HE_Path path = paths.get(i);
 			if (path.isLoop() && path.getPathOrder() > 2) {
@@ -89,11 +89,11 @@ class HET_PlanarPathTriangulator {
 				ringtree.add(JTSgf.createLinearRing(pts));
 			}
 		}
-		tracker.setStatus("HET_PlanarPathTriangulator", "Extracting polygons from contours tree.", 0);
+		tracker.setDuringStatus("HET_PlanarPathTriangulator", "Extracting polygons from contours tree.");
 		final List<WB_Polygon> polygons = ringtree.extractPolygons();
 		final List<WB_Coord[]> triangles = new FastTable<WB_Coord[]>();
 		WB_ProgressCounter counter = new WB_ProgressCounter(polygons.size(), 10);
-		tracker.setStatus("HET_PlanarPathTriangulator", "Triangulating polygons.", counter);
+		tracker.setCounterStatus("HET_PlanarPathTriangulator", "Triangulating polygons.", counter);
 		for (final WB_Polygon poly : polygons) {
 			final int[] tris = poly.getTriangles(false);
 			for (int i = 0; i < tris.length; i += 3) {
@@ -113,7 +113,7 @@ class HET_PlanarPathTriangulator {
 			trianglekeys[3 * i + 1] = key2;
 			trianglekeys[3 * i + 2] = key1;
 		}
-		tracker.setStatus("HET_PlanarPathTriangulator", "All paths triangulated.", -1);
+		tracker.setStopStatus("HET_PlanarPathTriangulator", "All paths triangulated.");
 		return trianglekeys;
 	}
 
@@ -125,13 +125,13 @@ class HET_PlanarPathTriangulator {
 	 * @return
 	 */
 	public static HE_Mesh getConstrainedCaps(final List<? extends HE_Path> paths, final WB_Plane P) {
-		tracker.setStatus("HET_PlanarPathTriangulator", "Starting planar path triangulation.", +1);
+		tracker.setStartStatus("HET_PlanarPathTriangulator", "Starting planar path triangulation.");
 		final WB_Map2D emb = geometryfactory.createEmbeddedPlane(P);
 		final RingTree ringtree = new RingTree();
 		List<HE_Vertex> vertices;
 		Coordinate[] pts;
 		final WB_KDTree<WB_Point, Long> vertextree = new WB_KDTree<WB_Point, Long>();
-		tracker.setStatus("HET_PlanarPathTriangulator", "Building contours tree.", 0);
+		tracker.setDuringStatus("HET_PlanarPathTriangulator", "Building contours tree.");
 		for (int i = 0; i < paths.size(); i++) {
 			final HE_Path path = paths.get(i);
 			if (path.isLoop() && path.getPathOrder() > 2) {
@@ -149,10 +149,10 @@ class HET_PlanarPathTriangulator {
 				ringtree.add(JTSgf.createLinearRing(pts));
 			}
 		}
-		tracker.setStatus("HET_PlanarPathTriangulator", "Extracting polygons from contours tree.", 0);
+		tracker.setDuringStatus("HET_PlanarPathTriangulator", "Extracting polygons from contours tree.");
 		final List<WB_Polygon> polygons = ringtree.extractPolygons();
 		WB_ProgressCounter counter = new WB_ProgressCounter(polygons.size(), 10);
-		tracker.setStatus("HET_PlanarPathTriangulator", "Triangulating polygons.", counter);
+		tracker.setCounterStatus("HET_PlanarPathTriangulator", "Triangulating polygons.", counter);
 		final HE_Mesh cap = new HE_Mesh();
 		for (final WB_Polygon poly : polygons) {
 			final WB_Triangulation2DWithPoints tri = WB_Triangulate.triangulateConforming2D(poly);
@@ -165,7 +165,7 @@ class HET_PlanarPathTriangulator {
 			v = vitr.next();
 			emb.unmapPoint2D(v.xd(), v.yd(), v);
 		}
-		tracker.setStatus("HET_PlanarPathTriangulator", "All paths triangulated.", -1);
+		tracker.setStopStatus("HET_PlanarPathTriangulator", "All paths triangulated.");
 		return cap;
 	}
 

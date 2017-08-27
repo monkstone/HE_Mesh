@@ -12,4 +12,16 @@ public class WB_GeometryFactory extends WB_GeometryFactory3D {
 		super();
 
 	}
+
+	/**
+	 * Legacy code, WB_GeometryFactory used to be a singleton but this limited
+	 * its use in multithreaded code.
+	 *
+	 * @return
+	 */
+
+	public static WB_GeometryFactory instance() {
+		return new WB_GeometryFactory();
+
+	}
 }

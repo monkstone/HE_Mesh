@@ -11,6 +11,9 @@ package wblut.hemesh;
 
 import gnu.trove.iterator.TLongLongIterator;
 import gnu.trove.map.TLongLongMap;
+import wblut.math.WB_ConstantScalarParameter;
+import wblut.math.WB_FactorScalarParameter;
+import wblut.math.WB_ScalarParameter;
 
 /**
  * Turns a solid into a rudimentary shelled structure.
@@ -22,14 +25,17 @@ public class HEM_Shell extends HEM_Modifier {
 	/**
 	 *
 	 */
-	private double d;
+	private WB_ScalarParameter d;
+
+	private boolean useFace;
 
 	/**
 	 *
 	 */
 	public HEM_Shell() {
 		super();
-		d = 0;
+		d = WB_ScalarParameter.ZERO;
+		useFace = false;
 	}
 
 	/**
@@ -39,7 +45,28 @@ public class HEM_Shell extends HEM_Modifier {
 	 * @return
 	 */
 	public HEM_Shell setThickness(final double d) {
+		this.d = d == 0.0 ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(d);
+		return this;
+	}
+
+	/**
+	 *
+	 *
+	 * @param d
+	 * @return
+	 */
+	public HEM_Shell setThickness(final WB_ScalarParameter d) {
 		this.d = d;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param b
+	 * @return
+	 */
+	public HEM_Shell setUseFaceExpand(final boolean b) {
+		useFace = b;
 		return this;
 	}
 
@@ -49,18 +76,22 @@ public class HEM_Shell extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
-		if (d == 0) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
+		if (d == WB_ScalarParameter.ZERO) {
 			return mesh;
 		}
 
 		HEC_Copy cc = new HEC_Copy().setMesh(mesh);
 		final HE_Mesh innerMesh = cc.create();
-
 		TLongLongMap heCorrelation = cc.halfedgeCorrelation;
+		if (!useFace) {
+			final HEM_VertexExpand expm = new HEM_VertexExpand().setDistance(new WB_FactorScalarParameter(-1.0, d));
+			innerMesh.modify(expm);
+		} else {
+			final HEM_FaceExpand expm = new HEM_FaceExpand().setDistance(new WB_FactorScalarParameter(-1.0, d));
+			innerMesh.modify(expm);
+		}
 
-		final HEM_VertexExpand expm = new HEM_VertexExpand().setDistance(-d);
-		innerMesh.modify(expm);
 		HET_MeshOp.flipFaces(innerMesh);
 		mesh.add(innerMesh);
 		HE_Halfedge he1, he2, heio, heoi;
@@ -95,9 +126,6 @@ public class HEM_Shell extends HEM_Modifier {
 		}
 		mesh.pairHalfedges();
 		mesh.capHalfedges();
-		if (d < 0) {
-			HET_MeshOp.flipFaces(mesh);
-		}
 		return mesh;
 	}
 
@@ -107,7 +135,7 @@ public class HEM_Shell extends HEM_Modifier {
 	 * @see wblut.hemesh.HE_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
-		return applyInt(selection.parent);
+	protected HE_Mesh applySelf(final HE_Selection selection) {
+		return applySelf(selection.parent);
 	}
 }

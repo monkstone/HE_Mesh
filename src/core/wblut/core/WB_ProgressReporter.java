@@ -10,27 +10,41 @@
 
 package wblut.core;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 public class WB_ProgressReporter extends Thread {
 
 	WB_ProgressTracker tracker;
-	String status;
+	WB_ProgressStatus status;
+	PrintStream output;
+	String path;
 
 	/**
 	 *
 	 */
-	public WB_ProgressReporter() {
-		super();
-		tracker = WB_ProgressTracker.instance();
-		tracker.setDepth(0);
+	public WB_ProgressReporter(final String path) {
+		this(0, path, false);
 	}
 
 	/**
 	 *
 	 */
-	public WB_ProgressReporter(final int depth) {
+	public WB_ProgressReporter(final int depth, final int consoleDepth, final String path) {
+		this(depth, path, false);
+	}
+
+	public WB_ProgressReporter(final int depth, final String path, final boolean append) {
 		super();
 		tracker = WB_ProgressTracker.instance();
-		tracker.setDepth(depth);
+		tracker.setMaxLevel(depth);
+		this.path = path;
+		try {
+			output = new PrintStream(new BufferedOutputStream(new FileOutputStream(path, append)), true, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -41,7 +55,8 @@ public class WB_ProgressReporter extends Thread {
 	@Override
 	public void start() {
 		super.start();
-		System.out.println("Starting WB_ProgressTracker");
+		System.out.println("Starting WB_ProgressTracker: " + path);
+		System.out.println("");
 	}
 
 	/*
@@ -57,7 +72,13 @@ public class WB_ProgressReporter extends Thread {
 				while (tracker.isUpdated()) {
 					status = tracker.getStatus();
 					if (status != null) {
-						System.out.println(status);
+						String s = status.getText();
+						if (s != null) {
+							output.println(s);
+							if (status.getLevel() < 2) {
+								System.out.println(status.getConsoleText());
+							}
+						}
 					}
 				}
 			} catch (final Exception e) {

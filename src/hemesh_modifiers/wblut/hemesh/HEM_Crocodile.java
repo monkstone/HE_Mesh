@@ -38,7 +38,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 	/**
 	 *
 	 */
-	private double chamfer;
+	private WB_ScalarParameter chamfer;
 
 	/*
 	 * (non-Javadoc)
@@ -49,7 +49,8 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 *
 	 */
 	public HEM_Crocodile() {
-		chamfer = 0.5;
+		chamfer = new WB_ConstantScalarParameter(0.5);
+		distance = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 * @return
 	 */
 	public HEM_Crocodile setDistance(final double d) {
-		distance = new WB_ConstantScalarParameter(d);
+		distance = d == 0 ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(d);
 		return this;
 	}
 
@@ -75,6 +76,11 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 * @return
 	 */
 	public HEM_Crocodile setChamfer(final double c) {
+		chamfer = c == 0 ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(c);
+		return this;
+	}
+
+	public HEM_Crocodile setChamfer(final WB_ScalarParameter c) {
 		chamfer = c;
 		return this;
 	}
@@ -85,7 +91,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 * @see wblut.hemesh.HEM_Modifier#apply(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Mesh mesh) {
+	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		final HE_Selection selection = HE_Selection.selectAllVertices(mesh);
 		return apply(selection);
 	}
@@ -97,69 +103,55 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 * wblut.hemesh.modifiers.HEB_Modifier#modifySelected(wblut.hemesh.HE_Mesh)
 	 */
 	@Override
-	protected HE_Mesh applyInt(final HE_Selection selection) {
+	protected HE_Mesh applySelf(final HE_Selection selection) {
 		spikes = new HE_Selection(selection.parent);
 		selection.collectVertices();
-		tracker.setStatus(this, "Starting HEM_Crocodile.", +1);
+		tracker.setStartStatus(this, "Starting HEM_Crocodile.");
 		final Map<Long, WB_Coord> umbrellapoints = new FastMap<Long, WB_Coord>();
 		HE_VertexIterator vitr = selection.vItr();
 		HE_Vertex v;
-		if (chamfer == 0) {
-			tracker.setStatus(this, "Chamfer is 0, nothing to do. Exiting HEM_Crocodile.", -1);
+		if (chamfer == WB_ScalarParameter.ZERO) {
+			tracker.setStopStatus(this, "Chamfer is 0, nothing to do. Exiting HEM_Crocodile.");
 			return selection.parent;
 		}
-		if (chamfer < 0) {
-			chamfer *= -1;
-		}
-		if (chamfer > 0.5 && chamfer < 1.0) {
-			chamfer = 1.0 - chamfer;
-		} else if (chamfer < 0 || chamfer > 1) {
-			tracker.setStatus(this, "Chamfer is outside range (0-0.5), nothing to do. Exiting HEM_Crocodile.", -1);
-			return selection.parent;
-		}
-		if (chamfer == 0.5) {
-			WB_ProgressCounter counter = new WB_ProgressCounter(selection.getNumberOfVertices(), 10);
-			tracker.setStatus(this, "Enumerating vertex umbrellas.", counter);
-			List<HE_Halfedge> star;
-			while (vitr.hasNext()) {
-				v = vitr.next();
-				star = v.getEdgeStar();
-				for (final HE_Halfedge e : star) {
-					umbrellapoints.put(e.key, e.getEdgeCenter());
-				}
-				counter.increment();
-			}
-			counter = new WB_ProgressCounter(umbrellapoints.size(), 10);
 
-			tracker.setStatus(this, "Splitting edges.", counter);
-			for (final long e : umbrellapoints.keySet()) {
-				HET_MeshOp.splitEdge(selection.parent, selection.parent.getEdgeWithKey(e), umbrellapoints.get(e));
-				counter.increment();
-			}
-		} else {
-			List<HE_Halfedge> star;
-			WB_ProgressCounter counter = new WB_ProgressCounter(selection.getNumberOfVertices(), 10);
-
-			tracker.setStatus(this, "Enumerating vertex umbrellas.", counter);
-			while (vitr.hasNext()) {
-				v = vitr.next();
-				star = v.getHalfedgeStar();
-				for (final HE_Halfedge he : star) {
-					umbrellapoints.put(he.key, gf.createInterpolatedPoint(he.getVertex(), he.getEndVertex(), chamfer));
-				}
-				counter.increment();
-			}
-			counter = new WB_ProgressCounter(umbrellapoints.size(), 10);
-
-			tracker.setStatus(this, "Splitting edges.", counter);
-			for (final long he : umbrellapoints.keySet()) {
-				HET_MeshOp.splitEdge(selection.parent, selection.parent.getHalfedgeWithKey(he), umbrellapoints.get(he));
-				counter.increment();
-			}
-		}
 		WB_ProgressCounter counter = new WB_ProgressCounter(selection.getNumberOfVertices(), 10);
+		tracker.setCounterStatus(this, "Enumerating vertex umbrellas.", counter);
+		List<HE_Halfedge> star;
+		double ch = 0.0;
+		while (vitr.hasNext()) {
+			v = vitr.next();
+			ch = chamfer.evaluate(v.xd(), v.yd(), v.zd());
+			if (ch < 0.0) {
+				ch *= -1;
+			}
+			ch = ch - (int) ch;
+			if (ch > 0.5) {
+				ch = 1.0 - ch;
+			}
+			if (ch == 0.0) {
+				continue;
+			} else if (ch == 0.5) {
+				star = v.getEdgeStar();
+			} else {
+				star = v.getHalfedgeStar();
+			}
+			for (final HE_Halfedge he : star) {
+				umbrellapoints.put(he.key, gf.createInterpolatedPoint(he.getVertex(), he.getEndVertex(), ch));
+			}
+			counter.increment();
+		}
+		counter = new WB_ProgressCounter(umbrellapoints.size(), 10);
 
-		tracker.setStatus(this, "Splitting faces.", counter);
+		tracker.setCounterStatus(this, "Splitting edges.", counter);
+		for (final long e : umbrellapoints.keySet()) {
+			HET_MeshOp.splitEdge(selection.parent, selection.parent.getEdgeWithKey(e), umbrellapoints.get(e));
+			counter.increment();
+		}
+
+		counter = new WB_ProgressCounter(selection.getNumberOfVertices(), 10);
+
+		tracker.setCounterStatus(this, "Splitting faces.", counter);
 		vitr = selection.vItr();
 		while (vitr.hasNext()) {
 			v = vitr.next();
@@ -175,7 +167,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 			counter.increment();
 			v.addMulSelf(distance.evaluate(v.xd(), v.yd(), v.zd()), v.getVertexNormal());
 		}
-		tracker.setStatus(this, "Exiting HEM_Crocodile.", -1);
+		tracker.setStopStatus(this, "Exiting HEM_Crocodile.");
 		return selection.parent;
 	}
 }

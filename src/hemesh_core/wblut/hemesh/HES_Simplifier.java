@@ -26,14 +26,19 @@ abstract public class HES_Simplifier extends HE_Machine {
 	@Override
 	public HE_Mesh apply(final HE_Mesh mesh) {
 		if (mesh == null || mesh.getNumberOfVertices() == 0) {
+			tracker.setStopStatus(this, "Nothing to simplify.");
 			return new HE_Mesh();
 		}
 		HE_Mesh copy = mesh.get();
 		try {
-			return applyInt(mesh);
+			HE_Mesh result = applySelf(mesh);
+			tracker.setStopStatus(this, "Mesh simplified.");
+
+			return result;
 		} catch (Exception e) {
-			System.out.println("HES_Simplifier failed. Resetting mesh");
+			e.printStackTrace();
 			mesh.setNoCopy(copy);
+			tracker.setStopStatus(this, "Simplifier failed. Resetting mesh.");
 			return mesh;
 		}
 
@@ -42,20 +47,25 @@ abstract public class HES_Simplifier extends HE_Machine {
 	@Override
 	public HE_Mesh apply(final HE_Selection selection) {
 		if (selection == null) {
+			tracker.setStopStatus(this, "Nothing to simplify.");
+
 			return new HE_Mesh();
 		}
 		HE_Mesh copy = selection.parent.get();
 		try {
-			return applyInt(selection);
+			HE_Mesh result = applySelf(selection);
+			tracker.setStopStatus(this, "Mesh simplified.");
+			return result;
 		} catch (Exception e) {
-			System.out.println("HES_Simplifier failed. Resetting mesh");
+			e.printStackTrace();
 			selection.parent.setNoCopy(copy);
+			tracker.setStopStatus(this, "Simplifier failed. Resetting mesh.");
 			return selection.parent;
 		}
 
 	}
 
-	protected abstract HE_Mesh applyInt(final HE_Mesh mesh);
+	protected abstract HE_Mesh applySelf(final HE_Mesh mesh);
 
-	protected abstract HE_Mesh applyInt(final HE_Selection selection);
+	protected abstract HE_Mesh applySelf(final HE_Selection selection);
 }

@@ -2,8 +2,8 @@ var classwblut_1_1hemesh_1_1_h_e_s___tri_dec =
 [
     [ "Heap", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec_1_1_heap.html", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec_1_1_heap" ],
     [ "HES_TriDec", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#abd6475e89719f1b5796754a132ce624e", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#ad853bfaa06de873e07a2da5efb580a8f", null ],
-    [ "applyInt", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#a7a586ad928f4a6960d7a738fe8e238d5", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#aff97fae898ea66382c3170639a1fe3fb", null ],
+    [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#a3c502fff0351df8fe5b9423093136acf", null ],
     [ "buildHeap", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#afcd9e342fb77ff5ebbd38d17a21e22c7", null ],
     [ "halfedgeCollapseCost", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#a30df2c279d2e13b1e957853b75ce56e7", null ],
     [ "setGoal", "classwblut_1_1hemesh_1_1_h_e_s___tri_dec.html#a01740919c5564c959dc41ad5f42fd54b", null ],
