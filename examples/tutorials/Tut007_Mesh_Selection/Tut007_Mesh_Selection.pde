@@ -5,8 +5,6 @@ import wblut.hemesh.*;
 import wblut.geom.*;
 
 
-import processing.opengl.*;
-
 HE_Selection selection;
 HE_Selection invselection;
 HE_Mesh box;

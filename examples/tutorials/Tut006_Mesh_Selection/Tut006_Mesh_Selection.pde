@@ -34,8 +34,8 @@ void setup() {
   //only modify selection (if applicable)
   selection.modify(extrude);
   
-  //Some modifiers store selections after application.
-  HE_Selection newSelection=extrude.walls;
+ 
+  HE_Selection newSelection=box.getSelection("walls");
   extrude.setDistance(-10).setChamfer(0.4);
   newSelection.modify(extrude);
   
