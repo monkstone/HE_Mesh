@@ -4,8 +4,7 @@ import wblut.core.*;
 import wblut.hemesh.*;
 import wblut.geom.*;
 import java.util.List;
-float[][] points;
-int numpoints;
+
 HE_Mesh container;
 HE_MeshCollection cells;
 
@@ -18,7 +17,7 @@ void setup() {
   // for prototyping tens to hundreds of points, painfully slow
   // for more...
 
-  container=new HE_Mesh(new HEC_Geodesic().setB(4).setC(4).setRadius(360));
+  //container=new HE_Mesh(new HEC_Geodesic().setB(4).setC(4).setRadius(360));
 
 HEC_Cube creator=new HEC_Cube();
   creator.setEdge(400); 
@@ -28,21 +27,13 @@ HEC_Cube creator=new HEC_Cube();
     fitr.next().setColor(color(0,0,255));
   }
   //make a skin
-  container.modify(new HEM_Shell().setThickness(50));  
+  container.modify(new HEM_Shell().setThickness(100));  
 
-  //generate points
-  numpoints=100;
-  points=new float[numpoints][3];
-  for (int i=0; i<numpoints; i++) {
-    points[i][0]=random(-200, 200);
-    points[i][1]=random(-200, 200);
-    points[i][2]=random(-200, 200);
-  }
   
    int B, C;
   // make a icosahedron
   B=1;
-  C=0;
+  C=2;
   HEC_Geodesic pointMaker=new HEC_Geodesic();
   pointMaker.setRadius(20);
   pointMaker.setB(B+1);
@@ -56,9 +47,7 @@ List <WB_Coord> thesePoints = thisMesh.getPoints();
   multiCreator.setContainer(container);// cutoff mesh for the voronoi cells, complex meshes increase the generation time
   multiCreator.setOffset(10);// offset of the bisector cutting planes, sides of the voronoi cells will be separated by twice this distance
   multiCreator.setSurface(false);// is container mesh a volume (false) or a surface (true)
-  multiCreator.setCreateSkin(false);// create the combined outer skin of the cells as an additional mesh? This mesh is the last in the returned array.
   multiCreator.setSimpleCap(false);
-  // multiCreator.setBruteForce(true);
   ASYNC=true;
 
   if (ASYNC) {

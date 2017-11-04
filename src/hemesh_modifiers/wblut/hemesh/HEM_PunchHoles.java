@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.math.WB_ConstantScalarParameter;
@@ -163,7 +158,7 @@ public class HEM_PunchHoles extends HEM_Modifier {
 		final HEM_Extrude extm = new HEM_Extrude().setDistance(0).setRelative(relative).setChamfer(sew).setFuse(fuse)
 				.setHardEdgeChamfer(hew).setFuseAngle(fuseAngle).setThresholdAngle(thresholdAngle);
 		mesh.modify(extm);
-		mesh.deleteFaces(extm.extruded);
+		mesh.deleteFaces(mesh.getSelection("extruded"));
 		return mesh;
 	}
 
@@ -180,7 +175,7 @@ public class HEM_PunchHoles extends HEM_Modifier {
 		final HEM_Extrude extm = new HEM_Extrude().setDistance(0).setRelative(relative).setChamfer(sew).setFuse(fuse)
 				.setHardEdgeChamfer(hew).setFuseAngle(fuseAngle).setThresholdAngle(thresholdAngle);
 		selection.modify(extm);
-		selection.parent.deleteFaces(extm.extruded);
+		selection.parent.deleteFaces(selection.parent.getSelection("extruded"));
 		return selection.parent;
 	}
 }

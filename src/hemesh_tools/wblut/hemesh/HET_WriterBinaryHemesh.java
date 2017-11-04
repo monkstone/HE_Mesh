@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.DataOutputStream;
@@ -57,15 +52,15 @@ public class HET_WriterBinaryHemesh {
 				}
 			}
 		} catch (final SecurityException se) {
-			System.err.println("No permissions to create "
-					+ file.getAbsolutePath());
+			System.err.println("No permissions to create " + file.getAbsolutePath());
 		}
 	}
 
 	/**
 	 * Begin save.
 	 *
-	 * @param fn            the fn
+	 * @param fn
+	 *            the fn
 	 * @param name
 	 */
 	public void beginSave(final String fn, final String name) {
@@ -97,16 +92,14 @@ public class HET_WriterBinaryHemesh {
 	 * Handle begin save.
 	 */
 	protected void handleBeginSave() {
-		hemeshWriter = new DataOutputStream(new DeflaterOutputStream(
-				hemeshStream));
+		hemeshWriter = new DataOutputStream(new DeflaterOutputStream(hemeshStream));
 	}
 
-
 	/**
-	 * 
 	 *
-	 * @param v 
-	 * @param heid 
+	 *
+	 * @param v
+	 * @param heid
 	 */
 	public void vertex(final HE_Vertex v, final int heid) {
 		try {
@@ -116,12 +109,12 @@ public class HET_WriterBinaryHemesh {
 			hemeshWriter.writeInt(heid);
 			hemeshWriter.writeInt(v.getColor());
 			hemeshWriter.writeLong(v.labels);
-			if(v.hasVertexUVW()){
+			if (v.hasVertexUVW()) {
 				hemeshWriter.writeInt(1);
 				hemeshWriter.writeDouble(v.getVertexUVW().xd());
 				hemeshWriter.writeDouble(v.getVertexUVW().yd());
 				hemeshWriter.writeDouble(v.getVertexUVW().zd());
-			}else{
+			} else {
 				hemeshWriter.writeInt(0);
 			}
 
@@ -131,15 +124,15 @@ public class HET_WriterBinaryHemesh {
 	}
 
 	/**
-	 * 
 	 *
-	 * @param he 
-	 * @param vid 
-	 * @param henextid 
-	 * @param hepairid 
-	 * @param faceid 
+	 *
+	 * @param he
+	 * @param vid
+	 * @param henextid
+	 * @param hepairid
+	 * @param faceid
 	 */
-	public void halfedge(final HE_Halfedge he,final int vid, final int henextid, final int hepairid,
+	public void halfedge(final HE_Halfedge he, final int vid, final int henextid, final int hepairid,
 			final int faceid) {
 		try {
 			hemeshWriter.writeInt(vid);
@@ -148,12 +141,12 @@ public class HET_WriterBinaryHemesh {
 			hemeshWriter.writeInt(faceid);
 			hemeshWriter.writeInt(he.getColor());
 			hemeshWriter.writeLong(he.labels);
-			if(he.hasHalfedgeUVW()){
+			if (he.hasHalfedgeUVW()) {
 				hemeshWriter.writeInt(1);
 				hemeshWriter.writeDouble(he.getHalfedgeUVW().xd());
 				hemeshWriter.writeDouble(he.getHalfedgeUVW().yd());
 				hemeshWriter.writeDouble(he.getHalfedgeUVW().zd());
-			}else{
+			} else {
 				hemeshWriter.writeInt(0);
 			}
 		} catch (final IOException e) {
@@ -161,15 +154,13 @@ public class HET_WriterBinaryHemesh {
 		}
 	}
 
-
-
 	/**
-	 * 
 	 *
-	 * @param f 
-	 * @param heid 
+	 *
+	 * @param f
+	 * @param heid
 	 */
-	public void face(final HE_Face f,final int heid) {
+	public void face(final HE_Face f, final int heid) {
 		try {
 			hemeshWriter.writeInt(heid);
 			hemeshWriter.writeInt(f.getColor());
@@ -183,9 +174,12 @@ public class HET_WriterBinaryHemesh {
 	/**
 	 * Sizes.
 	 *
-	 * @param v1            the v1
-	 * @param v2            the v2
-	 * @param v3            the v3
+	 * @param v1
+	 *            the v1
+	 * @param v2
+	 *            the v2
+	 * @param v3
+	 *            the v3
 	 */
 	public void sizes(final int v1, final int v2, final int v3) {
 		try {

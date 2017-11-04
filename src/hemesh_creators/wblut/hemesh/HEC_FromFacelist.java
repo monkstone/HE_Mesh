@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -15,7 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javolution.util.FastMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_KDTreeInteger;
 import wblut.geom.WB_KDTreeInteger.WB_KDEntryInteger;
@@ -429,8 +424,11 @@ public class HEC_FromFacelist extends HEC_Creator {
 				if (useVertexInfo) {
 					v.setColor(vertexColors[0]);
 					v.setVisible(vertexVisibility[0]);
-					v.setLabel(vertexLabels[0]);
+					v.setUserLabel(vertexLabels[0]);
 					v.setInternalLabel(vertexInternalLabels[0]);
+				} else {
+					v.setInternalLabel(0);
+
 				}
 
 				if (useVertexUVW) {
@@ -442,6 +440,15 @@ public class HEC_FromFacelist extends HEC_Creator {
 				mesh.add(v);
 				for (int i = 1; i < vertices.length; i++) {
 					v = new HE_Vertex(vertices[i]);
+					if (useVertexInfo) {
+						v.setColor(vertexColors[i]);
+						v.setVisible(vertexVisibility[i]);
+						v.setUserLabel(vertexLabels[i]);
+						v.setInternalLabel(vertexInternalLabels[i]);
+					} else {
+						v.setInternalLabel(i);
+
+					}
 					if (useVertexUVW) {
 						v.setUVW(vertexuvws[i]);
 					}
@@ -460,6 +467,15 @@ public class HEC_FromFacelist extends HEC_Creator {
 				HE_Vertex v;
 				for (int i = 0; i < vertices.length; i++) {
 					v = new HE_Vertex(vertices[i]);
+					if (useVertexInfo) {
+						v.setColor(vertexColors[i]);
+						v.setVisible(vertexVisibility[i]);
+						v.setUserLabel(vertexLabels[i]);
+						v.setInternalLabel(vertexInternalLabels[i]);
+					} else {
+						v.setInternalLabel(i);
+
+					}
 					if (useVertexUVW) {
 						v.setUVW(vertexuvws[i]);
 					}
@@ -474,7 +490,7 @@ public class HEC_FromFacelist extends HEC_Creator {
 			final List<Long> nmedges = new ArrayList<Long>();
 			if (normalcheck) {
 				// Create adjacency table
-				final FastMap<Long, int[]> edges = new FastMap<Long, int[]>();
+				final UnifiedMap<Long, int[]> edges = new UnifiedMap<Long, int[]>();
 				for (int i = 0; i < faces.length; i++) {
 					final int[] face = faces[i];
 
@@ -562,7 +578,7 @@ public class HEC_FromFacelist extends HEC_Creator {
 						hef.setColor(faceColors[faceid]);
 						hef.setTextureId(faceTextureIds[id]);
 						hef.setVisible(faceVisibility[id]);
-						hef.setLabel(faceLabels[id]);
+						hef.setUserLabel(faceLabels[id]);
 						hef.setInternalLabel(faceInternalLabels[id]);
 					}
 
@@ -632,8 +648,9 @@ public class HEC_FromFacelist extends HEC_Creator {
 
 			if (cleanunused) {
 				mesh.cleanUnusedElementsByFace();
+				mesh.capHalfedges();
 			}
-			mesh.capHalfedges();
+
 			if (manifoldcheck) {
 				HET_Fixer.fixNonManifoldVertices(mesh);
 			}

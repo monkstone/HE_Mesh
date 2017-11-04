@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.processing;
 
 import java.util.HashMap;
@@ -81,7 +76,7 @@ public class WB_SelectRender3D {
 	 *            face
 	 */
 	private void drawFace(final HE_Face f) {
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			final int[] tris = f.getTriangles();
 			final List<HE_Vertex> vertices = f.getFaceVertices();
 			HE_Vertex v0, v1, v2;

@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Vector;
@@ -170,88 +165,74 @@ public class HEC_Tube extends HEC_Creator {
 	 */
 	@Override
 	protected HE_Mesh createBase() {
-		final double[][] vertices = new double[((steps + 1) * facets) * 2][3];
+		final double[][] vertices = new double[(steps + 1) * facets * 2][3];
 		// outer vertices
-		for (int i = 0; i < (steps + 1); i++) {
-			final double Hj = (i * H) / steps;
+		for (int i = 0; i < steps + 1; i++) {
+			final double Hj = i * H / steps;
 			for (int j = 0; j < facets; j++) {
-				vertices[j + (i * facets)][0] = outerRadius
-						* Math.cos(((2 * Math.PI) / facets) * j);
-				vertices[j + (i * facets)][1] = outerRadius
-						* Math.sin(((2 * Math.PI) / facets) * j);
-				vertices[j + (i * facets)][2] = Hj;
+				vertices[j + i * facets][0] = outerRadius * Math.cos(2 * Math.PI / facets * j);
+				vertices[j + i * facets][1] = outerRadius * Math.sin(2 * Math.PI / facets * j);
+				vertices[j + i * facets][2] = Hj;
 			}
 		}
 		// inner vertices
 		for (int i = steps; i >= 0; i--) {
-			final double Hj = (i * H) / steps;
+			final double Hj = i * H / steps;
 			for (int j = 0; j < facets; j++) {
-				vertices[j + (i * facets) + ((steps + 1) * facets)][0] = shiftX
-						+ (innerRadius * Math.cos(((2 * Math.PI) / facets) * j));
-				vertices[j + (i * facets) + ((steps + 1) * facets)][1] = shiftY
-						+ (innerRadius * Math.sin(((2 * Math.PI) / facets) * j));
-				vertices[j + (i * facets) + ((steps + 1) * facets)][2] = Hj;
+				vertices[j + i * facets + (steps + 1) * facets][0] = shiftX
+						+ innerRadius * Math.cos(2 * Math.PI / facets * j);
+				vertices[j + i * facets + (steps + 1) * facets][1] = shiftY
+						+ innerRadius * Math.sin(2 * Math.PI / facets * j);
+				vertices[j + i * facets + (steps + 1) * facets][2] = Hj;
 			}
 		}
-		final int[][] faces = new int[(steps * facets * 2) + (facets * 2)][];
+		final int[][] faces = new int[steps * facets * 2 + facets * 2][];
 		for (int j = 0; j < facets; j++) {
 			// outer faces
 			for (int i = 0; i < steps; i++) {
-				faces[j + (i * facets)] = new int[4];
-				faces[j + (i * facets)][0] = ((j + 1) % facets) + (i * facets);
-				faces[j + (i * facets)][1] = ((j + 1) % facets) + facets
-						+ (i * facets);
-				faces[j + (i * facets)][2] = j + (i * facets) + facets;
-				faces[j + (i * facets)][3] = j + (i * facets);
+				faces[j + i * facets] = new int[4];
+				faces[j + i * facets][0] = (j + 1) % facets + i * facets;
+				faces[j + i * facets][1] = (j + 1) % facets + facets + i * facets;
+				faces[j + i * facets][2] = j + i * facets + facets;
+				faces[j + i * facets][3] = j + i * facets;
 			}
 			// top faces
-			if (j != (facets - 1)) {
-				faces[j + (steps * facets)] = new int[4];
-				faces[j + (steps * facets)][0] = j + (steps * facets) + facets;
-				faces[j + (steps * facets)][1] = j + 1 + (steps * facets)
-						+ facets;
-				faces[j + (steps * facets)][2] = j + 1;
-				faces[j + (steps * facets)][3] = j;
+			if (j != facets - 1) {
+				faces[j + steps * facets] = new int[4];
+				faces[j + steps * facets][0] = j + steps * facets + facets;
+				faces[j + steps * facets][1] = j + 1 + steps * facets + facets;
+				faces[j + steps * facets][2] = j + 1;
+				faces[j + steps * facets][3] = j;
 			} else {
-				faces[j + (steps * facets)] = new int[4];
-				faces[j + (steps * facets)][0] = j + (steps * facets) + facets;
-				faces[j + (steps * facets)][1] = (steps * facets) + facets;
-				faces[j + (steps * facets)][2] = 0;
-				faces[j + (steps * facets)][3] = j;
+				faces[j + steps * facets] = new int[4];
+				faces[j + steps * facets][0] = j + steps * facets + facets;
+				faces[j + steps * facets][1] = steps * facets + facets;
+				faces[j + steps * facets][2] = 0;
+				faces[j + steps * facets][3] = j;
 			}
 			// inner faces
 			for (int i = 0; i < steps; i++) {
-				faces[(j + (i * facets)) + (steps * facets) + facets] = new int[4];
-				faces[(j + (i * facets)) + (steps * facets) + facets][0] = (j + (i * facets))
-						+ (steps * facets) + facets;
-				faces[(j + (i * facets)) + (steps * facets) + facets][1] = (j
-						+ (i * facets) + facets)
-						+ (steps * facets) + facets;
-				faces[(j + (i * facets)) + (steps * facets) + facets][2] = (((j + 1) % facets)
-						+ facets + (i * facets))
-						+ (steps * facets) + facets;
-				faces[(j + (i * facets)) + (steps * facets) + facets][3] = (((j + 1) % facets) + (i * facets))
-						+ (steps * facets) + facets;
+				faces[j + i * facets + steps * facets + facets] = new int[4];
+				faces[j + i * facets + steps * facets + facets][0] = j + i * facets + steps * facets + facets;
+				faces[j + i * facets + steps * facets + facets][1] = j + i * facets + facets + steps * facets + facets;
+				faces[j + i * facets + steps * facets + facets][2] = (j + 1) % facets + facets + i * facets
+						+ steps * facets + facets;
+				faces[j + i * facets + steps * facets + facets][3] = (j + 1) % facets + i * facets + steps * facets
+						+ facets;
 			}
 			// bottom faces
-			if (j != (facets - 1)) {
-				faces[j + (2 * (steps * facets)) + facets] = new int[4];
-				faces[j + (2 * (steps * facets)) + facets][0] = j
-						+ (steps * facets);
-				faces[j + (2 * (steps * facets)) + facets][1] = j + 1
-						+ (steps * facets);
-				faces[j + (2 * (steps * facets)) + facets][2] = j + 1
-						+ (steps * facets) + facets + (steps * facets);
-				faces[j + (2 * (steps * facets)) + facets][3] = j
-						+ (steps * facets) + facets + (steps * facets);
+			if (j != facets - 1) {
+				faces[j + 2 * steps * facets + facets] = new int[4];
+				faces[j + 2 * steps * facets + facets][0] = j + steps * facets;
+				faces[j + 2 * steps * facets + facets][1] = j + 1 + steps * facets;
+				faces[j + 2 * steps * facets + facets][2] = j + 1 + steps * facets + facets + steps * facets;
+				faces[j + 2 * steps * facets + facets][3] = j + steps * facets + facets + steps * facets;
 			} else {
-				faces[j + (2 * (steps * facets)) + facets] = new int[4];
-				faces[j + (2 * (steps * facets)) + facets][0] = j
-						+ (steps * facets);
-				faces[j + (2 * (steps * facets)) + facets][1] = (facets * steps);
-				faces[j + (2 * (steps * facets)) + facets][2] = vertices.length
-						- 1 - j;
-				faces[j + (2 * (steps * facets)) + facets][3] = vertices.length - 1;
+				faces[j + 2 * steps * facets + facets] = new int[4];
+				faces[j + 2 * steps * facets + facets][0] = j + steps * facets;
+				faces[j + 2 * steps * facets + facets][1] = facets * steps;
+				faces[j + 2 * steps * facets + facets][2] = vertices.length - 1 - j;
+				faces[j + 2 * steps * facets + facets][3] = vertices.length - 1;
 			}
 		}
 		final HEC_FromFacelist fl = new HEC_FromFacelist();

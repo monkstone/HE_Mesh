@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import processing.core.PImage;
@@ -74,7 +69,7 @@ public class HET_Texture {
 		int color;
 		while (vitr.hasNext()) {
 			v = vitr.next();
-			final int choice = Math.max(0, Math.min(size - 1, v.getLabel()));
+			final int choice = Math.max(0, Math.min(size - 1, v.getUserLabel()));
 			color = palette[choice];
 			v.setColor(color);
 		}
@@ -160,7 +155,7 @@ public class HET_Texture {
 		final double idenom = 0.5 * palette.length / Math.PI;
 		while (vitr.hasNext()) {
 			v = vitr.next();
-			color = (int) (idenom * (v.getGaussianCurvature() - minrange) / (maxrange - minrange));
+			color = (int) (idenom * (v.getGaussCurvature() - minrange) / (maxrange - minrange));
 			color = Math.max(0, Math.min(color, palette.length - 1));
 			v.setColor(palette[color]);
 		}
@@ -199,7 +194,7 @@ public class HET_Texture {
 		int color;
 		while (fitr.hasNext()) {
 			f = fitr.next();
-			final int choice = Math.max(0, Math.min(size - 1, f.getLabel()));
+			final int choice = Math.max(0, Math.min(size - 1, f.getUserLabel()));
 			color = palette[choice];
 			f.setColor(color);
 		}

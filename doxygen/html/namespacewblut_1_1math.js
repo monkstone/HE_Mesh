@@ -20,6 +20,7 @@ var namespacewblut_1_1math =
     [ "WB_M33", "classwblut_1_1math_1_1_w_b___m33.html", "classwblut_1_1math_1_1_w_b___m33" ],
     [ "WB_M44", "classwblut_1_1math_1_1_w_b___m44.html", "classwblut_1_1math_1_1_w_b___m44" ],
     [ "WB_Math", "classwblut_1_1math_1_1_w_b___math.html", null ],
+    [ "WB_MatrixTriple", "classwblut_1_1math_1_1_w_b___matrix_triple.html", "classwblut_1_1math_1_1_w_b___matrix_triple" ],
     [ "WB_MTRandom", "classwblut_1_1math_1_1_w_b___m_t_random.html", "classwblut_1_1math_1_1_w_b___m_t_random" ],
     [ "WB_Noise", "interfacewblut_1_1math_1_1_w_b___noise.html", "interfacewblut_1_1math_1_1_w_b___noise" ],
     [ "WB_OSNoise", "classwblut_1_1math_1_1_w_b___o_s_noise.html", "classwblut_1_1math_1_1_w_b___o_s_noise" ],

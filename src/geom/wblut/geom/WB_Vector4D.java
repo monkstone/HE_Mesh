@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import wblut.math.WB_Epsilon;
@@ -16,7 +11,7 @@ import wblut.math.WB_Math;
 /**
  *
  */
-public class WB_Vector4D extends WB_SimpleVector4D implements WB_MutableCoordinateFull4D {
+public class WB_Vector4D extends WB_MutableCoordinate4D implements WB_MutableCoordinateFull4D {
 	/**
 	 *
 	 *
@@ -683,7 +678,7 @@ public class WB_Vector4D extends WB_SimpleVector4D implements WB_MutableCoordina
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param z
@@ -905,7 +900,7 @@ public class WB_Vector4D extends WB_SimpleVector4D implements WB_MutableCoordina
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param z
@@ -935,7 +930,7 @@ public class WB_Vector4D extends WB_SimpleVector4D implements WB_MutableCoordina
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @param z
@@ -987,7 +982,7 @@ public class WB_Vector4D extends WB_SimpleVector4D implements WB_MutableCoordina
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param f
 	 * @param x
 	 * @param y
@@ -1013,7 +1008,7 @@ public class WB_Vector4D extends WB_SimpleVector4D implements WB_MutableCoordina
 
 	@Override
 	/**
-	 * 
+	 *
 	 * @param f
 	 * @param g
 	 * @param x

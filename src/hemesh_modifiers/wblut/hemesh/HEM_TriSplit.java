@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.core.WB_ProgressCounter;
@@ -90,7 +85,10 @@ public class HEM_TriSplit extends HEM_Modifier {
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
 		tracker.setCounterStatus(this, "Splitting faces.", counter);
 		for (int i = 0; i < n; i++) {
-			selectionOut.add(splitFaceTri(faces[i], d, selection.parent));
+			HE_Selection sft = splitFaceTri(faces[i], d, selection.parent);
+			if (sft != null) {
+				selectionOut.add(sft);
+			}
 			counter.increment();
 		}
 		selection.add(selectionOut);
@@ -137,7 +135,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 			he = he.getNextInFace();
 		} while (he != face.getHalfedge());
 		if (hasTexture) {
-			final double ifo = 1.0 / face.getFaceOrder();
+			final double ifo = 1.0 / face.getFaceDegree();
 			vi.setUVW(u * ifo, v * ifo, w * ifo);
 		}
 		he = face.getHalfedge();
@@ -155,7 +153,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 			he = he.getNextInFace();
 		} while (he != face.getHalfedge());
 		if (!onEdge) {
-			mesh.add(vi);
+			mesh.addDerivedElement(vi, face);
 			final HE_Halfedge[] he0 = new HE_Halfedge[c];
 			final HE_Halfedge[] he1 = new HE_Halfedge[c];
 			final HE_Halfedge[] he2 = new HE_Halfedge[c];
@@ -167,7 +165,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 				} else {
 					f = new HE_Face();
 					f.copyProperties(face);
-					mesh.add(f);
+					mesh.addDerivedElement(f, face);
 					out.add(f);
 				}
 				he0[c] = he;
@@ -184,8 +182,8 @@ public class HEM_TriSplit extends HEM_Modifier {
 				mesh.setNext(he2[c], he);
 				mesh.setFace(he1[c], f);
 				mesh.setFace(he2[c], f);
-				mesh.add(he1[c]);
-				mesh.add(he2[c]);
+				mesh.addDerivedElement(he1[c], face);
+				mesh.addDerivedElement(he2[c], face);
 				c++;
 				he = he.getNextInFace();
 			} while (he != face.getHalfedge());

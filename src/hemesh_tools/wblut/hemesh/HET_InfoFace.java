@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Point;
@@ -159,7 +154,7 @@ public interface HET_InfoFace<E extends Object> {
 		@Override
 		public int[] retrieve(final HE_Face f) {
 			int[] triangles;
-			final int fo = f.getFaceOrder();
+			final int fo = f.getFaceDegree();
 			if (fo < 3) {
 				return new int[] { 0, 0, 0 };
 			} else if (fo == 3) {

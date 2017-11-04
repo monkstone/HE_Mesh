@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  *
@@ -38,7 +33,7 @@ public class WB_Triangulation2DWithPoints extends WB_Triangulation2D {
 	 */
 	public WB_Triangulation2DWithPoints(final int[] T, final int[] E, final List<? extends WB_Coord> P) {
 		super(T, E);
-		_points = new FastTable<WB_Coord>();
+		_points = new FastList<WB_Coord>();
 		_points.addAll(P);
 	}
 
@@ -50,7 +45,7 @@ public class WB_Triangulation2DWithPoints extends WB_Triangulation2D {
 	 */
 	public WB_Triangulation2DWithPoints(final int[] T, final List<? extends WB_Coord> P) {
 		super(T);
-		_points = new FastTable<WB_Coord>();
+		_points = new FastList<WB_Coord>();
 		_points.addAll(P);
 	}
 

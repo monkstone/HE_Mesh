@@ -1,19 +1,15 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+
 import wblut.geom.WB_Point;
 import wblut.math.WB_MTRandom;
 
@@ -109,7 +105,7 @@ public class HES_Planar extends HES_Subdividor {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		randomGen.reset();
-		final TLongObjectMap<HE_Vertex> faceVertices = new TLongObjectHashMap<HE_Vertex>(1024, 0.5f, -1L);
+		final LongObjectHashMap<HE_Vertex> faceVertices = new LongObjectHashMap<HE_Vertex>();
 		HE_Face face;
 		Iterator<HE_Face> fItr = mesh.fItr();
 		while (fItr.hasNext()) {
@@ -132,7 +128,7 @@ public class HES_Planar extends HES_Subdividor {
 					he = he.getNextInFace();
 				} while (he != face.getHalfedge());
 				if (hasTexture) {
-					final double ifo = 1.0 / face.getFaceOrder();
+					final double ifo = 1.0 / face.getFaceDegree();
 					fv.setUVW(u * ifo, v * ifo, w * ifo);
 				}
 				faceVertices.put(face.key(), fv);
@@ -174,7 +170,7 @@ public class HES_Planar extends HES_Subdividor {
 					he = he.getNextInFace();
 				} while (he != face.getHalfedge());
 				if (hasTexture) {
-					final double ifo = 1.0 / face.getFaceOrder();
+					final double ifo = 1.0 / face.getFaceDegree();
 					fv.setUVW(u * ifo, v * ifo, w * ifo);
 				}
 				faceVertices.put(face.key(), fv);
@@ -202,7 +198,7 @@ public class HES_Planar extends HES_Subdividor {
 			while (orig.contains(startHE.getVertex())) {
 				startHE = startHE.getNextInFace();
 			}
-			if (face.getFaceOrder() == 6 && keepTriangles) {
+			if (face.getFaceDegree() == 6 && keepTriangles) {
 				HE_Halfedge origHE1 = startHE;
 				final HE_Face centerFace = new HE_Face();
 				newFaces.add(centerFace);
@@ -285,7 +281,15 @@ public class HES_Planar extends HES_Subdividor {
 			}
 			face.setInternalLabel(0);
 		} // end of face loop
-		mesh.replaceFaces(newFaces);
+		List<HE_Face> faces = mesh.getFaces();
+		mesh.addFaces(newFaces);
+		for (HE_Face f : faces) {
+			if (!newFaces.contains(f)) {
+				mesh.remove(f);
+			}
+
+		}
+
 		return mesh;
 	}
 
@@ -303,7 +307,7 @@ public class HES_Planar extends HES_Subdividor {
 		if (selection.getNumberOfFaces() == 0) {
 			return selection.parent;
 		}
-		final TLongObjectMap<HE_Vertex> faceVertices = new TLongObjectHashMap<HE_Vertex>(1024, 0.5f, -1L);
+		final LongObjectHashMap<HE_Vertex> faceVertices = new LongObjectHashMap<HE_Vertex>();
 		HE_Face face;
 		Iterator<HE_Face> fItr = selection.fItr();
 		while (fItr.hasNext()) {
@@ -326,7 +330,7 @@ public class HES_Planar extends HES_Subdividor {
 					he = he.getNextInFace();
 				} while (he != face.getHalfedge());
 				if (hasTexture) {
-					final double ifo = 1.0 / face.getFaceOrder();
+					final double ifo = 1.0 / face.getFaceDegree();
 					fv.setUVW(u * ifo, v * ifo, w * ifo);
 				}
 				faceVertices.put(face.key(), fv);
@@ -367,7 +371,7 @@ public class HES_Planar extends HES_Subdividor {
 					he = he.getNextInFace();
 				} while (he != face.getHalfedge());
 				if (hasTexture) {
-					final double ifo = 1.0 / face.getFaceOrder();
+					final double ifo = 1.0 / face.getFaceDegree();
 					fv.setUVW(u * ifo, v * ifo, w * ifo);
 				}
 				faceVertices.put(face.key(), fv);
@@ -397,7 +401,7 @@ public class HES_Planar extends HES_Subdividor {
 			while (!newVertices.contains(startHE.getVertex())) {
 				startHE = startHE.getNextInFace();
 			}
-			if (face.getFaceOrder() == 6 && keepTriangles) {
+			if (face.getFaceDegree() == 6 && keepTriangles) {
 				HE_Halfedge origHE1 = startHE;
 				final HE_Face centerFace = new HE_Face();
 				centerFace.copyProperties(face);

@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.BufferedReader;
@@ -18,7 +13,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Point;
 
 /**
@@ -96,10 +91,10 @@ public class HEC_FromOBJFileNoCheck extends HEC_Creator {
 		if (is == null) {
 			return new HE_Mesh();
 		}
-		final List<WB_Point> vertexList = new FastTable<WB_Point>();
-		final List<WB_Point> UVWList = new FastTable<WB_Point>();
-		final List<int[]> faceList = new FastTable<int[]>();
-		final List<int[]> faceUVWList = new FastTable<int[]>();
+		final List<WB_Point> vertexList = new FastList<WB_Point>();
+		final List<WB_Point> UVWList = new FastList<WB_Point>();
+		final List<int[]> faceList = new FastList<int[]>();
+		final List<int[]> faceUVWList = new FastList<int[]>();
 		int faceCount = 0;
 		// load OBJ file as an array of strings
 		final String objStrings[] = loadStrings(is);

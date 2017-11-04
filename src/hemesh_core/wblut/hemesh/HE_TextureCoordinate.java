@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Coord;
@@ -101,7 +96,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#wd()
 	 */
 	@Override
@@ -129,7 +124,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#wf()
 	 */
 	@Override
@@ -163,7 +158,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -173,7 +168,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#xd()
 	 */
 	@Override
@@ -183,7 +178,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#yd()
 	 */
 	@Override
@@ -193,7 +188,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#zd()
 	 */
 	@Override
@@ -203,7 +198,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#getd(int)
 	 */
 	@Override
@@ -222,7 +217,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#xf()
 	 */
 	@Override
@@ -232,7 +227,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#yf()
 	 */
 	@Override
@@ -242,7 +237,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#zf()
 	 */
 	@Override
@@ -252,7 +247,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Coord#getf(int)
 	 */
 	@Override
@@ -271,7 +266,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#setX(double)
 	 */
 	@Override
@@ -281,7 +276,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#setY(double)
 	 */
 	@Override
@@ -291,7 +286,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#setZ(double)
 	 */
 	@Override
@@ -301,7 +296,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#setW(double)
 	 */
 	@Override
@@ -311,7 +306,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#setCoord(int, double)
 	 */
 	@Override
@@ -329,7 +324,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#set(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -339,7 +334,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#set(double, double)
 	 */
 	@Override
@@ -350,7 +345,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#set(double, double, double)
 	 */
 	@Override
@@ -362,7 +357,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_MutableCoord#set(double, double, double, double)
 	 */
 	@Override
@@ -396,7 +391,7 @@ public class HE_TextureCoordinate implements WB_MutableCoord {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

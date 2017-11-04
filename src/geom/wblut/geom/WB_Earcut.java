@@ -70,7 +70,7 @@ public final class WB_Earcut {
 	}
 
 	public static final long[] triangulate2Dkeys(final HE_Face face) {
-		int n = face.getFaceOrder();
+		int n = face.getFaceDegree();
 		WB_Map2D map = new WB_OrthoProject(face.getPlane());
 		WB_IndexedPoint[][] points = new WB_IndexedPoint[1][n];
 		HE_Halfedge he = face.getHalfedge();
@@ -94,7 +94,7 @@ public final class WB_Earcut {
 	}
 
 	public static final int[] triangulate2Dindices(final HE_Face face) {
-		int n = face.getFaceOrder();
+		int n = face.getFaceDegree();
 		WB_Map2D map = new WB_OrthoProject(face.getPlane());
 		WB_IndexedPoint[][] points = new WB_IndexedPoint[1][n];
 		HE_Halfedge he = face.getHalfedge();

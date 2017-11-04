@@ -114,11 +114,11 @@ $(document).ready(function(){initNavTree('classwblut_1_1geom_1_1_w_b___coord_col
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classwblut_1_1geom_1_1_w_b___coord_collection-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">wblut.geom.WB_CoordCollection Class Reference</div>  </div>
+<div class="title">wblut.geom.WB_CoordCollection Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Inherited by wblut.geom.WB_CoordCollection.WB_CoordCollectionArray, wblut.geom.WB_CoordCollection.WB_CoordCollectionList, wblut.geom.WB_CoordCollection.WB_CoordCollectionMap, wblut.geom.WB_CoordCollection.WB_CoordCollectionNoise, wblut.geom.WB_CoordCollection.WB_CoordCollectionUnmap2D, and wblut.geom.WB_CoordCollection.WB_CoordCollectionUnmap3D.</p>
+<p>Inherited by wblut.geom.WB_CoordCollection.WB_CoordCollectionArray, wblut.geom.WB_CoordCollection.WB_CoordCollectionList, wblut.geom.WB_CoordCollection.WB_CoordCollectionMap, wblut.geom.WB_CoordCollection.WB_CoordCollectionNoise, wblut.geom.WB_CoordCollection.WB_CoordCollectionPolygon, wblut.geom.WB_CoordCollection.WB_CoordCollectionUnmap2D, and wblut.geom.WB_CoordCollection.WB_CoordCollectionUnmap3D.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -129,6 +129,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><b>WB_CoordCollectionMap</b></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><b>WB_CoordCollectionNoise</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><b>WB_CoordCollectionPolygon</b></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><b>WB_CoordCollectionUnmap2D</b></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,6 +156,8 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b4127e816b8f5520e62b9b015182336"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html">WB_CoordCollection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html#a9b4127e816b8f5520e62b9b015182336">getCollection</a> (final <a class="el" href="interfacewblut_1_1geom_1_1_w_b___coord.html">WB_Coord</a>[] coords)</td></tr>
 <tr class="separator:a9b4127e816b8f5520e62b9b015182336"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98350ce92fa47122dc23e04d60b5fcf3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html">WB_CoordCollection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html#a98350ce92fa47122dc23e04d60b5fcf3">getCollection</a> (final <a class="el" href="classwblut_1_1geom_1_1_w_b___polygon.html">WB_Polygon</a> polygon)</td></tr>
+<tr class="separator:a98350ce92fa47122dc23e04d60b5fcf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81200e6b5689d907667a6f7e3000fc41"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html">WB_CoordCollection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html#a81200e6b5689d907667a6f7e3000fc41">getCollection</a> (final <a class="el" href="interfacewblut_1_1geom_1_1_w_b___point_generator.html">WB_PointGenerator</a> generator, final int n)</td></tr>
 <tr class="separator:a81200e6b5689d907667a6f7e3000fc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a013abe0279993382a7835d933d268dc9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html">WB_CoordCollection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html#a013abe0279993382a7835d933d268dc9">getCollection</a> (final Collection&lt;?extends <a class="el" href="interfacewblut_1_1geom_1_1_w_b___coord.html">WB_Coord</a> &gt; coords)</td></tr>
@@ -219,6 +223,30 @@ Private Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">final <a class="el" href="interfacewblut_1_1geom_1_1_w_b___coord.html">WB_Coord</a>[]&#160;</td>
           <td class="paramname"><em>coords</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a98350ce92fa47122dc23e04d60b5fcf3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html">WB_CoordCollection</a> wblut.geom.WB_CoordCollection.getCollection </td>
+          <td>(</td>
+          <td class="paramtype">final <a class="el" href="classwblut_1_1geom_1_1_w_b___polygon.html">WB_Polygon</a>&#160;</td>
+          <td class="paramname"><em>polygon</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -375,7 +403,7 @@ Private Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacewblut.html">wblut</a></li><li class="navelem"><a class="el" href="namespacewblut_1_1geom.html">geom</a></li><li class="navelem"><a class="el" href="classwblut_1_1geom_1_1_w_b___coord_collection.html">WB_CoordCollection</a></li>
-    <li class="footer">Generated on Sun Aug 27 2017 10:15:56 for HE_Mesh by
+    <li class="footer">Generated on Sat Nov 4 2017 20:54:17 for HE_Mesh by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
   </ul>

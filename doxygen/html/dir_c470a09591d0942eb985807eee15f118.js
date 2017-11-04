@@ -39,6 +39,9 @@ var dir_c470a09591d0942eb985807eee15f118 =
     [ "HEC_Cylinder.java", "_h_e_c___cylinder_8java.html", [
       [ "HEC_Cylinder", "classwblut_1_1hemesh_1_1_h_e_c___cylinder.html", "classwblut_1_1hemesh_1_1_h_e_c___cylinder" ]
     ] ],
+    [ "HEC_Disk.java", "_h_e_c___disk_8java.html", [
+      [ "HEC_Disk", "classwblut_1_1hemesh_1_1_h_e_c___disk.html", "classwblut_1_1hemesh_1_1_h_e_c___disk" ]
+    ] ],
     [ "HEC_Dodecahedron.java", "_h_e_c___dodecahedron_8java.html", [
       [ "HEC_Dodecahedron", "classwblut_1_1hemesh_1_1_h_e_c___dodecahedron.html", "classwblut_1_1hemesh_1_1_h_e_c___dodecahedron" ]
     ] ],
@@ -141,6 +144,9 @@ var dir_c470a09591d0942eb985807eee15f118 =
     ] ],
     [ "HEC_RevolvePolygon.java", "_h_e_c___revolve_polygon_8java.html", [
       [ "HEC_RevolvePolygon", "classwblut_1_1hemesh_1_1_h_e_c___revolve_polygon.html", "classwblut_1_1hemesh_1_1_h_e_c___revolve_polygon" ]
+    ] ],
+    [ "HEC_Ring.java", "_h_e_c___ring_8java.html", [
+      [ "HEC_Ring", "classwblut_1_1hemesh_1_1_h_e_c___ring.html", "classwblut_1_1hemesh_1_1_h_e_c___ring" ]
     ] ],
     [ "HEC_SeaShell.java", "_h_e_c___sea_shell_8java.html", [
       [ "HEC_SeaShell", "classwblut_1_1hemesh_1_1_h_e_c___sea_shell.html", "classwblut_1_1hemesh_1_1_h_e_c___sea_shell" ]

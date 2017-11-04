@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
@@ -31,10 +26,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 *
 	 */
 	private WB_ScalarParameter distance;
-	/**
-	 *
-	 */
-	public HE_Selection spikes;
+
 	/**
 	 *
 	 */
@@ -104,10 +96,10 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection selection) {
-		spikes = new HE_Selection(selection.parent);
+		HE_Selection spikes = new HE_Selection(selection.parent);
 		selection.collectVertices();
 		tracker.setStartStatus(this, "Starting HEM_Crocodile.");
-		final Map<Long, WB_Coord> umbrellapoints = new FastMap<Long, WB_Coord>();
+		final Map<Long, WB_Coord> umbrellapoints = new UnifiedMap<Long, WB_Coord>();
 		HE_VertexIterator vitr = selection.vItr();
 		HE_Vertex v;
 		if (chamfer == WB_ScalarParameter.ZERO) {
@@ -167,6 +159,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 			counter.increment();
 			v.addMulSelf(distance.evaluate(v.xd(), v.yd(), v.zd()), v.getVertexNormal());
 		}
+		selection.parent.addSelection("spikes", spikes);
 		tracker.setStopStatus(this, "Exiting HEM_Crocodile.");
 		return selection.parent;
 	}

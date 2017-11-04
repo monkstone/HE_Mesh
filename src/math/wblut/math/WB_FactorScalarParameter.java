@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.math;
 
 /**
@@ -18,7 +19,7 @@ public class WB_FactorScalarParameter implements WB_ScalarParameter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.math.WB_ScalarParameter#evaluate(double[])
 	 */
 	@Override

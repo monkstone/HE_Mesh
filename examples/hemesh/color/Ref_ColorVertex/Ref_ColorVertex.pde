@@ -14,10 +14,10 @@ void setup() {
   mesh=new HE_Mesh(creator);
   HET_MeshOp.splitFacesCenter(mesh);
   HET_MeshOp.splitFacesTri(mesh); 
-  HET_MeshOp.splitFacesTri(mesh,90); 
+  HET_MeshOp.splitFacesTri(mesh,30); 
   HE_VertexIterator vitr=mesh.vItr();
   while(vitr.hasNext()){
-   vitr.next().setColor(color(random(255), 0,0));
+   vitr.next().setColor(color(random(255), random(80),random(80,180)));
   }
   
   render=new WB_Render3D(this);

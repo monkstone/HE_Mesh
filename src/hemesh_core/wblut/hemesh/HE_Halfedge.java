@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Classification;
@@ -220,6 +215,14 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 		} else {
 			return WB_Classification.CONCAVE;
 		}
+	}
+
+	public WB_Coord getHalfedgeVector() {
+		if (_pair != null && _vertex != null && _pair.getVertex() != null) {
+			final WB_Vector v = WB_Vector.subToVector3D(_pair.getVertex(), _vertex);
+			return v;
+		}
+		return null;
 	}
 
 	/**
@@ -463,11 +466,16 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	 * @return angle
 	 */
 	public double getHalfedgeDihedralAngle() {
-		return getEdgeDihedralAngle();
-	}
+		if (isOuterBoundary() || isInnerBoundary()) {
+			return 0.0;
+		}
+		WB_Coord n1 = getFace().getFaceNormal();
+		WB_Coord n2 = getPair().getFace().getFaceNormal();
+		WB_Coord w = getHalfedgeTangent();
+		double cosTheta = WB_Vector.dot(n1, n2);
+		double sinTheta = WB_Vector.cross(n1, n2).dot(w);
+		return Math.atan2(sinTheta, cosTheta);
 
-	public double getHalfedgeCosDihedralAngle() {
-		return getEdgeCosDihedralAngle();
 	}
 
 	/*
@@ -478,7 +486,7 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	@Override
 	public String toString() {
 		return "HE_Halfedge key: " + key() + ", paired with halfedge " + getPair().key() + ". Vertex: "
-				+ getVertex().key() + ". Is this an edge: " + isEdge() + "." + " (" + getLabel() + ","
+				+ getVertex().key() + ". Is this an edge: " + isEdge() + "." + " (" + getUserLabel() + ","
 				+ getInternalLabel() + ")";
 	}
 
@@ -606,7 +614,7 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	 */
 	public double getEdgeDihedralAngle() {
 		if (_pair == null) {
-			return Double.NaN;
+			return 0.0;
 		}
 		HE_Halfedge he1, he2;
 		if (isEdge()) {
@@ -617,7 +625,7 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 			he2 = this;
 		}
 		if (he1._face == null || he2._face == null) {
-			return Double.NaN;
+			return 0.0;
 		} else {
 			final WB_Coord n1 = he1._face.getFaceNormal();
 			final WB_Coord n2 = he2._face.getFaceNormal();
@@ -691,18 +699,12 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	}
 
 	/**
-	 *
+	 * Computes cotangent of the angle opposite this halfedge. Triangles only
 	 *
 	 * @return
 	 */
 	public double getCotan() {
-		final WB_Coord c = getVertex();
-		final WB_Coord p1 = getEndVertex();
-		final WB_Coord p2 = this.getPrevInFace().getVertex();
-		if (c == null) {
-			return Double.NaN;
-		}
-		return WB_GeometryOp3D.cotan(c, p1, p2);
+		return HET_MeshOp.getCotan(this);
 	}
 
 	// TEXTURE COORDINATES
@@ -865,6 +867,7 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 
 	}
 
+	@Override
 	public void clearPrecomputed() {
 
 	}

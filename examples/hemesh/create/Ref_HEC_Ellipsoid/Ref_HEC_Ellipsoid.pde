@@ -15,7 +15,6 @@ void setup() {
   creator.setUFacets(16);
   creator.setVFacets(16);
   mesh=new HE_Mesh(creator); 
-  HET_Diagnosis.validate(mesh);
   render=new WB_Render(this);
 }
 
@@ -33,4 +32,15 @@ void draw() {
   strokeWeight(1);
   stroke(0);
   render.drawEdges(mesh);
+  HE_VertexIterator vItr=mesh.vItr(); 
+  HE_Vertex v;
+  stroke(255,0,0);
+  while(vItr.hasNext()){
+   v=vItr.next();
+    WB_Coord n=v.getVertexNormalMeanCurvature();
+    render.drawVector(v,n,50.0);
+    
+  }
+  
+  
 }

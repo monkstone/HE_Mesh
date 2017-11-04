@@ -46,6 +46,6 @@ var classwblut_1_1geom_1_1_w_b___frame =
     [ "smoothNodes", "classwblut_1_1geom_1_1_w_b___frame.html#aa3d03fa1d0b5736346061c2755904186", null ],
     [ "smoothNodes", "classwblut_1_1geom_1_1_w_b___frame.html#a728716b7187891eedab71fd7811d0a39", null ],
     [ "toPointCloud", "classwblut_1_1geom_1_1_w_b___frame.html#ac6e643e5f42f074c20ad72ad9ae89203", null ],
-    [ "nodes", "classwblut_1_1geom_1_1_w_b___frame.html#a44f6cb31c3f6e7a71d60657c365815fe", null ],
-    [ "struts", "classwblut_1_1geom_1_1_w_b___frame.html#a2e286066353345195668b17dd506e3c3", null ]
+    [ "nodes", "classwblut_1_1geom_1_1_w_b___frame.html#ae7fbae3db02f7cc231c373ad96e6230c", null ],
+    [ "struts", "classwblut_1_1geom_1_1_w_b___frame.html#a27c50db8d33743055ee0641d891d5ada", null ]
 ];

@@ -1,15 +1,11 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -17,10 +13,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /** OBject consisting of several meshes */
-public class HE_MeshCollection {
+public class HE_MeshCollection implements Iterable<HE_Mesh> {
 	final List<HE_Mesh> meshes;
 	Future<HE_MeshCollection> future;
 	ExecutorService executor;
@@ -32,7 +28,7 @@ public class HE_MeshCollection {
 	 */
 	public HE_MeshCollection() {
 		super();
-		meshes = new FastTable<HE_Mesh>();
+		meshes = new FastList<HE_Mesh>();
 		tasks = new LinkedList<Callable<HE_MeshCollection>>();
 		future = null;
 		executor = null;
@@ -334,6 +330,17 @@ public class HE_MeshCollection {
 	public boolean isFinished() {
 		return finished;
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Iterable#iterator()
+	 */
+	@Override
+	public Iterator<HE_Mesh> iterator() {
+
+		return meshes.iterator();
 	}
 
 }

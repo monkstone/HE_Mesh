@@ -1,16 +1,11 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
-import gnu.trove.iterator.TLongLongIterator;
-import gnu.trove.map.TLongLongMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
+
 import wblut.math.WB_ConstantScalarParameter;
 import wblut.math.WB_FactorScalarParameter;
 import wblut.math.WB_ScalarParameter;
@@ -83,7 +78,7 @@ public class HEM_Shell extends HEM_Modifier {
 
 		HEC_Copy cc = new HEC_Copy().setMesh(mesh);
 		final HE_Mesh innerMesh = cc.create();
-		TLongLongMap heCorrelation = cc.halfedgeCorrelation;
+		LongLongHashMap heCorrelation = cc.halfedgeCorrelation;
 		if (!useFace) {
 			final HEM_VertexExpand expm = new HEM_VertexExpand().setDistance(new WB_FactorScalarParameter(-1.0, d));
 			innerMesh.modify(expm);
@@ -96,11 +91,13 @@ public class HEM_Shell extends HEM_Modifier {
 		mesh.add(innerMesh);
 		HE_Halfedge he1, he2, heio, heoi;
 		HE_Face fNew;
-		for (TLongLongIterator it = heCorrelation.iterator(); it.hasNext();) {
-			it.advance();
-			he1 = mesh.getHalfedgeWithKey(it.key());
+		long[] keys = heCorrelation.keySet().toArray();
+		long[] values = heCorrelation.values().toArray();
+		for (int i = 0; i < keys.length; i++) {
+
+			he1 = mesh.getHalfedgeWithKey(keys[i]);
 			if (he1.isOuterBoundary()) {
-				he2 = mesh.getHalfedgeWithKey(it.value());
+				he2 = mesh.getHalfedgeWithKey(values[i]);
 				heio = new HE_Halfedge();
 				heoi = new HE_Halfedge();
 				mesh.setVertex(heio, he1.getPair().getVertex());

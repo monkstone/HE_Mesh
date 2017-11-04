@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.processing;
 
 import wblut.geom.WB_Vector;
@@ -1077,6 +1078,12 @@ public class WB_Color {
 		return y;
 	}
 
+	/**
+	 *
+	 * @param wavelength
+	 *            400-700
+	 * @return
+	 */
 	public static int spectralColorZucconi6(final double wavelength) {
 		WB_Vector x = new WB_Vector(1.0, 1.0, 1.0).mulSelf((wavelength - 400.0) / 300.0);
 

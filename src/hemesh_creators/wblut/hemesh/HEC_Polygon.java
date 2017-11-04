@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Polygon;
 import wblut.geom.WB_Vector;
 import wblut.math.WB_Epsilon;
@@ -50,7 +45,7 @@ public class HEC_Polygon extends HEC_Creator {
 	public HEC_Polygon(final WB_Polygon poly, final double d) {
 		this();
 		override = true;
-		polygon = new FastTable<WB_Polygon>();
+		polygon = new FastList<WB_Polygon>();
 		polygon.add(poly);
 		thickness = d;
 		offset = 0;
@@ -79,7 +74,7 @@ public class HEC_Polygon extends HEC_Creator {
 	 * @return
 	 */
 	public HEC_Polygon setPolygon(final WB_Polygon poly) {
-		polygon = new FastTable<WB_Polygon>();
+		polygon = new FastList<WB_Polygon>();
 		polygon.add(poly);
 		return this;
 	}
@@ -90,7 +85,7 @@ public class HEC_Polygon extends HEC_Creator {
 	 * @return
 	 */
 	public HEC_Polygon setPolygon(final Collection<? extends WB_Polygon> polygons) {
-		polygon = new FastTable<WB_Polygon>();
+		polygon = new FastList<WB_Polygon>();
 		polygon.addAll(polygons);
 		return this;
 	}
@@ -101,7 +96,7 @@ public class HEC_Polygon extends HEC_Creator {
 	 * @return
 	 */
 	public HEC_Polygon setPolygon(final WB_Polygon[] polygons) {
-		polygon = new FastTable<WB_Polygon>();
+		polygon = new FastList<WB_Polygon>();
 		for (WB_Polygon poly : polygons) {
 			polygon.add(poly);
 		}

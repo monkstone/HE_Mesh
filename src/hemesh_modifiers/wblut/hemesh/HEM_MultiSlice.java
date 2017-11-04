@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -44,8 +39,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 	private boolean triangulate = false;
 	/** Original faces?. */
 	public HE_Selection origFaces;
-	/** New faces?. */
-	public HE_Selection capFaces;
+
 	/** The offset. */
 	private double offset;
 
@@ -180,7 +174,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		origFaces = new HE_Selection(mesh);
-		capFaces = new HE_Selection(mesh);
+		HE_Selection capFaces = new HE_Selection(mesh);
 		if (planes == null) {
 			return mesh;
 		}
@@ -232,7 +226,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 			if (unique) {
 				slice.setPlane(Pi);
 				slice.applySelf(mesh);
-				fItr = slice.capFaces.fItr();
+				fItr = mesh.getSelection("caps").fItr();
 				HE_Face f;
 				while (fItr.hasNext()) {
 					f = fItr.next();
@@ -253,7 +247,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 				capFaces.add(f);
 			}
 		}
-
+		mesh.addSelection("caps", capFaces);
 		return mesh;
 	}
 

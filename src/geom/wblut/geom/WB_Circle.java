@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -249,6 +243,20 @@ public class WB_Circle {
 	public boolean contains(final WB_Coord p) {
 		return center.getSqDistance2D(p) <= r2;
 
+	}
+
+	public WB_Point[] getPoints(final int n, final double phase) {
+		WB_Plane P = new WB_Plane(center, normal);
+		WB_Transform T = new WB_Transform();
+		T.addFromCSToWorld(new WB_CoordinateSystem3D(P));
+		double da = 2.0 * Math.PI / n;
+		WB_Point[] result = new WB_Point[n];
+		WB_Point p;
+		for (int i = 0; i < n; i++) {
+			p = new WB_Point(radius * Math.cos(i * da + phase), radius * Math.sin(i * da + phase));
+			result[i] = p.applySelf(T);
+		}
+		return result;
 	}
 
 	public WB_Point[] getPoints(final int n) {

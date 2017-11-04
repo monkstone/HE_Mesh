@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -15,7 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.hemesh.HEC_Geodesic;
 import wblut.hemesh.HE_Mesh;
 import wblut.math.WB_Epsilon;
@@ -25,16 +19,16 @@ public class WB_Frame {
 
 	private static WB_GeometryFactory gf = new WB_GeometryFactory();
 
-	protected FastTable<WB_FrameStrut> struts;
+	protected FastList<WB_FrameStrut> struts;
 
-	protected FastTable<WB_FrameNode> nodes;
+	protected FastList<WB_FrameNode> nodes;
 
 	/**
 	 *
 	 */
 	public WB_Frame() {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 	}
 
 	/**
@@ -44,8 +38,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final WB_Coord[] points, final WB_IndexedSegment[] connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
@@ -61,8 +55,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final WB_Coord[] points, final Collection<WB_IndexedSegment> connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
@@ -79,10 +73,10 @@ public class WB_Frame {
 	 */
 	public void add(final WB_Coord[] points, final Collection<WB_IndexedSegment> connections) {
 		if (struts == null) {
-			struts = new FastTable<WB_FrameStrut>();
+			struts = new FastList<WB_FrameStrut>();
 		}
 		if (nodes == null) {
-			nodes = new FastTable<WB_FrameNode>();
+			nodes = new FastList<WB_FrameNode>();
 		}
 		final int nodeoffset = nodes.size();
 		for (final WB_Coord point : points) {
@@ -100,10 +94,10 @@ public class WB_Frame {
 	 */
 	public void add(final WB_Frame frame) {
 		if (struts == null) {
-			struts = new FastTable<WB_FrameStrut>();
+			struts = new FastList<WB_FrameStrut>();
 		}
 		if (nodes == null) {
-			nodes = new FastTable<WB_FrameNode>();
+			nodes = new FastList<WB_FrameNode>();
 		}
 		final int nodeoffset = nodes.size();
 		for (final WB_FrameNode node : frame.nodes) {
@@ -121,8 +115,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final Collection<? extends WB_Coord> points, final Collection<WB_IndexedSegment> connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
@@ -138,8 +132,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final WB_Coord[] points, final int[][] connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
@@ -155,8 +149,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final Collection<? extends WB_Coord> points, final int[][] connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
@@ -172,8 +166,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final double[][] points, final int[][] connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final double[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -189,8 +183,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final float[][] points, final int[][] connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final float[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -206,8 +200,8 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public WB_Frame(final int[][] points, final int[][] connections) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final int[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -222,8 +216,8 @@ public class WB_Frame {
 	 * @param points
 	 */
 	public WB_Frame(final WB_Coord[] points) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
@@ -235,8 +229,8 @@ public class WB_Frame {
 	 * @param points
 	 */
 	public WB_Frame(final Collection<? extends WB_Coord> points) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
@@ -248,8 +242,8 @@ public class WB_Frame {
 	 * @param points
 	 */
 	public WB_Frame(final double[][] points) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final double[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -261,8 +255,8 @@ public class WB_Frame {
 	 * @param points
 	 */
 	public WB_Frame(final float[][] points) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final float[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -274,8 +268,8 @@ public class WB_Frame {
 	 * @param points
 	 */
 	public WB_Frame(final int[][] points) {
-		struts = new FastTable<WB_FrameStrut>();
-		nodes = new FastTable<WB_FrameNode>();
+		struts = new FastList<WB_FrameStrut>();
+		nodes = new FastList<WB_FrameNode>();
 		for (final int[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -733,7 +727,7 @@ public class WB_Frame {
 	 */
 	public List<WB_Point> toPointCloud(final int n, final double r, final double d, final int l, final double rr,
 			final double dr) {
-		final List<WB_Point> points = new FastTable<WB_Point>();
+		final List<WB_Point> points = new FastList<WB_Point>();
 		double sl, dsl;
 		int divs;
 		WB_Plane P;
@@ -774,7 +768,7 @@ public class WB_Frame {
 
 	public class WB_FrameNode extends WB_Point {
 
-		private final FastTable<WB_FrameStrut> struts;
+		private final FastList<WB_FrameStrut> struts;
 
 		protected final int index;
 
@@ -790,7 +784,7 @@ public class WB_Frame {
 		public WB_FrameNode(final WB_Coord pos, final int id, final double v) {
 			super(pos);
 			index = id;
-			struts = new FastTable<WB_FrameStrut>();
+			struts = new FastList<WB_FrameStrut>();
 			value = v == 0 ? 10 * WB_Epsilon.EPSILON : v;
 		}
 

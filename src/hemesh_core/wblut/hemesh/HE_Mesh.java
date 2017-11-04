@@ -1,27 +1,28 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import gnu.trove.map.TLongIntMap;
-import gnu.trove.map.hash.TLongIntHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
+
+import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_AABB;
+import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Frame;
 import wblut.geom.WB_GeometryOp3D;
@@ -29,11 +30,15 @@ import wblut.geom.WB_KDTree;
 import wblut.geom.WB_KDTree.WB_KDEntry;
 import wblut.geom.WB_Mesh;
 import wblut.geom.WB_MeshCreator;
+import wblut.geom.WB_Plane;
 import wblut.geom.WB_Point;
 import wblut.geom.WB_Polygon;
 import wblut.geom.WB_Transform;
 import wblut.geom.WB_Triangle;
 import wblut.geom.WB_Vector;
+import wblut.hemesh.HE_RAS.HE_RASEC;
+import wblut.math.WB_Epsilon;
+import wblut.math.WB_MTRandom;
 
 /**
  * Half-edge mesh data structure.
@@ -45,6 +50,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	Future<HE_Mesh> future;
 	ExecutorService executor;
 	LinkedList<Callable<HE_Mesh>> tasks;
+	Map<String, HE_Selection> selections;
 	boolean finished;
 
 	/**
@@ -53,6 +59,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	 */
 	public HE_Mesh() {
 		super();
+		selections = new UnifiedMap<String, HE_Selection>();
 		tasks = new LinkedList<Callable<HE_Mesh>>();
 		future = null;
 		executor = null;
@@ -184,6 +191,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		replaceVertices(result);
 		replaceFaces(result);
 		replaceHalfedges(result);
+		selections = target.selections;
 
 	}
 
@@ -198,6 +206,45 @@ public class HE_Mesh extends HE_MeshStructure {
 			replaceVertices(target);
 			replaceFaces(target);
 			replaceHalfedges(target);
+			selections = target.selections;
+			for (String name : getSelectionNames()) {
+				getSelection(name).parent = this;
+			}
+		}
+
+	}
+
+	/**
+	 *
+	 *
+	 * @param mesh
+	 */
+	private final void replaceFaces(final HE_Mesh mesh) {
+		clearFaces();
+		addFaces(mesh);
+	}
+
+	/**
+	 *
+	 *
+	 * @param mesh
+	 */
+	private final void replaceVertices(final HE_Mesh mesh) {
+		clearVertices();
+		addVertices(mesh);
+	}
+
+	/**
+	 *
+	 *
+	 * @param mesh
+	 */
+	private final void replaceHalfedges(final HE_Mesh mesh) {
+		clearHalfedges();
+		HE_HalfedgeIterator heItr = mesh.heItr();
+		while (heItr.hasNext()) {
+			add(heItr.next());
+
 		}
 
 	}
@@ -335,8 +382,11 @@ public class HE_Mesh extends HE_MeshStructure {
 	 */
 	public WB_Frame getFrame() {
 		final WB_Frame frame = new WB_Frame(getVerticesAsCoord());
-		final TLongIntMap map = new TLongIntHashMap(10, 0.5f, -1L, -1);
-		map.putAll(getVertexKeyToIndexMap());
+		final LongIntHashMap map = new LongIntHashMap();
+		Map<Long, Integer> indexMap = getVertexKeyToIndexMap();
+		for (Entry<Long, Integer> entry : indexMap.entrySet()) {
+			map.put(entry.getKey(), entry.getValue());
+		}
 		final Iterator<HE_Halfedge> eItr = eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
@@ -1195,7 +1245,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		if (he1.getFace() != null && he2.getFace() != null) {
 			f = new HE_Face();
 			f.copyProperties(e.getPair().getFace());
-			add(f);
+			addDerivedElement(f, e.getPair().getFace());
 			setHalfedge(f, he1p);
 			HE_Halfedge he = he1p;
 			do {
@@ -1220,7 +1270,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	 * @return
 	 */
 	public List<WB_Triangle> getTriangles() {
-		final List<WB_Triangle> result = new FastTable<WB_Triangle>();
+		final List<WB_Triangle> result = new FastList<WB_Triangle>();
 		final HE_Mesh trimesh = this.copy();
 		trimesh.triangulate();
 		final Iterator<HE_Face> fItr = trimesh.fItr();
@@ -1295,8 +1345,8 @@ public class HE_Mesh extends HE_MeshStructure {
 	public HE_Face fuseCoplanarFace(final HE_Face face, final double a) {
 
 		List<HE_Face> neighbors;
-		FastTable<HE_Face> facesToCheck = new FastTable<HE_Face>();
-		final FastTable<HE_Face> newFacesToCheck = new FastTable<HE_Face>();
+		FastList<HE_Face> facesToCheck = new FastList<HE_Face>();
+		final FastList<HE_Face> newFacesToCheck = new FastList<HE_Face>();
 		facesToCheck.add(face);
 		final HE_Selection sel = new HE_Selection(this);
 		sel.add(face);
@@ -1347,6 +1397,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		}
 		removeFaces(sel.getFacesAsArray());
 		cleanUnusedElementsByFace();
+		capHalfedges();
 		return newFace;
 	}
 
@@ -1588,7 +1639,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	}
 
 	public List<WB_Coord> getPoints() {
-		final List<WB_Coord> result = new FastTable<WB_Coord>();
+		final List<WB_Coord> result = new FastList<WB_Coord>();
 		result.addAll(vertices.getObjects());
 		return result;
 	}
@@ -1715,6 +1766,1184 @@ public class HE_Mesh extends HE_MeshStructure {
 
 	public boolean isSurface() {
 		return this.getBoundaryHalfedges().size() > 0;
+	}
+
+	/**
+	 * Select all mesh elements.
+	 *
+	 * @return current selection
+	 */
+	public void selectAll(final String name) {
+		HE_Selection sel = new HE_Selection(this);
+		sel.addFaces(this);
+		sel.addHalfedges(this);
+		sel.addVertices(this);
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectAllEdges(final String name) {
+		HE_Selection sel = new HE_Selection(this);
+		sel.addEdges(this);
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectAllFaces(final String name) {
+		HE_Selection sel = new HE_Selection(this);
+		sel.addFaces(this);
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectAllHalfedges(final String name) {
+		HE_Selection sel = new HE_Selection(this);
+		sel.addHalfedges(this);
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectAllInnerBoundaryHalfedges(final String name) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getPair().getFace() == null) {
+				_selection.add(he);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectAllOuterBoundaryHalfedges(final String name) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getFace() == null) {
+				_selection.add(he);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectAllVertices(final String name) {
+		HE_Selection sel = new HE_Selection(this);
+		sel.addVertices(this);
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectBackEdges(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_EdgeIterator eitr = this.eItr();
+		HE_Halfedge e;
+		while (eitr.hasNext()) {
+			e = eitr.next();
+			if (HET_MeshOp.classifyEdgeToPlane3D(e, P) == WB_Classification.BACK) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectBackFaces(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_FaceIterator fitr = this.fItr();
+		HE_Face f;
+		while (fitr.hasNext()) {
+			f = fitr.next();
+			if (HET_MeshOp.classifyFaceToPlane3D(f, P) == WB_Classification.BACK) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectBackVertices(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_VertexIterator vitr = this.vItr();
+		HE_Vertex v;
+		while (vitr.hasNext()) {
+			v = vitr.next();
+			if (WB_GeometryOp3D.classifyPointToPlane3D(v, P) == WB_Classification.BACK) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectBoundaryEdges(final String name) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_EdgeIterator eItr = this.eItr();
+		HE_Halfedge e;
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e.isInnerBoundary()) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectBoundaryFaces(final String name) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getFace() == null) {
+				_selection.add(he.getPair().getFace());
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 */
+	public void selectBoundaryVertices(final String name) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getFace() == null) {
+				_selection.add(he.getVertex());
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectCrossingEdges(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_EdgeIterator eitr = this.eItr();
+		HE_Halfedge e;
+		while (eitr.hasNext()) {
+			e = eitr.next();
+			if (HET_MeshOp.classifyEdgeToPlane3D(e, P) == WB_Classification.CROSSING) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectCrossingFaces(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_FaceIterator fitr = this.fItr();
+		HE_Face f;
+		while (fitr.hasNext()) {
+			f = fitr.next();
+			if (HET_MeshOp.classifyFaceToPlane3D(f, P) == WB_Classification.CROSSING) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectEdgesWithLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge e;
+		final Iterator<HE_Halfedge> eItr = this.eItr();
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e.getUserLabel() == label) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectEdgesWithOtherInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge e;
+		final Iterator<HE_Halfedge> eItr = this.eItr();
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e.getInternalLabel() != label) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectEdgesWithOtherLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge e;
+		final Iterator<HE_Halfedge> eItr = this.eItr();
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e.getUserLabel() != label) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectEdgeWithInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge e;
+		final Iterator<HE_Halfedge> eItr = this.eItr();
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e.getInternalLabel() == label) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectFacesWithInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Face f;
+		final Iterator<HE_Face> fItr = this.fItr();
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f.getInternalLabel() == label) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectFacesWithLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Face f;
+		final Iterator<HE_Face> fItr = this.fItr();
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f.getUserLabel() == label) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param v
+	 */
+	public void selectFacesWithNormal(final String name, final WB_Coord v) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final WB_Vector w = new WB_Vector(v);
+		w.normalizeSelf();
+		HE_Face f;
+		final Iterator<HE_Face> fItr = this.fItr();
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (WB_Vector.dot(f.getFaceNormal(), v) > 1.0 - WB_Epsilon.EPSILON) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param n
+	 * @param ta
+	 */
+	public void selectFacesWithNormal(final String name, final WB_Coord n, final double ta) {
+		HE_Selection sel = new HE_Selection(this);
+		final WB_Vector nn = new WB_Vector(n);
+		nn.normalizeSelf();
+		final double cta = Math.cos(ta);
+		HE_FaceIterator fItr = sel.parent.fItr();
+		HE_Face f;
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (nn.dot(f.getFaceNormal()) > cta) {
+				sel.add(f);
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectFacesWithOtherInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Face f;
+		final Iterator<HE_Face> fItr = this.fItr();
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f.getInternalLabel() != label) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectFacesWithOtherLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Face f;
+		final Iterator<HE_Face> fItr = this.fItr();
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f.getUserLabel() != label) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectFrontEdges(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_EdgeIterator eitr = this.eItr();
+		HE_Halfedge e;
+		while (eitr.hasNext()) {
+			e = eitr.next();
+			if (HET_MeshOp.classifyEdgeToPlane3D(e, P) == WB_Classification.FRONT) {
+				_selection.add(e);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectFrontFaces(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_FaceIterator fitr = this.fItr();
+		HE_Face f;
+		while (fitr.hasNext()) {
+			f = fitr.next();
+			if (HET_MeshOp.classifyFaceToPlane3D(f, P) == WB_Classification.FRONT) {
+				_selection.add(f);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectFrontVertices(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_VertexIterator vitr = this.vItr();
+		HE_Vertex v;
+		while (vitr.hasNext()) {
+			v = vitr.next();
+			if (WB_GeometryOp3D.classifyPointToPlane3D(v, P) == WB_Classification.FRONT) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectHalfedgesWithLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge he;
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getUserLabel() == label) {
+				_selection.add(he);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectHalfedgesWithOtherInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge he;
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getInternalLabel() != label) {
+				_selection.add(he);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectHalfedgesWithOtherLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge he;
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getUserLabel() != label) {
+				_selection.add(he);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectHalfedgeWithInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Halfedge he;
+		final Iterator<HE_Halfedge> heItr = this.heItr();
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getInternalLabel() == label) {
+				_selection.add(he);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param P
+	 */
+	public void selectOnVertices(final String name, final WB_Plane P) {
+		final HE_Selection _selection = new HE_Selection(this);
+		final HE_VertexIterator vitr = this.vItr();
+		HE_Vertex v;
+		while (vitr.hasNext()) {
+			v = vitr.next();
+			if (WB_GeometryOp3D.classifyPointToPlane3D(v, P) == WB_Classification.ON) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param r
+	 */
+	public void selectRandomEdges(final String name, final double r) {
+		HE_Selection sel = new HE_Selection(this);
+		HE_EdgeIterator eItr = this.eItr();
+		HE_Halfedge e;
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e != null) {
+				if (Math.random() < r) {
+					sel.add(e);
+				}
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param r
+	 * @param seed
+	 */
+	public void selectRandomEdges(final String name, final double r, final long seed) {
+		final WB_MTRandom random = new WB_MTRandom(seed);
+		HE_Selection sel = new HE_Selection(this);
+		HE_EdgeIterator eItr = this.eItr();
+		HE_Halfedge e;
+		while (eItr.hasNext()) {
+			e = eItr.next();
+			if (e != null) {
+				if (random.nextFloat() < r) {
+					sel.add(e);
+				}
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param r
+	 */
+	public void selectRandomFaces(final String name, final double r) {
+		HE_Selection sel = new HE_Selection(this);
+		HE_FaceIterator fItr = this.fItr();
+		HE_Face f;
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f != null) {
+				if (Math.random() < r) {
+					sel.add(f);
+				}
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param r
+	 * @param seed
+	 */
+	public void selectRandomFaces(final String name, final double r, final long seed) {
+		final WB_MTRandom random = new WB_MTRandom(seed);
+		HE_Selection sel = new HE_Selection(this);
+		HE_FaceIterator fItr = this.fItr();
+		HE_Face f;
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f != null) {
+				if (random.nextFloat() < r) {
+					sel.add(f);
+				}
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param r
+	 */
+	public void selectRandomVertices(final String name, final double r) {
+		HE_Selection sel = new HE_Selection(this);
+		HE_VertexIterator vItr = this.vItr();
+		HE_Vertex v;
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v != null) {
+				if (Math.random() < r) {
+					sel.add(v);
+				}
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param r
+	 * @param seed
+	 */
+
+	public void selectRandomVertices(final String name, final double r, final long seed) {
+		final WB_MTRandom random = new WB_MTRandom(seed);
+		HE_Selection sel = new HE_Selection(this);
+		HE_VertexIterator vItr = this.vItr();
+		HE_Vertex v;
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v != null) {
+				if (random.nextFloat() < r) {
+					sel.add(v);
+				}
+			}
+		}
+		selections.put(name, sel);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectVerticesWithInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Vertex v;
+		final Iterator<HE_Vertex> vItr = this.vItr();
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v.getInternalLabel() == label) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectVerticesWithLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Vertex v;
+		final Iterator<HE_Vertex> vItr = this.vItr();
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v.getUserLabel() == label) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectVerticesWithOtherInternalLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Vertex v;
+		final Iterator<HE_Vertex> vItr = this.vItr();
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v.getInternalLabel() != label) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param label
+	 */
+	public void selectVerticesWithOtherLabel(final String name, final int label) {
+		final HE_Selection _selection = new HE_Selection(this);
+		HE_Vertex v;
+		final Iterator<HE_Vertex> vItr = this.vItr();
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v.getUserLabel() != label) {
+				_selection.add(v);
+			}
+		}
+		selections.put(name, _selection);
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @return
+	 */
+	public HE_Selection getSelection(final String name) {
+		HE_Selection sel = selections.get(name);
+		if (sel == null) {
+			tracker.setDuringStatus(this, "Selection " + name + " not found.");
+		}
+
+		return sel;
+	}
+
+	/**
+	 *
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public HE_Selection copySelection(final String from, final String to) {
+		HE_Selection sel = selections.get(from);
+		if (sel == null) {
+			tracker.setDuringStatus(this, "Selection " + from + " not found.");
+		}
+
+		HE_Selection copy = sel.get();
+		addSelection(to, copy);
+		return copy;
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param sel
+	 */
+	public void addSelection(final String name, final HE_Selection sel) {
+		if (sel.parent == this && sel != null) {
+			HE_Selection prevsel = selections.get(name);
+			if (prevsel == null) {
+				tracker.setDuringStatus(this, "Adding to selection " + name + ".");
+				selections.put(name, sel);
+			} else {
+				tracker.setDuringStatus(this, "Adding selection " + name + ".");
+				prevsel.add(sel);
+			}
+
+		} else {
+			tracker.setDuringStatus(this,
+					"Selection " + name + " not added: selection is null or parent mesh is not the same.");
+		}
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param sel
+	 * @return
+	 */
+	public HE_Selection replaceSelection(final String name, final HE_Selection sel) {
+		if (sel.parent == this && sel != null) {
+			HE_Selection prevsel = selections.get(name);
+			if (prevsel == null) {
+				tracker.setDuringStatus(this, "Adding selection " + name + ".");
+				selections.put(name, sel);
+			} else {
+				tracker.setDuringStatus(this, "Replacing selection " + name + ".");
+				removeSelection(name);
+				selections.put(name, sel);
+			}
+			return prevsel;
+
+		} else {
+			tracker.setDuringStatus(this,
+					"Selection " + name + " not added: selection is null or parent mesh is not the same.");
+		}
+		return null;
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @return
+	 */
+	public HE_Selection removeSelection(final String name) {
+		HE_Selection prevsel = selections.remove(name);
+		if (prevsel == null) {
+			tracker.setDuringStatus(this, "Selection " + name + " not found.");
+		} else {
+			tracker.setDuringStatus(this, "Removed selection " + name + ".");
+		}
+		return prevsel;
+	}
+
+	/**
+	 *
+	 */
+	public void cleanSelections() {
+		for (HE_Selection sel : selections.values()) {
+			sel.cleanSelection();
+		}
+	}
+
+	/**
+	 *
+	 */
+	public void clearSelections() {
+
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public Set<String> getSelectionNames() {
+
+		return selections.keySet();
+
+	}
+
+	/**
+	 *
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public boolean renameSelection(final String from, final String to) {
+		HE_Selection sel = removeSelection(from);
+		if (sel == null) {
+			tracker.setDuringStatus(this, "Selection " + from + " not found.");
+			return false;
+		}
+		replaceSelection(to, sel);
+		tracker.setDuringStatus(this, "Renamed selection " + from + " to " + to + ".");
+		return true;
+
+	}
+
+	/**
+	 * Adds a face to the mesh. The face is also added to any selection that
+	 * contains one of the elements it derives from.
+	 *
+	 * @param f
+	 *            new face
+	 * @param el
+	 *            elements the face derives from
+	 */
+	public final void addDerivedElement(final HE_Face f, final HE_Element... el) {
+		add(f);
+		for (HE_Selection sel : selections.values()) {
+			boolean contains = false;
+			for (int i = 0; i < el.length; i++) {
+				contains |= sel.contains(el[i]);
+				if (contains) {
+					break;
+				}
+			}
+			if (contains) {
+				sel.add(f);
+			}
+		}
+	}
+
+	/**
+	 * Adds a halfedge to the mesh. The halfedge is also added to any selection
+	 * that contains one of the elements it derives from.
+	 *
+	 * @param he
+	 *            new halfedge
+	 * @param el
+	 *            elements the halfedge derives from
+	 */
+	public final void addDerivedElement(final HE_Halfedge he, final HE_Element... el) {
+		add(he);
+		for (HE_Selection sel : selections.values()) {
+			boolean contains = false;
+			for (int i = 0; i < el.length; i++) {
+				contains |= sel.contains(el[i]);
+				if (contains) {
+					break;
+				}
+			}
+			if (contains) {
+				sel.add(he);
+			}
+		}
+
+	}
+
+	/**
+	 * Adds a vertex to the mesh. The vertex is also added to any selection that
+	 * contains one of the elements it derives from.
+	 *
+	 * @param v
+	 *            new vertex
+	 * @param el
+	 *            elements the vertex derives from
+	 */
+	public final void addDerivedElement(final HE_Vertex v, final HE_Element... el) {
+		add(v);
+		for (HE_Selection sel : selections.values()) {
+			boolean contains = false;
+			for (int i = 0; i < el.length; i++) {
+				contains |= sel.contains(el[i]);
+				if (contains) {
+					break;
+				}
+			}
+			if (contains) {
+				sel.add(v);
+			}
+		}
+	}
+
+	/**
+	 * Removes face.
+	 *
+	 * @param f
+	 *            face to remove
+	 */
+	@Override
+	public void remove(final HE_Face f) {
+
+		faces.remove(f);
+		for (HE_Selection sel : selections.values()) {
+
+			sel.remove(f);
+
+		}
+	}
+
+	/**
+	 * Removes halfedge.
+	 *
+	 * @param he
+	 *            halfedge to remove
+	 */
+	@Override
+	public void remove(final HE_Halfedge he) {
+		edges.remove(he);
+		halfedges.remove(he);
+		unpairedHalfedges.remove(he);
+		for (HE_Selection sel : selections.values()) {
+
+			sel.remove(he);
+
+		}
+	}
+
+	/**
+	 * Removes vertex.
+	 *
+	 * @param v
+	 *            vertex to remove
+	 */
+	@Override
+	public void remove(final HE_Vertex v) {
+		vertices.remove(v);
+		for (HE_Selection sel : selections.values()) {
+
+			sel.remove(v);
+
+		}
+	}
+
+	/**
+	 * Clear entire structure.
+	 */
+	@Override
+	public void clear() {
+		selections = new UnifiedMap<String, HE_Selection>();
+		clearVertices();
+		clearHalfedges();
+		clearFaces();
+	}
+
+	/**
+	 * Clear faces.
+	 */
+	@Override
+	public void clearFaces() {
+		faces = new HE_RASEC<HE_Face>();
+		for (HE_Selection sel : selections.values()) {
+
+			sel.clearFaces();
+
+		}
+	}
+
+	/**
+	 * Clear halfedges.
+	 */
+	@Override
+	public void clearHalfedges() {
+		halfedges = new HE_RASEC<HE_Halfedge>();
+		edges = new HE_RASEC<HE_Halfedge>();
+		unpairedHalfedges = new HE_RASEC<HE_Halfedge>();
+		for (HE_Selection sel : selections.values()) {
+
+			sel.clearHalfedges();
+
+		}
+	}
+
+	/**
+	 * Clear vertices.
+	 */
+	@Override
+	public void clearVertices() {
+		vertices = new HE_RASEC<HE_Vertex>();
+		for (HE_Selection sel : selections.values()) {
+
+			sel.clearVertices();
+
+		}
+	}
+
+	/**
+	 * Cap all remaining unpaired halfedges. Only use after pairHalfedges();
+	 */
+	@Override
+	public void capHalfedges() {
+
+		tracker.setStartStatus(this, "Capping unpaired halfedges.");
+		final List<HE_Halfedge> unpairedHalfedges = getUnpairedHalfedges();
+		final int nuh = unpairedHalfedges.size();
+		final HE_Halfedge[] newHalfedges = new HE_Halfedge[nuh];
+		HE_Halfedge he1, he2;
+		WB_ProgressCounter counter = new WB_ProgressCounter(nuh, 10);
+		tracker.setCounterStatus(this, "Capping unpaired halfedges.", counter);
+		for (int i = 0; i < nuh; i++) {
+			he1 = unpairedHalfedges.get(i);
+			he2 = new HE_Halfedge();
+			setVertex(he2, he1.getNextInFace().getVertex());
+			setPair(he1, he2);
+			newHalfedges[i] = he2;
+			addDerivedElement(he2);
+			counter.increment();
+		}
+		counter = new WB_ProgressCounter(nuh, 10);
+		tracker.setCounterStatus(this, "Cycling new halfedges.", counter);
+		for (int i = 0; i < nuh; i++) {
+			he1 = newHalfedges[i];
+			if (he1.getNextInFace() == null) {
+				for (int j = 0; j < nuh; j++) {
+					he2 = newHalfedges[j];
+					if (!he2.isVisited()) {
+						if (he2.getVertex() == he1.getPair().getVertex()) {
+							setNext(he1, he2);
+							he2.setVisited();
+							break;
+						}
+					}
+				}
+			}
+			counter.increment();
+		}
+		tracker.setStopStatus(this, "Processed unpaired halfedges.");
+	}
+
+	@Override
+	public void setPair(final HE_Halfedge he1, final HE_Halfedge he2) {
+		removeNoSelectionCheck(he1);
+		removeNoSelectionCheck(he2);
+		he1._setPair(he2);
+		he2._setPair(he1);
+		addDerivedElement(he1, he2);
+		addDerivedElement(he2, he1);
+	}
+
+	public void setPairNoSelectionCheck(final HE_Halfedge he1, final HE_Halfedge he2) {
+		removeNoSelectionCheck(he1);
+		removeNoSelectionCheck(he2);
+		he1._setPair(he2);
+		he2._setPair(he1);
+
+	}
+
+	/**
+	 * Add all mesh elements to this mesh. No copies are made.
+	 *
+	 * @param mesh
+	 *            mesh to add
+	 */
+	@Override
+	public void add(final HE_Mesh mesh) {
+		addVertices(mesh);
+		addFaces(mesh);
+		addHalfedges(mesh);
+
+		Set<String> selections = mesh.getSelectionNames();
+		for (String name : selections) {
+			HE_Selection sourceSel = mesh.getSelection(name);
+			HE_Selection currentSel = getSelection(name);
+			HE_Selection sel = sourceSel.get();
+			sel.parent = this;
+			if (currentSel == null) {
+				addSelection(name, sel);
+			} else {
+				currentSel.add(sel);
+			}
+
+		}
+
+	}
+
+	public double getMeanEdgeLength() {
+		double sum = 0;
+		HE_EdgeIterator eItr = this.eItr();
+		while (eItr.hasNext()) {
+			sum += eItr.next().getLength();
+		}
+
+		return sum / this.getNumberOfEdges();
+	}
+
+	public double getAngleDefect() {
+
+		return HET_MeshOp.getAngleDefect(this);
 	}
 
 }

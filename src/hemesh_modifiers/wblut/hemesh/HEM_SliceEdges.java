@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -14,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javolution.util.FastMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_Classification;
@@ -151,14 +146,14 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		tracker.setCounterStatus(this, "Classifying edges.", counter);
 		new ArrayList<HE_Vertex>();
 		final HE_Selection split = new HE_Selection(mesh);
-		final FastMap<Long, Double> edgeInt = new FastMap<Long, Double>();
+		final UnifiedMap<Long, Double> edgeInt = new UnifiedMap<Long, Double>();
 		final Iterator<HE_Halfedge> eItr = faces.eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
 			e = eItr.next();
 			if (vertexClass.get(e.getStartVertex().key()) == WB_Classification.ON) {
 				if (vertexClass.get(e.getEndVertex().key()) == WB_Classification.ON) {
-					cutEdges.add(e);
+					cutEdges.addEdge(e);
 					e.setInternalLabel(1);
 					e.getPair().setInternalLabel(1);
 				} else {
@@ -250,7 +245,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 		boolean positiveVertexExists = false;
 		boolean negativeVertexExists = false;
 		WB_Classification tmp;
-		final FastMap<Long, WB_Classification> vertexClass = new FastMap<Long, WB_Classification>();
+		final UnifiedMap<Long, WB_Classification> vertexClass = new UnifiedMap<Long, WB_Classification>();
 		HE_Vertex v;
 		WB_ProgressCounter counter = new WB_ProgressCounter(lsel.getNumberOfVertices(), 10);
 
@@ -281,7 +276,7 @@ public class HEM_SliceEdges extends HEM_Modifier {
 				e = eItr.next();
 				if (vertexClass.get(e.getStartVertex().key()) == WB_Classification.ON) {
 					if (vertexClass.get(e.getEndVertex().key()) == WB_Classification.ON) {
-						cutEdges.add(e);
+						cutEdges.addEdge(e);
 						e.setInternalLabel(1);
 					} else {
 						edgeInt.put(e.key(), 0.0);

@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.PrintWriter;
@@ -14,8 +9,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import gnu.trove.map.TLongIntMap;
-import gnu.trove.map.hash.TLongIntHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
+
 import wblut.geom.WB_Coord;
 
 /**
@@ -258,21 +253,21 @@ public class HET_Export {
 	public static void saveToHemesh(final HE_Mesh mesh, final String path, final String name) {
 		final HET_WriterHemesh hem = new HET_WriterHemesh();
 		hem.beginSave(path, name);
-		final TLongIntMap vertexKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap vertexKeys = new LongIntHashMap();
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		int i = 0;
 		while (vItr.hasNext()) {
 			vertexKeys.put(vItr.next().key(), i);
 			i++;
 		}
-		final TLongIntMap halfedgeKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap halfedgeKeys = new LongIntHashMap();
 		Iterator<HE_Halfedge> heItr = mesh.heItr();
 		i = 0;
 		while (heItr.hasNext()) {
 			halfedgeKeys.put(heItr.next().key(), i);
 			i++;
 		}
-		final TLongIntMap faceKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap faceKeys = new LongIntHashMap();
 		Iterator<HE_Face> fItr = mesh.fItr();
 		i = 0;
 		while (fItr.hasNext()) {
@@ -355,21 +350,21 @@ public class HET_Export {
 	public static void saveToBinaryHemesh(final HE_Mesh mesh, final String path, final String name) {
 		final HET_WriterBinaryHemesh hem = new HET_WriterBinaryHemesh();
 		hem.beginSave(path, name);
-		final TLongIntMap vertexKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap vertexKeys = new LongIntHashMap();
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		int i = 0;
 		while (vItr.hasNext()) {
 			vertexKeys.put(vItr.next().key(), i);
 			i++;
 		}
-		final TLongIntMap halfedgeKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap halfedgeKeys = new LongIntHashMap();
 		Iterator<HE_Halfedge> heItr = mesh.heItr();
 		i = 0;
 		while (heItr.hasNext()) {
 			halfedgeKeys.put(heItr.next().key(), i);
 			i++;
 		}
-		final TLongIntMap faceKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap faceKeys = new LongIntHashMap();
 		Iterator<HE_Face> fItr = mesh.fItr();
 		i = 0;
 		while (fItr.hasNext()) {
@@ -456,7 +451,7 @@ public class HET_Export {
 	 * @param saveNormals
 	 */
 	public static void saveToPOV(final HE_Mesh mesh, final String path, final String name, final boolean saveNormals) {
-		final HET_WriterPoV obj = new HET_WriterPoV();
+		final HET_WriterPOV obj = new HET_WriterPOV();
 		obj.beginSave(path, name);
 		saveToPOV(mesh, obj, saveNormals);
 		obj.endSave();
@@ -470,12 +465,12 @@ public class HET_Export {
 	 * @param pov
 	 *            instance of HET_POVWriter
 	 * @param normals
-	 *            smooth faces {@link HET_WriterPoV} instance.
+	 *            smooth faces {@link HET_WriterPOV} instance.
 	 */
-	public static void saveToPOV(final HE_Mesh mesh, final HET_WriterPoV pov, final boolean normals) {
+	public static void saveToPOV(final HE_Mesh mesh, final HET_WriterPOV pov, final boolean normals) {
 		final int vOffset = pov.getCurrVertexOffset();
 		pov.beginMesh2(String.format("obj%d", mesh.getKey()));
-		final TLongIntMap keyToIndex = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap keyToIndex = new LongIntHashMap();
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		final int vcount = mesh.getNumberOfVertices();
 		pov.total(vcount);
@@ -531,7 +526,7 @@ public class HET_Export {
 	 *            boolean (Smooth face or otherwise)
 	 */
 	public static void saveToPOV(final HE_Mesh mesh, final PrintWriter pw, final boolean saveNormals) {
-		final HET_WriterPoV obj = new HET_WriterPoV();
+		final HET_WriterPOV obj = new HET_WriterPOV();
 		obj.beginSave(pw);
 		saveToPOV(mesh, obj, saveNormals);
 		obj.endSave();

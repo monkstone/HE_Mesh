@@ -72,6 +72,7 @@ var searchData=
   ['isinside',['isInside',['../classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#af0f317970eef92bb7f2b26ff8bbf1a62',1,'wblut.hemesh.HET_MeshOp.isInside(final HE_Mesh mesh, final WB_Coord p)'],['../classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#a9ae69eb36193f74eddd70064d1ae8f01',1,'wblut.hemesh.HET_MeshOp.isInside(final WB_AABBTree tree, final WB_Coord p)']]],
   ['isintersecting',['isIntersecting',['../classwblut_1_1geom_1_1_w_b___earcut.html#aa497ee8274ccb6477bddbb9c67e20b51',1,'wblut::geom::WB_Earcut']]],
   ['isintersectingpolygon',['isIntersectingPolygon',['../classwblut_1_1geom_1_1_w_b___earcut.html#ae62ca774074646f45a9f12506486d3db',1,'wblut::geom::WB_Earcut']]],
+  ['isisolated',['isIsolated',['../classwblut_1_1hemesh_1_1_h_e___vertex.html#a4052934a85c33a65ee76b3dc87acf4b8',1,'wblut::hemesh::HE_Vertex']]],
   ['isleaf',['isLeaf',['../classwblut_1_1geom_1_1_w_b___a_a_b_b_tree_1_1_w_b___a_a_b_b_node.html#adfb19988fed88d20996d5727bfa35516',1,'wblut.geom.WB_AABBTree.WB_AABBNode.isLeaf()'],['../classwblut_1_1geom_1_1_w_b___a_a_b_b_tree2_d_1_1_w_b___a_a_b_b_node2_d.html#ae0a47513ec429cb2a8c8aec9a00e5a45',1,'wblut.geom.WB_AABBTree2D.WB_AABBNode2D.isLeaf()'],['../classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d_1_1_w_b___indexed_a_a_b_b_node2_d.html#af47b0e30f614f7b076ceffc3839cfaca',1,'wblut.geom.WB_IndexedAABBTree2D.WB_IndexedAABBNode2D.isLeaf()']]],
   ['isleft2d',['isLeft2D',['../classwblut_1_1geom_1_1_w_b___geometry_op2_d.html#a04d579a0ad1f9ba8c6b0faf689ae282a',1,'wblut::geom::WB_GeometryOp2D']]],
   ['isleftstrict2d',['isLeftStrict2D',['../classwblut_1_1geom_1_1_w_b___geometry_op2_d.html#a7ebad14c5f5efbf5c385c944d538cab5',1,'wblut::geom::WB_GeometryOp2D']]],
@@ -120,5 +121,5 @@ var searchData=
   ['iszero3d',['isZero3D',['../classwblut_1_1geom_1_1_w_b___geometry_op3_d.html#aa796d11208cb10e14e5f9bbcbcf0b19a',1,'wblut::geom::WB_GeometryOp3D']]],
   ['iszero4d',['isZero4D',['../classwblut_1_1geom_1_1_w_b___geometry_op4_d.html#af6a026b0868359b548e79d2c7770d9d2',1,'wblut::geom::WB_GeometryOp4D']]],
   ['iszerosq',['isZeroSq',['../classwblut_1_1math_1_1_w_b___epsilon.html#a688ca6484349b35b85b95f86a0ab053a',1,'wblut::math::WB_Epsilon']]],
-  ['iterator',['iterator',['../classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a953ed7c3b26501e99d0ded81944e8aa2',1,'wblut::hemesh::HE_RAS']]]
+  ['iterator',['iterator',['../classwblut_1_1hemesh_1_1_h_e___mesh_collection.html#a57a199c8adbbca282d5314616bfc20c5',1,'wblut.hemesh.HE_MeshCollection.iterator()'],['../classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a953ed7c3b26501e99d0ded81944e8aa2',1,'wblut.hemesh.HE_RAS.iterator()']]]
 ];

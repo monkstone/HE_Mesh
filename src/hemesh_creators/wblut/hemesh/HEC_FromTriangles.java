@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Point;
 import wblut.geom.WB_Triangle;
@@ -25,7 +20,7 @@ import wblut.geom.WB_Triangle;
  */
 public class HEC_FromTriangles extends HEC_Creator {
 	/** Source triangles. */
-	FastTable<WB_Triangle> triangles;
+	FastList<WB_Triangle> triangles;
 
 	/**
 	 * Instantiates a new HEC_FromTriangles.
@@ -44,7 +39,7 @@ public class HEC_FromTriangles extends HEC_Creator {
 	 * @return self
 	 */
 	public HEC_FromTriangles setTriangles(final WB_Triangle[] ts) {
-		triangles = new FastTable<WB_Triangle>();
+		triangles = new FastList<WB_Triangle>();
 		for (final WB_Triangle tri : ts) {
 			triangles.add(tri);
 		}
@@ -59,7 +54,7 @@ public class HEC_FromTriangles extends HEC_Creator {
 	 * @return self
 	 */
 	public HEC_FromTriangles setTriangles(final Collection<? extends WB_Triangle> ts) {
-		triangles = new FastTable<WB_Triangle>();
+		triangles = new FastList<WB_Triangle>();
 		triangles.addAll(ts);
 		return this;
 	}

@@ -1,19 +1,14 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
 import java.util.List;
 
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp3D;
@@ -74,7 +69,7 @@ public class HEM_Soapfilm extends HEM_Modifier {
 		if (autoRescale) {
 			box = mesh.getAABB();
 		}
-		final TLongObjectMap<WB_Coord> newPositions = new TLongObjectHashMap<WB_Coord>(10, 0.5f, 0L);
+		final LongObjectHashMap<WB_Coord> newPositions = new LongObjectHashMap<WB_Coord>();
 		if (iter < 1) {
 			iter = 1;
 		}
@@ -117,7 +112,7 @@ public class HEM_Soapfilm extends HEM_Modifier {
 		if (autoRescale) {
 			box = selection.parent.getAABB();
 		}
-		final TLongObjectMap<WB_Coord> newPositions = new TLongObjectHashMap<WB_Coord>(10, 0.5f, 0L);
+		final LongObjectHashMap<WB_Coord> newPositions = new LongObjectHashMap<WB_Coord>();
 		if (iter < 1) {
 			iter = 1;
 		}

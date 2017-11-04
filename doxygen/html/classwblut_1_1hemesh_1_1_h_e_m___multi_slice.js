@@ -13,7 +13,6 @@ var classwblut_1_1hemesh_1_1_h_e_m___multi_slice =
     [ "setReverse", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a153dbf3ba45dba1ace83bed1c1a2ea6f", null ],
     [ "setSimpleCap", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a9740876e25c3550e31d44af0c0f1e971", null ],
     [ "setTriangulate", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#ac1a9055b7d752ad5d159f4ffff5aee68", null ],
-    [ "capFaces", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#ad2e0c156461a04a51356c39238dda4b8", null ],
     [ "capHoles", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a61e716c40fc55219e3b5dceab61f7adb", null ],
     [ "center", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#aaefa345614924f858faa518fee4073ab", null ],
     [ "labels", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a4316aeaaaa5303161190a4b9c9d55a71", null ],

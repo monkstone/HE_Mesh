@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -13,9 +14,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressCounter;
 import wblut.core.WB_ProgressTracker;
 import wblut.geom.WB_AABB;
@@ -89,7 +90,7 @@ public class HET_Fixer {
 	 * @param v
 	 */
 	public static void deleteTwoEdgeVertex(final HE_Mesh mesh, final HE_Vertex v) {
-		if (mesh.contains(v) && v.getVertexOrder() == 2) {
+		if (mesh.contains(v) && v.getVertexDegree() == 2) {
 			final HE_Halfedge he0 = v.getHalfedge();
 			final HE_Halfedge he1 = he0.getNextInVertex();
 			final HE_Halfedge he0n = he0.getNextInFace();
@@ -119,10 +120,10 @@ public class HET_Fixer {
 	public static void deleteTwoEdgeVertices(final HE_Mesh mesh) {
 		final HE_VertexIterator vitr = mesh.vItr();
 		HE_Vertex v;
-		final List<HE_Vertex> toremove = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> toremove = new FastList<HE_Vertex>();
 		while (vitr.hasNext()) {
 			v = vitr.next();
-			if (v.getVertexOrder() == 2) {
+			if (v.getVertexDegree() == 2) {
 				toremove.add(v);
 			}
 		}
@@ -136,7 +137,7 @@ public class HET_Fixer {
 	 *
 	 */
 	public static void collapseDegenerateEdges(final HE_Mesh mesh) {
-		final FastTable<HE_Halfedge> edgesToRemove = new FastTable<HE_Halfedge>();
+		final FastList<HE_Halfedge> edgesToRemove = new FastList<HE_Halfedge>();
 		final Iterator<HE_Halfedge> eItr = mesh.eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
@@ -156,7 +157,7 @@ public class HET_Fixer {
 	 * @param d
 	 */
 	public static void collapseDegenerateEdges(final HE_Mesh mesh, final double d) {
-		final FastTable<HE_Halfedge> edgesToRemove = new FastTable<HE_Halfedge>();
+		final FastList<HE_Halfedge> edgesToRemove = new FastList<HE_Halfedge>();
 		final Iterator<HE_Halfedge> eItr = mesh.eItr();
 		HE_Halfedge e;
 		final double d2 = d * d;
@@ -178,13 +179,13 @@ public class HET_Fixer {
 	 */
 	public static boolean fixNonManifoldVerticesOnePass(final HE_Mesh mesh) {
 		class VertexInfo {
-			FastTable<HE_Halfedge> out;
+			FastList<HE_Halfedge> out;
 
 			VertexInfo() {
-				out = new FastTable<HE_Halfedge>();
+				out = new FastList<HE_Halfedge>();
 			}
 		}
-		final TLongObjectMap<VertexInfo> vertexLists = new TLongObjectHashMap<VertexInfo>(1024, 0.5f, -1L);
+		final LongObjectHashMap<VertexInfo> vertexLists = new LongObjectHashMap<VertexInfo>();
 		HE_Vertex v;
 		VertexInfo vi;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
@@ -202,7 +203,7 @@ public class HET_Fixer {
 			vi.out.add(he);
 			counter.increment();
 		}
-		final List<HE_Vertex> toUnweld = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> toUnweld = new FastList<HE_Vertex>();
 		counter = new WB_ProgressCounter(mesh.getNumberOfVertices(), 10);
 		tracker.setCounterStatus("HET_Fixer", "Checking vertex umbrellas.", counter);
 		Iterator<HE_Vertex> vItr = mesh.vItr();
@@ -245,7 +246,7 @@ public class HET_Fixer {
 		HE_Face f;
 		while (fItr.hasNext()) {
 			f = fItr.next();
-			if (f.isDegenerate() && f.getFaceOrder() == 3 && mesh.contains(f)) {
+			if (f.isDegenerate() && f.getFaceDegree() == 3 && mesh.contains(f)) {
 				double d = f.getHalfedge().getLength();
 				double dmax = d;
 				HE_Halfedge he = f.getHalfedge();
@@ -295,7 +296,7 @@ public class HET_Fixer {
 		HE_Halfedge he;
 		while (vItr.hasNext()) {
 			v = vItr.next();
-			if (v.getVertexOrder() == 2) {
+			if (v.getVertexDegree() == 2) {
 				he = v.getHalfedge();
 				if (WB_Vector.isParallel(he.getHalfedgeTangent(), he.getNextInVertex().getHalfedgeTangent())) {
 					mesh.setNext(he.getPrevInFace(), he.getNextInFace());
@@ -330,7 +331,7 @@ public class HET_Fixer {
 				continue; // face already removed by a previous change
 			}
 			if (face.isDegenerate()) {
-				final int fo = face.getFaceOrder();
+				final int fo = face.getFaceDegree();
 				if (fo == 3) {
 					HE_Halfedge degeneratehe = null;
 					he = face.getHalfedge();
@@ -391,8 +392,8 @@ public class HET_Fixer {
 	 * @return
 	 */
 	static List<HET_SelfIntersectionResult> checkSelfIntersection(final HE_Face tri, final WB_AABBTree tree) {
-		final List<HET_SelfIntersectionResult> selfints = new FastTable<HET_SelfIntersectionResult>();
-		final HE_RAS.HE_RASTrove<HE_Face> candidates = new HE_RAS.HE_RASTrove<HE_Face>();
+		final List<HET_SelfIntersectionResult> selfints = new FastList<HET_SelfIntersectionResult>();
+		final HE_RAS.HE_RASEC<HE_Face> candidates = new HE_RAS.HE_RASEC<HE_Face>();
 		final WB_AABB aabb = tri.getAABB();
 		final List<WB_AABBNode> nodes = WB_GeometryOp3D.getIntersection3D(aabb, tree);
 		for (final WB_AABBNode n : nodes) {
@@ -428,18 +429,15 @@ public class HET_Fixer {
 		mesh.triangulate();
 		mesh.resetFaceInternalLabels();
 		final WB_AABBTree tree = new WB_AABBTree(mesh, 1);
-		/*
-		 * final HE_FaceIterator fitr = mesh.fItr(); final
-		 * List<HET_SelfIntersectionResult> result = new
-		 * FastTable<HET_SelfIntersectionResult>();
-		 * List<HET_SelfIntersectionResult> selfints; HE_Face f; while
-		 * (fitr.hasNext()) { f = fitr.next(); selfints =
-		 * checkSelfIntersection(f, tree); if (selfints.size() > 0) {
-		 * f.setInternalLabel(1); } result.addAll(selfints); }
-		 *
-		 * return result;
-		 */
-		return checkSelfIntersection(mesh.faces.getObjects(), tree);
+
+		HE_Selection sifs = new HE_Selection(mesh);
+		List<HET_SelfIntersectionResult> result = checkSelfIntersection(mesh.faces.getObjects(), tree);
+		for (HET_SelfIntersectionResult sir : result) {
+			sifs.add(sir.f1);
+			sifs.add(sir.f2);
+		}
+		mesh.replaceSelection("intersection", sifs);
+		return result;
 	}
 
 	/**
@@ -452,7 +450,7 @@ public class HET_Fixer {
 	private static List<HET_SelfIntersectionResult> checkSelfIntersection(final List<HE_Face> faces,
 			final WB_AABBTree tree) {
 
-		List<HET_SelfIntersectionResult> selfints = new FastTable<HET_SelfIntersectionResult>();
+		List<HET_SelfIntersectionResult> selfints = new FastList<HET_SelfIntersectionResult>();
 		try {
 			int threadCount = Runtime.getRuntime().availableProcessors();
 			int dfaces = faces.size() / threadCount;
@@ -612,7 +610,7 @@ public class HET_Fixer {
 
 		HEM_Extrude ext = new HEM_Extrude().setChamfer(25).setRelative(false);
 		mesh.modify(ext);
-		HE_Selection sel = ext.extruded;
+		HE_Selection sel = mesh.getSelection("extruded");
 		ext = new HEM_Extrude().setDistance(-10);
 		sel.modify(ext);
 		System.out.println(checkSelfIntersection(mesh.get()).size());

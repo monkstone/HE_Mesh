@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -14,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
@@ -131,10 +126,10 @@ public class HES_CatmullClark extends HES_Subdividor {
 			avgFC.put(v.key(), afc);
 			counter.increment();
 		}
-		HEM_QuadSplit qs = new HEM_QuadSplit();
+		HES_QuadSplit qs = new HES_QuadSplit();
 		qs.applySelf(mesh);
 
-		final FastMap<Long, WB_Coord> newPositions = new FastMap<Long, WB_Coord>();
+		final UnifiedMap<Long, WB_Coord> newPositions = new UnifiedMap<Long, WB_Coord>();
 		final HE_Selection all = HE_Selection.selectAllFaces(mesh);
 		final List<HE_Vertex> boundary = all.getOuterVertices();
 		final List<HE_Vertex> inner = all.getInnerVertices();
@@ -252,10 +247,10 @@ public class HES_CatmullClark extends HES_Subdividor {
 			afc.divSelf(c);
 			avgFC.put(v.key(), afc);
 		}
-		HEM_QuadSplit qs = new HEM_QuadSplit();
+		HES_QuadSplit qs = new HES_QuadSplit();
 		qs.applySelf(selection);
 
-		final FastMap<Long, WB_Coord> newPositions = new FastMap<Long, WB_Coord>();
+		final UnifiedMap<Long, WB_Coord> newPositions = new UnifiedMap<Long, WB_Coord>();
 		selection.collectVertices();
 		final List<HE_Vertex> boundary = selection.getBoundaryVertices();
 		final List<HE_Vertex> outer = selection.getOuterVertices();

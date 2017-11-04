@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -13,9 +7,9 @@ package wblut.hemesh;
 import java.util.Iterator;
 import java.util.List;
 
-import gnu.trove.map.TLongDoubleMap;
-import gnu.trove.map.hash.TLongDoubleHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_Plane;
 import wblut.geom.WB_Triangle;
@@ -30,7 +24,7 @@ public class HES_TriDec extends HES_Simplifier {
 
 	private Heap heap;
 
-	TLongDoubleMap vertexCost;
+	LongDoubleHashMap vertexCost;
 
 	private int goal;
 
@@ -237,7 +231,7 @@ public class HES_TriDec extends HES_Simplifier {
 		tracker.setCounterStatus(this, "Building vertex removal heap.", pcounter);
 		counter = 0;
 		heap = new Heap();
-		vertexCost = new TLongDoubleHashMap(10, 0.5f, -1L, Double.NaN);
+		vertexCost = new LongDoubleHashMap();
 		final Iterator<HE_Vertex> vItr = sel.vItr();
 		double min;
 		double c;
@@ -446,8 +440,8 @@ public class HES_TriDec extends HES_Simplifier {
 		 *
 		 */
 		public Heap() {
-			heap = new FastTable<Entry>();
-			keys = new FastTable<Double>();
+			heap = new FastList<Entry>();
+			keys = new FastList<Double>();
 		}
 
 		/**

@@ -15,18 +15,19 @@ void setup() {
   creator.setEdge(200); 
   mesh=new HE_Mesh(creator);
   HET_MeshOp.splitFacesCenter(mesh);
+  mesh.getSelection("center").modify(new HEM_Extrude().setDistance(-40).setChamfer(0.2));
+HET_MeshOp.splitFacesTri(mesh);
 
-  colorMode(HSB);
   HE_FaceIterator fitr=mesh.fItr();
   while (fitr.hasNext ()) {
     HE_Face f=fitr.next();
     HE_Halfedge he=f.getHalfedge();
     do {
-      he.setColor(color(random(256), 200, 200));
+      he.setColor(color(random(256), random(80), random(80,180)));
       he=he.getNextInFace();
     } while (he!=f.getHalfedge ());
   }
-  colorMode(RGB);
+
 
   render=new WB_Render3D(this);
 }

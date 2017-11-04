@@ -1,11 +1,12 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  * @author FVH
@@ -2606,18 +2607,18 @@ public class WB_Subdivision {
 			new O13(), new O14() };
 
 	public static class WB_SubdivisionResult {
-		FastTable<WB_Triangle> triangles;
-		FastTable<WB_Quad> quads;
-		FastTable<WB_Pentagon> pentagons;
-		FastTable<WB_Hexagon> hexagons;
-		FastTable<WB_Octagon> octagons;
+		FastList<WB_Triangle> triangles;
+		FastList<WB_Quad> quads;
+		FastList<WB_Pentagon> pentagons;
+		FastList<WB_Hexagon> hexagons;
+		FastList<WB_Octagon> octagons;
 
 		public WB_SubdivisionResult() {
-			triangles = new FastTable<WB_Triangle>();
-			quads = new FastTable<WB_Quad>();
-			pentagons = new FastTable<WB_Pentagon>();
-			hexagons = new FastTable<WB_Hexagon>();
-			octagons = new FastTable<WB_Octagon>();
+			triangles = new FastList<WB_Triangle>();
+			quads = new FastList<WB_Quad>();
+			pentagons = new FastList<WB_Pentagon>();
+			hexagons = new FastList<WB_Hexagon>();
+			octagons = new FastList<WB_Octagon>();
 		}
 
 		public void addTriangle(final WB_Triangle triangle) {
@@ -2680,23 +2681,23 @@ public class WB_Subdivision {
 		}
 
 		public List<WB_Triangle> getTriangles() {
-			return triangles.unmodifiable();
+			return triangles.asUnmodifiable();
 		}
 
 		public List<WB_Quad> getQuads() {
-			return quads.unmodifiable();
+			return quads.asUnmodifiable();
 		}
 
 		public List<WB_Pentagon> getPentagons() {
-			return pentagons.unmodifiable();
+			return pentagons.asUnmodifiable();
 		}
 
 		public List<WB_Hexagon> getHexagons() {
-			return hexagons.unmodifiable();
+			return hexagons.asUnmodifiable();
 		}
 
 		public List<WB_Octagon> getOctagons() {
-			return octagons.unmodifiable();
+			return octagons.asUnmodifiable();
 		}
 
 	}

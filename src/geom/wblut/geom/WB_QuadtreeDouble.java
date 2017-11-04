@@ -1,12 +1,13 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 public class WB_QuadtreeDouble {
 	protected WB_AABB2D box;
@@ -52,7 +53,7 @@ public class WB_QuadtreeDouble {
 		if (box.contains(p)) {
 			if (hsize <= minNodeSize) {
 				if (entries == null) {
-					entries = new FastTable<WB_QuadtreeDoubleEntry>();
+					entries = new FastList<WB_QuadtreeDoubleEntry>();
 				}
 				entries.add(new WB_QuadtreeDoubleEntry(p, value));
 
@@ -138,7 +139,7 @@ public class WB_QuadtreeDouble {
 	}
 
 	public List<WB_QuadtreeDouble> getNodes() {
-		List<WB_QuadtreeDouble> result = new FastTable<WB_QuadtreeDouble>();
+		List<WB_QuadtreeDouble> result = new FastList<WB_QuadtreeDouble>();
 		if (numNodes > 0) {
 			for (int i = 0; i < 4; i++) {
 				if (nodes[i] != null) {
@@ -207,9 +208,9 @@ public class WB_QuadtreeDouble {
 	}
 
 	public List<WB_QuadtreeDoubleEntry> getEntries() {
-		FastTable<WB_QuadtreeDoubleEntry> result = null;
+		FastList<WB_QuadtreeDoubleEntry> result = null;
 		if (entries != null) {
-			result = new FastTable<WB_QuadtreeDoubleEntry>();
+			result = new FastList<WB_QuadtreeDoubleEntry>();
 
 			result.addAll(entries);
 
@@ -219,21 +220,21 @@ public class WB_QuadtreeDouble {
 					List<WB_QuadtreeDoubleEntry> childPoints = nodes[i].getEntries();
 					if (childPoints != null) {
 						if (result == null) {
-							result = new FastTable<WB_QuadtreeDoubleEntry>();
+							result = new FastList<WB_QuadtreeDoubleEntry>();
 						}
 						result.addAll(childPoints);
 					}
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_QuadtreeDoubleEntry> getEntriesInRange(final WB_AABB2D AABB) {
-		FastTable<WB_QuadtreeDoubleEntry> result = new FastTable<WB_QuadtreeDoubleEntry>();
+		FastList<WB_QuadtreeDoubleEntry> result = new FastList<WB_QuadtreeDoubleEntry>();
 		if (box.intersects(AABB)) {
 			if (entries != null) {
-				result = new FastTable<WB_QuadtreeDoubleEntry>();
+				result = new FastList<WB_QuadtreeDoubleEntry>();
 				for (WB_QuadtreeDoubleEntry oe : entries) {
 					if (AABB.contains(oe.coord)) {
 						result.add(oe);
@@ -251,11 +252,11 @@ public class WB_QuadtreeDouble {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_QuadtreeDoubleEntry> getEntriesInRange(final WB_Circle circle) {
-		FastTable<WB_QuadtreeDoubleEntry> result = new FastTable<WB_QuadtreeDoubleEntry>();
+		FastList<WB_QuadtreeDoubleEntry> result = new FastList<WB_QuadtreeDoubleEntry>();
 		if (box.intersects(circle)) {
 			if (entries != null) {
 				for (WB_QuadtreeDoubleEntry oe : entries) {
@@ -282,7 +283,7 @@ public class WB_QuadtreeDouble {
 	}
 
 	public List<WB_Coord> getPoints() {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		if (entries != null) {
 			for (WB_QuadtreeDoubleEntry oe : entries) {
 				result.add(oe.coord);
@@ -297,23 +298,23 @@ public class WB_QuadtreeDouble {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_AABB2D AABB) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_QuadtreeDoubleEntry eo : getEntriesInRange(AABB)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Circle circle) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_QuadtreeDoubleEntry eo : getEntriesInRange(circle)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Coord center, final double radius) {

@@ -1,13 +1,7 @@
-
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import wblut.math.WB_MTRandom;
@@ -59,7 +53,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#setSeed(long)
 	 */
 	@Override
@@ -70,7 +64,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#nextPoint()
 	 */
 	@Override
@@ -81,7 +75,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#nextVector()
 	 */
 	@Override
@@ -92,7 +86,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#reset()
 	 */
 	@Override
@@ -102,7 +96,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#setOffset(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -113,7 +107,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#setOffset(double, double)
 	 */
 	@Override
@@ -124,7 +118,7 @@ public class WB_RandomCurve implements WB_RandomPoint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_RandomPoint#setOffset(double, double, double)
 	 */
 	@Override

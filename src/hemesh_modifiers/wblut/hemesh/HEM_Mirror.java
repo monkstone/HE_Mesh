@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Plane;
 import wblut.math.WB_Epsilon;
@@ -124,11 +119,14 @@ public class HEM_Mirror extends HEM_Modifier {
 		slice.setCap(false);
 		mesh.modify(slice);
 
+		mesh.selectAllFaces("mirror0");
+		mesh.removeSelection("mirror1");
 		HE_Mesh mirrormesh = mesh.get();
+		mirrormesh.renameSelection("mirror0", "mirror1");
 		mirrormesh.vItr();
 		HE_Vertex v, origv;
 		pairs = new HE_Vertex[2 * mirrormesh.getNumberOfVertices()];
-		List<HE_Vertex> boundary = new FastTable<HE_Vertex>();
+		List<HE_Vertex> boundary = new FastList<HE_Vertex>();
 		for (int i = 0; i < mirrormesh.getNumberOfVertices(); i++) {
 			v = mirrormesh.getVertexWithIndex(i);
 			origv = mesh.getVertexWithIndex(i);
@@ -154,6 +152,7 @@ public class HEM_Mirror extends HEM_Modifier {
 		mesh.add(mirrormesh);
 
 		mesh.cleanUnusedElementsByFace();
+		mesh.uncapBoundaryHalfedges();
 		mesh.pairHalfedges();
 		mesh.capHalfedges();
 

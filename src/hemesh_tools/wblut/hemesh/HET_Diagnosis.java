@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Coord;
@@ -394,7 +389,7 @@ public class HET_Diagnosis {
 				System.out.println("   Can't retrieve normal of vertex!");
 			}
 			try {
-				System.out.println("   Order: " + v.getVertexOrder());
+				System.out.println("   Order: " + v.getVertexDegree());
 				System.out.println("   Area: " + v.getVertexArea());
 				System.out.println("   Umbrella angle: " + v.getUmbrellaAngle() / (2 * Math.PI));
 			} catch (final Exception e) {
@@ -448,7 +443,7 @@ public class HET_Diagnosis {
 				System.out.println("   Can't retrieve normal of face!");
 			}
 			try {
-				System.out.println("   Order: " + f.getFaceOrder());
+				System.out.println("   Order: " + f.getFaceDegree());
 				System.out.println("   Area: " + f.getFaceArea());
 			} catch (final Exception e) {
 				System.out.println("   Can't calculate properties of face!");
@@ -458,20 +453,24 @@ public class HET_Diagnosis {
 	}
 
 	public static void checkHalfedges(final HE_MeshStructure mesh) {
+		int i = 0;
 		for (HE_Halfedge he : mesh.halfedges) {
-			if (mesh.edges.contains(he)) {
-				System.out.println("Duplicate halfedge " + he.getKey() + " in halfedgs and edges.");
+			if (!mesh.contains(he.getVertex())) {
+				i++;
 			}
-			if (mesh.unpairedHalfedges.contains(he)) {
-				System.out.println("Duplicate halfedge " + he.getKey() + " in halfedges and unpairedHalfedges.");
+		}
+		for (HE_Halfedge he : mesh.edges) {
+			if (!mesh.contains(he.getVertex())) {
+				i++;
+			}
+		}
+		for (HE_Halfedge he : mesh.unpairedHalfedges) {
+			if (!mesh.contains(he.getVertex())) {
+				i++;
 			}
 		}
 
-		for (HE_Halfedge he : mesh.edges) {
-			if (mesh.unpairedHalfedges.contains(he)) {
-				System.out.println("Duplicate halfedge " + he.getKey() + " in edges and unpairedHalfedges.");
-			}
-		}
+		System.out.println("Halfedges with external reference (vert): " + i);
 
 	}
 

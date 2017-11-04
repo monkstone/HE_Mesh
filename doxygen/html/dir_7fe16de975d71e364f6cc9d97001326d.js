@@ -60,6 +60,9 @@ var dir_7fe16de975d71e364f6cc9d97001326d =
     [ "WB_Math.java", "_w_b___math_8java.html", [
       [ "WB_Math", "classwblut_1_1math_1_1_w_b___math.html", null ]
     ] ],
+    [ "WB_MatrixTriple.java", "_w_b___matrix_triple_8java.html", [
+      [ "WB_MatrixTriple", "classwblut_1_1math_1_1_w_b___matrix_triple.html", "classwblut_1_1math_1_1_w_b___matrix_triple" ]
+    ] ],
     [ "WB_MTRandom.java", "_w_b___m_t_random_8java.html", [
       [ "WB_MTRandom", "classwblut_1_1math_1_1_w_b___m_t_random.html", "classwblut_1_1math_1_1_w_b___m_t_random" ]
     ] ],

@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 package wblut.geom;
 
@@ -16,9 +10,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_ScalarParameter;
 
@@ -119,19 +113,19 @@ public class WB_IsoSurfaceVOL {
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> xedges;
+	private IntObjectHashMap<WB_Point> xedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> yedges;
+	private IntObjectHashMap<WB_Point> yedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> zedges;
+	private IntObjectHashMap<WB_Point> zedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> vertices;
+	private IntObjectHashMap<WB_Point> vertices;
 
 	private List<WB_Tetrahedron> tetra;
 
@@ -555,12 +549,12 @@ public class WB_IsoSurfaceVOL {
 	 * Polygonise.
 	 */
 	private void polygonise() {
-		xedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		yedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		zedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		vertices = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
+		xedges = new IntObjectHashMap<WB_Point>();
+		yedges = new IntObjectHashMap<WB_Point>();
+		zedges = new IntObjectHashMap<WB_Point>();
+		vertices = new IntObjectHashMap<WB_Point>();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy, cz - 0.5 * resz * dz);
-		tetra = new FastTable<WB_Tetrahedron>();
+		tetra = new FastList<WB_Tetrahedron>();
 
 		for (int i = 0; i < resx; i++) {
 			for (int j = 0; j < resy; j++) {

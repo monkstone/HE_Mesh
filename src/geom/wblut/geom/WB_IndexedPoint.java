@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 /**
@@ -60,7 +61,7 @@ public class WB_IndexedPoint extends WB_Point {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	int getIndex() {

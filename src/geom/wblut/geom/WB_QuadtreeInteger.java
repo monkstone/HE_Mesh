@@ -1,13 +1,14 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 public class WB_QuadtreeInteger {
 	protected WB_AABB2D box;
@@ -53,7 +54,7 @@ public class WB_QuadtreeInteger {
 		if (box.contains(p)) {
 			if (hsize <= minNodeSize) {
 				if (entries == null) {
-					entries = new FastTable<WB_QuadtreeIntegerEntry>();
+					entries = new FastList<WB_QuadtreeIntegerEntry>();
 				}
 				entries.add(new WB_QuadtreeIntegerEntry(p, value));
 
@@ -139,7 +140,7 @@ public class WB_QuadtreeInteger {
 	}
 
 	public List<WB_QuadtreeInteger> getNodes() {
-		List<WB_QuadtreeInteger> result = new FastTable<WB_QuadtreeInteger>();
+		List<WB_QuadtreeInteger> result = new FastList<WB_QuadtreeInteger>();
 		if (numNodes > 0) {
 			for (int i = 0; i < 4; i++) {
 				if (nodes[i] != null) {
@@ -208,9 +209,9 @@ public class WB_QuadtreeInteger {
 	}
 
 	public List<WB_QuadtreeIntegerEntry> getEntries() {
-		FastTable<WB_QuadtreeIntegerEntry> result = null;
+		FastList<WB_QuadtreeIntegerEntry> result = null;
 		if (entries != null) {
-			result = new FastTable<WB_QuadtreeIntegerEntry>();
+			result = new FastList<WB_QuadtreeIntegerEntry>();
 
 			result.addAll(entries);
 
@@ -220,21 +221,21 @@ public class WB_QuadtreeInteger {
 					List<WB_QuadtreeIntegerEntry> childPoints = nodes[i].getEntries();
 					if (childPoints != null) {
 						if (result == null) {
-							result = new FastTable<WB_QuadtreeIntegerEntry>();
+							result = new FastList<WB_QuadtreeIntegerEntry>();
 						}
 						result.addAll(childPoints);
 					}
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_QuadtreeIntegerEntry> getEntriesInRange(final WB_AABB2D AABB) {
-		FastTable<WB_QuadtreeIntegerEntry> result = new FastTable<WB_QuadtreeIntegerEntry>();
+		FastList<WB_QuadtreeIntegerEntry> result = new FastList<WB_QuadtreeIntegerEntry>();
 		if (box.intersects(AABB)) {
 			if (entries != null) {
-				result = new FastTable<WB_QuadtreeIntegerEntry>();
+				result = new FastList<WB_QuadtreeIntegerEntry>();
 				for (WB_QuadtreeIntegerEntry oe : entries) {
 					if (AABB.contains(oe.coord)) {
 						result.add(oe);
@@ -252,11 +253,11 @@ public class WB_QuadtreeInteger {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_QuadtreeIntegerEntry> getEntriesInRange(final WB_Circle circle) {
-		FastTable<WB_QuadtreeIntegerEntry> result = new FastTable<WB_QuadtreeIntegerEntry>();
+		FastList<WB_QuadtreeIntegerEntry> result = new FastList<WB_QuadtreeIntegerEntry>();
 		if (box.intersects(circle)) {
 			if (entries != null) {
 				for (WB_QuadtreeIntegerEntry oe : entries) {
@@ -283,7 +284,7 @@ public class WB_QuadtreeInteger {
 	}
 
 	public List<WB_Coord> getPoints() {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		if (entries != null) {
 			for (WB_QuadtreeIntegerEntry oe : entries) {
 				result.add(oe.coord);
@@ -298,23 +299,23 @@ public class WB_QuadtreeInteger {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_AABB2D AABB) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_QuadtreeIntegerEntry eo : getEntriesInRange(AABB)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Circle circle) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_QuadtreeIntegerEntry eo : getEntriesInRange(circle)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Coord center, final double radius) {

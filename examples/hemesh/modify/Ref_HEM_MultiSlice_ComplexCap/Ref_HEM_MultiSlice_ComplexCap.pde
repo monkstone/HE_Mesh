@@ -17,9 +17,9 @@ void setup() {
   modifier=new HEM_MultiSlice();
   numPlanes=5;
   planes=new WB_Plane[numPlanes];
-  for(int i=0;i<numPlanes;i++){
+  for (int i=0; i<numPlanes; i++) {
     int pol=(random(100)<50)?-1:1;
-  planes[i]=new WB_Plane(-pol*random(50,100),-pol*random(50,100),-pol*random(50,150),pol*random(1),pol*random(1),pol*random(1));
+    planes[i]=new WB_Plane(-pol*random(50, 100), -pol*random(50, 100), -pol*random(50, 150), pol*random(1), pol*random(1), pol*random(1));
   } 
   modifier.setPlanes(planes);// Cut plane 
   //planes can also be any Collection<WB_Plane>
@@ -28,7 +28,7 @@ void setup() {
   modifier.setOptimizeCap(true);
   slicedMesh.modify(modifier);
   slicedMesh.validate();
-  modifier.capFaces.collectEdgesByFace();
+  slicedMesh.getSelection("caps").collectEdgesByFace();
 
   render=new WB_Render(this);
 }
@@ -42,28 +42,28 @@ void draw() {
   rotateX(mouseY*1.0f/height*TWO_PI);
   fill(255);
   noStroke();
-  for(int i=-1;i<numPlanes;i++){
- fill(255-(i+1)*25,255,(i+1)*40);
- HE_Selection faces=HE_Selection.selectFacesWithInternalLabel(slicedMesh,i);
+  for (int i=-1; i<numPlanes; i++) {
+    fill(255-(i+1)*25, 255, (i+1)*40);
+    HE_Selection faces=HE_Selection.selectFacesWithInternalLabel(slicedMesh, i);
     render.drawFaces(faces);//Multislice internally labels all faces with the index of the corresponding cutplane, -1 for part of an original face
   }
-  
+
   noFill();
-    strokeWeight(1);
+  strokeWeight(1);
   stroke(0);
   render.drawEdges(mesh);
-  stroke(255,0,0);
-  for(int i=0;i<numPlanes;i++){
-  render.drawPlane(planes[i],600);
+  stroke(255, 0, 0);
+  for (int i=0; i<numPlanes; i++) {
+    render.drawPlane(planes[i], 600);
   }
+ 
   strokeWeight(1.5);
-  render.drawEdges(modifier.capFaces);
-  
-
+  render.drawEdges(slicedMesh.getSelection("caps"));
+   
 }
 
 
-void createMesh(){
+void createMesh() {
   HEC_Torus creator=new HEC_Torus(120, 300, 6, 16);
   mesh=new HE_Mesh(creator);
   creator=new HEC_Torus(60, 300, 6, 16);
@@ -73,5 +73,4 @@ void createMesh(){
   mesh.add(inner);
   mesh.smooth(2);
   slicedMesh=mesh.get();
-  
 }

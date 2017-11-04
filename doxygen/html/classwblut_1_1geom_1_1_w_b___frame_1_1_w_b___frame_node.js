@@ -18,6 +18,6 @@ var classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node =
     [ "setValue", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html#a0e8c3420bd0d82ce94e17027d425814f", null ],
     [ "toPoint", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html#abc8031f68a61850cc32170358d54f272", null ],
     [ "index", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html#ae6e76ae1bf5260ac13b24ffbf148fbfc", null ],
-    [ "struts", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html#a6654e301415560d6340c86028178ad09", null ],
+    [ "struts", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html#a3348d346c20cd29fab22ae99bbff2779", null ],
     [ "value", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html#ac50205f5d591872c95a4e54647960381", null ]
 ];

@@ -64,9 +64,3 @@ void draw() {
   stroke(0);
   render.drawEdges(mesh);
 }
-
-class ScalarField implements WB_ScalarParameter {
-  double evaluate(double... x) {
-    return 2.5*sin((float)x[0])*cos((float)x[1])*sin((float)x[2])+4*noise(0.2*(float)x[0], 0.4*(float)x[1], 0.2*(float)x[2]);
-  }
-}

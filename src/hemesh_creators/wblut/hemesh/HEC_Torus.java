@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Point;
@@ -121,7 +116,7 @@ public class HEC_Torus extends HEC_Creator {
 	/**
 	 * Sets the torus radius. Parameter should be a WB_ScalarParameter on the
 	 * domain [0,2PI]
-	 * 
+	 *
 	 * @param Ro
 	 * @return
 	 */
@@ -133,7 +128,7 @@ public class HEC_Torus extends HEC_Creator {
 	/**
 	 * Sets the tube radius. Parameter should be a WB_ScalarParameter on the
 	 * domain [0,2PI]
-	 * 
+	 *
 	 * @param Ri
 	 * @return
 	 */
@@ -146,7 +141,7 @@ public class HEC_Torus extends HEC_Creator {
 	/**
 	 * Sets the tube elliptical axes. Parameter should be a WB_ScalarParameter
 	 * on the domain [0,2PI]
-	 * 
+	 *
 	 * @param Rix
 	 *            Elliptical axis in torus plane
 	 * @param Riz
@@ -222,7 +217,7 @@ public class HEC_Torus extends HEC_Creator {
 	/**
 	 * Sets the tube phase, the rotation around the torus center circle.
 	 * Parameter should be a WB_ScalarParameter on the domain [0,2PI]
-	 * 
+	 *
 	 * @param p
 	 * @return
 	 */

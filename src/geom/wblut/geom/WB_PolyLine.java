@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 
 /**
@@ -23,12 +18,12 @@ public class WB_PolyLine {
 	/**
 	 *
 	 */
-	FastTable<WB_Point> points;
+	FastList<WB_Point> points;
 
 	/**
 	 *
 	 */
-	FastTable<WB_Vector> directions;
+	FastList<WB_Vector> directions;
 
 	/**
 	 *
@@ -254,7 +249,7 @@ public class WB_PolyLine {
 	 */
 	public WB_PolyLine(final Collection<? extends WB_Coord> points) {
 		numberOfPoints = points.size();
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : points) {
 			this.points.add(new WB_Point(p));
 		}
@@ -269,7 +264,7 @@ public class WB_PolyLine {
 	 */
 	public WB_PolyLine(final WB_Coord... points) {
 		numberOfPoints = points.length;
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : points) {
 			this.points.add(new WB_Point(p));
 		}
@@ -281,7 +276,7 @@ public class WB_PolyLine {
 	 *
 	 */
 	private void getDirections() {
-		directions = new FastTable<WB_Vector>();
+		directions = new FastList<WB_Vector>();
 		incLengths = new double[points.size() - 1];
 		for (int i = 0; i < points.size() - 1; i++) {
 			final WB_Vector v = new WB_Vector(points.get(i), points.get(i + 1));
@@ -341,7 +336,7 @@ public class WB_PolyLine {
 	 */
 
 	public WB_PolyLine apply(final WB_Transform T) {
-		FastTable<WB_Point> tpoints = new FastTable<WB_Point>();
+		FastList<WB_Point> tpoints = new FastList<WB_Point>();
 		for (WB_Point p : points) {
 			tpoints.add(p.applyAsPoint(T));
 		}

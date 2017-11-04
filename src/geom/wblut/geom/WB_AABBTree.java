@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -15,7 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.core.WB_ProgressTracker;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_FaceSort;
@@ -56,7 +51,7 @@ public class WB_AABBTree {
 				"Starting WB_AABBTree construction. Max. number of faces per node: " + maxNumberOfFaces);
 
 		root = new WB_AABBNode();
-		final List<HE_Face> faces = new FastTable<HE_Face>();
+		final List<HE_Face> faces = new FastList<HE_Face>();
 		faces.addAll(mesh.getFaces());
 		buildNode(root, faces, mesh, 0);
 		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");
@@ -84,8 +79,8 @@ public class WB_AABBTree {
 			return;
 		}
 
-		List<HE_Face> subsetA = new FastTable<HE_Face>();
-		List<HE_Face> subsetB = new FastTable<HE_Face>();
+		List<HE_Face> subsetA = new FastList<HE_Face>();
+		List<HE_Face> subsetB = new FastList<HE_Face>();
 
 		double sah = Double.POSITIVE_INFINITY;
 
@@ -107,8 +102,8 @@ public class WB_AABBTree {
 			sah = findOptimalSubset(sah, node, subsetA, subsetB, faces);
 		}
 
-		List<HE_Face> childA = new FastTable<HE_Face>();
-		List<HE_Face> childB = new FastTable<HE_Face>();
+		List<HE_Face> childA = new FastList<HE_Face>();
+		List<HE_Face> childB = new FastList<HE_Face>();
 
 		if (subsetA.size() < subsetB.size()) {
 			childA.addAll(subsetB);
@@ -334,7 +329,7 @@ public class WB_AABBTree {
 		 */
 		public WB_AABBNode() {
 			level = -1;
-			faces = new FastTable<HE_Face>();
+			faces = new FastList<HE_Face>();
 		}
 
 		/**

@@ -1,22 +1,16 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.nurbs;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import gnu.trove.list.TDoubleList;
-import gnu.trove.list.array.TDoubleArrayList;
-import gnu.trove.map.TDoubleIntMap;
-import gnu.trove.map.hash.TDoubleIntHashMap;
+import org.eclipse.collections.impl.list.mutable.primitive.DoubleArrayList;
+import org.eclipse.collections.impl.map.mutable.primitive.DoubleIntHashMap;
+
 import wblut.math.WB_Epsilon;
 
 /**
@@ -391,7 +385,7 @@ public class WB_NurbsKnot {
 		if (UA.p() != UB.p()) {
 			throw new IllegalArgumentException("Cannot merge knots of different degree.");
 		}
-		final TDoubleIntMap knotvalues = new TDoubleIntHashMap(10, 0.5f, Double.NaN, -1);
+		final DoubleIntHashMap knotvalues = new DoubleIntHashMap();
 		int total = 0;
 		for (int i = 0; i <= UA.m;) {
 			final double ua = UA.value(i);
@@ -419,9 +413,9 @@ public class WB_NurbsKnot {
 			}
 			i += mul;
 		}
-		final TDoubleList distinctValues = new TDoubleArrayList();
+		final DoubleArrayList distinctValues = new DoubleArrayList();
 		distinctValues.addAll(knotvalues.keySet());
-		distinctValues.sort();
+		distinctValues.sortThis();
 		final double[] allValues = new double[total];
 		int offset = 0;
 		for (int i = 0; i < distinctValues.size(); i++) {

@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.awt.Font;
@@ -33,7 +28,7 @@ import com.vividsolutions.jts.operation.buffer.BufferOp;
 import com.vividsolutions.jts.operation.buffer.BufferParameters;
 import com.vividsolutions.jts.simplify.TopologyPreservingSimplifier;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_Math;
 
@@ -1505,7 +1500,7 @@ public class WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Polygon createSimplePolygon(final List<? extends WB_Coord> tuples, final int[] indices) {
-		final List<WB_Coord> coords = new FastTable<WB_Coord>();
+		final List<WB_Coord> coords = new FastList<WB_Coord>();
 		for (final int indice : indices) {
 			coords.add(tuples.get(indice));
 		}
@@ -1595,7 +1590,7 @@ public class WB_GeometryFactory2D {
 	 * @return
 	 */
 	private List<WB_Polygon> createPolygonsFromJTSGeometry2D(final Geometry geometry) {
-		final List<WB_Polygon> polygons = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polygons = new FastList<WB_Polygon>();
 		for (int i = 0; i < geometry.getNumGeometries(); i++) {
 			final Geometry geo = geometry.getGeometryN(i);
 			if (!geo.isEmpty()) {
@@ -2155,7 +2150,7 @@ public class WB_GeometryFactory2D {
 	 * @return
 	 */
 	public List<WB_Polygon> constrainPolygons2D(final WB_Polygon[] polygons, final WB_Polygon container) {
-		final List<WB_Polygon> polys = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polys = new FastList<WB_Polygon>();
 		for (final WB_Polygon poly : polygons) {
 			final Polygon JTSpoly1 = toJTSPolygon2D(poly);
 			final Polygon JTSpoly2 = toJTSPolygon2D(container);
@@ -2173,7 +2168,7 @@ public class WB_GeometryFactory2D {
 	 * @return
 	 */
 	public List<WB_Polygon> constrainPolygons2D(final List<WB_Polygon> polygons, final WB_Polygon container) {
-		final List<WB_Polygon> polys = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polys = new FastList<WB_Polygon>();
 		for (final WB_Polygon poly : polygons) {
 			final Polygon JTSpoly1 = toJTSPolygon2D(poly);
 			final Polygon JTSpoly2 = toJTSPolygon2D(container);
@@ -2214,7 +2209,7 @@ public class WB_GeometryFactory2D {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		return new FastTable<WB_Polygon>();
+		return new FastList<WB_Polygon>();
 	}
 
 	public List<WB_Polygon> createTextWithFont(final String text, final String fontName, final float pointSize) {
@@ -2234,7 +2229,7 @@ public class WB_GeometryFactory2D {
 			is = new FileInputStream(fontName);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			return new FastTable<WB_Polygon>();
+			return new FastList<WB_Polygon>();
 		}
 
 		Font font = null;
@@ -2251,7 +2246,7 @@ public class WB_GeometryFactory2D {
 			e.printStackTrace();
 		}
 
-		return new FastTable<WB_Polygon>();
+		return new FastList<WB_Polygon>();
 	}
 
 	public List<WB_Polygon> createTextWithOpenTypeFont(final String text, final String fontName,
@@ -2283,7 +2278,7 @@ public class WB_GeometryFactory2D {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		return new FastTable<WB_Polygon>();
+		return new FastList<WB_Polygon>();
 	}
 
 	public List<WB_Polygon> createTextWithType1Font(final String text, final String fontName, final float pointSize) {
@@ -2314,7 +2309,7 @@ public class WB_GeometryFactory2D {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		return new FastTable<WB_Polygon>();
+		return new FastList<WB_Polygon>();
 	}
 
 	/**
@@ -2393,7 +2388,7 @@ public class WB_GeometryFactory2D {
 			final char[] chs = text.toCharArray();
 			final FontRenderContext fontContext = new FontRenderContext(null, false, true);
 			final GlyphVector gv = font.createGlyphVector(fontContext, chs);
-			final List<WB_Polygon> geometries = new FastTable<WB_Polygon>();
+			final List<WB_Polygon> geometries = new FastList<WB_Polygon>();
 			for (int i = 0; i < gv.getNumGlyphs(); i++) {
 				geometries.addAll(shapereader.read(gv.getGlyphOutline(i), flatness));
 			}
@@ -2401,7 +2396,7 @@ public class WB_GeometryFactory2D {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		return new FastTable<WB_Polygon>();
+		return new FastList<WB_Polygon>();
 
 	}
 
@@ -4040,7 +4035,7 @@ public class WB_GeometryFactory2D {
 	}
 
 	public List<WB_Coord> createUniquePoints2D(final List<WB_Coord> points, final double threshold) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
 		final WB_KDTreeInteger2D<WB_Coord> kdtree = new WB_KDTreeInteger2D<WB_Coord>();
 		WB_KDTreeInteger2D.WB_KDEntryInteger<WB_Coord> neighbor;
 		WB_Coord v = points.get(0);

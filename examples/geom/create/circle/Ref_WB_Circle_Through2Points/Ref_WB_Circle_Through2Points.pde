@@ -29,6 +29,7 @@ void draw() {
   translate(400,400);
   create();
   noFill();
+  strokeWeight(2);
   stroke(255,0,0);
   for(WB_Circle circle:circles){
   render.drawCircle2D(circle);

@@ -9,9 +9,9 @@ List<WB_AABB> leafs;
 List<WB_Point> points;
 void setup() {
   size(800, 800, P3D);
-  source=new WB_RandomInSphere().setRadius(250);
+  source=new WB_RandomOnSphere().setRadius(250);
   render=new WB_Render3D(this);
-  tree= new WB_KDTreeInteger<WB_Point>(32);
+  tree= new WB_KDTreeInteger<WB_Point>(8);
   points=new ArrayList<WB_Point>();
   for (int i=0; i<1000; i++) {
     points.add(source.nextPoint());

@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.core;
@@ -14,13 +8,13 @@ public class WB_Version {
 
 	public static final WB_Version CURRENT_VERSION = new WB_Version();
 
-	public static final int MAJOR = 5;
+	public static final int MAJOR = 6;
 
-	public static final int MINOR = 1;
+	public static final int MINOR = 0;
 
-	public static final int PATCH = 4;
+	public static final int PATCH = 0;
 
-	private static final String releaseInfo = "Saturn";
+	private static final String releaseInfo = "Titan";
 
 	/**
 	 *

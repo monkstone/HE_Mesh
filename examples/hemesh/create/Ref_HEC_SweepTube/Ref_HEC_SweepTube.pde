@@ -21,7 +21,7 @@ void setup() {
   //Generate a BSpline
   points=new WB_Point[11];
   for (int i=0;i<11;i++) {
-    points[i]=new WB_Point(5*(i-5)*(i-5), -200+40*i, 0);
+    points[i]=new WB_Point(5*(i-5)*(i-5), -200+40*i, random(100));
   }
   C=new WB_BSpline(points, 4);
 

@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.io.BufferedReader;
@@ -16,11 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import gnu.trove.map.TIntDoubleMap;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntDoubleHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_ScalarParameter;
 
@@ -119,28 +113,28 @@ public class WB_IsoSurface {
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> xedges;
+	private IntObjectHashMap<WB_Point> xedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> yedges;
+	private IntObjectHashMap<WB_Point> yedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> zedges;
+	private IntObjectHashMap<WB_Point> zedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> vertices;
+	private IntObjectHashMap<WB_Point> vertices;
 	/**
 	 *
 	 */
-	private TIntObjectMap<VertexRemap> vertexremaps;
+	private IntObjectHashMap<VertexRemap> vertexremaps;
 
 	/**
 	 *
 	 */
-	private TIntDoubleMap valueremaps;
+	private IntDoubleHashMap valueremaps;
 
 	/**
 	 *
@@ -151,7 +145,7 @@ public class WB_IsoSurface {
 	 *
 	 */
 	private boolean invert;
-	private FastTable<WB_Triangle> tris;
+	private FastList<WB_Triangle> tris;
 
 	/**
 	 *
@@ -356,10 +350,10 @@ public class WB_IsoSurface {
 	}
 
 	public List<WB_Triangle> getTriangles() {
-		vertices = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		xedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		yedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		zedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
+		vertices = new IntObjectHashMap<WB_Point>();
+		xedges = new IntObjectHashMap<WB_Point>();
+		yedges = new IntObjectHashMap<WB_Point>();
+		zedges = new IntObjectHashMap<WB_Point>();
 		valueremaps = null;
 		if (gamma > 0) {
 			mapvertices();
@@ -378,8 +372,8 @@ public class WB_IsoSurface {
 	 */
 	private void mapvertices() {
 
-		vertexremaps = new TIntObjectHashMap<VertexRemap>(1024, 0.5f, -1);
-		valueremaps = new TIntDoubleHashMap(1024, 0.5f, -1, Double.NaN);
+		vertexremaps = new IntObjectHashMap<VertexRemap>();
+		valueremaps = new IntDoubleHashMap();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy, cz - 0.5 * resz * dz);
 		if (Double.isNaN(boundary)) {
 			for (int i = 0; i < resx; i++) {
@@ -421,7 +415,7 @@ public class WB_IsoSurface {
 	 */
 	private void polygonise() {
 
-		tris = new FastTable<WB_Triangle>();
+		tris = new FastList<WB_Triangle>();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy, cz - 0.5 * resz * dz);
 		if (Double.isNaN(boundary)) {
 			for (int i = 0; i < resx; i++) {
@@ -1035,7 +1029,7 @@ public class WB_IsoSurface {
 	 */
 	private double value(final int i, final int j, final int k) {
 		if (valueremaps != null) {
-			double val = valueremaps.get(index(i, j, k));
+			double val = valueremaps.getIfAbsent(index(i, j, k), Double.NaN);
 			if (!Double.isNaN(val)) {
 				return isolevel;
 			}

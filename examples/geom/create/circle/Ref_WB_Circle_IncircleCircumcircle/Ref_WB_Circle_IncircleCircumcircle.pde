@@ -28,6 +28,7 @@ void draw() {
   background(55);
   translate(400,400);
   noFill();
+  strokeWeight(2);
   stroke(255, 0, 0);
   render.drawCircle2D(incircle);
   render.drawCircle2D(circumcircle);

@@ -1,19 +1,14 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 
 /**
@@ -50,7 +45,7 @@ public class WB_Polygon extends WB_Ring {
 	public WB_Polygon(final Collection<? extends WB_Coord> points) {
 		numberOfPoints = points.size();
 		numberOfShellPoints = points.size();
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : points) {
 			this.points.add(new WB_Point(p));
 		}
@@ -67,7 +62,7 @@ public class WB_Polygon extends WB_Ring {
 	public WB_Polygon(final WB_Coord... points) {
 		numberOfPoints = points.length;
 		numberOfShellPoints = points.length;
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : points) {
 			this.points.add(new WB_Point(p));
 		}
@@ -88,7 +83,7 @@ public class WB_Polygon extends WB_Ring {
 		final ArrayList<WB_Coord> tmp = new ArrayList<WB_Coord>();
 		tmp.addAll(points);
 		tmp.addAll(innerpoints);
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : tmp) {
 			this.points.add(new WB_Point(p));
 		}
@@ -113,7 +108,7 @@ public class WB_Polygon extends WB_Ring {
 		for (final WB_Coord p : innerpoints) {
 			tmp.add(p);
 		}
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : tmp) {
 			this.points.add(new WB_Point(p));
 		}
@@ -146,7 +141,7 @@ public class WB_Polygon extends WB_Ring {
 			numberOfPointsPerContour[i++] = hole.size();
 			numberOfPoints += hole.size();
 		}
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : tmp) {
 			this.points.add(new WB_Point(p));
 		}
@@ -177,7 +172,7 @@ public class WB_Polygon extends WB_Ring {
 			numberOfPointsPerContour[i++] = hole.length;
 			numberOfPoints += hole.length;
 		}
-		this.points = new FastTable<WB_Point>();
+		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : tmp) {
 			this.points.add(new WB_Point(p));
 		}
@@ -188,7 +183,7 @@ public class WB_Polygon extends WB_Ring {
 	 *
 	 */
 	private void calculateDirections() {
-		directions = new FastTable<WB_Vector>();
+		directions = new FastList<WB_Vector>();
 		incLengths = new double[numberOfPoints];
 		int offset = 0;
 		for (int j = 0; j < numberOfContours; j++) {
@@ -446,7 +441,7 @@ public class WB_Polygon extends WB_Ring {
 	 * @return
 	 */
 	public WB_Polygon toPolygon2D() {
-		final List<WB_Point> shellpoints = new FastTable<WB_Point>();
+		final List<WB_Point> shellpoints = new FastList<WB_Point>();
 		final WB_Plane P = getPlane(0);
 		final WB_PlanarMap EP = new WB_PlanarMap(P);
 		for (int i = 0; i < numberOfShellPoints; i++) {
@@ -458,10 +453,10 @@ public class WB_Polygon extends WB_Ring {
 			return new WB_Polygon(shellpoints);
 		} else {
 			@SuppressWarnings("unchecked")
-			final List<WB_Point>[] holepoints = new FastTable[numberOfContours - 1];
+			final List<WB_Point>[] holepoints = new FastList[numberOfContours - 1];
 			int index = numberOfShellPoints;
 			for (int i = 0; i < numberOfContours - 1; i++) {
-				holepoints[i] = new FastTable<WB_Point>();
+				holepoints[i] = new FastList<WB_Point>();
 				for (int j = 0; j < numberOfPointsPerContour[i + 1]; j++) {
 					final WB_Point p2D = new WB_Point();
 					EP.mapPoint3D(points.get(index++), p2D);
@@ -478,7 +473,7 @@ public class WB_Polygon extends WB_Ring {
 	 * @return
 	 */
 	public WB_Polygon toPolygon2DOrtho() {
-		final List<WB_Point> shellpoints = new FastTable<WB_Point>();
+		final List<WB_Point> shellpoints = new FastList<WB_Point>();
 		final WB_Plane P = getPlane(0);
 		final WB_OrthoProject OP = new WB_OrthoProject(P);
 		for (int i = 0; i < numberOfShellPoints; i++) {
@@ -490,10 +485,10 @@ public class WB_Polygon extends WB_Ring {
 			return new WB_Polygon(shellpoints);
 		} else {
 			@SuppressWarnings("unchecked")
-			final List<WB_Point>[] holepoints = new FastTable[numberOfContours - 1];
+			final List<WB_Point>[] holepoints = new FastList[numberOfContours - 1];
 			int index = numberOfShellPoints;
 			for (int i = 0; i < numberOfContours - 1; i++) {
-				holepoints[i] = new FastTable<WB_Point>();
+				holepoints[i] = new FastList<WB_Point>();
 				for (int j = 0; j < numberOfPointsPerContour[i + 1]; j++) {
 					final WB_Point p2D = new WB_Point();
 					OP.mapPoint3D(points.get(index++), p2D);
@@ -614,7 +609,7 @@ public class WB_Polygon extends WB_Ring {
 	 * @return
 	 */
 	public WB_Polygon negate() {
-		final List<WB_Point> shellpoints = new FastTable<WB_Point>();
+		final List<WB_Point> shellpoints = new FastList<WB_Point>();
 		for (int i = numberOfShellPoints - 1; i >= 0; i--) {
 			shellpoints.add(new WB_Point(points.get(i)));
 		}
@@ -622,10 +617,10 @@ public class WB_Polygon extends WB_Ring {
 			return new WB_Polygon(shellpoints);
 		} else {
 			@SuppressWarnings("unchecked")
-			final List<WB_Point>[] holepoints = new FastTable[numberOfContours - 1];
+			final List<WB_Point>[] holepoints = new FastList[numberOfContours - 1];
 			int index = numberOfShellPoints;
 			for (int i = 0; i < numberOfContours - 1; i++) {
-				holepoints[i] = new FastTable<WB_Point>();
+				holepoints[i] = new FastList<WB_Point>();
 				for (int j = numberOfPointsPerContour[i + 1] - 1; j >= 0; j--) {
 					holepoints[i].add(new WB_Point(points.get(index++)));
 				}
@@ -718,7 +713,7 @@ public class WB_Polygon extends WB_Ring {
 	 * @return
 	 */
 	public List<WB_Segment> toSegments() {
-		final List<WB_Segment> segments = new FastTable<WB_Segment>();
+		final List<WB_Segment> segments = new FastList<WB_Segment>();
 		for (int i = 0, j = this.numberOfShellPoints - 1; i < this.numberOfShellPoints; j = i, i++) {
 			segments.add(new WB_Segment(getPoint(j), getPoint(i)));
 		}

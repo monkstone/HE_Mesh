@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
@@ -23,7 +18,7 @@ import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 import com.vividsolutions.jts.triangulate.quadedge.QuadEdgeSubdivision;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  *
@@ -1153,11 +1148,11 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		for (int i = 0; i < npolys; i++) {
 			final Polygon poly = (Polygon) polys.getGeometryN(i);
 			final Coordinate[] polycoord = poly.getCoordinates();
-			final List<WB_Coord> polypoints = new FastTable<WB_Coord>();
+			final List<WB_Coord> polypoints = new FastList<WB_Coord>();
 			for (final Coordinate element : polycoord) {
 				polypoints.add(toPoint(element.x, element.y, context));
 			}
@@ -1187,7 +1182,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] coordsArray = new Coordinate[coords.size()];
 		coordsArray = coords.toArray(coordsArray);
 		for (int i = 0; i < npolys; i++) {
@@ -1200,7 +1195,7 @@ class WB_Voronoi2D {
 						&& !intersect.getGeometryN(j).isEmpty()) {
 					poly = (Polygon) intersect.getGeometryN(j);
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
 					}
@@ -1227,7 +1222,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] coordsArray = new Coordinate[coords.size()];
 		coordsArray = coords.toArray(coordsArray);
 		final ConvexHull ch = new ConvexHull(coordsArray, new GeometryFactory());
@@ -1241,7 +1236,7 @@ class WB_Voronoi2D {
 						&& !intersect.getGeometryN(j).isEmpty()) {
 					poly = (Polygon) intersect.getGeometryN(j);
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
 					}
@@ -1271,7 +1266,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] coordsArray = new Coordinate[coords.size()];
 		coordsArray = coords.toArray(coordsArray);
 		final ConvexHull ch = new ConvexHull(coordsArray, new GeometryFactory());
@@ -1286,7 +1281,7 @@ class WB_Voronoi2D {
 						&& !intersect.getGeometryN(j).isEmpty()) {
 					poly = (Polygon) intersect.getGeometryN(j);
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
 					}
@@ -1317,7 +1312,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] bdcoordsArray = new Coordinate[bdcoords.size()];
 		bdcoordsArray = bdcoords.toArray(bdcoordsArray);
 		final Polygon hull = new GeometryFactory().createPolygon(bdcoordsArray);
@@ -1331,7 +1326,7 @@ class WB_Voronoi2D {
 					poly = (Polygon) intersect.getGeometryN(j);
 
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
 					}
@@ -1362,7 +1357,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 
 		final Polygon hull = geometryfactory.toJTSPolygon2D(constraint);
 		for (int i = 0; i < npolys; i++) {
@@ -1375,7 +1370,7 @@ class WB_Voronoi2D {
 					poly = (Polygon) intersect.getGeometryN(j);
 
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
 					}
@@ -1406,7 +1401,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 
 		final Geometry hull = geometryfactory.toJTSMultiPolygon2D(constraint);
 		for (int i = 0; i < npolys; i++) {
@@ -1419,7 +1414,7 @@ class WB_Voronoi2D {
 					poly = (Polygon) intersect.getGeometryN(j);
 
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
 					}
@@ -1452,7 +1447,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] bdcoordsArray = new Coordinate[bdcoords.size()];
 		bdcoordsArray = bdcoords.toArray(bdcoordsArray);
 		final Polygon hull = new GeometryFactory().createPolygon(bdcoordsArray);
@@ -1467,7 +1462,7 @@ class WB_Voronoi2D {
 					poly = (Polygon) intersect.getGeometryN(j);
 
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					;
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
@@ -1501,7 +1496,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		final Polygon hull = geometryfactory.toJTSPolygon2D(constraint);
 		for (int i = 0; i < npolys; i++) {
 			Polygon poly = (Polygon) polys.getGeometryN(i);
@@ -1514,7 +1509,7 @@ class WB_Voronoi2D {
 					poly = (Polygon) intersect.getGeometryN(j);
 
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					;
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));
@@ -1538,7 +1533,7 @@ class WB_Voronoi2D {
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
 		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
 		final int npolys = polys.getNumGeometries();
-		final List<WB_VoronoiCell2D> result = new FastTable<WB_VoronoiCell2D>();
+		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		final Geometry hull = geometryfactory.toJTSMultiPolygon2D(constraint);
 		for (int i = 0; i < npolys; i++) {
 			Polygon poly = (Polygon) polys.getGeometryN(i);
@@ -1551,7 +1546,7 @@ class WB_Voronoi2D {
 					poly = (Polygon) intersect.getGeometryN(j);
 
 					final Coordinate[] polycoord = poly.getCoordinates();
-					final List<WB_Point> polypoints = new FastTable<WB_Point>();
+					final List<WB_Point> polypoints = new FastList<WB_Point>();
 					;
 					for (final Coordinate element : polycoord) {
 						polypoints.add(toPoint(element.x, element.y, context));

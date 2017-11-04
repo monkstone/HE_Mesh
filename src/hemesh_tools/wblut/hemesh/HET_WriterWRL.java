@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.BufferedOutputStream;
@@ -17,8 +12,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-import gnu.trove.map.TLongIntMap;
-import gnu.trove.map.hash.TLongIntHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
 
 /**
  *
@@ -61,7 +55,7 @@ public class HET_WriterWRL {
 			out.write("\t\tcoord  DEF AllCoords Coordinate {\n".getBytes());
 			out.write("\t\tpoint [\n".getBytes());
 			// list vertices coordinates
-			final TLongIntMap vertexKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+			final LongIntHashMap vertexKeys = new LongIntHashMap();
 			int counter = 0;
 			final HE_VertexIterator vItr = mesh.vItr();
 			HE_Vertex v;
@@ -202,7 +196,7 @@ public class HET_WriterWRL {
 			out.write("\t\tcoord  DEF AllCoords Coordinate {\n".getBytes());
 			out.write("\t\tpoint [\n".getBytes());
 			// list vertices coordinates
-			final TLongIntMap vertexKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+			final LongIntHashMap vertexKeys = new LongIntHashMap();
 			int counter = 0;
 			final HE_VertexIterator vItr = mesh.vItr();
 			HE_Vertex v;
@@ -289,7 +283,7 @@ public class HET_WriterWRL {
 			out.write("\t\tcoord  DEF AllCoords Coordinate {\n".getBytes());
 			out.write("\t\tpoint [\n".getBytes());
 			// list vertices coordinates
-			final TLongIntMap vertexKeys = new TLongIntHashMap(10, 0.5f, -1L, -1);
+			final LongIntHashMap vertexKeys = new LongIntHashMap();
 			int counter = 0;
 			HE_VertexIterator vItr = mesh.vItr();
 			HE_Vertex v;

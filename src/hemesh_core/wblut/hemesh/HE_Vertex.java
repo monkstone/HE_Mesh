@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_CoordinateSystem3D;
@@ -265,7 +260,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return halfedges
 	 */
 	public List<HE_Halfedge> getHalfedgeStar() {
-		final List<HE_Halfedge> vhe = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> vhe = new FastList<HE_Halfedge>();
 		if (getHalfedge() == null) {
 			return vhe;
 		}
@@ -286,7 +281,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return edges
 	 */
 	public List<HE_Halfedge> getEdgeStar() {
-		final List<HE_Halfedge> ve = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> ve = new FastList<HE_Halfedge>();
 		if (getHalfedge() == null) {
 			return ve;
 		}
@@ -312,7 +307,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return faces
 	 */
 	public List<HE_Face> getFaceStar() {
-		final List<HE_Face> vf = new FastTable<HE_Face>();
+		final List<HE_Face> vf = new FastList<HE_Face>();
 		if (getHalfedge() == null) {
 			return vf;
 		}
@@ -334,7 +329,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return neighbors
 	 */
 	public List<HE_Vertex> getNeighborVertices() {
-		final List<HE_Vertex> vv = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> vv = new FastList<HE_Vertex>();
 		if (getHalfedge() == null) {
 			return vv;
 		}
@@ -364,7 +359,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return
 	 */
 	public List<HE_Vertex> getNextNeighborVertices() {
-		final List<HE_Vertex> result = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> result = new FastList<HE_Vertex>();
 		if (getHalfedge() == null) {
 			return result;
 		}
@@ -389,7 +384,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return the neighbors as points
 	 */
 	public WB_Coord[] getNeighborsAsPoints() {
-		final WB_Coord[] vv = new WB_Coord[getVertexOrder()];
+		final WB_Coord[] vv = new WB_Coord[getVertexDegree()];
 		if (getHalfedge() == null) {
 			return vv;
 		}
@@ -408,7 +403,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @return number of edges
 	 */
-	public int getVertexOrder() {
+	public int getVertexDegree() {
 		int result = 0;
 		if (getHalfedge() == null) {
 			return 0;
@@ -427,20 +422,25 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * @return area
 	 */
 	public double getVertexArea() {
-		if (getHalfedge() == null) {
-			return 0;
-		}
-		double result = 0;
-		int n = 0;
-		HE_Halfedge he = getHalfedge();
-		do {
-			if (he.getFace() != null) {
-				result += he.getFace().getFaceArea();
-				n++;
-			}
-			he = he.getNextInVertex();
-		} while (he != getHalfedge());
-		return result / n;
+		return HET_MeshOp.getVertexArea(this);
+	}
+
+	/**
+	 * Get the barycentric dual area. Triangles only.
+	 *
+	 * @return
+	 */
+	public double getBarycentricDualArea() {
+		return HET_MeshOp.getBarycentricDualVertexArea(this);
+	}
+
+	/**
+	 * Get the circumcentric dual area. Triangles only.
+	 *
+	 * @return
+	 */
+	public double getCircumcentricDualArea() {
+		return HET_MeshOp.getCircumcentricDualVertexArea(this);
 	}
 
 	/**
@@ -457,6 +457,11 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 			he = he.getNextInVertex();
 		} while (he != _halfedge);
 		return false;
+	}
+
+	public boolean isIsolated() {
+
+		return _halfedge == null;
 	}
 
 	/*
@@ -674,8 +679,8 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @return
 	 */
-	public WB_Coord getVertexAverageNormal() {
-		return HET_MeshOp.getVertexAverageNormal(this);
+	public WB_Coord getVertexNormalAverage() {
+		return HET_MeshOp.getVertexNormalAverage(this);
 	}
 
 	/**
@@ -683,8 +688,8 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @return
 	 */
-	public WB_Coord getVertexAreaNormal() {
-		return HET_MeshOp.getVertexAreaNormal(this);
+	public WB_Coord getVertexNormalArea() {
+		return HET_MeshOp.getVertexNormalArea(this);
 	}
 
 	/**
@@ -692,8 +697,38 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @return
 	 */
-	public WB_Coord getVertexAngleNormal() {
-		return HET_MeshOp.getVertexAngleNormal(this);
+	public WB_Coord getVertexNormalAngle() {
+		return HET_MeshOp.getVertexNormalAngle(this);
+
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public WB_Coord getVertexNormalGaussCurvature() {
+		return HET_MeshOp.getVertexNormalGaussCurvature(this);
+
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public WB_Coord getVertexNormalMeanCurvature() {
+		return HET_MeshOp.getVertexNormalMeanCurvature(this);
+
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public WB_Coord getVertexNormalSphereInscribed() {
+		return HET_MeshOp.getVertexNormalSphereInscribed(this);
 
 	}
 
@@ -728,8 +763,8 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @return
 	 */
-	public double getGaussianCurvature() {
-		return HET_MeshOp.getGaussianCurvature(this);
+	public double getGaussCurvature() {
+		return HET_MeshOp.getGaussCurvature(this);
 	}
 
 	/**
@@ -774,6 +809,33 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 */
 	public double getUmbrellaAngle() {
 		return HET_MeshOp.getUmbrellaAngle(this);
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public double getAngleDefect() {
+		return HET_MeshOp.getAngleDefect(this);
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public double getScalarGaussCurvature() {
+		return HET_MeshOp.getScalarGaussCurvature(this);
+	}
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public double getScalarMeanCurvature() {
+		return HET_MeshOp.getScalarMeanCurvature(this);
 	}
 
 	/**
@@ -1031,15 +1093,6 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 
 		}
 
-	}
-
-	/**
-	 *
-	 *
-	 * @return
-	 */
-	public double getAngularDefect() {
-		return 2 * Math.PI - getUmbrellaAngle();
 	}
 
 	public boolean isNeighbor(final HE_Vertex v) {
@@ -2632,7 +2685,6 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * wblut.geom.WB_CoordinateMetric#getDistance3D(wblut.geom.WB_Coordinate)
 	 */
 
-	@Deprecated
 	@Override
 	/**
 	 *
@@ -2661,7 +2713,6 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * wblut.geom.WB_CoordinateMetric#getSqDistance3D(wblut.geom.WB_Coordinate)
 	 */
 
-	@Deprecated
 	@Override
 	/**
 	 *
@@ -2688,10 +2739,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @see wblut.geom.WB_CoordinateMetric#getLength3D()
 	 */
-	/**
-	 * @deprecated Use {@link #getLength()} instead
-	 */
-	@Deprecated
+
 	@Override
 	public double getLength3D() {
 		return getLength();
@@ -2712,10 +2760,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @see wblut.geom.WB_CoordinateMetric#getSqLength3D()
 	 */
-	/**
-	 * @deprecated Use {@link #getSqLength()} instead
-	 */
-	@Deprecated
+
 	@Override
 	public double getSqLength3D() {
 		return getSqLength();
@@ -2757,10 +2802,6 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 *
 	 * @see wblut.geom.WB_CoordinateMetric#getOrthoNormal3D()
 	 */
-	/**
-	 * @deprecated Use {@link #getOrthoNormal()} instead
-	 */
-	@Deprecated
 	@Override
 	public WB_Vector getOrthoNormal3D() {
 		return getOrthoNormal();
@@ -2996,8 +3037,8 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 */
 	@Override
 	public String toString() {
-		return "HE_Vertex key: " + key() + " [x=" + xd() + ", y=" + yd() + ", z=" + zd() + "]" + " (" + getLabel() + ","
-				+ getInternalLabel() + ")";
+		return "HE_Vertex key: " + key() + " [x=" + xd() + ", y=" + yd() + ", z=" + zd() + "]" + " (" + getUserLabel()
+				+ "," + getInternalLabel() + ")";
 	}
 
 	@Override

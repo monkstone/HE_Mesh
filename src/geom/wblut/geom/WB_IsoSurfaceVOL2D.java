@@ -1,6 +1,6 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
+ * http://creativecommons.org/publicdomain/zero/1.0/
+
  * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
  * rights.
  *
@@ -16,9 +16,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_ScalarParameter;
 
@@ -103,16 +103,16 @@ public class WB_IsoSurfaceVOL2D {
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> xedges;
+	private IntObjectHashMap<WB_Point> xedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> yedges;
+	private IntObjectHashMap<WB_Point> yedges;
 
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> vertices;
+	private IntObjectHashMap<WB_Point> vertices;
 
 	/**
 	 *
@@ -476,11 +476,11 @@ public class WB_IsoSurfaceVOL2D {
 	 * Polygonise.
 	 */
 	private void polygonise() {
-		xedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		yedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		vertices = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
+		xedges = new IntObjectHashMap<WB_Point>();
+		yedges = new IntObjectHashMap<WB_Point>();
+		vertices = new IntObjectHashMap<WB_Point>();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy);
-		triangles = new FastTable<WB_Triangle>();
+		triangles = new FastList<WB_Triangle>();
 		for (int i = 0; i < resx; i++) {
 
 			for (int j = 0; j < resy; j++) {

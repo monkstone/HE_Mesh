@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 
 /**
@@ -144,7 +139,7 @@ public class WB_Ring extends WB_PolyLine {
 	 *
 	 */
 	private void getDirections() {
-		directions = new FastTable<WB_Vector>();
+		directions = new FastList<WB_Vector>();
 		incLengths = new double[numberOfPoints];
 		for (int i = 0; i < numberOfPoints; i++) {
 			final int in = (i + 1) % numberOfPoints;
@@ -255,7 +250,7 @@ public class WB_Ring extends WB_PolyLine {
 	 */
 	@Override
 	public WB_Ring apply(final WB_Transform T) {
-		FastTable<WB_Point> tpoints = new FastTable<WB_Point>();
+		FastList<WB_Point> tpoints = new FastList<WB_Point>();
 		for (WB_Point p : points) {
 			tpoints.add(p.applyAsPoint(T));
 		}

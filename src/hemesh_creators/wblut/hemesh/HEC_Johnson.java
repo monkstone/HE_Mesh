@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.data.WB_JohnsonPolyhedraData01;
@@ -53,7 +48,7 @@ public class HEC_Johnson extends HEC_Creator {
 		super();
 		R = E;
 		this.type = type;
-		if ((type < 1) || (type > 92)) {
+		if (type < 1 || type > 92) {
 			throw new IllegalArgumentException("Type of Johnson polyhedron should be between 1 and 92.");
 		}
 		if (type < 24) {
@@ -88,7 +83,7 @@ public class HEC_Johnson extends HEC_Creator {
 	 * @return self
 	 */
 	public HEC_Johnson setType(final int type) {
-		if ((type < 1) || (type > 92)) {
+		if (type < 1 || type > 92) {
 			throw new IllegalArgumentException("Type of Johnson polyhedron should be between 1 and 92.");
 		}
 		this.type = type;
@@ -110,7 +105,7 @@ public class HEC_Johnson extends HEC_Creator {
 	 * @return the name
 	 */
 	public String getName() {
-		return (name);
+		return name;
 	}
 
 	/*

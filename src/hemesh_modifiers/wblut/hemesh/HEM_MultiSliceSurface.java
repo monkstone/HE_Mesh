@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -28,9 +23,9 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 	/** Cut planes. */
 	private ArrayList<WB_Plane> planes;
 	/** Store cut faces. */
-	public HE_Selection cutFaces;
+	private HE_Selection cutFaces;
 	/** The new edges. */
-	public HE_Selection newEdges;
+	private HE_Selection newEdges;
 	/** The offset. */
 	private double offset;
 
@@ -113,9 +108,7 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 
 				slice.setPlane(Pi).setOffset(offset);
 				slice.applySelf(mesh);
-				cutFaces.add(slice.cutFaces);
-
-				newEdges.add(slice.newEdges);
+				cutFaces.add(mesh.getSelection("cuts"));
 
 			}
 		}
@@ -130,11 +123,13 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 				if (WB_GeometryOp.classifySegmentToPlane3D(he.getVertex(), he.getEndVertex(),
 						planes.get(i)) == WB_Classification.ON) {
 					he.setInternalLabel(1);
-					newEdges.add(he);
+					newEdges.addEdge(he);
 					break;
 				}
 			}
 		}
+		mesh.addSelection("cuts", cutFaces);
+		mesh.addSelection("edges", newEdges);
 		return mesh;
 	}
 
@@ -170,7 +165,9 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 
 				slice.setPlane(Pi).setOffset(offset);
 				slice.apply(selection);
-				cutFaces.add(slice.cutFaces);
+				if (selection.parent.getSelection("cuts") != null) {
+					cutFaces.add(selection.parent.getSelection("cuts"));
+				}
 			}
 		}
 		selection.parent.resetEdgeInternalLabels();
@@ -184,11 +181,13 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 				if (WB_GeometryOp.classifySegmentToPlane3D(he.getVertex(), he.getEndVertex(),
 						planes.get(i)) == WB_Classification.ON) {
 					he.setInternalLabel(1);
-					newEdges.add(he);
+					newEdges.addEdge(he);
 					break;
 				}
 			}
 		}
+		selection.parent.addSelection("cuts", cutFaces);
+		selection.parent.addSelection("edges", newEdges);
 		return selection.parent;
 	}
 }

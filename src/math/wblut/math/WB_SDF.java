@@ -1,6 +1,3 @@
-/**
- *
- */
 package wblut.math;
 
 import wblut.geom.WB_Coord;

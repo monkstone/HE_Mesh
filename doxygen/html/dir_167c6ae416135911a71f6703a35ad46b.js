@@ -45,6 +45,9 @@ var dir_167c6ae416135911a71f6703a35ad46b =
     [ "HEM_FaceExpand.java", "_h_e_m___face_expand_8java.html", [
       [ "HEM_FaceExpand", "classwblut_1_1hemesh_1_1_h_e_m___face_expand.html", "classwblut_1_1hemesh_1_1_h_e_m___face_expand" ]
     ] ],
+    [ "HEM_FlatExtrude.java", "_h_e_m___flat_extrude_8java.html", [
+      [ "HEM_FlatExtrude", "classwblut_1_1hemesh_1_1_h_e_m___flat_extrude.html", "classwblut_1_1hemesh_1_1_h_e_m___flat_extrude" ]
+    ] ],
     [ "HEM_FlipFaces.java", "_h_e_m___flip_faces_8java.html", [
       [ "HEM_FlipFaces", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces.html", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces" ]
     ] ],
@@ -89,9 +92,6 @@ var dir_167c6ae416135911a71f6703a35ad46b =
     ] ],
     [ "HEM_PunchHoles.java", "_h_e_m___punch_holes_8java.html", [
       [ "HEM_PunchHoles", "classwblut_1_1hemesh_1_1_h_e_m___punch_holes.html", "classwblut_1_1hemesh_1_1_h_e_m___punch_holes" ]
-    ] ],
-    [ "HEM_QuadSplit.java", "_h_e_m___quad_split_8java.html", [
-      [ "HEM_QuadSplit", "classwblut_1_1hemesh_1_1_h_e_m___quad_split.html", "classwblut_1_1hemesh_1_1_h_e_m___quad_split" ]
     ] ],
     [ "HEM_RemoveParts.java", "_h_e_m___remove_parts_8java.html", [
       [ "HEM_RemoveParts", "classwblut_1_1hemesh_1_1_h_e_m___remove_parts.html", "classwblut_1_1hemesh_1_1_h_e_m___remove_parts" ]

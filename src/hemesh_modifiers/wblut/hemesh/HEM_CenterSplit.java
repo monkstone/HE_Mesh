@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 /**
@@ -23,11 +18,6 @@ public class HEM_CenterSplit extends HEM_Modifier {
 	 *
 	 */
 	private double c;
-
-	/**
-	 *
-	 */
-	private HE_Selection selectionOut;
 
 	/**
 	 *
@@ -70,8 +60,8 @@ public class HEM_CenterSplit extends HEM_Modifier {
 		tracker.setStartStatus(this, "Starting HEC_CenterSplit.");
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
 		mesh.modify(ext);
-		selectionOut = ext.extruded;
 		tracker.setStopStatus(this, "Exiting HEC_CenterSplit.");
+		mesh.renameSelection("extruded", "center");
 		return mesh;
 	}
 
@@ -85,17 +75,10 @@ public class HEM_CenterSplit extends HEM_Modifier {
 		tracker.setStartStatus(this, "Starting HEC_CenterSplit.");
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
 		selection.modify(ext);
-		selectionOut = ext.extruded;
+
 		tracker.setStopStatus(this, "Exiting HEC_CenterSplit.");
+		selection.parent.renameSelection("extruded", "center");
 		return selection.parent;
 	}
 
-	/**
-	 *
-	 *
-	 * @return
-	 */
-	public HE_Selection getCenterFaces() {
-		return this.selectionOut;
-	}
 }

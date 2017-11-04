@@ -1,18 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 package wblut.geom;
 
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  *
@@ -20,7 +14,7 @@ import javolution.util.FastTable;
  * @author Frederik Vanhoutte
  *
  */
-public class WB_CoordCollection {
+public abstract class WB_CoordCollection {
 
 	private WB_CoordCollection() {
 
@@ -28,6 +22,10 @@ public class WB_CoordCollection {
 
 	public static WB_CoordCollection getCollection(final WB_Coord[] coords) {
 		return new WB_CoordCollectionArray(coords);
+	}
+
+	public static WB_CoordCollection getCollection(final WB_Polygon polygon) {
+		return new WB_CoordCollectionPolygon(polygon);
 	}
 
 	public static WB_CoordCollection getCollection(final WB_PointGenerator generator, final int n) {
@@ -90,20 +88,21 @@ public class WB_CoordCollection {
 
 		@Override
 		public List<WB_Coord> toList() {
-			List<WB_Coord> list = new FastTable<WB_Coord>();
+			List<WB_Coord> list = new FastList<WB_Coord>();
 			for (WB_Coord c : array) {
 				list.add(c);
 			}
 
 			return list;
 		}
+
 	}
 
 	static class WB_CoordCollectionList extends WB_CoordCollection {
 		List<WB_Coord> list;
 
 		WB_CoordCollectionList(final Collection<? extends WB_Coord> coords) {
-			this.list = new FastTable<WB_Coord>();
+			this.list = new FastList<WB_Coord>();
 			list.addAll(coords);
 		}
 
@@ -129,6 +128,44 @@ public class WB_CoordCollection {
 
 		@Override
 		public List<WB_Coord> toList() {
+
+			return list;
+		}
+	}
+
+	static class WB_CoordCollectionPolygon extends WB_CoordCollection {
+		WB_Polygon polygon;
+
+		WB_CoordCollectionPolygon(final WB_Polygon polygon) {
+			this.polygon = polygon;
+		}
+
+		@Override
+		public WB_Coord get(final int i) {
+			return polygon.getPoint(i);
+		}
+
+		@Override
+		public int size() {
+			return polygon.getNumberOfShellPoints();
+		}
+
+		@Override
+		public WB_Coord[] toArray() {
+			WB_Coord[] array = new WB_Coord[polygon.getNumberOfShellPoints()];
+			for (int i = 0; i < polygon.getNumberOfShellPoints(); i++) {
+				array[i] = polygon.getPoint(i);
+			}
+			return array;
+		}
+
+		@Override
+		public List<WB_Coord> toList() {
+
+			List<WB_Coord> list = new FastList<WB_Coord>();
+			for (int i = 0; i < polygon.getNumberOfShellPoints(); i++) {
+				list.add(polygon.getPoint(i));
+			}
 
 			return list;
 		}
@@ -169,7 +206,7 @@ public class WB_CoordCollection {
 
 		@Override
 		public List<WB_Coord> toList() {
-			List<WB_Coord> list = new FastTable<WB_Coord>();
+			List<WB_Coord> list = new FastList<WB_Coord>();
 			for (int i = 0; i < source.size(); i++) {
 				list.add(WB_Point.add(source.get(i), noise[i]));
 			}
@@ -210,7 +247,7 @@ public class WB_CoordCollection {
 
 		@Override
 		public List<WB_Coord> toList() {
-			List<WB_Coord> list = new FastTable<WB_Coord>();
+			List<WB_Coord> list = new FastList<WB_Coord>();
 			for (int i = 0; i < source.size(); i++) {
 				list.add(map.mapPoint3D(source.get(i)));
 			}
@@ -251,7 +288,7 @@ public class WB_CoordCollection {
 
 		@Override
 		public List<WB_Coord> toList() {
-			List<WB_Coord> list = new FastTable<WB_Coord>();
+			List<WB_Coord> list = new FastList<WB_Coord>();
 			for (int i = 0; i < source.size(); i++) {
 				list.add(map.unmapPoint3D(source.get(i)));
 			}
@@ -292,7 +329,7 @@ public class WB_CoordCollection {
 
 		@Override
 		public List<WB_Coord> toList() {
-			List<WB_Coord> list = new FastTable<WB_Coord>();
+			List<WB_Coord> list = new FastList<WB_Coord>();
 			for (int i = 0; i < source.size(); i++) {
 				list.add(map.unmapPoint2D(source.get(i)));
 			}

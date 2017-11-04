@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 /**
@@ -74,7 +69,7 @@ public class HEM_Diagrid extends HEM_Modifier {
 	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.collectEdgesByFace();
 		HET_MeshOp.splitFacesTri(selection);
-		final HE_RAS<HE_Halfedge> border = new HE_RAS.HE_RASTrove<HE_Halfedge>();
+		final HE_RAS<HE_Halfedge> border = new HE_RAS.HE_RASEC<HE_Halfedge>();
 		border.addAll(selection.getOuterEdges());
 		final HE_EdgeIterator eitr = selection.eItr();
 		HE_Halfedge e;

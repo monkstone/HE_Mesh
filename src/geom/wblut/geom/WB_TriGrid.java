@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
@@ -48,10 +43,10 @@ public class WB_TriGrid {
 	}
 
 	/**
-	 * 
 	 *
-	 * @param scale 
-	 * @return 
+	 *
+	 * @param scale
+	 * @return
 	 */
 	public WB_TriGrid setScale(final double scale) {
 		this.scale = scale;
@@ -66,15 +61,15 @@ public class WB_TriGrid {
 	 * @return
 	 */
 	public WB_Point getPoint(final int b, final int c) {
-		return new WB_Point(scale * ((c60 * c) + b), scale * s60 * c, 0);
+		return new WB_Point(scale * (c60 * c + b), scale * s60 * c, 0);
 	}
 
 	/**
 	 * http://www.voidinspace.com/2014/07/project-twa-part-1-generating-a-
 	 * hexagonal-tile-and-its-triangular-grid/
 	 *
-	 * @param level 
-	 * @return 
+	 * @param level
+	 * @return
 	 */
 	public WB_Mesh getHex(final int level) {
 		final double sin60 = Math.sin(Math.PI / 3);
@@ -109,7 +104,7 @@ public class WB_TriGrid {
 			for (int itR = row_min; itR <= row_max; itR++) {
 				final double y = inv_tan60 * x + RdS * itR;
 				vertices[vertices_index] = new WB_Point(x, y, 0);
-				if (vertices_index < (current_num_points - 1)) {
+				if (vertices_index < current_num_points - 1) {
 					if (itC >= col_min && itC < col_max) {
 						int pad_left = 0;
 						if (itC < 0) {
@@ -139,10 +134,10 @@ public class WB_TriGrid {
 	}
 
 	/**
-	 * 
 	 *
-	 * @param level 
-	 * @return 
+	 *
+	 * @param level
+	 * @return
 	 */
 	public List<WB_Polygon> getHexTriangles(final int level) {
 		final double rowDistance = scale;
@@ -181,7 +176,7 @@ public class WB_TriGrid {
 			for (int rowIndex = minRowIndex; rowIndex <= maxRowIndex; rowIndex++) {
 				final double y = it60 * x + rowDistance * rowIndex;
 				vertices[vid] = new WB_Point(x, y, 0);
-				if (vid < (pointCounter - 1)) {
+				if (vid < pointCounter - 1) {
 					if (columnIndex >= minColumnIndex && columnIndex < maxColumnIndex) {
 						int padLeft = 0;
 						if (columnIndex < 0) {
@@ -210,8 +205,8 @@ public class WB_TriGrid {
 		final List<WB_Polygon> triangles = new ArrayList<WB_Polygon>(faces.length);
 		for (int i = 0; i < faces.length; i++) {
 			final int[] face = faces[i];
-			triangles.add(
-					gf.createSimplePolygon(vertices[face[0]].copy(), vertices[face[1]].copy(), vertices[face[2]].copy()));
+			triangles.add(gf.createSimplePolygon(vertices[face[0]].copy(), vertices[face[1]].copy(),
+					vertices[face[2]].copy()));
 		}
 		return triangles;
 	}

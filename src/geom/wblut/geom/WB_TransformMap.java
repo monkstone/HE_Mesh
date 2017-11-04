@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 public class WB_TransformMap implements WB_Map {
@@ -27,7 +22,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapPoint3D(wblut.geom.WB_Coord,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -39,7 +34,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapPoint3D(double, double, double,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -51,7 +46,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapPoint3D(wblut.geom.WB_Coord,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -63,7 +58,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapPoint3D(double, double, double,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -75,7 +70,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapVector3D(wblut.geom.WB_Coord,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -87,7 +82,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapVector3D(double, double, double,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -99,7 +94,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapVector3D(wblut.geom.WB_Coord,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -111,7 +106,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapVector3D(double, double, double,
 	 * wblut.geom.WB_MutableCoord)
 	 */
@@ -123,7 +118,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapPoint3D(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -134,7 +129,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapPoint3D(double, double, double)
 	 */
 	@Override
@@ -145,7 +140,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapPoint3D(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -156,7 +151,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapPoint3D(double, double, double)
 	 */
 	@Override
@@ -167,7 +162,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapVector3D(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -178,7 +173,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#mapVector3D(double, double, double)
 	 */
 	@Override
@@ -189,7 +184,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapVector3D(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -200,7 +195,7 @@ public class WB_TransformMap implements WB_Map {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapVector3D(double, double, double)
 	 */
 	@Override

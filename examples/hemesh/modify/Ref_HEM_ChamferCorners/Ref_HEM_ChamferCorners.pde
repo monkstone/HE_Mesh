@@ -31,6 +31,9 @@ void draw() {
   fill(255);
   noStroke();
   render.drawFaces(mesh);
+  fill(255,0,0);
+  noStroke();
+  render.drawFaces(mesh.getSelection("chamfer"));
   stroke(0);
   render.drawEdges(mesh);
   //recreate mesh and modifier

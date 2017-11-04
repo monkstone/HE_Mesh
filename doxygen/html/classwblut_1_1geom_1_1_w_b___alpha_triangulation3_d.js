@@ -15,6 +15,6 @@ var classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d =
     [ "getTetrahedra", "classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d.html#af6f4350b7b83c5d5b3207733108f2e11", null ],
     [ "setAlpha", "classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d.html#a46d7f05ead0b6e315219dc17ebd81a3b", null ],
     [ "alpha", "classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d.html#aa5c00a4d966d16b8810ebb38154dc649", null ],
-    [ "points", "classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d.html#a1f9481cedd2fd4bb947773f867230fd4", null ],
+    [ "points", "classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d.html#a5db6628d19db7cc0abb910c627c48da0", null ],
     [ "tetrahedra", "classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d.html#a54fba7cab3472f9c7b4b90d060c7c7c5", null ]
 ];

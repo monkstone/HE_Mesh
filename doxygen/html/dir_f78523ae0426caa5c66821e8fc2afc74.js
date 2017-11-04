@@ -40,6 +40,15 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     [ "WB_CoordCollection.java", "_w_b___coord_collection_8java.html", [
       [ "WB_CoordCollection", "classwblut_1_1geom_1_1_w_b___coord_collection.html", "classwblut_1_1geom_1_1_w_b___coord_collection" ]
     ] ],
+    [ "WB_Coordinate.java", "_w_b___coordinate_8java.html", [
+      [ "WB_Coordinate", "classwblut_1_1geom_1_1_w_b___coordinate.html", "classwblut_1_1geom_1_1_w_b___coordinate" ]
+    ] ],
+    [ "WB_Coordinate2D.java", "_w_b___coordinate2_d_8java.html", [
+      [ "WB_Coordinate2D", "classwblut_1_1geom_1_1_w_b___coordinate2_d.html", "classwblut_1_1geom_1_1_w_b___coordinate2_d" ]
+    ] ],
+    [ "WB_Coordinate4D.java", "_w_b___coordinate4_d_8java.html", [
+      [ "WB_Coordinate4D", "classwblut_1_1geom_1_1_w_b___coordinate4_d.html", "classwblut_1_1geom_1_1_w_b___coordinate4_d" ]
+    ] ],
     [ "WB_CoordinateFull2D.java", "_w_b___coordinate_full2_d_8java.html", [
       [ "WB_CoordinateFull2D", "interfacewblut_1_1geom_1_1_w_b___coordinate_full2_d.html", null ]
     ] ],
@@ -81,6 +90,9 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     ] ],
     [ "WB_Danzer.java", "_w_b___danzer_8java.html", [
       [ "WB_Danzer", "classwblut_1_1geom_1_1_w_b___danzer.html", "classwblut_1_1geom_1_1_w_b___danzer" ]
+    ] ],
+    [ "WB_DefaultMap2D.java", "_w_b___default_map2_d_8java.html", [
+      [ "WB_DefaultMap2D", "classwblut_1_1geom_1_1_w_b___default_map2_d.html", "classwblut_1_1geom_1_1_w_b___default_map2_d" ]
     ] ],
     [ "WB_Earcut.java", "_w_b___earcut_8java.html", [
       [ "WB_Earcut", "classwblut_1_1geom_1_1_w_b___earcut.html", "classwblut_1_1geom_1_1_w_b___earcut" ]
@@ -235,6 +247,15 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     [ "WB_MutableCoord.java", "_w_b___mutable_coord_8java.html", [
       [ "WB_MutableCoord", "interfacewblut_1_1geom_1_1_w_b___mutable_coord.html", "interfacewblut_1_1geom_1_1_w_b___mutable_coord" ]
     ] ],
+    [ "WB_MutableCoordinate.java", "_w_b___mutable_coordinate_8java.html", [
+      [ "WB_MutableCoordinate", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html", "classwblut_1_1geom_1_1_w_b___mutable_coordinate" ]
+    ] ],
+    [ "WB_MutableCoordinate2D.java", "_w_b___mutable_coordinate2_d_8java.html", [
+      [ "WB_MutableCoordinate2D", "classwblut_1_1geom_1_1_w_b___mutable_coordinate2_d.html", "classwblut_1_1geom_1_1_w_b___mutable_coordinate2_d" ]
+    ] ],
+    [ "WB_MutableCoordinate4D.java", "_w_b___mutable_coordinate4_d_8java.html", [
+      [ "WB_MutableCoordinate4D", "classwblut_1_1geom_1_1_w_b___mutable_coordinate4_d.html", "classwblut_1_1geom_1_1_w_b___mutable_coordinate4_d" ]
+    ] ],
     [ "WB_MutableCoordinateFull2D.java", "_w_b___mutable_coordinate_full2_d_8java.html", [
       [ "WB_MutableCoordinateFull2D", "interfacewblut_1_1geom_1_1_w_b___mutable_coordinate_full2_d.html", null ]
     ] ],
@@ -322,6 +343,9 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     [ "WB_Predicates.java", "_w_b___predicates_8java.html", [
       [ "WB_Predicates", "classwblut_1_1geom_1_1_w_b___predicates.html", "classwblut_1_1geom_1_1_w_b___predicates" ]
     ] ],
+    [ "WB_PyramidFactory.java", "_w_b___pyramid_factory_8java.html", [
+      [ "WB_PyramidFactory", "classwblut_1_1geom_1_1_w_b___pyramid_factory.html", "classwblut_1_1geom_1_1_w_b___pyramid_factory" ]
+    ] ],
     [ "WB_Quad.java", "_w_b___quad_8java.html", [
       [ "WB_Quad", "classwblut_1_1geom_1_1_w_b___quad.html", "classwblut_1_1geom_1_1_w_b___quad" ]
     ] ],
@@ -381,24 +405,6 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     ] ],
     [ "WB_ShapeReader.java", "_w_b___shape_reader_8java.html", [
       [ "RingTree", "classwblut_1_1geom_1_1_w_b___shape_reader_1_1_ring_tree.html", null ]
-    ] ],
-    [ "WB_SimpleCoordinate.java", "_w_b___simple_coordinate_8java.html", [
-      [ "WB_SimpleCoordinate", "classwblut_1_1geom_1_1_w_b___simple_coordinate.html", "classwblut_1_1geom_1_1_w_b___simple_coordinate" ]
-    ] ],
-    [ "WB_SimpleCoordinate2D.java", "_w_b___simple_coordinate2_d_8java.html", [
-      [ "WB_SimpleCoordinate2D", "classwblut_1_1geom_1_1_w_b___simple_coordinate2_d.html", "classwblut_1_1geom_1_1_w_b___simple_coordinate2_d" ]
-    ] ],
-    [ "WB_SimpleCoordinate4D.java", "_w_b___simple_coordinate4_d_8java.html", [
-      [ "WB_SimpleCoordinate4D", "classwblut_1_1geom_1_1_w_b___simple_coordinate4_d.html", "classwblut_1_1geom_1_1_w_b___simple_coordinate4_d" ]
-    ] ],
-    [ "WB_SimpleVector.java", "_w_b___simple_vector_8java.html", [
-      [ "WB_SimpleVector", "classwblut_1_1geom_1_1_w_b___simple_vector.html", "classwblut_1_1geom_1_1_w_b___simple_vector" ]
-    ] ],
-    [ "WB_SimpleVector2D.java", "_w_b___simple_vector2_d_8java.html", [
-      [ "WB_SimpleVector2D", "classwblut_1_1geom_1_1_w_b___simple_vector2_d.html", "classwblut_1_1geom_1_1_w_b___simple_vector2_d" ]
-    ] ],
-    [ "WB_SimpleVector4D.java", "_w_b___simple_vector4_d_8java.html", [
-      [ "WB_SimpleVector4D", "classwblut_1_1geom_1_1_w_b___simple_vector4_d.html", "classwblut_1_1geom_1_1_w_b___simple_vector4_d" ]
     ] ],
     [ "WB_Sphere.java", "_w_b___sphere_8java.html", [
       [ "WB_Sphere", "classwblut_1_1geom_1_1_w_b___sphere.html", "classwblut_1_1geom_1_1_w_b___sphere" ]

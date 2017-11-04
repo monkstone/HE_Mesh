@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Polygon;
 
@@ -115,8 +110,8 @@ public class HEC_FromPolygons extends HEC_Creator {
 		if (polygons != null) {
 			if (polygons.length > 0) {
 				final int nq = polygons.length;
-				final FastTable<WB_Coord> vertices = new FastTable<WB_Coord>();
-				final FastTable<int[]> faces = new FastTable<int[]>();
+				final FastList<WB_Coord> vertices = new FastList<WB_Coord>();
+				final FastList<int[]> faces = new FastList<int[]>();
 				int id = 0;
 				for (int i = 0; i < nq; i++) {
 					WB_Polygon poly = polygons[i];

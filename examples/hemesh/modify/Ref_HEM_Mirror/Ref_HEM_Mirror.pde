@@ -39,11 +39,15 @@ void draw() {
   rotateX(0.25*TWO_PI);
   fill(255);
   noStroke();
-  render.drawFaces(mesh);
+  render.drawFaces(mesh.getSelection("mirror0"));
+  fill(255,0,0);
+  noStroke();
+  render.drawFaces(mesh.getSelection("mirror1"));
   noFill();
   stroke(0);
   render.drawEdges(mesh);
   stroke(255, 0, 0);
+  render.drawEdges(mesh.getSelection("edges"));
   render.drawPlane(P, 300);
   render.drawPlane(P2, 300);
   render.drawPlane(P3, 300);

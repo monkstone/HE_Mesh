@@ -1,19 +1,16 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
+import java.util.Set;
 
-import gnu.trove.map.hash.TLongLongHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
+
 import wblut.core.WB_ProgressCounter;
-import wblut.hemesh.HE_RAS.HE_RASTrove;
+import wblut.hemesh.HE_RAS.HE_RASEC;
 
 /**
  * Axis Aligned Box.
@@ -26,9 +23,9 @@ public class HEC_Copy extends HEC_Creator {
 	 *
 	 */
 	HE_MeshStructure source;
-	public TLongLongHashMap vertexCorrelation;
-	public TLongLongHashMap faceCorrelation;
-	public TLongLongHashMap halfedgeCorrelation;
+	public LongLongHashMap vertexCorrelation;
+	public LongLongHashMap faceCorrelation;
+	public LongLongHashMap halfedgeCorrelation;
 
 	/**
 	 *
@@ -77,9 +74,9 @@ public class HEC_Copy extends HEC_Creator {
 
 		if (source instanceof HE_Mesh) {
 			final HE_Mesh mesh = (HE_Mesh) source;
-			vertexCorrelation = new TLongLongHashMap(10, 0.5f, -1L, -1L);
-			faceCorrelation = new TLongLongHashMap(10, 0.5f, -1L, -1L);
-			halfedgeCorrelation = new TLongLongHashMap(10, 0.5f, -1L, -1L);
+			vertexCorrelation = new LongLongHashMap();
+			faceCorrelation = new LongLongHashMap();
+			halfedgeCorrelation = new LongLongHashMap();
 			HE_Vertex rv;
 			HE_Vertex v;
 			WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfVertices(), 10);
@@ -112,7 +109,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Halfedge he;
 			counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
 			tracker.setCounterStatus(this, "Creating halfedges.", counter);
-			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RAS.HE_RASTrove<HE_Halfedge>();
+			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
 			final Iterator<HE_Halfedge> heItr = mesh.getHalfedges().iterator();
 			while (heItr.hasNext()) {
 				he = heItr.next();
@@ -127,7 +124,7 @@ public class HEC_Copy extends HEC_Creator {
 			tracker.setCounterStatus(this, "Setting vertex properties.", counter);
 			HE_Vertex sv;
 			HE_Vertex tv;
-			final Iterator<HE_Vertex> svItr = mesh.vItr();
+			Iterator<HE_Vertex> svItr = mesh.vItr();
 			final Iterator<HE_Vertex> tvItr = result.vItr();
 			Long key;
 			while (svItr.hasNext()) {
@@ -147,7 +144,7 @@ public class HEC_Copy extends HEC_Creator {
 			tracker.setCounterStatus(this, "Setting face properties.", counter);
 			HE_Face sf;
 			HE_Face tf;
-			final Iterator<HE_Face> sfItr = mesh.fItr();
+			Iterator<HE_Face> sfItr = mesh.fItr();
 			final Iterator<HE_Face> tfItr = result.fItr();
 			while (sfItr.hasNext()) {
 				sf = sfItr.next();
@@ -165,7 +162,7 @@ public class HEC_Copy extends HEC_Creator {
 			tracker.setCounterStatus(this, "Setting halfedge properties.", counter);
 			HE_Halfedge she;
 			HE_Halfedge the;
-			final Iterator<HE_Halfedge> sheItr = mesh.getHalfedges().iterator();
+			Iterator<HE_Halfedge> sheItr = mesh.getHalfedges().iterator();
 			final Iterator<HE_Halfedge> theItr = copyHalfedges.iterator();
 			while (sheItr.hasNext()) {
 				she = sheItr.next();
@@ -200,15 +197,43 @@ public class HEC_Copy extends HEC_Creator {
 				counter.increment();
 			}
 
+			Set<String> names = mesh.getSelectionNames();
+
+			for (String name : names) {
+
+				HE_Selection source = mesh.getSelection(name);
+				HE_Selection target = new HE_Selection(result);
+				svItr = source.vItr();
+				while (svItr.hasNext()) {
+					sv = svItr.next();
+					key = vertexCorrelation.get(sv.key());
+					target.add(result.getVertexWithKey(key));
+				}
+				sheItr = source.heItr();
+				while (sheItr.hasNext()) {
+					she = sheItr.next();
+					key = halfedgeCorrelation.get(she.key());
+					target.add(result.getHalfedgeWithKey(key));
+				}
+				sfItr = source.fItr();
+				while (sfItr.hasNext()) {
+					sf = sfItr.next();
+					key = faceCorrelation.get(sf.key());
+					target.add(result.getFaceWithKey(key));
+				}
+				result.addSelection(name, target);
+
+			}
+
 			tracker.setStopStatus(this, "Exiting HEC_Copy.");
 		} else if (source instanceof HE_Selection) {
 			final HE_Selection sel = ((HE_Selection) source).get();
 
 			sel.completeFromFaces();
 
-			vertexCorrelation = new TLongLongHashMap(10, 0.5f, -1L, -1L);
-			faceCorrelation = new TLongLongHashMap(10, 0.5f, -1L, -1L);
-			halfedgeCorrelation = new TLongLongHashMap(10, 0.5f, -1L, -1L);
+			vertexCorrelation = new LongLongHashMap();
+			faceCorrelation = new LongLongHashMap();
+			halfedgeCorrelation = new LongLongHashMap();
 			HE_Vertex rv;
 			HE_Vertex v;
 			WB_ProgressCounter counter = new WB_ProgressCounter(sel.getNumberOfVertices(), 10);
@@ -238,7 +263,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Halfedge rhe;
 			HE_Halfedge he;
 			counter = new WB_ProgressCounter(sel.getNumberOfHalfedges(), 10);
-			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RASTrove<HE_Halfedge>();
+			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RASEC<HE_Halfedge>();
 			tracker.setCounterStatus(this, "Creating halfedges.", counter);
 			final Iterator<HE_Halfedge> heItr = sel.heItr();
 			while (heItr.hasNext()) {

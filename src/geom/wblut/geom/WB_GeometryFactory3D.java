@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.io.BufferedReader;
@@ -14,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap;
 
 import com.vividsolutions.jts.algorithm.ConvexHull;
 import com.vividsolutions.jts.densify.Densifier;
@@ -28,9 +25,7 @@ import com.vividsolutions.jts.operation.buffer.BufferOp;
 import com.vividsolutions.jts.operation.buffer.BufferParameters;
 import com.vividsolutions.jts.simplify.TopologyPreservingSimplifier;
 
-import gnu.trove.map.TIntIntMap;
-import gnu.trove.map.hash.TIntIntHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.data.WB_JohnsonPolyhedraData01;
 import wblut.data.WB_JohnsonPolyhedraData02;
 import wblut.data.WB_JohnsonPolyhedraData03;
@@ -890,7 +885,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	private List<WB_Point> cleanPointlist(final List<WB_Point> points) {
-		final List<WB_Point> result = new FastTable<WB_Point>();
+		final List<WB_Point> result = new FastList<WB_Point>();
 		final int n = points.size();
 		for (int i = 0; i < n; i++) {
 			if (!points.get(i).equals(points.get((i + 1) % n))) {
@@ -1688,8 +1683,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Polygon[] splitSimplePolygon(final WB_Polygon poly, final WB_Plane P) {
-		List<WB_Point> frontVerts = new FastTable<WB_Point>();
-		List<WB_Point> backVerts = new FastTable<WB_Point>();
+		List<WB_Point> frontVerts = new FastList<WB_Point>();
+		List<WB_Point> backVerts = new FastList<WB_Point>();
 		final int numVerts = poly.getNumberOfPoints();
 		final WB_Polygon[] polys = new WB_Polygon[2];
 		if (numVerts > 0) {
@@ -1821,6 +1816,10 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Circle createCircumcircle3D(final WB_Triangle tri) {
+		WB_Plane P = tri.getPlane();
+		if (P == null) {
+			return createCircleWithRadius(createCentroid(tri), new WB_Vector(0, 0, 1), 0.0);
+		}
 		final double a = tri.a();
 		final double b = tri.b();
 		final double c = tri.c();
@@ -1837,6 +1836,10 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Circle createIncircle(final WB_Triangle tri) {
+		WB_Plane P = tri.getPlane();
+		if (P == null) {
+			return createCircleWithRadius(createCentroid(tri), new WB_Vector(0, 0, 1), 0.0);
+		}
 		final double a = tri.a();
 		final double b = tri.b();
 		final double c = tri.c();
@@ -2012,8 +2015,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Mesh createUniqueMesh(final WB_Mesh mesh) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
-		final TIntIntMap oldnew = new TIntIntHashMap(10, 0.5f, -1, -1);
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
+		final IntIntHashMap oldnew = new IntIntHashMap();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
 		WB_Coord v = mesh.getVertex(0);
@@ -2051,8 +2054,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Mesh createUniqueMesh(final WB_Mesh mesh, final double threshold) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
-		final TIntIntMap oldnew = new TIntIntHashMap(10, 0.5f, -1, -1);
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
+		final IntIntHashMap oldnew = new IntIntHashMap();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		final double t2 = threshold * threshold;
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
@@ -2124,7 +2127,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Mesh createRegularPrism(final int n, final double radius, final double h) {
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		for (int i = 0; i < n; i++) {
 			lpoints.add(
 					createPoint(radius * Math.cos(Math.PI * 2.0 / n * i), radius * Math.sin(Math.PI * 2.0 / n * i), 0));
@@ -2143,7 +2146,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createPrism(final Collection<? extends WB_Coord> points, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		for (final WB_Coord point : points) {
 			lpoints.add(createPoint(point));
 			lpoints.add(createPoint(point).addSelf(offset));
@@ -2160,7 +2163,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createPrismOpen(final Collection<? extends WB_Coord> points, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		for (final WB_Coord point : points) {
 			lpoints.add(createPoint(point));
 			lpoints.add(createPoint(point).addSelf(offset));
@@ -2177,7 +2180,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createPrism(final WB_Coord[] points, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		for (final WB_Coord point : points) {
 			lpoints.add(createPoint(point));
 			lpoints.add(createPoint(point).addSelf(offset));
@@ -2242,7 +2245,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		WB_Vector N = poly.getPlane().getNormal();
 		final WB_Vector offset1 = N.mul(offset);
 		final WB_Vector offset2 = N.mul(offset + h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Coord point;
 		for (int i = 0; i < poly.getNumberOfPoints(); i++) {
 			point = poly.getPoint(i);
@@ -2289,7 +2292,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	public WB_Mesh createMesh(final WB_Polygon poly, final double offset) {
 		WB_Vector N = poly.getPlane().getNormal();
 		final WB_Vector offset1 = N.mul(offset);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Coord point;
 		for (int i = 0; i < poly.getNumberOfPoints(); i++) {
 			point = poly.getPoint(i);
@@ -2317,7 +2320,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createPrismOpen(final WB_Polygon poly, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Coord point;
 		for (int i = 0; i < poly.getNumberOfPoints(); i++) {
 			point = poly.getPoint(i);
@@ -2350,7 +2353,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Mesh createRegularAntiPrism(final int n, final double radius, final double h) {
-		final List<WB_Point> points = new FastTable<WB_Point>();
+		final List<WB_Point> points = new FastList<WB_Point>();
 		for (int i = 0; i < n; i++) {
 			points.add(
 					createPoint(radius * Math.cos(Math.PI * 2.0 / n * i), radius * Math.sin(Math.PI * 2.0 / n * i), 0));
@@ -2369,7 +2372,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createAntiPrism(final Collection<? extends WB_Coord> points, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		for (final WB_Coord point : points) {
 			lpoints.add(createPoint(point));
 			lpoints.add(createPoint(point).addSelf(offset));
@@ -2386,7 +2389,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createAntiPrism(final WB_Coord[] points, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		for (final WB_Coord point : points) {
 			lpoints.add(createPoint(point));
 			lpoints.add(createPoint(point).addSelf(offset));
@@ -2430,7 +2433,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createAntiPrism(final WB_Polygon poly, final double h) {
 		final WB_Vector offset = createVector(0, 0, h);
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Coord point;
 		for (int i = 0; i < poly.getNumberOfPoints(); i++) {
 			point = poly.getPoint(i);
@@ -2537,7 +2540,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	private List<WB_Point> createVerticesFromArray(final double[][] vertices) {
-		final List<WB_Point> points = new FastTable<WB_Point>();
+		final List<WB_Point> points = new FastList<WB_Point>();
 		for (final double[] vertice : vertices) {
 			points.add(createPoint(vertice[0], vertice[1], vertice[2]));
 		}
@@ -2653,8 +2656,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final BufferedReader br = new BufferedReader(new InputStreamReader(
 				this.getClass().getClassLoader().getResourceAsStream("resources/" + name + ".wrl")));
 
-		final List<WB_Point> points = new FastTable<WB_Point>();
-		final List<int[]> faces = new FastTable<int[]>();
+		final List<WB_Point> points = new FastList<WB_Point>();
+		final List<int[]> faces = new FastList<int[]>();
 		String line;
 		String[] words;
 		try {
@@ -2720,7 +2723,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 			return null;
 		}
 		final int nop = (int) Math.pow(2, n);
-		final List<WB_Point> points = new FastTable<WB_Point>();
+		final List<WB_Point> points = new FastList<WB_Point>();
 		for (int i = 0; i < nop; i++) {
 			final WB_Point point = createPoint();
 			int div = i;
@@ -2804,616 +2807,6 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 *
 	 *
 	 * @param points
-	 * @param angles
-	 * @param b
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngles(final Collection<? extends WB_Coord> points, final double[] angles,
-			final boolean b, final WB_Map2D context) {
-		WB_Mesh output = new WB_Mesh();
-		try {
-			final Corner[] corners = new Corner[points.size()];
-			// final WB_Point local = createPoint();
-			int id = 0;
-			for (final WB_Coord p : points) {
-				// local.set(context.pointTo2D(p));
-				corners[id++] = new Corner(p.xd(), p.yd());// new
-															// Corner(local.x(),
-				// local.y());
-			}
-			final Loop<Edge> poly = new Loop<Edge>();
-			for (int i = 0; i < points.size(); i++) {
-				poly.append(new Edge(corners[i], corners[(i + 1) % points.size()]));
-			}
-			int i = 0;
-			for (final Edge e : poly) {
-				e.machine = new Machine(angles[i++]);
-			}
-			final LoopL<Edge> out = new LoopL<Edge>();
-			out.add(poly);
-			final Skeleton skel = new Skeleton(out, true);
-			skel.skeleton();
-			final Collection<Face> expfaces = skel.output.faces.values();
-			int counter = 0;
-			final List<int[]> tmpfaces = new FastTable<int[]>();
-			final List<WB_Point> lpoints = new FastTable<WB_Point>();
-			WB_Point point;
-			for (final Face face : expfaces) {
-				for (final Loop<Point3d> faceloop : face.points) {
-					final int[] tmp = new int[faceloop.count()];
-					i = 0;
-					for (final Point3d p : faceloop) {
-						tmp[i++] = counter;
-						point = createPoint();
-						context.unmapPoint3D(p.x, p.y, p.z, point);
-						lpoints.add(point);
-						counter++;
-					}
-					tmpfaces.add(tmp);
-				}
-			}
-			final int n = tmpfaces.size();
-			final int[][] faces = new int[b ? n + 1 : n][];
-			i = 0;
-			for (final int[] tmp : tmpfaces) {
-				faces[i++] = tmp;
-			}
-			if (b) {
-				faces[n] = new int[n];
-				i = 0;
-				for (final WB_Coord p : points) {
-					faces[n][i++] = counter++;
-					point = createPoint();
-					context.unmapPoint2D(p.xd(), p.yd(), point);
-					lpoints.add(point);
-				}
-			}
-			output = createUniqueMesh(createMesh(lpoints, faces));
-		} catch (Exception e) {
-			System.out.println("WB_GeometryFactory.createPyramidWithAngles failed, returning empty mesh.");
-
-		}
-		return output;
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param angles
-	 * @param b
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngles(final WB_Coord[] points, final double[] angles, final boolean b,
-			final WB_Map2D context) {
-		WB_Mesh output = new WB_Mesh();
-		try {
-			final Corner[] corners = new Corner[points.length];
-			// final WB_Point local = createPoint();
-			int id = 0;
-			for (final WB_Coord p : points) {
-				// local.set(context.pointTo2D(p));
-				corners[id++] = new Corner(p.xd(), p.yd());// new
-															// Corner(local.x(),
-				// local.y());
-			}
-			final Loop<Edge> poly = new Loop<Edge>();
-			for (int i = 0; i < points.length; i++) {
-				poly.append(new Edge(corners[i], corners[(i + 1) % points.length]));
-			}
-			int i = 0;
-			for (final Edge e : poly) {
-				e.machine = new Machine(angles[i++]);
-			}
-			final LoopL<Edge> out = new LoopL<Edge>();
-			out.add(poly);
-			final Skeleton skel = new Skeleton(out, true);
-			skel.skeleton();
-			final Collection<Face> expfaces = skel.output.faces.values();
-			int counter = 0;
-			final List<int[]> tmpfaces = new FastTable<int[]>();
-			final List<WB_Point> lpoints = new FastTable<WB_Point>();
-			WB_Point point;
-			for (final Face face : expfaces) {
-				for (final Loop<Point3d> faceloop : face.points) {
-					final int[] tmp = new int[faceloop.count()];
-					i = 0;
-					for (final Point3d p : faceloop) {
-						tmp[i++] = counter;
-						point = createPoint();
-						context.unmapPoint3D(p.x, p.y, p.z, point);
-						lpoints.add(point);
-						counter++;
-					}
-					tmpfaces.add(tmp);
-				}
-			}
-			final int n = tmpfaces.size();
-			final int[][] faces = new int[b ? n + 1 : n][];
-			i = 0;
-			for (final int[] tmp : tmpfaces) {
-				faces[i++] = tmp;
-			}
-			if (b) {
-				faces[n] = new int[n];
-				i = 0;
-				for (final WB_Coord p : points) {
-					faces[n][i++] = counter++;
-					point = createPoint();
-					context.unmapPoint2D(p.xd(), p.yd(), point);
-					lpoints.add(point);
-				}
-			}
-			output = createUniqueMesh(createMesh(lpoints, faces));
-		} catch (Exception e) {
-			System.out.println("WB_GeometryFactory.createPyramidWithAngles failed, returning empty mesh.");
-
-		}
-		return output;
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param minangle
-	 * @param maxangle
-	 * @param b
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngleRange(final Collection<? extends WB_Coord> points, final double minangle,
-			final double maxangle, final boolean b, final WB_Map2D context) {
-		WB_Mesh output = new WB_Mesh();
-		try {
-
-			final Corner[] corners = new Corner[points.size()];
-			// final WB_Point local = createPoint();
-			int id = 0;
-			for (final WB_Coord p : points) {
-				// local.set(context.pointTo2D(p));
-				corners[id++] = new Corner(p.xd(), p.yd());// new
-															// Corner(local.x(),
-				// local.y());
-			}
-			final Loop<Edge> poly = new Loop<Edge>();
-			for (int i = 0; i < points.size(); i++) {
-				poly.append(new Edge(corners[i], corners[(i + 1) % points.size()]));
-			}
-			for (final Edge e : poly) {
-				e.machine = new Machine(Math.random() * (maxangle - minangle) + minangle);
-			}
-			final LoopL<Edge> out = new LoopL<Edge>();
-			out.add(poly);
-			final Skeleton skel = new Skeleton(out, true);
-			skel.skeleton();
-			final Collection<Face> expfaces = skel.output.faces.values();
-			int counter = 0;
-			final List<int[]> tmpfaces = new FastTable<int[]>();
-			final List<WB_Point> lpoints = new FastTable<WB_Point>();
-			WB_Point point;
-			for (final Face face : expfaces) {
-				for (final Loop<Point3d> faceloop : face.points) {
-					final int[] tmp = new int[faceloop.count()];
-					int i = 0;
-					for (final Point3d p : faceloop) {
-						tmp[i++] = counter;
-						point = createPoint();
-						context.unmapPoint3D(p.x, p.y, p.z, point);
-						lpoints.add(point);
-						counter++;
-					}
-					tmpfaces.add(tmp);
-				}
-			}
-			final int n = tmpfaces.size();
-			final int[][] faces = new int[b ? n + 1 : n][];
-			int i = 0;
-			for (final int[] tmp : tmpfaces) {
-				faces[i++] = tmp;
-			}
-			if (b) {
-				faces[n] = new int[n];
-				i = 0;
-				for (final WB_Coord p : points) {
-					faces[n][i++] = counter++;
-					point = createPoint();
-					context.unmapPoint2D(p.xd(), p.yd(), point);
-					lpoints.add(point);
-				}
-			}
-			output = createUniqueMesh(createMesh(lpoints, faces));
-		} catch (Exception e) {
-			System.out.println("WB_GeometryFactory.createPyramidWithAngleRange failed, returning empty mesh.");
-
-		}
-		return output;
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param minangle
-	 * @param maxangle
-	 * @param b
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngleRange(final WB_Coord[] points, final double minangle, final double maxangle,
-			final boolean b, final WB_Map2D context) {
-		WB_Mesh output = new WB_Mesh();
-		try {
-
-			final Corner[] corners = new Corner[points.length];
-			// final WB_Point local = createPoint();
-			int id = 0;
-			for (final WB_Coord p : points) {
-				// local.set(context.pointTo2D(p));
-				corners[id++] = new Corner(p.xd(), p.yd());// new
-															// Corner(local.x(),
-				// local.y());
-			}
-			final Loop<Edge> poly = new Loop<Edge>();
-			for (int i = 0; i < points.length; i++) {
-				poly.append(new Edge(corners[i], corners[(i + 1) % points.length]));
-			}
-			for (final Edge e : poly) {
-				e.machine = new Machine(Math.random() * (maxangle - minangle) + minangle);
-			}
-			final LoopL<Edge> out = new LoopL<Edge>();
-			out.add(poly);
-			final Skeleton skel = new Skeleton(out, true);
-			skel.skeleton();
-			final Collection<Face> expfaces = skel.output.faces.values();
-			int counter = 0;
-			final List<int[]> tmpfaces = new FastTable<int[]>();
-			final List<WB_Point> lpoints = new FastTable<WB_Point>();
-			WB_Point point;
-			for (final Face face : expfaces) {
-				for (final Loop<Point3d> faceloop : face.points) {
-					final int[] tmp = new int[faceloop.count()];
-					int i = 0;
-					for (final Point3d p : faceloop) {
-						tmp[i++] = counter;
-						point = createPoint();
-						context.unmapPoint3D(p.x, p.y, p.z, point);
-						lpoints.add(point);
-						counter++;
-					}
-					tmpfaces.add(tmp);
-				}
-			}
-			final int n = tmpfaces.size();
-			final int[][] faces = new int[b ? n + 1 : n][];
-			int i = 0;
-			for (final int[] tmp : tmpfaces) {
-				faces[i++] = tmp;
-			}
-			if (b) {
-				faces[n] = new int[n];
-				i = 0;
-				for (final WB_Coord p : points) {
-					faces[n][i++] = counter++;
-					point = createPoint();
-					context.unmapPoint2D(p.xd(), p.yd(), point);
-					lpoints.add(point);
-				}
-			}
-			output = createUniqueMesh(createMesh(lpoints, faces));
-		} catch (Exception e) {
-			System.out.println("WB_GeometryFactory.createPyramidWithAngleRange failed, returning empty mesh.");
-
-		}
-		return output;
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param minangle
-	 * @param maxangle
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngleRange(final Collection<? extends WB_Coord> points, final double minangle,
-			final double maxangle, final WB_Map2D context) {
-		return createPyramidWithAngleRange(points, minangle, maxangle, true, context);
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param minangle
-	 * @param maxangle
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngleRange(final WB_Coord[] points, final double minangle, final double maxangle,
-			final WB_Map2D context) {
-		return createPyramidWithAngleRange(points, minangle, maxangle, true, context);
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param angle
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngle(final Collection<? extends WB_Coord> points, final double angle,
-			final WB_Map2D context) {
-		return createPyramidWithAngleRange(points, angle, angle, context);
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param angle
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngle(final WB_Coord[] points, final double angle, final WB_Map2D context) {
-		return createPyramidWithAngleRange(points, angle, angle, context);
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param minangle
-	 * @param maxangle
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngleRange(final Collection<? extends WB_Coord> points, final double minangle,
-			final double maxangle) {
-		return createPyramidWithAngleRange(points, minangle, maxangle, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param minangle
-	 * @param maxangle
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngleRange(final WB_Coord[] points, final double minangle, final double maxangle) {
-		return createPyramidWithAngleRange(points, minangle, maxangle, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param angle
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngle(final Collection<? extends WB_Coord> points, final double angle) {
-		return createPyramidWithAngle(points, angle, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param angle
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithAngle(final WB_Coord[] points, final double angle) {
-		return createPyramidWithAngle(points, angle, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param height
-	 * @param b
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithHeight(final Collection<? extends WB_Coord> points, final double height,
-			final boolean b, final WB_Map2D context) {
-		WB_Mesh output = new WB_Mesh();
-		try {
-			final Corner[] corners = new Corner[points.size()];
-			// final WB_Point local = createPoint();
-			int id = 0;
-			for (final WB_Coord p : points) {
-				// local.set(context.pointTo2D(p));
-				corners[id++] = new Corner(p.xd(), p.yd());// new
-															// Corner(local.x(),
-				// local.y());
-			}
-			final Loop<Edge> poly = new Loop<Edge>();
-			for (int i = 0; i < points.size(); i++) {
-				poly.append(new Edge(corners[i], corners[(i + 1) % points.size()]));
-			}
-			for (final Edge e : poly) {
-				e.machine = new Machine(0.25 * Math.PI);
-			}
-			final LoopL<Edge> out = new LoopL<Edge>();
-			out.add(poly);
-			final Skeleton skel = new Skeleton(out, true);
-			skel.skeleton();
-			final Collection<Face> expfaces = skel.output.faces.values();
-			int counter = 0;
-			final List<int[]> tmpfaces = new FastTable<int[]>();
-			final List<WB_Point> lpoints = new FastTable<WB_Point>();
-			WB_Point point;
-			for (final Face face : expfaces) {
-				for (final Loop<Point3d> faceloop : face.points) {
-					final int[] tmp = new int[faceloop.count()];
-					int i = 0;
-					for (final Point3d p : faceloop) {
-						tmp[i++] = counter;
-						point = createPoint();
-						context.unmapPoint3D(p.x, p.y, p.z == 0 ? 0 : height, point);
-						lpoints.add(point);
-						counter++;
-					}
-					tmpfaces.add(tmp);
-				}
-			}
-			final int n = tmpfaces.size();
-			final int[][] faces = new int[b ? n + 1 : n][];
-			int i = 0;
-			for (final int[] tmp : tmpfaces) {
-				faces[i++] = tmp;
-			}
-			if (b) {
-				faces[n] = new int[n];
-				i = 0;
-				for (final WB_Coord p : points) {
-					faces[n][i++] = counter++;
-					point = createPoint();
-					context.unmapPoint2D(p.xd(), p.yd(), point);
-					lpoints.add(point);
-				}
-			}
-			output = createUniqueMesh(createMesh(lpoints, faces));
-		} catch (Exception e) {
-			System.out.println("WB_GeometryFactory.createPyramidWithHeight failed, returning empty mesh.");
-
-		}
-		return output;
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param height
-	 * @param b
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithHeight(final Collection<? extends WB_Coord> points, final double height,
-			final boolean b) {
-		return createPyramidWithHeight(points, height, b, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param height
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithHeight(final Collection<? extends WB_Coord> points, final double height) {
-		return createPyramidWithHeight(points, height, true, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param height
-	 * @param b
-	 * @param context
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithHeight(final WB_Coord[] points, final double height, final boolean b,
-			final WB_Map2D context) {
-		WB_Mesh output = new WB_Mesh();
-		try {
-			final Corner[] corners = new Corner[points.length];
-			// final WB_Point local = createPoint();
-			int id = 0;
-			for (final WB_Coord p : points) {
-				// local.set(context.pointTo2D(p));
-				corners[id++] = new Corner(p.xd(), p.yd());// new
-															// Corner(local.x(),
-				// local.y());
-			}
-			final Loop<Edge> poly = new Loop<Edge>();
-			for (int i = 0; i < points.length; i++) {
-				poly.append(new Edge(corners[i], corners[(i + 1) % points.length]));
-			}
-			for (final Edge e : poly) {
-				e.machine = new Machine(0.25 * Math.PI);
-			}
-			final LoopL<Edge> out = new LoopL<Edge>();
-			out.add(poly);
-			final Skeleton skel = new Skeleton(out, true);
-			skel.skeleton();
-			final Collection<Face> expfaces = skel.output.faces.values();
-			int counter = 0;
-			final List<int[]> tmpfaces = new FastTable<int[]>();
-			final List<WB_Point> lpoints = new FastTable<WB_Point>();
-			WB_Point point;
-			for (final Face face : expfaces) {
-				for (final Loop<Point3d> faceloop : face.points) {
-					final int[] tmp = new int[faceloop.count()];
-					int i = 0;
-					for (final Point3d p : faceloop) {
-						tmp[i++] = counter;
-						point = createPoint();
-						context.unmapPoint3D(p.x, p.y, p.z == 0 ? 0 : height, point);
-						lpoints.add(point);
-						counter++;
-					}
-					tmpfaces.add(tmp);
-				}
-			}
-			final int n = tmpfaces.size();
-			final int[][] faces = new int[b ? n + 1 : n][];
-			int i = 0;
-			for (final int[] tmp : tmpfaces) {
-				faces[i++] = tmp;
-			}
-			if (b) {
-				faces[n] = new int[n];
-				i = 0;
-				for (final WB_Coord p : points) {
-					faces[n][i++] = counter++;
-					point = createPoint();
-					context.unmapPoint2D(p.xd(), p.yd(), point);
-					lpoints.add(point);
-				}
-			}
-			output = createUniqueMesh(createMesh(lpoints, faces));
-		} catch (Exception e) {
-			System.out.println("WB_GeometryFactory.createPyramidWithHeight failed, returning empty mesh.");
-
-		}
-		return output;
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
-	 * @param height
-	 * @param b
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithHeight(final WB_Coord[] points, final double height, final boolean b) {
-		return createPyramidWithHeight(points, height, b, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param polygon
-	 * @param height
-	 * @return
-	 */
-	public WB_Mesh createPyramidWithHeight(final WB_Polygon polygon, final double height) {
-
-		return createPyramidWithHeight(polygon.getPoints(), height, true, createEmbeddedPlane());
-	}
-
-	/**
-	 *
-	 *
-	 * @param points
 	 * @param minangle
 	 * @param maxangle
 	 * @param context
@@ -3442,8 +2835,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		skel.skeleton();
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -3507,8 +2900,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		skel.skeleton();
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -3618,8 +3011,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		skel.skeleton();
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -3692,8 +3085,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		skel.skeleton();
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -3772,8 +3165,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -3859,8 +3252,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -3947,8 +3340,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -4034,8 +3427,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -4204,8 +3597,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -4309,8 +3702,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -4415,8 +3808,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -4520,8 +3913,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		for (final Face face : expfaces) {
 			for (final Loop<Point3d> faceloop : face.points) {
@@ -4739,8 +4132,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		i = 0;
 		WB_Point point;
 		for (final WB_Coord p : points) {
@@ -4952,8 +4345,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		final LoopL<Corner> top = skel.flatTop;
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		WB_Point point;
 		i = 0;
 		for (final WB_Coord p : points) {
@@ -5162,8 +4555,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		skel.skeleton();
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		i = 0;
 		WB_Point point;
 		for (final WB_Coord p : points) {
@@ -5286,8 +4679,8 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		skel.skeleton();
 		final Collection<Face> expfaces = skel.output.faces.values();
 		int counter = 0;
-		final List<int[]> tmpfaces = new FastTable<int[]>();
-		final List<WB_Point> lpoints = new FastTable<WB_Point>();
+		final List<int[]> tmpfaces = new FastList<int[]>();
+		final List<WB_Point> lpoints = new FastList<WB_Point>();
 		i = 0;
 		WB_Point point;
 		for (final WB_Coord p : points) {
@@ -5404,7 +4797,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Mesh createConvexHull(final WB_Coord[] points, final boolean triangulate) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
 		int n = 0;
@@ -5441,7 +4834,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Mesh createConvexHull(final List<? extends WB_Coord> points, final boolean triangulate) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
 		int n = 0;
@@ -5480,7 +4873,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createConvexHullWithThreshold(final WB_Coord[] points, final boolean triangulate,
 			final double threshold) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
 		final double t2 = threshold * threshold;
@@ -5520,7 +4913,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public WB_Mesh createConvexHullWithThreshold(final List<? extends WB_Coord> points, final boolean triangulate,
 			final double threshold) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
 		final double t2 = threshold * threshold;
@@ -5788,7 +5181,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * @return
 	 */
 	private List<WB_Polygon> createPolygonsFromJTSGeometry(final Geometry geometry, final WB_Map2D map) {
-		final List<WB_Polygon> polygons = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polygons = new FastList<WB_Polygon>();
 		for (int i = 0; i < geometry.getNumGeometries(); i++) {
 			final Geometry geo = geometry.getGeometryN(i);
 			if (!geo.isEmpty()) {
@@ -6074,7 +5467,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public List<WB_Polygon> constrainPolygons(final WB_Polygon[] polygons, final WB_Polygon container) {
 		WB_Map2D map = new WB_PlanarMap(polygons[0].getPlane(0));
-		final List<WB_Polygon> polys = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polys = new FastList<WB_Polygon>();
 		for (final WB_Polygon poly : polygons) {
 			final Polygon JTSpoly1 = toJTSPolygon(poly, map);
 			final Polygon JTSpoly2 = toJTSPolygon(container, map);
@@ -6093,7 +5486,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 */
 	public List<WB_Polygon> constrainPolygons(final List<WB_Polygon> polygons, final WB_Polygon container) {
 		WB_Map2D map = new WB_PlanarMap(polygons.get(0).getPlane(0));
-		final List<WB_Polygon> polys = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polys = new FastList<WB_Polygon>();
 		for (final WB_Polygon poly : polygons) {
 			final Polygon JTSpoly1 = toJTSPolygon(poly, map);
 			final Polygon JTSpoly2 = toJTSPolygon(container, map);
@@ -6106,7 +5499,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	}
 
 	public List<WB_Coord> createUniquePoints(final List<WB_Coord> points, final double threshold) {
-		final List<WB_Coord> uniqueVertices = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
 		WB_Coord v = points.get(0);
@@ -6128,7 +5521,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 
 	public List<WB_Plane> createUniquePlanes(final List<WB_Plane> planes) {
 
-		final List<WB_Plane> uniquePlanes = new FastTable<WB_Plane>();
+		final List<WB_Plane> uniquePlanes = new FastList<WB_Plane>();
 		boolean unique = true;
 		WB_Plane Pi, Pj;
 		uniquePlanes.add(planes.get(0));

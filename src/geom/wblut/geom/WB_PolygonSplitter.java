@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import static wblut.geom.WB_Classification.BACK;
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 
 /**
@@ -90,8 +91,8 @@ public class WB_PolygonSplitter {
 	}
 
 	static void splitEdges(final List<? extends WB_Coord> coords, final WB_Plane P) {
-		splitPoly = new FastTable<PolyEdge>();
-		edgesOnLine = new FastTable<PolyEdge>();
+		splitPoly = new FastList<PolyEdge>();
+		edgesOnLine = new FastList<PolyEdge>();
 
 		for (int i = 0; i < coords.size(); i++) {
 			WB_Segment edge = new WB_Segment(coords.get(i), coords.get((i + 1) % coords.size()));
@@ -118,8 +119,8 @@ public class WB_PolygonSplitter {
 	}
 
 	static void splitEdges(final List<? extends WB_Coord> coords, final WB_Line L) {
-		splitPoly = new FastTable<PolyEdge>();
-		edgesOnLine = new FastTable<PolyEdge>();
+		splitPoly = new FastList<PolyEdge>();
+		edgesOnLine = new FastList<PolyEdge>();
 
 		for (int i = 0; i < coords.size(); i++) {
 			WB_Segment edge = new WB_Segment(coords.get(i), coords.get((i + 1) % coords.size()));
@@ -248,7 +249,7 @@ public class WB_PolygonSplitter {
 		List<WB_Polygon> resPolys = new ArrayList<WB_Polygon>();
 		for (PolyEdge e : splitPoly) {
 			if (!e.visited) {
-				List<WB_Coord> splitCoords = new FastTable<WB_Coord>();
+				List<WB_Coord> splitCoords = new FastList<WB_Coord>();
 				PolyEdge curEdge = e;
 				do {
 					curEdge.visited = true;
@@ -297,13 +298,14 @@ public class WB_PolygonSplitter {
 
 		@Override
 		public int compare(final PolyEdge e0, final PolyEdge e1) {
-			double d = WB_GeometryOp3D.getParameterOfPointOnLine3D(e0.pos, L) - WB_GeometryOp3D.getParameterOfPointOnLine3D(e1.pos, L);
+			double d = WB_GeometryOp3D.getParameterOfPointOnLine3D(e0.pos, L)
+					- WB_GeometryOp3D.getParameterOfPointOnLine3D(e1.pos, L);
 			return WB_Epsilon.isZero(d) ? 0 : d > 0 ? 1 : -1;
 		}
 	}
 
 	static WB_Polygon polygonFromArray(final double[][] points) {
-		List<WB_Coord> coords = new FastTable<WB_Coord>();
+		List<WB_Coord> coords = new FastList<WB_Coord>();
 		for (double[] p : points) {
 			if (p.length == 2) {
 				coords.add(new WB_Point(p[0], p[1]));
@@ -359,7 +361,7 @@ public class WB_PolygonSplitter {
 			}
 
 		}
-		List<TestCase2D> cases2D = new FastTable<TestCase2D>();
+		List<TestCase2D> cases2D = new FastList<TestCase2D>();
 		cases2D.add(new TestCase2D(poly1, new double[][] { { -60, 0 }, { 55, 0 } }));
 		cases2D.add(new TestCase2D(poly1, new double[][] { { 60, 0 }, { -60, 0 } }));
 		cases2D.add(new TestCase2D(poly1, new double[][] { { -60, 20 }, { 60, 20 } }));
@@ -425,7 +427,7 @@ public class WB_PolygonSplitter {
 			}
 
 		}
-		List<TestCase3D> cases3D = new FastTable<TestCase3D>();
+		List<TestCase3D> cases3D = new FastList<TestCase3D>();
 		cases3D.add(new TestCase3D(poly1, new double[][] { { -60, 0 }, { 55, 0 } }));
 		cases3D.add(new TestCase3D(poly1, new double[][] { { 60, 0 }, { -60, 0 } }));
 		cases3D.add(new TestCase3D(poly1, new double[][] { { -60, 20 }, { 60, 20 } }));

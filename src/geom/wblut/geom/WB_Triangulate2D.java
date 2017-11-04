@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.Arrays;
@@ -23,8 +18,8 @@ import com.vividsolutions.jts.triangulate.ConformingDelaunayTriangulationBuilder
 import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 import com.vividsolutions.jts.triangulate.quadedge.QuadEdgeSubdivision;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.external.constrainedDelaunay.WB_ConstrainedTriangulation;
 import wblut.math.WB_Epsilon;
 
@@ -51,7 +46,7 @@ class WB_Triangulate2D {
 	 */
 	public static WB_Triangulation2D triangulate2D(final WB_CoordCollection points) {
 		final int n = points.size();
-		final List<Coordinate> coords = new FastTable<Coordinate>();
+		final List<Coordinate> coords = new FastList<Coordinate>();
 		WB_Coord c;
 		for (int i = 0; i < n; i++) {
 			c = points.get(i);
@@ -127,7 +122,7 @@ class WB_Triangulate2D {
 		final QuadEdgeSubdivision qesd = dtb.getSubdivision();
 		final GeometryCollection tris = (GeometryCollection) qesd.getTriangles(new GeometryFactory());
 		final int ntris = tris.getNumGeometries();
-		List<int[]> result = new FastTable<int[]>();
+		List<int[]> result = new FastList<int[]>();
 		for (int i = 0; i < ntris; i++) {
 			final Polygon tri = (Polygon) tris.getGeometryN(i);
 			final Coordinate[] tricoord = tri.getCoordinates();
@@ -145,7 +140,7 @@ class WB_Triangulate2D {
 		}
 		final MultiLineString edges = (MultiLineString) qesd.getEdges(new GeometryFactory());
 		final int nedges = edges.getNumGeometries();
-		result = new FastTable<int[]>();
+		result = new FastList<int[]>();
 		for (int i = 0; i < nedges; i++) {
 			final LineString edge = (LineString) edges.getGeometryN(i);
 			final Coordinate[] edgecoord = edge.getCoordinates();
@@ -536,7 +531,7 @@ class WB_Triangulate2D {
 		}
 
 		WB_Triangulation2DWithPoints tri = getConformingTriangles2D(coords, constraints, tol);
-		List<WB_Point> upoints = new FastTable<WB_Point>();
+		List<WB_Point> upoints = new FastList<WB_Point>();
 		for (WB_Coord point : tri.getPoints()) {
 			WB_Point q = new WB_Point();
 			context.unmapPoint2D(point, q);
@@ -570,7 +565,7 @@ class WB_Triangulate2D {
 		final QuadEdgeSubdivision qesd = dtb.getSubdivision();
 		final GeometryCollection tris = (GeometryCollection) qesd.getTriangles(new GeometryFactory());
 		final Coordinate[] newcoords = tris.getCoordinates();
-		final List<WB_Coord> uniquePoints = new FastTable<WB_Coord>();
+		final List<WB_Coord> uniquePoints = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Point> tree = new WB_KDTreeInteger<WB_Point>();
 		int currentSize = 0;
 		for (final Coordinate newcoord : newcoords) {
@@ -582,7 +577,7 @@ class WB_Triangulate2D {
 			}
 		}
 		final int ntris = tris.getNumGeometries();
-		List<int[]> result = new FastTable<int[]>();
+		List<int[]> result = new FastList<int[]>();
 		for (int i = 0; i < ntris; i++) {
 			final Polygon tri = (Polygon) tris.getGeometryN(i);
 			final Coordinate[] tricoord = tri.getCoordinates();
@@ -600,7 +595,7 @@ class WB_Triangulate2D {
 		}
 		final MultiLineString edges = (MultiLineString) qesd.getEdges(new GeometryFactory());
 		final int nedges = edges.getNumGeometries();
-		result = new FastTable<int[]>();
+		result = new FastList<int[]>();
 		for (int i = 0; i < nedges; i++) {
 			final LineString edge = (LineString) edges.getGeometryN(i);
 			final Coordinate[] edgecoord = edge.getCoordinates();
@@ -615,7 +610,7 @@ class WB_Triangulate2D {
 			E[2 * i] = result.get(i)[0];
 			E[2 * i + 1] = result.get(i)[1];
 		}
-		final List<WB_Coord> Points = new FastTable<WB_Coord>();
+		final List<WB_Coord> Points = new FastList<WB_Coord>();
 		for (int i = 0; i < uniquePoints.size(); i++) {
 			Points.add(uniquePoints.get(i));
 		}
@@ -646,7 +641,7 @@ class WB_Triangulate2D {
 	 */
 	private static int[] extractEdgesTri(final int[] ears) {
 		final int f = ears.length;
-		final FastMap<Long, int[]> map = new FastMap<Long, int[]>();
+		final UnifiedMap<Long, int[]> map = new UnifiedMap<Long, int[]>();
 		for (int i = 0; i < ears.length; i += 3) {
 			final int v0 = ears[i];
 			final int v1 = ears[i + 1];
@@ -701,7 +696,7 @@ class WB_Triangulate2D {
 	 */
 	public static WB_AlphaTriangulation2D alphaTriangulate2D(final Collection<? extends WB_Coord> points,
 			final double jitter) {
-		FastTable<WB_Point> jigPoints = new FastTable<WB_Point>();
+		FastList<WB_Point> jigPoints = new FastList<WB_Point>();
 		WB_RandomOnSphere ros = new WB_RandomOnSphere();
 		for (WB_Coord p : points) {
 			jigPoints.add(WB_Point.addMul(p, jitter, ros.nextVector()));

@@ -13,9 +13,9 @@ WB_Render render;
 void setup() {
   size(1000, 1000, P3D);
   smooth(8);
-  HEC_Torus creator=new HEC_Torus(80, 200, 6, 16);
+  HEC_Torus creator=new HEC_Torus(120, 300, 6, 16);
   container=new HE_Mesh(creator);
-  creator=new HEC_Torus(40, 200, 6, 16);
+  creator=new HEC_Torus(60, 300, 6, 16);
   HE_Mesh inner=new HE_Mesh(creator);
   inner.modify(new HEM_Extrude().setDistance(32).setChamfer(0.8));
   HET_MeshOp.flipFaces(inner);
@@ -26,7 +26,7 @@ void setup() {
     fitr.next().setColor(color(0, 200, 50));
   }
 
-  numpoints=20;
+  numpoints=10;
   points=new float[numpoints][3];
   for (int i=0; i<numpoints; i++) {
     points[i][0]=random(-250, 250);

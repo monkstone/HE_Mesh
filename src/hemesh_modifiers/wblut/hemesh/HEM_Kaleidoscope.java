@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
@@ -130,8 +125,10 @@ public class HEM_Kaleidoscope extends HEM_Modifier {
 		for (int i = 0; i < n; i++) {
 			if (i == 0) {
 				copies[i] = mesh;
+				mesh.selectAllFaces("part0");
 			} else {
 				copies[i] = mesh.get();
+				copies[i].renameSelection("part0", "part" + i);
 				copies[i].rotateAboutAxisSelf(i * 2.0 * Math.PI / n, origin, axis);
 			}
 			for (int j = 0; j < origboundary.length; j++) {
@@ -157,6 +154,7 @@ public class HEM_Kaleidoscope extends HEM_Modifier {
 			mesh.add(copies[i + 1]);
 		}
 		mesh.cleanUnusedElementsByFace();
+		mesh.uncapBoundaryHalfedges();
 		mesh.pairHalfedges();
 		mesh.capHalfedges();
 		return mesh;

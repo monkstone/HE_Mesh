@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
@@ -74,13 +69,13 @@ public class HEMC_Explode extends HEMC_MultiCreator {
 			submesh = new HE_Selection(mesh);
 			submesh.add(start);
 			// find all unvisited faces connected to face
-			HE_RAS<HE_Face> facesToProcess = new HE_RAS.HE_RASTrove<HE_Face>();
+			HE_RAS<HE_Face> facesToProcess = new HE_RAS.HE_RASEC<HE_Face>();
 			HE_RAS<HE_Face> newFacesToProcess;
 			facesToProcess.add(start);
 			List<HE_Face> neighbors;
 			do {
 
-				newFacesToProcess = new HE_RAS.HE_RASTrove<HE_Face>();
+				newFacesToProcess = new HE_RAS.HE_RASEC<HE_Face>();
 				for (final HE_Face f : facesToProcess) {
 					neighbors = f.getNeighborFaces();
 					for (final HE_Face neighbor : neighbors) {

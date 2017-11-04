@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.File;
@@ -59,8 +54,7 @@ public class HET_WriterHemesh {
 				}
 			}
 		} catch (final SecurityException se) {
-			System.err.println("No permissions to create "
-					+ file.getAbsolutePath());
+			System.err.println("No permissions to create " + file.getAbsolutePath());
 		}
 	}
 
@@ -109,50 +103,48 @@ public class HET_WriterHemesh {
 	 * @param heid
 	 */
 	public void vertex(final HE_Vertex v, final int heid) {
-		String s=v.xd() + " " + v.yd() + " " + v.zd() + " " + heid+" "+v.getColor()+" "+v.labels;
-		if(v.hasVertexUVW()){
-			s+=" 1 "+v.getVertexUVW().xd()+ " " +v.getVertexUVW().yd()+" "+v.getVertexUVW().zd();
+		String s = v.xd() + " " + v.yd() + " " + v.zd() + " " + heid + " " + v.getColor() + " " + v.labels;
+		if (v.hasVertexUVW()) {
+			s += " 1 " + v.getVertexUVW().xd() + " " + v.getVertexUVW().yd() + " " + v.getVertexUVW().zd();
 
-		}else{
+		} else {
 
-			s+=" 0";
+			s += " 0";
 		}
 
-		hemeshWriter.println( s);
+		hemeshWriter.println(s);
 	}
 
 	/**
-	 * 
 	 *
-	 * @param he 
-	 * @param vid 
-	 * @param henextid 
-	 * @param hepairid 
-	 * @param faceid 
+	 *
+	 * @param he
+	 * @param vid
+	 * @param henextid
+	 * @param hepairid
+	 * @param faceid
 	 */
 	public void halfedge(final HE_Halfedge he, final int vid, final int henextid, final int hepairid,
 			final int faceid) {
-		String s=vid + " " + henextid + " " + hepairid + " "
-				+ faceid+" "+he.getColor()+" "+he.labels;
-		if(he.hasHalfedgeUVW()){
-			s+=" 1 "+he.getHalfedgeUVW().xd()+ " " +he.getHalfedgeUVW().yd()+" "+he.getHalfedgeUVW().zd();
+		String s = vid + " " + henextid + " " + hepairid + " " + faceid + " " + he.getColor() + " " + he.labels;
+		if (he.hasHalfedgeUVW()) {
+			s += " 1 " + he.getHalfedgeUVW().xd() + " " + he.getHalfedgeUVW().yd() + " " + he.getHalfedgeUVW().zd();
 
-		}else{
+		} else {
 
-			s+=" 0";
+			s += " 0";
 		}
 		hemeshWriter.println(s);
 	}
 
-
 	/**
-	 * 
 	 *
-	 * @param f 
-	 * @param heid 
+	 *
+	 * @param f
+	 * @param heid
 	 */
-	public void face(final HE_Face f,final int heid) {
-		hemeshWriter.println(heid+" "+f.getColor()+" "+f.getTextureId()+" "+f.labels);
+	public void face(final HE_Face f, final int heid) {
+		hemeshWriter.println(heid + " " + f.getColor() + " " + f.getTextureId() + " " + f.labels);
 	}
 
 	/**

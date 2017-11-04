@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 /**
@@ -836,7 +831,7 @@ public class WB_PlanarMap extends WB_CoordinateSystem3D implements WB_Map2D {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapVector3D(wblut.geom.WB_Coord)
 	 */
 	@Override
@@ -869,7 +864,7 @@ public class WB_PlanarMap extends WB_CoordinateSystem3D implements WB_Map2D {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map#unmapVector3D(double, double, double)
 	 */
 	@Override
@@ -902,7 +897,7 @@ public class WB_PlanarMap extends WB_CoordinateSystem3D implements WB_Map2D {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map2D#unmapVector2D(double, double)
 	 */
 	@Override
@@ -935,7 +930,7 @@ public class WB_PlanarMap extends WB_CoordinateSystem3D implements WB_Map2D {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_Map2D#unmapVector2D(wblut.geom.WB_Coord)
 	 */
 	@Override

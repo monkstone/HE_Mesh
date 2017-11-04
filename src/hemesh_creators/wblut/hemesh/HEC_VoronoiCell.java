@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -246,7 +241,7 @@ public class HEC_VoronoiCell extends HEC_Creator {
 		}
 		final HE_Mesh result = container.copy();
 		result.setInternalLabel(cellIndex);
-		result.setLabel(cellIndex);
+		result.setUserLabel(cellIndex);
 		final ArrayList<WB_Plane> cutPlanes = new ArrayList<WB_Plane>();
 		int id = 0;
 		final WB_Point O = new WB_Point();

@@ -1,16 +1,10 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
-import java.util.List;
 
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_AABB;
@@ -127,8 +121,8 @@ public class HEM_MeanCurvatureSmooth extends HEM_Modifier {
 					double factor = 0;
 					HE_Halfedge he = v.getHalfedge();
 					do {
-						double cotana = he.getPrevInFace().getCotan();
-						double cotanb = he.getPair().getPrevInFace().getCotan();
+						double cotana = he.getCotan();
+						double cotanb = he.getPair().getCotan();
 						p.addMulSelf(cotana + cotanb, WB_Vector.sub(he.getEndVertex(), v));
 						factor += cotana + cotanb;
 
@@ -179,28 +173,26 @@ public class HEM_MeanCurvatureSmooth extends HEM_Modifier {
 		for (int r = 0; r < iter; r++) {
 			Iterator<HE_Vertex> vItr = selection.vItr();
 			HE_Vertex v;
-			HE_Vertex n;
-			List<HE_Vertex> neighbors;
 			int id = 0;
+			WB_Point p;
 			while (vItr.hasNext()) {
 				v = vItr.next();
-				final WB_Point p = new WB_Point();
 				if (v.isBoundary() && keepBoundary) {
 					newPositions[id] = v;
 				} else {
-					neighbors = v.getNeighborVertices();
-					final Iterator<HE_Vertex> nItr = neighbors.iterator();
-					while (nItr.hasNext()) {
-						n = nItr.next();
-						if (!selection.contains(n)) {
-							nItr.remove();
-						}
-					}
+					p = new WB_Point();
+					double factor = 0;
+					HE_Halfedge he = v.getHalfedge();
+					do {
+						double cotana = he.getCotan();
+						double cotanb = he.getPair().getCotan();
+						p.addMulSelf(cotana + cotanb, WB_Vector.sub(he.getEndVertex(), v));
+						factor += cotana + cotanb;
 
-					for (int i = 0; i < neighbors.size(); i++) {
-						p.addMulSelf(lambda / neighbors.size(), neighbors.get(i));
-					}
-					newPositions[id] = p.addMulSelf(1.0 - lambda, v);
+						he = he.getNextInVertex();
+					} while (he != v.getHalfedge());
+					newPositions[id] = p.mulSelf(lambda / factor).addSelf(v);
+
 				}
 				id++;
 			}

@@ -19,6 +19,7 @@ void setup() {
   modifier.setAngle(random(PI));
   mesh.modify(modifier);
   render=new WB_Render(this);
+  println(mesh.getSelectionNames());
 }
 
 void draw() {
@@ -31,10 +32,15 @@ void draw() {
   noStroke();
   fill(255);
   render.drawFaces(mesh);
+  fill(255,0,0);
+  render.drawFaces(mesh.getSelection("mirror0"));
   noFill();
   strokeWeight(1);
   stroke(0);
   render.drawEdges(mesh);
+  stroke(255,0,0);
+  render.drawEdges(mesh.getSelection("edges"));
+  
 }
 
 

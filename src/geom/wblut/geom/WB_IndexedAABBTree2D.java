@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -16,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressTracker;
 
 public class WB_IndexedAABBTree2D {
@@ -37,7 +31,7 @@ public class WB_IndexedAABBTree2D {
 	 * @param mnof
 	 */
 	public WB_IndexedAABBTree2D(final int[] triangles, final List<? extends WB_Coord> points, final int mnof) {
-		List<WB_IndexedTriangle> mesh = new FastTable<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> mesh = new FastList<WB_IndexedTriangle>();
 		for (int i = 0; i < triangles.length; i += 3) {
 			mesh.add(new WB_IndexedTriangle(i, triangles, points));
 		}
@@ -56,7 +50,7 @@ public class WB_IndexedAABBTree2D {
 	 */
 	public WB_IndexedAABBTree2D(final WB_Triangulation2D triangulation, final List<? extends WB_Coord> points,
 			final int mnof) {
-		List<WB_IndexedTriangle> mesh = new FastTable<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> mesh = new FastList<WB_IndexedTriangle>();
 		for (int i = 0; i < triangulation.getTriangles().length; i += 3) {
 			mesh.add(new WB_IndexedTriangle(i, triangulation.getTriangles(), points));
 		}
@@ -74,7 +68,7 @@ public class WB_IndexedAABBTree2D {
 	 * @param mnof
 	 */
 	public WB_IndexedAABBTree2D(final WB_AlphaTriangulation2D triangulation, final double alpha, final int mnof) {
-		List<WB_IndexedTriangle> mesh = new FastTable<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> mesh = new FastList<WB_IndexedTriangle>();
 		int[] alphatri = triangulation.getAlphaTriangles(alpha);
 		for (int i = 0; i < alphatri.length; i += 3) {
 			mesh.add(new WB_IndexedTriangle(i, alphatri, triangulation.getPoints()));
@@ -92,7 +86,7 @@ public class WB_IndexedAABBTree2D {
 	 * @param mnof
 	 */
 	public WB_IndexedAABBTree2D(final WB_Triangulation2DWithPoints triangulation, final int mnof) {
-		List<WB_IndexedTriangle> mesh = new FastTable<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> mesh = new FastList<WB_IndexedTriangle>();
 		for (int i = 0; i < triangulation.getTriangles().length; i += 3) {
 			mesh.add(new WB_IndexedTriangle(i, triangulation.getTriangles(), triangulation.getPoints()));
 		}
@@ -126,7 +120,7 @@ public class WB_IndexedAABBTree2D {
 				"Starting WB_AABBTree construction. Max. number of faces per node: " + maxNumberOfFaces);
 
 		root = new WB_IndexedAABBNode2D();
-		final List<WB_IndexedTriangle> faces = new FastTable<WB_IndexedTriangle>();
+		final List<WB_IndexedTriangle> faces = new FastList<WB_IndexedTriangle>();
 		faces.addAll(mesh);
 		buildNode(root, faces, mesh, 0);
 		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");
@@ -155,8 +149,8 @@ public class WB_IndexedAABBTree2D {
 			return;
 		}
 
-		List<WB_IndexedTriangle> subsetA = new FastTable<WB_IndexedTriangle>();
-		List<WB_IndexedTriangle> subsetB = new FastTable<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> subsetA = new FastList<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> subsetB = new FastList<WB_IndexedTriangle>();
 
 		double sah = Double.POSITIVE_INFINITY;
 
@@ -178,8 +172,8 @@ public class WB_IndexedAABBTree2D {
 			sah = findOptimalSubset(sah, node, subsetA, subsetB, faces);
 		}
 
-		List<WB_IndexedTriangle> childA = new FastTable<WB_IndexedTriangle>();
-		List<WB_IndexedTriangle> childB = new FastTable<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> childA = new FastList<WB_IndexedTriangle>();
+		List<WB_IndexedTriangle> childB = new FastList<WB_IndexedTriangle>();
 
 		if (subsetA.size() < subsetB.size()) {
 			childA.addAll(subsetB);
@@ -407,7 +401,7 @@ public class WB_IndexedAABBTree2D {
 		 */
 		public WB_IndexedAABBNode2D() {
 			level = -1;
-			faces = new FastTable<WB_IndexedTriangle>();
+			faces = new FastList<WB_IndexedTriangle>();
 		}
 
 		/**

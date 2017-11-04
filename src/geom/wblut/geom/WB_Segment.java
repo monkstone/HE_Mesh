@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Math;
 
 /**
@@ -160,7 +155,7 @@ public class WB_Segment extends WB_Line {
 	 * @return
 	 */
 	public static List<WB_Segment> negate(final List<WB_Segment> segs) {
-		final List<WB_Segment> neg = new FastTable<WB_Segment>();
+		final List<WB_Segment> neg = new FastList<WB_Segment>();
 		for (int i = 0; i < segs.size(); i++) {
 			neg.add(segs.get(i).negate());
 		}

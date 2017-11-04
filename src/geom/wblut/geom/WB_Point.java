@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import wblut.math.WB_Ease;
@@ -19,11 +14,11 @@ import wblut.math.WB_M33;
  */
 public class WB_Point extends WB_Vector {
 
-	private static final WB_Coord X = new WB_SimpleVector(1, 0, 0);
-	private static final WB_Coord Y = new WB_SimpleVector(0, 1, 0);
-	private static final WB_Coord Z = new WB_SimpleVector(0, 0, 1);
-	private static final WB_Coord ORIGIN = new WB_SimpleVector(0, 0, 0);
-	private static final WB_Coord ZERO = new WB_SimpleVector(0, 0, 0);
+	private static final WB_Coord X = new WB_MutableCoordinate(1, 0, 0);
+	private static final WB_Coord Y = new WB_MutableCoordinate(0, 1, 0);
+	private static final WB_Coord Z = new WB_MutableCoordinate(0, 0, 1);
+	private static final WB_Coord ORIGIN = new WB_MutableCoordinate(0, 0, 0);
+	private static final WB_Coord ZERO = new WB_MutableCoordinate(0, 0, 0);
 
 	/**
 	 *
@@ -934,7 +929,7 @@ public class WB_Point extends WB_Vector {
 
 	@Override
 	/**
-	 * 
+	 *
 	 * @param angle
 	 * @param p
 	 * @return
@@ -1136,7 +1131,7 @@ public class WB_Point extends WB_Vector {
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param angle
 	 * @param p1
 	 * @param p2
@@ -1294,7 +1289,7 @@ public class WB_Point extends WB_Vector {
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param f
 	 * @return
 	 */
@@ -1321,7 +1316,7 @@ public class WB_Point extends WB_Vector {
 	 */
 	@Override
 	/**
-	 * 
+	 *
 	 * @param fx
 	 * @param fy
 	 * @param fz

@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 /**
@@ -80,7 +81,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#xd(wblut.geom.WB_Coord)
 		 */
 		@Override
@@ -91,7 +92,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#yd(wblut.geom.WB_Coord)
 		 */
 		@Override
@@ -101,7 +102,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#zd(wblut.geom.WB_Coord)
 		 */
 		@Override
@@ -111,7 +112,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#xf(wblut.geom.WB_Coord)
 		 */
 		@Override
@@ -121,7 +122,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#yf(wblut.geom.WB_Coord)
 		 */
 		@Override
@@ -131,7 +132,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#zf(wblut.geom.WB_Coord)
 		 */
 		@Override
@@ -141,7 +142,7 @@ public abstract class WB_Swizzle {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see wblut.geom.WB_Swizzle#swizzle(wblut.geom.WB_MutableCoord)
 		 */
 		@Override

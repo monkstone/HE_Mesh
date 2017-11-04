@@ -3,7 +3,6 @@ var searchData=
   ['b',['b',['../classwblut_1_1geom_1_1_w_b___geodesic.html#a046c1f18ef236da9998ca4a4c8c5736f',1,'wblut.geom.WB_Geodesic.b()'],['../classwblut_1_1geom_1_1_w_b___triangle.html#a06868797517a77c3e536ea4bf7c4f3fe',1,'wblut.geom.WB_Triangle.b()'],['../classwblut_1_1hemesh_1_1_h_e_c___geodesic.html#a9b75d781c97ea96ff78418131a892897',1,'wblut.hemesh.HEC_Geodesic.b()']]],
   ['back',['BACK',['../enumwblut_1_1geom_1_1_w_b___classification.html#a2e498bbd99349740e404d68a5734845d',1,'wblut.geom.WB_Classification.BACK()'],['../classwblut_1_1math_1_1_w_b___ease.html#acbca5ac239ed4fd1b2ca0811620130b8',1,'wblut.math.WB_Ease.back()']]],
   ['backexcl',['BACKEXCL',['../enumwblut_1_1geom_1_1_w_b___classification.html#afb07820acc7733763e418eeca1b903e1',1,'wblut::geom::WB_Classification']]],
-  ['backfaces',['backFaces',['../classwblut_1_1hemesh_1_1_h_e_m___slice_surface.html#ac0de12525397a05e6ea32d3bd504b3d3',1,'wblut::hemesh::HEM_SliceSurface']]],
   ['bendaxis',['bendAxis',['../classwblut_1_1hemesh_1_1_h_e_m___bend.html#abeb3057f189a405a1accc0b796cc0e9e',1,'wblut::hemesh::HEM_Bend']]],
   ['binomial',['binomial',['../classwblut_1_1math_1_1_w_b___binomial.html#a2a7b334f0f1f0d877528790b7e7ee84f',1,'wblut::math::WB_Binomial']]],
   ['blendfactor',['blendFactor',['../classwblut_1_1hemesh_1_1_h_e_s___catmull_clark.html#a454468866ff0eb9595ac9f9df4d9d9cf',1,'wblut::hemesh::HES_CatmullClark']]],

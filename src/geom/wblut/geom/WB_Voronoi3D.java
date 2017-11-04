@@ -1,21 +1,16 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import gnu.trove.set.TIntSet;
-import gnu.trove.set.hash.TIntHashSet;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.external.ProGAL.CTetrahedron;
 import wblut.external.ProGAL.CVertex;
 import wblut.external.ProGAL.DelaunayComplex;
@@ -56,7 +51,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 		}
 		final DelaunayComplex dc = new DelaunayComplex(tmppoints);
 		final List<CVertex> vertices = dc.getVertices();
-		final List<WB_VoronoiCell3D> result = new FastTable<WB_VoronoiCell3D>();
+		final List<WB_VoronoiCell3D> result = new FastList<WB_VoronoiCell3D>();
 		for (int i = 0; i < nv; i++) {
 			final CVertex v = vertices.get(i);
 			final Set<CTetrahedron> vertexhull = dc.getVertexHull(v);
@@ -66,7 +61,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 				hullpoints.add(toPoint(tetra.circumcenter()));
 				// }
 			}
-			final List<WB_Point> finalpoints = new FastTable<WB_Point>();
+			final List<WB_Point> finalpoints = new FastList<WB_Point>();
 			for (int j = 0; j < hullpoints.size(); j++) {
 				finalpoints.add(geometryfactory.createPoint(hullpoints.get(j)));
 			}
@@ -170,7 +165,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 		for (int i = 0; i < nv; i++) {
 			final CVertex v = vertices.get(i);
 			final Set<CTetrahedron> vertexhull = dc.getVertexHull(v);
-			final TIntSet neighbors = new TIntHashSet();
+			final IntHashSet neighbors = new IntHashSet();
 			for (final CTetrahedron tetra : vertexhull) {
 				for (int j = 0; j < 4; j++) {
 					if (!tetra.getPoint(j).isBigpoint()) {
@@ -212,7 +207,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 		for (int i = 0; i < nv; i++) {
 			final CVertex v = vertices.get(i);
 			final Set<CTetrahedron> vertexhull = dc.getVertexHull(v);
-			final TIntSet neighbors = new TIntHashSet();
+			final IntHashSet neighbors = new IntHashSet();
 			for (final CTetrahedron tetra : vertexhull) {
 				for (int j = 0; j < 4; j++) {
 					if (!tetra.getPoint(j).isBigpoint()) {
@@ -283,7 +278,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 		}
 		final DelaunayComplex dc = new DelaunayComplex(tmppoints);
 		final List<CVertex> vertices = dc.getVertices();
-		final List<WB_VoronoiCell3D> result = new FastTable<WB_VoronoiCell3D>();
+		final List<WB_VoronoiCell3D> result = new FastList<WB_VoronoiCell3D>();
 		for (i = 0; i < nv; i++) {
 			final CVertex v = vertices.get(i);
 			final Set<CTetrahedron> vertexhull = dc.getVertexHull(v);
@@ -294,7 +289,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 				hullpoints.add(toPoint(tetra.circumcenter()));
 				// }
 			}
-			final List<WB_Point> finalpoints = new FastTable<WB_Point>();
+			final List<WB_Point> finalpoints = new FastList<WB_Point>();
 			for (int j = 0; j < hullpoints.size(); j++) {
 				finalpoints.add(geometryfactory.createPoint(hullpoints.get(j)));
 			}
@@ -351,7 +346,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 			final WB_AABB aabb, final WB_ScalarParameter d) {
 		nv = Math.min(nv, points.size());
 		final int n = points.size();
-		final List<WB_VoronoiCell3D> result = new FastTable<WB_VoronoiCell3D>();
+		final List<WB_VoronoiCell3D> result = new FastList<WB_VoronoiCell3D>();
 		for (int i = 0; i < nv; i++) {
 			final ArrayList<WB_Plane> cutPlanes = new ArrayList<WB_Plane>();
 			final WB_Point O = new WB_Point();
@@ -475,7 +470,7 @@ class WB_Voronoi3D extends WB_Voronoi2D {
 			final WB_ScalarParameter d) {
 		nv = Math.min(nv, points.length);
 		final int n = points.length;
-		final List<WB_VoronoiCell3D> result = new FastTable<WB_VoronoiCell3D>();
+		final List<WB_VoronoiCell3D> result = new FastList<WB_VoronoiCell3D>();
 		for (int i = 0; i < nv; i++) {
 			final ArrayList<WB_Plane> cutPlanes = new ArrayList<WB_Plane>();
 			final WB_Point O = new WB_Point();

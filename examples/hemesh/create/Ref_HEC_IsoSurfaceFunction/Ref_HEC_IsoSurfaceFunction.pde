@@ -19,9 +19,9 @@ void setup() {
   //3D grids of values can take up a lot of memory, using a function
   //can decrease the memory use, allow larger grids. The resulting number
   //of triangles can still be a limiting factor for Processing though.
-  creator.setValues(new ScalarField(),0.0,0.0,0.0,.1,.1,.1);
+  creator.setValues(new ScalarField(),0.0,0.0,0.0,.1,.1,.1);//scalar field function, origin, stepsize
 
-  creator.setIsolevel(.6);
+  creator.setIsolevel(.36);
   creator.setInvert(false);
   creator.setBoundary(100);
   //Gamma controls level of grid snap, 0.0-0.5. Can improve the 
@@ -48,6 +48,6 @@ void draw() {
 
 class ScalarField implements WB_ScalarParameter{
   double evaluate(double... x){
-   return 2.5*sin((float)x[0])*cos((float)x[1])*sin((float)x[2])+4*noise(0.2*(float)x[0],0.4*(float)x[1],0.2*(float)x[2]); 
+   return noise(0.35*(float)(x[0]-6.4),0.35*(float)(x[1]-3.2),0.35*(float)(x[2]-3.2)); 
   }
 }

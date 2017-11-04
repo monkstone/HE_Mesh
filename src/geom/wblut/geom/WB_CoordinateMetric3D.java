@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -24,43 +18,36 @@ public interface WB_CoordinateMetric3D extends WB_CoordinateMetric2D {
 	 *
 	 *
 	 * @return
-	 * @deprecated Use {@link #getLength()} instead
 	 */
-	@Deprecated
 	public double getLength3D();
 
 	/**
 	 *
 	 *
 	 * @return
-	 * @deprecated Use {@link #getSqLength()} instead
 	 */
-	@Deprecated
 	public double getSqLength3D();
 
 	/**
-	 * 
+	 *
 	 * @param p
 	 * @return
 	 */
-	@Deprecated
 	public double getDistance3D(final WB_Coord p);
 
 	/**
-	 * 
+	 *
 	 * @param p
 	 * @return
 	 */
-	@Deprecated
 	public double getSqDistance3D(final WB_Coord p);
 
 	/**
 	 *
 	 *
 	 * @return
-	 * @deprecated Use {@link #getOrthoNormal()} instead
 	 */
-	@Deprecated
+
 	public WB_Coord getOrthoNormal3D();
 
 	/**

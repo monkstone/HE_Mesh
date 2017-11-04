@@ -19,7 +19,7 @@ void setup() {
   render=new WB_Render3D(this);
   println(WB_Version.version());
   println(WB_Disclaimer.disclaimer());
-  scale=400;
+  scale=550;
   danzerA=new WB_Danzer(scale, WB_Danzer.Type.A,new WB_Point(-250,0,0));
   danzerA.inflate(3);
   danzerB=new WB_Danzer(scale, WB_Danzer.Type.B);

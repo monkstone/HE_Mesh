@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
@@ -25,8 +20,8 @@ import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.hemesh.HEC_Archimedes;
 import wblut.hemesh.HEM_ChamferCorners;
 import wblut.hemesh.HEM_Crocodile;
@@ -227,14 +222,14 @@ public class WB_PolygonTriangulatorJTS {
 	 */
 	@SuppressWarnings("unchecked")
 	public WB_Triangulation2D triangulatePolygon2D(final WB_Polygon polygon, final boolean optimize) {
-		final List<WB_Point> pts = new FastTable<WB_Point>();
+		final List<WB_Point> pts = new FastList<WB_Point>();
 		for (int i = 0; i < polygon.numberOfShellPoints; i++) {
 			pts.add(polygon.getPoint(i));
 		}
 		int index = polygon.numberOfShellPoints;
-		final List<WB_Point>[] hpts = new FastTable[polygon.numberOfContours - 1];
+		final List<WB_Point>[] hpts = new FastList[polygon.numberOfContours - 1];
 		for (int i = 0; i < polygon.numberOfContours - 1; i++) {
-			hpts[i] = new FastTable<WB_Point>();
+			hpts[i] = new FastList<WB_Point>();
 			for (int j = 0; j < polygon.numberOfPointsPerContour[i + 1]; j++) {
 				hpts[i].add(polygon.points.get(index++));
 			}
@@ -306,7 +301,7 @@ public class WB_PolygonTriangulatorJTS {
 		final Polygon inputPolygon = new GeometryFactory().createPolygon(shell, holes);
 		final int[] ears = triangulate(inputPolygon, optimize);
 		final int[] E = extractEdgesTri(ears);
-		final List<WB_Point> Points = new FastTable<WB_Point>();
+		final List<WB_Point> Points = new FastList<WB_Point>();
 		for (int i = 0; i < shellCoords.size() - 1; i++) {
 			point = geometryfactory.createPoint();
 			context.unmapPoint2D(shellCoords.get(i).x, shellCoords.get(i).y, point);
@@ -341,7 +336,7 @@ public class WB_PolygonTriangulatorJTS {
 
 		}
 		final int[] E = extractEdgesTri(ears);
-		final List<WB_Point> Points = new FastTable<WB_Point>();
+		final List<WB_Point> Points = new FastList<WB_Point>();
 		for (int i = 0; i < shellCoords.size() - 1; i++) {
 			point = geometryfactory.createPoint();
 			context.unmapPoint2D(shellCoords.get(i).x, shellCoords.get(i).y, point);
@@ -380,7 +375,7 @@ public class WB_PolygonTriangulatorJTS {
 	}
 
 	public int[] triangulateFace(final HE_Face face, final boolean optimize) {
-		int fo = face.getFaceOrder();
+		int fo = face.getFaceDegree();
 		final Coordinate[] coords = new Coordinate[fo + 1];
 		WB_Coord normal = face.getFaceNormal();
 		WB_Swizzle coordViewer;
@@ -405,7 +400,7 @@ public class WB_PolygonTriangulatorJTS {
 		final Polygon inputPolygon = new GeometryFactory().createPolygon(shell);
 		final int[] ears = triangulate(inputPolygon, optimize);
 
-		final List<WB_Point> tripoints = new FastTable<WB_Point>();
+		final List<WB_Point> tripoints = new FastList<WB_Point>();
 		for (int j = 0; j < shellCoords.size() - 1; j++) {
 			tripoints.add(new WB_Point(shellCoords.get(j).x, shellCoords.get(j).y));
 		}
@@ -445,7 +440,7 @@ public class WB_PolygonTriangulatorJTS {
 		final Polygon inputPolygon = new GeometryFactory().createPolygon(shell);
 		final int[] ears = triangulate(inputPolygon, optimize);
 
-		final List<WB_Point> tripoints = new FastTable<WB_Point>();
+		final List<WB_Point> tripoints = new FastList<WB_Point>();
 		for (int j = 0; j < shellCoords.size() - 1; j++) {
 			tripoints.add(new WB_Point(shellCoords.get(j).x, shellCoords.get(j).y));
 		}
@@ -469,7 +464,7 @@ public class WB_PolygonTriangulatorJTS {
 	 */
 	private static int[] extractEdgesTri(final int[] ears) {
 		final int f = ears.length;
-		final FastMap<Long, int[]> map = new FastMap<Long, int[]>();
+		final UnifiedMap<Long, int[]> map = new UnifiedMap<Long, int[]>();
 		for (int i = 0; i < ears.length; i += 3) {
 			final int v0 = ears[i];
 			final int v1 = ears[i + 1];

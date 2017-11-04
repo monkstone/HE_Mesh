@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  * Mark Bayazit's algorithm for concave polygon decomposition
@@ -35,7 +30,7 @@ public class WB_PolygonDecomposer {
 		if (!polygon.isSimple()) {
 			polygon = gf.createSimplePolygon(polygon);
 		}
-		List<WB_Polygon> polys = new FastTable<WB_Polygon>();
+		List<WB_Polygon> polys = new FastList<WB_Polygon>();
 		if (polygon == null) {
 			return polys;
 		}
@@ -59,8 +54,8 @@ public class WB_PolygonDecomposer {
 		int lowerIndex = 0;
 		int closestIndex = 0;
 
-		List<WB_Point> lower = new FastTable<WB_Point>();
-		List<WB_Point> upper = new FastTable<WB_Point>();
+		List<WB_Point> lower = new FastList<WB_Point>();
+		List<WB_Point> upper = new FastList<WB_Point>();
 
 		for (int i = 0; i < n; i++) {
 			WB_Point iVertex = pointlist.get(i);

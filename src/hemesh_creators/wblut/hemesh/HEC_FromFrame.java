@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -526,6 +521,7 @@ public class HEC_FromFrame extends HEC_Creator {
 				mesh.add(vrtx);
 			}
 		}
+
 	}
 
 	/**
@@ -678,6 +674,7 @@ public class HEC_FromFrame extends HEC_Creator {
 						final HE_Mesh ball = new HE_Mesh(new HEC_Sphere().setRadius(br).setUFacets(strutFacets)
 								.setVFacets(strutFacets).setCenter(node));
 						hullPoints.addAll(ball.getVertices());
+						mesh.addVertices(ball);
 					}
 					final HEC_ConvexHull ch = new HEC_ConvexHull().setPointsFromVertices(hullPoints);
 					try {

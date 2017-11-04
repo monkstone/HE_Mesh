@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 /**
@@ -47,7 +42,7 @@ public class HEC_TubeSegment extends HEC_Creator {
 		facets = 6;
 		steps = 1;
 		angle = 90;
-		facetAngle = ((angle / facets) / 180.0) * Math.PI;
+		facetAngle = angle / facets / 180.0 * Math.PI;
 		shiftX = 0;
 		shiftY = 0;
 	}
@@ -185,13 +180,13 @@ public class HEC_TubeSegment extends HEC_Creator {
 	 */
 	@Override
 	protected HE_Mesh createBase() {
-		facetAngle = ((angle / facets) / 180.0) * Math.PI;
+		facetAngle = angle / facets / 180.0 * Math.PI;
 		final double[][] vertices = new double[(steps + 1) * (facets + 1) * 2][3];
 		// outer vertices
 		int index = 0;
-		for (int i = 0; i < (steps + 1); i++) {
-			final double Hj = (i * H) / steps;
-			for (int j = 0; j < (facets + 1); j++) {
+		for (int i = 0; i < steps + 1; i++) {
+			final double Hj = i * H / steps;
+			for (int j = 0; j < facets + 1; j++) {
 				vertices[index][0] = outerRadius * Math.cos(j * facetAngle);
 				vertices[index][1] = outerRadius * Math.sin(j * facetAngle);
 				vertices[index][2] = Hj;
@@ -199,28 +194,25 @@ public class HEC_TubeSegment extends HEC_Creator {
 			}
 		}
 		// inner vertices
-		for (int i = 0; i < (steps + 1); i++) {
-			final double Hj = (i * H) / steps;
-			for (int j = 0; j < (facets + 1); j++) {
-				vertices[index][0] = shiftX
-						+ (innerRadius * Math.cos(j * facetAngle));
-				vertices[index][1] = shiftY
-						+ (innerRadius * Math.sin(j * facetAngle));
+		for (int i = 0; i < steps + 1; i++) {
+			final double Hj = i * H / steps;
+			for (int j = 0; j < facets + 1; j++) {
+				vertices[index][0] = shiftX + innerRadius * Math.cos(j * facetAngle);
+				vertices[index][1] = shiftY + innerRadius * Math.sin(j * facetAngle);
 				vertices[index][2] = Hj;
 				index++;
 			}
 		}
-		final int[][] faces = new int[(steps * facets * 2) + (facets * 2)
-		                              + (steps * 2)][3];
+		final int[][] faces = new int[steps * facets * 2 + facets * 2 + steps * 2][3];
 		// outer faces
 		index = 0;
 		for (int j = 0; j < steps; j++) {
 			for (int i = 0; i < facets; i++) {
 				faces[index] = new int[4];
-				faces[index][0] = i + ((facets + 1) * j);
-				faces[index][1] = i + 1 + ((facets + 1) * j);
-				faces[index][2] = i + 1 + ((facets + 1) * (j + 1));
-				faces[index][3] = i + ((facets + 1) * (j + 1));
+				faces[index][0] = i + (facets + 1) * j;
+				faces[index][1] = i + 1 + (facets + 1) * j;
+				faces[index][2] = i + 1 + (facets + 1) * (j + 1);
+				faces[index][3] = i + (facets + 1) * (j + 1);
 				index++;
 			}
 		}
@@ -228,14 +220,10 @@ public class HEC_TubeSegment extends HEC_Creator {
 		for (int j = 0; j < steps; j++) {
 			for (int i = 0; i < facets; i++) {
 				faces[index] = new int[4];
-				faces[index][3] = (i + ((facets + 1) * j))
-						+ ((steps + 1) * (facets + 1));
-				faces[index][2] = (i + 1 + ((facets + 1) * j))
-						+ ((steps + 1) * (facets + 1));
-				faces[index][1] = (i + 1 + ((facets + 1) * (j + 1)))
-						+ ((steps + 1) * (facets + 1));
-				faces[index][0] = (i + ((facets + 1) * (j + 1)))
-						+ ((steps + 1) * (facets + 1));
+				faces[index][3] = i + (facets + 1) * j + (steps + 1) * (facets + 1);
+				faces[index][2] = i + 1 + (facets + 1) * j + (steps + 1) * (facets + 1);
+				faces[index][1] = i + 1 + (facets + 1) * (j + 1) + (steps + 1) * (facets + 1);
+				faces[index][0] = i + (facets + 1) * (j + 1) + (steps + 1) * (facets + 1);
 				index++;
 			}
 		}
@@ -244,39 +232,36 @@ public class HEC_TubeSegment extends HEC_Creator {
 			faces[index] = new int[4];
 			faces[index][3] = i;
 			faces[index][2] = i + 1;
-			faces[index][1] = i + 1 + ((steps + 1) * (facets + 1));
-			faces[index][0] = i + ((steps + 1) * (facets + 1));
+			faces[index][1] = i + 1 + (steps + 1) * (facets + 1);
+			faces[index][0] = i + (steps + 1) * (facets + 1);
 			index++;
 		}
 		// bottom faces
-		final int offSet = ((steps + 1) * (facets + 1)) - facets - 1;
+		final int offSet = (steps + 1) * (facets + 1) - facets - 1;
 		for (int i = 0; i < facets; i++) {
 			faces[index] = new int[4];
 			faces[index][0] = i + offSet;
 			faces[index][1] = i + 1 + offSet;
-			faces[index][2] = i + 1 + ((steps + 1) * (facets + 1)) + offSet;
-			faces[index][3] = i + ((steps + 1) * (facets + 1)) + offSet;
+			faces[index][2] = i + 1 + (steps + 1) * (facets + 1) + offSet;
+			faces[index][3] = i + (steps + 1) * (facets + 1) + offSet;
 			index++;
 		}
 		// close side 1
 		for (int i = 0; i < steps; i++) {
 			faces[index] = new int[4];
 			faces[index][0] = (i + 1) * (facets + 1);
-			faces[index][1] = ((steps + 1) * (facets + 1)) + (i * (facets + 1))
-					+ (facets + 1);
-			faces[index][2] = ((steps + 1) * (facets + 1)) + (i * (facets + 1));
+			faces[index][1] = (steps + 1) * (facets + 1) + i * (facets + 1) + facets + 1;
+			faces[index][2] = (steps + 1) * (facets + 1) + i * (facets + 1);
 			faces[index][3] = i * (facets + 1);
 			index++;
 		}
 		// close side 2
 		for (int i = 0; i < steps; i++) {
 			faces[index] = new int[4];
-			faces[index][3] = (((steps + 1) * (facets + 1))
-					+ (i * (facets + 1)) + (facets + 1)) - 1;
-			faces[index][2] = ((i + 1) * (facets + 1)) - 1;
-			faces[index][1] = (((i + 1) * (facets + 1)) - 1) + (facets + 1);
-			faces[index][0] = ((steps + 1) * (facets + 1)) + (i * (facets + 1))
-					+ (facets + 1) + facets;
+			faces[index][3] = (steps + 1) * (facets + 1) + i * (facets + 1) + facets + 1 - 1;
+			faces[index][2] = (i + 1) * (facets + 1) - 1;
+			faces[index][1] = (i + 1) * (facets + 1) - 1 + facets + 1;
+			faces[index][0] = (steps + 1) * (facets + 1) + i * (facets + 1) + facets + 1 + facets;
 			index++;
 		}
 		final HEC_FromFacelist fl = new HEC_FromFacelist();

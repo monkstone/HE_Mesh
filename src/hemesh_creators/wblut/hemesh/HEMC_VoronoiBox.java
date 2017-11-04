@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_Coord;
@@ -56,7 +51,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 	 * @return self
 	 */
 	public HEMC_VoronoiBox setPoints(final WB_Coord[] points) {
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (WB_Coord p : points) {
 			this.points.add(p);
 		}
@@ -71,7 +66,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 	 * @return self
 	 */
 	public HEMC_VoronoiBox setPoints(final Collection<? extends WB_Coord> points) {
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		this.points.addAll(points);
 		return this;
 	}
@@ -85,7 +80,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 	 */
 	public HEMC_VoronoiBox setPoints(final double[][] points) {
 		final int n = points.length;
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (int i = 0; i < n; i++) {
 			this.points.add(new WB_Point(points[i][0], points[i][1], points[i][2]));
 		}
@@ -101,7 +96,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 	 */
 	public HEMC_VoronoiBox setPoints(final float[][] points) {
 		final int n = points.length;
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (int i = 0; i < n; i++) {
 			this.points.add(new WB_Point(points[i][0], points[i][1], points[i][2]));
 		}
@@ -180,7 +175,7 @@ public class HEMC_VoronoiBox extends HEMC_MultiCreator {
 		for (WB_VoronoiCell3D vor : voronoi) {
 			HE_Mesh m = new HE_Mesh(vor.getMesh());
 			m.setInternalLabel(vor.getIndex());
-			m.setLabel(vor.getIndex());
+			m.setUserLabel(vor.getIndex());
 			result.add(m);
 			counter.increment();
 

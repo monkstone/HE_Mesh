@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.data.WB_PolyhedraData;
@@ -57,7 +52,7 @@ public class HEC_Plato extends HEC_Creator {
 		super();
 		R = E;
 		this.type = type;
-		if ((type < 1) || (type > 5)) {
+		if (type < 1 || type > 5) {
 			throw new IllegalArgumentException("Type of Platonic polyhedron should be between 1 and 5.");
 		}
 		name = names[type - 1];
@@ -83,7 +78,7 @@ public class HEC_Plato extends HEC_Creator {
 	 * @return
 	 */
 	public HEC_Plato setType(final int type) {
-		if ((type < 1) || (type > 5)) {
+		if (type < 1 || type > 5) {
 			throw new IllegalArgumentException("Type of Platonic polyhedron should be between 1 and 5.");
 		}
 		this.type = type;
@@ -97,7 +92,7 @@ public class HEC_Plato extends HEC_Creator {
 	 * @return
 	 */
 	public String getName() {
-		return (name);
+		return name;
 	}
 
 	/*
@@ -121,7 +116,7 @@ public class HEC_Plato extends HEC_Creator {
 	 */
 	public static void printTypes() {
 		for (int i = 0; i < names.length; i++) {
-			System.out.println((i + 1) + ": " + names[i]);
+			System.out.println(i + 1 + ": " + names[i]);
 		}
 	}
 }

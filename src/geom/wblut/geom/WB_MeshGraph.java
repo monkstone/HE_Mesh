@@ -1,6 +1,6 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
+ * http://creativecommons.org/publicdomain/zero/1.0/
+
  * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
  * rights.
  *
@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.hemesh.HEMC_Explode;
 import wblut.hemesh.HE_Mesh;
 import wblut.hemesh.HE_MeshCollection;
@@ -238,7 +238,7 @@ public class WB_MeshGraph {
 		for (int j = 0; j < vertices.length; j++) {
 			vertices[j].reset();
 		}
-		source.minWeight = 0.;
+		source.distanceToSource = 0.;
 		final PriorityQueue<WB_GraphVertex> vertexQueue = new PriorityQueue<WB_GraphVertex>();
 		vertexQueue.add(source);
 		while (!vertexQueue.isEmpty()) {
@@ -247,10 +247,10 @@ public class WB_MeshGraph {
 			for (final WB_GraphEdge e : u.neighbors) {
 				final WB_GraphVertex v = e.target;
 				final double weight = e.weight;
-				final double distanceThroughU = u.minWeight + weight;
-				if (distanceThroughU < v.minWeight) {
+				final double distanceThroughU = u.distanceToSource + weight;
+				if (distanceThroughU < v.distanceToSource) {
 					vertexQueue.remove(v);
-					v.minWeight = distanceThroughU;
+					v.distanceToSource = distanceThroughU;
 					v.previous = u;
 					vertexQueue.add(v);
 				}
@@ -283,6 +283,17 @@ public class WB_MeshGraph {
 			result[i] = path.get(i).index;
 		}
 		return result;
+	}
+
+	public double getShortestDistanceBetweenVertices(final int source, final int target) {
+		if (source != lastSource) {
+			computePathsToVertex(source);
+		}
+		if (source == target) {
+			return 0.0;
+		}
+		return vertices[target].distanceToSource;
+
 	}
 
 	/**
@@ -393,7 +404,7 @@ public class WB_MeshGraph {
 		WB_MeshGraph graph = new WB_MeshGraph(geo.create());
 		for (final WB_GraphVertex v : graph.vertices) {
 			final int[] path = graph.getShortestPathBetweenVertices(5, v.index);
-			System.out.println("Distance to " + v + ": " + v.minWeight);
+			System.out.println("Distance to " + v + ": " + v.distanceToSource);
 			System.out.print("Path: ");
 			for (int i = 0; i < path.length - 1; i++) {
 				System.out.print(path[i] + "->");
@@ -405,7 +416,7 @@ public class WB_MeshGraph {
 		graph = new WB_MeshGraph(mesh);
 		for (final WB_GraphVertex v : graph.vertices) {
 			final int[] path = graph.getShortestPathBetweenVertices(0, v.index);
-			System.out.println("Distance to " + v + ": " + v.minWeight);
+			System.out.println("Distance to " + v + ": " + v.distanceToSource);
 			System.out.print("Path: ");
 			for (int i = 0; i < path.length - 1; i++) {
 				System.out.print(path[i] + "->");
@@ -414,7 +425,7 @@ public class WB_MeshGraph {
 		}
 		for (final WB_GraphVertex v : graph.vertices) {
 			final int[] path = graph.getShortestPathBetweenVertices(5, v.index);
-			System.out.println("Distance to " + v + ": " + v.minWeight);
+			System.out.println("Distance to " + v + ": " + v.distanceToSource);
 			System.out.print("Path: ");
 			for (int i = 0; i < path.length - 1; i++) {
 				System.out.print(path[i] + "->");
@@ -438,7 +449,7 @@ public class WB_MeshGraph {
 		/**
 		 *
 		 */
-		public double minWeight = Double.POSITIVE_INFINITY;
+		public double distanceToSource = Double.POSITIVE_INFINITY;
 		/**
 		 *
 		 */
@@ -456,7 +467,7 @@ public class WB_MeshGraph {
 		 */
 		public WB_GraphVertex(final int id, final WB_Coord pos) {
 			index = id;
-			neighbors = new FastTable<WB_GraphEdge>();
+			neighbors = new FastList<WB_GraphEdge>();
 			x = pos.xd();
 			y = pos.yd();
 			z = pos.zd();
@@ -479,16 +490,17 @@ public class WB_MeshGraph {
 		 */
 		@Override
 		public int compareTo(final WB_GraphVertex other) {
-			return Double.compare(minWeight, other.minWeight);
+			return Double.compare(distanceToSource, other.distanceToSource);
 		}
 
 		/**
 		 *
 		 */
 		public void reset() {
-			minWeight = Double.POSITIVE_INFINITY;
+			distanceToSource = Double.POSITIVE_INFINITY;
 			previous = null;
 		}
+
 	}
 
 	/**

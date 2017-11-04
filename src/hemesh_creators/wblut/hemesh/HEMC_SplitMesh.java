@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Plane;
@@ -106,7 +101,7 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset).setSimpleCap(simpleCap);
 		sm.applySelf(tmp);
 		tmp.resetFaceInternalLabels();
-		HE_FaceIterator fItr = sm.capFaces.fItr();
+		HE_FaceIterator fItr = tmp.getSelection("caps").fItr();
 		while (fItr.hasNext()) {
 			fItr.next().setInternalLabel(1);
 		}
@@ -116,7 +111,7 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		tmp = mesh.copy();
 		sm.applySelf(tmp);
 		tmp.resetFaceInternalLabels();
-		fItr = sm.capFaces.fItr();
+		fItr = tmp.getSelection("caps").fItr();
 		while (fItr.hasNext()) {
 			fItr.next().setInternalLabel(1);
 		}

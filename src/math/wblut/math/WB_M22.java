@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.math;
 
 import wblut.geom.WB_Coord;
@@ -345,7 +340,7 @@ public class WB_M22 {
 	 *            factor
 	 */
 	public void div(final double f) {
-		final double invf = (WB_Epsilon.isZero(f)) ? Double.NaN : 1.0 / f;
+		final double invf = WB_Epsilon.isZero(f) ? Double.NaN : 1.0 / f;
 		m11 *= invf;
 		m12 *= invf;
 		m13 *= invf;
@@ -426,7 +421,7 @@ public class WB_M22 {
 	 *            result
 	 */
 	public void divInto(final double f, final WB_M22 result) {
-		final double invf = (WB_Epsilon.isZero(f)) ? 0 : 1.0 / f;
+		final double invf = WB_Epsilon.isZero(f) ? 0 : 1.0 / f;
 		result.m11 = invf * m11;
 		result.m12 = invf * m12;
 		result.m13 = invf * m13;
@@ -448,15 +443,11 @@ public class WB_M22 {
 	 * @return result
 	 */
 	public static WB_M22 mul(final WB_M22 m, final WB_M22 n) {
-		return new WB_M22((m.m11 * n.m11) + (m.m12 * n.m21) + (m.m13 * n.m31),
-				(m.m11 * n.m12) + (m.m12 * n.m22) + (m.m13 * n.m32),
-				(m.m11 * n.m13) + (m.m12 * n.m23) + (m.m13 * n.m33),
-				(m.m21 * n.m11) + (m.m22 * n.m21) + (m.m23 * n.m31),
-				(m.m21 * n.m12) + (m.m22 * n.m22) + (m.m23 * n.m32),
-				(m.m21 * n.m13) + (m.m22 * n.m23) + (m.m23 * n.m33),
-				(m.m31 * n.m11) + (m.m32 * n.m21) + (m.m33 * n.m31),
-				(m.m31 * n.m12) + (m.m32 * n.m22) + (m.m33 * n.m32),
-				(m.m31 * n.m13) + (m.m32 * n.m23) + (m.m33 * n.m33));
+		return new WB_M22(m.m11 * n.m11 + m.m12 * n.m21 + m.m13 * n.m31, m.m11 * n.m12 + m.m12 * n.m22 + m.m13 * n.m32,
+				m.m11 * n.m13 + m.m12 * n.m23 + m.m13 * n.m33, m.m21 * n.m11 + m.m22 * n.m21 + m.m23 * n.m31,
+				m.m21 * n.m12 + m.m22 * n.m22 + m.m23 * n.m32, m.m21 * n.m13 + m.m22 * n.m23 + m.m23 * n.m33,
+				m.m31 * n.m11 + m.m32 * n.m21 + m.m33 * n.m31, m.m31 * n.m12 + m.m32 * n.m22 + m.m33 * n.m32,
+				m.m31 * n.m13 + m.m32 * n.m23 + m.m33 * n.m33);
 	}
 
 	/**
@@ -470,15 +461,11 @@ public class WB_M22 {
 	 *            result
 	 */
 	public static void mulInto(final WB_M22 m, final WB_M22 n, final WB_M22 result) {
-		result.set((m.m11 * n.m11) + (m.m12 * n.m21) + (m.m13 * n.m31),
-				(m.m11 * n.m12) + (m.m12 * n.m22) + (m.m13 * n.m32),
-				(m.m11 * n.m13) + (m.m12 * n.m23) + (m.m13 * n.m33),
-				(m.m21 * n.m11) + (m.m22 * n.m21) + (m.m23 * n.m31),
-				(m.m21 * n.m12) + (m.m22 * n.m22) + (m.m23 * n.m32),
-				(m.m21 * n.m13) + (m.m22 * n.m23) + (m.m23 * n.m33),
-				(m.m31 * n.m11) + (m.m32 * n.m21) + (m.m33 * n.m31),
-				(m.m31 * n.m12) + (m.m32 * n.m22) + (m.m33 * n.m32),
-				(m.m31 * n.m13) + (m.m32 * n.m23) + (m.m33 * n.m33));
+		result.set(m.m11 * n.m11 + m.m12 * n.m21 + m.m13 * n.m31, m.m11 * n.m12 + m.m12 * n.m22 + m.m13 * n.m32,
+				m.m11 * n.m13 + m.m12 * n.m23 + m.m13 * n.m33, m.m21 * n.m11 + m.m22 * n.m21 + m.m23 * n.m31,
+				m.m21 * n.m12 + m.m22 * n.m22 + m.m23 * n.m32, m.m21 * n.m13 + m.m22 * n.m23 + m.m23 * n.m33,
+				m.m31 * n.m11 + m.m32 * n.m21 + m.m33 * n.m31, m.m31 * n.m12 + m.m32 * n.m22 + m.m33 * n.m32,
+				m.m31 * n.m13 + m.m32 * n.m23 + m.m33 * n.m33);
 	}
 
 	/**
@@ -489,11 +476,11 @@ public class WB_M22 {
 	 * @return result
 	 */
 	public WB_M22 mul(final WB_M22 n) {
-		return new WB_M22((m11 * n.m11) + (m12 * n.m21) + (m13 * n.m31), (m11 * n.m12) + (m12 * n.m22) + (m13 * n.m32),
-				(m11 * n.m13) + (m12 * n.m23) + (m13 * n.m33), (m21 * n.m11) + (m22 * n.m21) + (m23 * n.m31),
-				(m21 * n.m12) + (m22 * n.m22) + (m23 * n.m32), (m21 * n.m13) + (m22 * n.m23) + (m23 * n.m33),
-				(m31 * n.m11) + (m32 * n.m21) + (m33 * n.m31), (m31 * n.m12) + (m32 * n.m22) + (m33 * n.m32),
-				(m31 * n.m13) + (m32 * n.m23) + (m33 * n.m33));
+		return new WB_M22(m11 * n.m11 + m12 * n.m21 + m13 * n.m31, m11 * n.m12 + m12 * n.m22 + m13 * n.m32,
+				m11 * n.m13 + m12 * n.m23 + m13 * n.m33, m21 * n.m11 + m22 * n.m21 + m23 * n.m31,
+				m21 * n.m12 + m22 * n.m22 + m23 * n.m32, m21 * n.m13 + m22 * n.m23 + m23 * n.m33,
+				m31 * n.m11 + m32 * n.m21 + m33 * n.m31, m31 * n.m12 + m32 * n.m22 + m33 * n.m32,
+				m31 * n.m13 + m32 * n.m23 + m33 * n.m33);
 	}
 
 	/**
@@ -505,11 +492,11 @@ public class WB_M22 {
 	 *            result
 	 */
 	public void multInto(final WB_M22 n, final WB_M22 result) {
-		result.set((m11 * n.m11) + (m12 * n.m21) + (m13 * n.m31), (m11 * n.m12) + (m12 * n.m22) + (m13 * n.m32),
-				(m11 * n.m13) + (m12 * n.m23) + (m13 * n.m33), (m21 * n.m11) + (m22 * n.m21) + (m23 * n.m31),
-				(m21 * n.m12) + (m22 * n.m22) + (m23 * n.m32), (m21 * n.m13) + (m22 * n.m23) + (m23 * n.m33),
-				(m31 * n.m11) + (m32 * n.m21) + (m33 * n.m31), (m31 * n.m12) + (m32 * n.m22) + (m33 * n.m32),
-				(m31 * n.m13) + (m32 * n.m23) + (m33 * n.m33));
+		result.set(m11 * n.m11 + m12 * n.m21 + m13 * n.m31, m11 * n.m12 + m12 * n.m22 + m13 * n.m32,
+				m11 * n.m13 + m12 * n.m23 + m13 * n.m33, m21 * n.m11 + m22 * n.m21 + m23 * n.m31,
+				m21 * n.m12 + m22 * n.m22 + m23 * n.m32, m21 * n.m13 + m22 * n.m23 + m23 * n.m33,
+				m31 * n.m11 + m32 * n.m21 + m33 * n.m31, m31 * n.m12 + m32 * n.m22 + m33 * n.m32,
+				m31 * n.m13 + m32 * n.m23 + m33 * n.m33);
 	}
 
 	/**
@@ -523,9 +510,8 @@ public class WB_M22 {
 	 *            result
 	 */
 	public static void mulInto(final WB_M22 m, final WB_Coord v, final WB_MutableCoord result) {
-		result.set((v.xd() * m.m11) + (v.yd() * m.m12) + (v.zd() * m.m13),
-				(v.xd() * m.m21) + (v.yd() * m.m22) + (v.zd() * m.m23),
-				(v.xd() * m.m31) + (v.yd() * m.m32) + (v.zd() * m.m33));
+		result.set(v.xd() * m.m11 + v.yd() * m.m12 + v.zd() * m.m13, v.xd() * m.m21 + v.yd() * m.m22 + v.zd() * m.m23,
+				v.xd() * m.m31 + v.yd() * m.m32 + v.zd() * m.m33);
 	}
 
 	/**
@@ -536,9 +522,8 @@ public class WB_M22 {
 	 * @param result
 	 */
 	public static void mulInto(final WB_Coord v, final WB_M22 m, final WB_MutableCoord result) {
-		result.set((v.xd() * m.m11) + (v.yd() * m.m21) + (v.zd() * m.m31),
-				(v.xd() * m.m12) + (v.yd() * m.m22) + (v.zd() * m.m32),
-				(v.xd() * m.m13) + (v.yd() * m.m23) + (v.zd() * m.m33));
+		result.set(v.xd() * m.m11 + v.yd() * m.m21 + v.zd() * m.m31, v.xd() * m.m12 + v.yd() * m.m22 + v.zd() * m.m32,
+				v.xd() * m.m13 + v.yd() * m.m23 + v.zd() * m.m33);
 	}
 
 	/**
@@ -551,9 +536,8 @@ public class WB_M22 {
 	 * @return result
 	 */
 	public static WB_Point mulToPoint(final WB_M22 m, final WB_Coord v) {
-		return new WB_Point((v.xd() * m.m11) + (v.yd() * m.m12) + (v.zd() * m.m13),
-				(v.xd() * m.m21) + (v.yd() * m.m22) + (v.zd() * m.m23),
-				(v.xd() * m.m31) + (v.yd() * m.m32) + (v.zd() * m.m33));
+		return new WB_Point(v.xd() * m.m11 + v.yd() * m.m12 + v.zd() * m.m13,
+				v.xd() * m.m21 + v.yd() * m.m22 + v.zd() * m.m23, v.xd() * m.m31 + v.yd() * m.m32 + v.zd() * m.m33);
 	}
 
 	/**
@@ -566,9 +550,8 @@ public class WB_M22 {
 	 * @return result
 	 */
 	public static WB_Point mulToPoint(final WB_Coord v, final WB_M22 m) {
-		return new WB_Point((v.xd() * m.m11) + (v.yd() * m.m21) + (v.zd() * m.m31),
-				(v.xd() * m.m12) + (v.yd() * m.m22) + (v.zd() * m.m32),
-				(v.xd() * m.m13) + (v.yd() * m.m23) + (v.zd() * m.m33));
+		return new WB_Point(v.xd() * m.m11 + v.yd() * m.m21 + v.zd() * m.m31,
+				v.xd() * m.m12 + v.yd() * m.m22 + v.zd() * m.m32, v.xd() * m.m13 + v.yd() * m.m23 + v.zd() * m.m33);
 	}
 
 	/**
@@ -579,9 +562,8 @@ public class WB_M22 {
 	 * @return
 	 */
 	public static WB_Vector mulToVector(final WB_M22 m, final WB_Coord v) {
-		return new WB_Vector((v.xd() * m.m11) + (v.yd() * m.m12) + (v.zd() * m.m13),
-				(v.xd() * m.m21) + (v.yd() * m.m22) + (v.zd() * m.m23),
-				(v.xd() * m.m31) + (v.yd() * m.m32) + (v.zd() * m.m33));
+		return new WB_Vector(v.xd() * m.m11 + v.yd() * m.m12 + v.zd() * m.m13,
+				v.xd() * m.m21 + v.yd() * m.m22 + v.zd() * m.m23, v.xd() * m.m31 + v.yd() * m.m32 + v.zd() * m.m33);
 	}
 
 	/**
@@ -592,9 +574,8 @@ public class WB_M22 {
 	 * @return
 	 */
 	public static WB_Vector mulToVector(final WB_Coord v, final WB_M22 m) {
-		return new WB_Vector((v.xd() * m.m11) + (v.yd() * m.m21) + (v.zd() * m.m31),
-				(v.xd() * m.m12) + (v.yd() * m.m22) + (v.zd() * m.m32),
-				(v.xd() * m.m13) + (v.yd() * m.m23) + (v.zd() * m.m33));
+		return new WB_Vector(v.xd() * m.m11 + v.yd() * m.m21 + v.zd() * m.m31,
+				v.xd() * m.m12 + v.yd() * m.m22 + v.zd() * m.m32, v.xd() * m.m13 + v.yd() * m.m23 + v.zd() * m.m33);
 	}
 
 	/**
@@ -603,8 +584,7 @@ public class WB_M22 {
 	 * @return determinant
 	 */
 	public double det() {
-		return (m11 * ((m22 * m33) - (m23 * m32))) + (m12 * ((m23 * m31) - (m21 * m33)))
-				+ (m13 * ((m21 * m32) - (m22 * m31)));
+		return m11 * (m22 * m33 - m23 * m32) + m12 * (m23 * m31 - m21 * m33) + m13 * (m21 * m32 - m22 * m31);
 	}
 
 	/**
@@ -651,9 +631,9 @@ public class WB_M22 {
 		if (WB_Epsilon.isZero(d)) {
 			return null;
 		}
-		final WB_M22 I = new WB_M22((m22 * m33) - (m23 * m32), (m13 * m32) - (m12 * m33), (m12 * m23) - (m13 * m22),
-				(m23 * m31) - (m21 * m33), (m11 * m33) - (m13 * m31), (m13 * m21) - (m11 * m23),
-				(m21 * m32) - (m22 * m31), (m12 * m31) - (m11 * m32), (m11 * m22) - (m12 * m21));
+		final WB_M22 I = new WB_M22(m22 * m33 - m23 * m32, m13 * m32 - m12 * m33, m12 * m23 - m13 * m22,
+				m23 * m31 - m21 * m33, m11 * m33 - m13 * m31, m13 * m21 - m11 * m23, m21 * m32 - m22 * m31,
+				m12 * m31 - m11 * m32, m11 * m22 - m12 * m21);
 		I.div(d);
 		return I;
 	}
@@ -720,11 +700,11 @@ public class WB_M22 {
 			final double r = (m[q][q] - m[p][p]) / (2 * m[p][q]);
 			double t;
 			if (r >= 0) {
-				t = 1 / (r + Math.sqrt(1 + (r * r)));
+				t = 1 / (r + Math.sqrt(1 + r * r));
 			} else {
-				t = -1 / (-r + Math.sqrt(1 + (r * r)));
+				t = -1 / (-r + Math.sqrt(1 + r * r));
 			}
-			result[0] = 1 / Math.sqrt(1 + (t * t));
+			result[0] = 1 / Math.sqrt(1 + t * t);
 			result[1] = t * result[0];
 		} else {
 			result[0] = 1;
@@ -788,7 +768,7 @@ public class WB_M22 {
 					off += am[i][j] * am[i][j];
 				}
 			}
-			if ((n > 2) && (off >= prevoff)) {
+			if (n > 2 && off >= prevoff) {
 				return a;
 			}
 			prevoff = off;

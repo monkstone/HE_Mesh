@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
@@ -103,9 +98,9 @@ public class HEM_Triangulate extends HEM_Modifier {
 	 * @param mesh
 	 */
 	private void triangulateNoPairing(final HE_Face face, final HE_Mesh mesh) {
-		if (face.getFaceOrder() == 3) {
+		if (face.getFaceDegree() == 3) {
 			triangles.add(face);
-		} else if (face.getFaceOrder() > 3) {
+		} else if (face.getFaceDegree() > 3) {
 			final int[] tris = face.getTriangles(false);
 			final List<HE_Vertex> vertices = face.getFaceVertices();
 			final List<HE_TextureCoordinate> UVWs = face.getFaceUVWs();

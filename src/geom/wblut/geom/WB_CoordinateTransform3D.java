@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -145,7 +139,6 @@ public interface WB_CoordinateTransform3D extends WB_CoordinateTransform2D {
 	public WB_Coord rotateAboutAxis2P(final double angle, final double p1x, final double p1y, final double p1z,
 			final double p2x, final double p2y, final double p2z);
 
-	
 	/**
 	 * Rotate around axis defined by two points.
 	 *
@@ -163,7 +156,7 @@ public interface WB_CoordinateTransform3D extends WB_CoordinateTransform2D {
 
 	/**
 	 * Rotate around axis defined by two points.
-	 * 
+	 *
 	 * @param angle
 	 * @param p1
 	 * @param p2
@@ -296,7 +289,7 @@ public interface WB_CoordinateTransform3D extends WB_CoordinateTransform2D {
 
 	/**
 	 * Uniform scale.
-	 * 
+	 *
 	 * @param f
 	 * @return
 	 */

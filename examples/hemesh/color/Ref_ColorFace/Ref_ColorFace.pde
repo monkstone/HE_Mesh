@@ -13,7 +13,7 @@ void setup() {
   createMesh();
   HE_FaceIterator fitr=mesh.fItr();
   while (fitr.hasNext()) {
-    fitr.next().setColor(color(random(255), 50, 50));
+    fitr.next().setColor(color(random(255), random(80), random(80,180)));
   }
   render=new WB_Render3D(this);
 }
@@ -37,5 +37,6 @@ void createMesh() {
   mesh=new HE_Mesh(creator); 
   HEM_ChamferCorners cc=new HEM_ChamferCorners().setDistance(40);
   mesh.modify(cc);
-  HET_MeshOp.splitFacesTri(cc.origFaces);
+ 
+ mesh.getSelection("chamfer").modify(new HEM_Crocodile().setDistance(50));
 }

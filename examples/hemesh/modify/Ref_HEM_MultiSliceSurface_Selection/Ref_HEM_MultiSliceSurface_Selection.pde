@@ -1,3 +1,5 @@
+/*BROKEN IN 6.0.0 */
+
 import wblut.math.*;
 import wblut.processing.*;
 import wblut.core.*;
@@ -41,7 +43,7 @@ void draw() {
   
   fill(255,0,0);
   noStroke();
-  render.drawFaces(modifier.cutFaces);
+  render.drawFaces(mesh.getSelection("cuts"));
   noFill();
   stroke(0);
   render.drawEdges(mesh);

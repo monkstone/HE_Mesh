@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  * Bend a mesh. Determined by a ground plane, a bend axis and an angle factor.
@@ -56,7 +51,7 @@ public class HEM_EqualizeValence extends HEM_Modifier {
 		int devpre = 0, devpost = 0;
 		for (int r = 0; r < 2; r++) {
 
-			List<HE_Halfedge> edges = new FastTable<HE_Halfedge>();
+			List<HE_Halfedge> edges = new FastList<HE_Halfedge>();
 			edges.addAll(mesh.getEdges());
 
 			Collections.shuffle(edges);
@@ -67,19 +62,19 @@ public class HEM_EqualizeValence extends HEM_Modifier {
 					b = e.getEndVertex();
 					c = e.getNextInFace().getEndVertex();
 					d = e.getPair().getNextInFace().getEndVertex();
-					devpre = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexOrder());
-					devpre += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexOrder());
-					devpre += Math.abs((c.isBoundary() ? 4 : 6) - c.getVertexOrder());
-					devpre += Math.abs((d.isBoundary() ? 4 : 6) - d.getVertexOrder());
+					devpre = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexDegree());
+					devpre += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexDegree());
+					devpre += Math.abs((c.isBoundary() ? 4 : 6) - c.getVertexDegree());
+					devpre += Math.abs((d.isBoundary() ? 4 : 6) - d.getVertexDegree());
 					if (devpre > 0) {
 						boolean trial = HET_MeshOp.flipEdge(mesh, e);
 
 						if (trial) {
 
-							devpost = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexOrder());
-							devpost += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexOrder());
-							devpost += Math.abs((b.isBoundary() ? 4 : 6) - c.getVertexOrder());
-							devpost += Math.abs((b.isBoundary() ? 4 : 6) - d.getVertexOrder());
+							devpost = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexDegree());
+							devpost += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexDegree());
+							devpost += Math.abs((b.isBoundary() ? 4 : 6) - c.getVertexDegree());
+							devpost += Math.abs((b.isBoundary() ? 4 : 6) - d.getVertexDegree());
 
 							if (devpre <= devpost) {
 
@@ -105,7 +100,7 @@ public class HEM_EqualizeValence extends HEM_Modifier {
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.parent.triangulate(selection);
-		List<HE_Halfedge> edges = new FastTable<HE_Halfedge>();
+		List<HE_Halfedge> edges = new FastList<HE_Halfedge>();
 		edges.addAll(selection.getInnerEdges());
 		Collections.shuffle(edges);
 		HE_Vertex a, b, c, d;
@@ -118,15 +113,15 @@ public class HEM_EqualizeValence extends HEM_Modifier {
 					b = e.getPair().getVertex();
 					c = e.getNextInFace().getEndVertex();
 					d = e.getPair().getNextInFace().getEndVertex();
-					devpre = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexOrder());
-					devpre += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexOrder());
-					devpre += Math.abs((c.isBoundary() ? 4 : 6) - c.getVertexOrder());
-					devpre += Math.abs((d.isBoundary() ? 4 : 6) - d.getVertexOrder());
+					devpre = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexDegree());
+					devpre += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexDegree());
+					devpre += Math.abs((c.isBoundary() ? 4 : 6) - c.getVertexDegree());
+					devpre += Math.abs((d.isBoundary() ? 4 : 6) - d.getVertexDegree());
 					if (HET_MeshOp.flipEdge(selection.parent, e)) {
-						devpost = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexOrder());
-						devpost += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexOrder());
-						devpost += Math.abs((b.isBoundary() ? 4 : 6) - c.getVertexOrder());
-						devpost += Math.abs((b.isBoundary() ? 4 : 6) - d.getVertexOrder());
+						devpost = Math.abs((a.isBoundary() ? 4 : 6) - a.getVertexDegree());
+						devpost += Math.abs((b.isBoundary() ? 4 : 6) - b.getVertexDegree());
+						devpost += Math.abs((b.isBoundary() ? 4 : 6) - c.getVertexDegree());
+						devpost += Math.abs((b.isBoundary() ? 4 : 6) - d.getVertexDegree());
 						if (devpre <= devpost) {
 							HET_MeshOp.flipEdge(selection.parent, e);
 						}

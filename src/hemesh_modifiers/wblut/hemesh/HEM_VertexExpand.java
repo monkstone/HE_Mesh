@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
 import wblut.math.WB_ConstantScalarParameter;
 import wblut.math.WB_ScalarParameter;
@@ -61,7 +56,7 @@ public class HEM_VertexExpand extends HEM_Modifier {
 		}
 		HE_Vertex v;
 		Iterator<HE_Vertex> vItr = mesh.vItr();
-		final FastTable<WB_Coord> normals = new FastTable<WB_Coord>();
+		final FastList<WB_Coord> normals = new FastList<WB_Coord>();
 		while (vItr.hasNext()) {
 			v = vItr.next();
 			normals.add(v.getVertexNormal());
@@ -89,7 +84,7 @@ public class HEM_VertexExpand extends HEM_Modifier {
 		}
 		HE_Vertex v;
 		Iterator<HE_Vertex> vItr = selection.vItr();
-		final FastTable<WB_Coord> normals = new FastTable<WB_Coord>();
+		final FastList<WB_Coord> normals = new FastList<WB_Coord>();
 		while (vItr.hasNext()) {
 			v = vItr.next();
 			normals.add(v.getVertexNormal());

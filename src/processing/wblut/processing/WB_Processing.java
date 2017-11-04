@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.processing;
 
 import processing.core.PApplet;
@@ -21,11 +16,9 @@ public class WB_Processing {
 	 */
 	protected PGraphics home;
 
-
 	protected WB_Processing() {
 
 	}
-
 
 	/**
 	 *
@@ -57,6 +50,6 @@ public class WB_Processing {
 	 * @return
 	 */
 	public static int color(final int r, final int g, final int b) {
-		return (255 << 24) | (r << 16) | (g << 8) | b;
+		return 255 << 24 | r << 16 | g << 8 | b;
 	}
 }

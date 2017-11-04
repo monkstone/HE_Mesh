@@ -1,19 +1,14 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import gnu.trove.map.TLongIntMap;
-import gnu.trove.map.hash.TLongIntHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
+
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Point;
 import wblut.geom.WB_Vector;
@@ -112,7 +107,7 @@ public class HES_DooSabin extends HES_Subdividor {
 			throw new IllegalArgumentException("HES_DooSabin only supports closed meshes at this time.");
 		}
 		Iterator<HE_Face> fItr = mesh.fItr();
-		final TLongIntMap halfedgeCorrelation = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap halfedgeCorrelation = new LongIntHashMap();
 		final ArrayList<WB_Point> newVertices = new ArrayList<WB_Point>();
 		HE_Face f;
 		HE_Halfedge he;
@@ -154,7 +149,7 @@ public class HES_DooSabin extends HES_Subdividor {
 		fItr = mesh.fItr();
 		while (fItr.hasNext()) {
 			f = fItr.next();
-			faces[currentFace] = new int[f.getFaceOrder()];
+			faces[currentFace] = new int[f.getFaceDegree()];
 			he = f.getHalfedge();
 			int i = 0;
 			labels[currentFace] = currentFace;
@@ -184,9 +179,9 @@ public class HES_DooSabin extends HES_Subdividor {
 		int currentVertex = 0;
 		while (vItr.hasNext()) {
 			v = vItr.next();
-			faces[currentFace] = new int[v.getVertexOrder()];
+			faces[currentFace] = new int[v.getVertexDegree()];
 			he = v.getHalfedge();
-			int i = v.getVertexOrder() - 1;
+			int i = v.getVertexDegree() - 1;
 			do {
 				faces[currentFace][i] = halfedgeCorrelation.get(he.key());
 				he = he.getNextInVertex();

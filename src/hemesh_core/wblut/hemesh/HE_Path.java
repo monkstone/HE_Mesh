@@ -1,17 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_MeshGraph;
 
 /**
@@ -75,7 +70,7 @@ public class HE_Path extends HE_MeshElement {
 	 *            single vertex
 	 */
 	public HE_Path(final HE_Vertex v) {
-		final List<HE_Halfedge> halfedges = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> halfedges = new FastList<HE_Halfedge>();
 		HE_Halfedge hev = v.getHalfedge();
 		HE_Halfedge circuit;
 		do {
@@ -208,7 +203,7 @@ public class HE_Path extends HE_MeshElement {
 	 * @return halfedges of path as List
 	 */
 	public List<HE_Halfedge> getHalfedges() {
-		final List<HE_Halfedge> fhe = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> fhe = new FastList<HE_Halfedge>();
 		if (_phalfedge == null) {
 			return fhe;
 		}
@@ -227,7 +222,7 @@ public class HE_Path extends HE_MeshElement {
 	 * @return vertices of path as List. Includes end vertex of an open path.
 	 */
 	public List<HE_Vertex> getPathVertices() {
-		final List<HE_Vertex> fhe = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> fhe = new FastList<HE_Vertex>();
 		if (_phalfedge == null) {
 			return fhe;
 		}
@@ -249,7 +244,7 @@ public class HE_Path extends HE_MeshElement {
 	 * @return the edges of the path
 	 */
 	public List<HE_Halfedge> getPathEdges() {
-		final List<HE_Halfedge> fe = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> fe = new FastList<HE_Halfedge>();
 		if (_phalfedge == null) {
 			return fe;
 		}
@@ -294,7 +289,7 @@ public class HE_Path extends HE_MeshElement {
 	 * @return get all faces belonging to the path halfedges
 	 */
 	public List<HE_Face> getPathInnerFaces() {
-		final List<HE_Face> ff = new FastTable<HE_Face>();
+		final List<HE_Face> ff = new FastList<HE_Face>();
 		if (getPathHalfedge() == null) {
 			return ff;
 		}
@@ -317,7 +312,7 @@ public class HE_Path extends HE_MeshElement {
 	 * @return get all faces belonging to the pairs of the path halfedges
 	 */
 	public List<HE_Face> getPathOuterFaces() {
-		final List<HE_Face> ff = new FastTable<HE_Face>();
+		final List<HE_Face> ff = new FastList<HE_Face>();
 		if (getPathHalfedge() == null) {
 			return ff;
 		}

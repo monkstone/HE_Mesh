@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -13,7 +7,7 @@ package wblut.geom;
 import java.security.InvalidParameterException;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 
 class WB_GeodesicI {
@@ -202,8 +196,8 @@ class WB_GeodesicI {
 			}
 		}
 		int pid = 0;
-		final List<WB_Point> points = new FastTable<WB_Point>();
-		final List<WB_Point> zeropoints = new FastTable<WB_Point>();
+		final List<WB_Point> points = new FastList<WB_Point>();
+		final List<WB_Point> zeropoints = new FastList<WB_Point>();
 		points.add(apices[0]);
 		for (int i = 0; i < v - 1; i++) {
 			points.add(refpoints[i + 2 * (v - 1)]);
@@ -240,7 +234,7 @@ class WB_GeodesicI {
 			}
 			break;
 		case OCTAHEDRON:
-			final List<WB_Point> points4 = new FastTable<WB_Point>();
+			final List<WB_Point> points4 = new FastList<WB_Point>();
 			T = new WB_Transform().addRotateZ(Math.PI).addRotateY(Math.PI);
 			for (final WB_Point p : zeropoints) {
 				points4.add(T.applyAsPoint(p));
@@ -278,19 +272,19 @@ class WB_GeodesicI {
 		case ICOSAHEDRON:
 		default:
 			T = new WB_Transform().addRotateZ(Math.PI).addRotateY(Math.PI / 180 * 116.5651);
-			final List<WB_Point> points5 = new FastTable<WB_Point>();
+			final List<WB_Point> points5 = new FastList<WB_Point>();
 			for (final WB_Point p : zeropoints) {
 				points5.add(T.applyAsPoint(p));
 			}
 			points.addAll(points5);
 			T = new WB_Transform().addRotateY(Math.PI / 180 * 63.43495).addRotateZ(Math.PI / 180 * 36);
-			final List<WB_Point> points6 = new FastTable<WB_Point>();
+			final List<WB_Point> points6 = new FastList<WB_Point>();
 			for (final WB_Point p : zeropoints) {
 				points6.add(T.applyAsPoint(p));
 			}
 			points.addAll(points6);
 			T = new WB_Transform().addRotateY(-Math.PI).addRotateZ(-Math.PI / 180 * 144);
-			final List<WB_Point> points15 = new FastTable<WB_Point>();
+			final List<WB_Point> points15 = new FastList<WB_Point>();
 			for (final WB_Point p : zeropoints) {
 				points15.add(T.applyAsPoint(p));
 			}
@@ -361,8 +355,8 @@ class WB_GeodesicI {
 	 */
 	private WB_Point selectPoint(final WB_GreatCircleIntersection gci, final WB_Point[] apices, final int type) {
 		if (type == TETRAHEDRON) {
-			return Math.abs(WB_GeometryOp3D.getDistance3D(gci.p0, P)) < Math.abs(WB_GeometryOp3D.getDistance3D(gci.p1, P))
-					? gf.createPoint(gci.p0) : gf.createPoint(gci.p1);
+			return Math.abs(WB_GeometryOp3D.getDistance3D(gci.p0, P)) < Math
+					.abs(WB_GeometryOp3D.getDistance3D(gci.p1, P)) ? gf.createPoint(gci.p0) : gf.createPoint(gci.p1);
 		}
 		return gci.p0[2] > 0 ? gf.createPoint(gci.p0) : gf.createPoint(gci.p1);
 	}

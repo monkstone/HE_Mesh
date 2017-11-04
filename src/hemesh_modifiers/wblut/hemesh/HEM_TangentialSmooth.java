@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import static wblut.geom.WB_GeometryOp3D.projectOnPlane;
@@ -123,7 +118,7 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 			WB_Plane tangent;
 			while (vItr.hasNext()) {
 				v = vItr.next();
-				tangent = new WB_Plane(v, v.getVertexAngleNormal());
+				tangent = new WB_Plane(v, v.getVertexNormalAngle());
 
 				if (v.isBoundary() && keepBoundary) {
 					newPositions[id] = v;
@@ -183,7 +178,7 @@ public class HEM_TangentialSmooth extends HEM_Modifier {
 			int id = 0;
 			while (vItr.hasNext()) {
 				v = vItr.next();
-				tangent = new WB_Plane(v, v.getVertexAngleNormal());
+				tangent = new WB_Plane(v, v.getVertexNormalAngle());
 				final WB_Point p = new WB_Point();
 				if (v.isBoundary() && keepBoundary) {
 					newPositions[id] = v;

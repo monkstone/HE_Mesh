@@ -15,7 +15,7 @@ void setup() {
   gf=new WB_GeometryFactory();
   render=new WB_Render2D(this);
   radius=200;
-  L= gf.createLineThroughPoints(0,0,random(0, 400),random(0, 400));
+  L= gf.createLineThroughPoints(-200,200,random(0, 400),random(0, 400));
   C= gf.createCircleWithRadius(random(100, 300),random(-300, -100),100);
 }
 
@@ -29,7 +29,8 @@ void draw() {
   translate(400,400);
   create();
   noFill();
-  stroke(255,0,0, 120);
+  strokeWeight(2);
+  stroke(255,0,0);
   for(WB_Circle circle:circles){
   render.drawCircle2D(circle);
   }

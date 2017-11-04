@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp;
 import wblut.geom.WB_GeometryOp3D;
@@ -89,9 +84,9 @@ public class HEM_FaceExpand extends HEM_Modifier {
 		HE_Vertex v;
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 
-		final List<WB_Plane> planes = new FastTable<WB_Plane>();
-		final List<WB_Plane> uniquePlanes = new FastTable<WB_Plane>();
-		final List<WB_Coord> pos = new FastTable<WB_Coord>();
+		final List<WB_Plane> planes = new FastList<WB_Plane>();
+		final List<WB_Plane> uniquePlanes = new FastList<WB_Plane>();
+		final List<WB_Coord> pos = new FastList<WB_Coord>();
 		List<HE_Face> faces;
 		WB_Coord LS = null;
 		while (vItr.hasNext()) {
@@ -176,9 +171,9 @@ public class HEM_FaceExpand extends HEM_Modifier {
 		selection.collectVertices();
 		HE_Vertex v;
 		Iterator<HE_Vertex> vItr = selection.vItr();
-		final List<WB_Plane> planes = new FastTable<WB_Plane>();
-		final List<WB_Plane> uniquePlanes = new FastTable<WB_Plane>();
-		final List<WB_Coord> pos = new FastTable<WB_Coord>();
+		final List<WB_Plane> planes = new FastList<WB_Plane>();
+		final List<WB_Plane> uniquePlanes = new FastList<WB_Plane>();
+		final List<WB_Coord> pos = new FastList<WB_Coord>();
 		List<HE_Face> faces;
 		WB_Coord LS = null;
 		while (vItr.hasNext()) {

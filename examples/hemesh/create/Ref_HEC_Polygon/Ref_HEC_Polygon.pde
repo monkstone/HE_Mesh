@@ -3,7 +3,7 @@ import wblut.processing.*;
 import wblut.core.*;
 import wblut.hemesh.*;
 import wblut.geom.*;
-
+WB_ProgressReporter pr;
 HE_Mesh mesh;
 WB_Render render;
 

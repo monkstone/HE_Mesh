@@ -20,7 +20,7 @@ void setup() {
   modifier.setThresholdAngle(1.5*HALF_PI);// treat edges sharper than this angle as hard edges
   
   mesh.modify(modifier);
- // mesh.smooth(2);
+ 
 
   render=new WB_Render(this);
 }

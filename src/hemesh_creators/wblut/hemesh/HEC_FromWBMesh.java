@@ -1,21 +1,16 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_KDTreeInteger;
 import wblut.geom.WB_KDTreeInteger.WB_KDEntryInteger;
@@ -207,7 +202,7 @@ public class HEC_FromWBMesh extends HEC_Creator {
 	 * @return
 	 */
 	private List<HE_Vertex> getUniqueVertices(final HE_Mesh mesh) {
-		final List<HE_Vertex> uniqueVertices = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> uniqueVertices = new FastList<HE_Vertex>();
 		if (duplicate) {
 			final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
 			WB_KDEntryInteger<WB_Coord> neighbor;
@@ -245,7 +240,7 @@ public class HEC_FromWBMesh extends HEC_Creator {
 	 * @param faces
 	 */
 	private void unifyNormals(final int[][] faces) {
-		final TLongObjectMap<int[]> edges = new TLongObjectHashMap<int[]>();
+		final LongObjectHashMap<int[]> edges = new LongObjectHashMap<int[]>();
 		for (int i = 0; i < faces.length; i++) {
 			final int[] face = faces[i];
 			final int fl = face.length;

@@ -18,8 +18,8 @@ void setup() {
   modifier.setPlane(P);// Cut plane 
   //you can also pass directly as origin and normal:  modifier.setPlane(0,0,-200,0,0,1)
   modifier.setOffset(0);// shift cut plane along normal
-
   mesh.modify(modifier);
+
 
   render=new WB_Render(this);
 }
@@ -36,13 +36,13 @@ void draw() {
   render.drawFaces(mesh);
   fill(255, 0, 0);
   noStroke();
-  render.drawFaces(modifier.cutFaces);
+  render.drawFaces(mesh.getSelection("cuts"));
   noFill();
   stroke(0);
   render.drawEdges(mesh);
   strokeWeight(4);
   stroke(0, 0, 255);
-  render.drawEdges(modifier.newEdges);
+  render.drawEdges(mesh.getSelection("edges"));
   strokeWeight(1);
   stroke(255, 0, 0);
   render.drawPlane(P, 300);

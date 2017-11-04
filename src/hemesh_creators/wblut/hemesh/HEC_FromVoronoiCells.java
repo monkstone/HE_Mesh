@@ -1,18 +1,13 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
 
 /**
@@ -156,7 +151,7 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 			return new HE_Mesh();
 		}
 		final int n = on.length;
-		final FastTable<HE_Face> tmpfaces = new FastTable<HE_Face>();
+		final FastList<HE_Face> tmpfaces = new FastList<HE_Face>();
 		int nv = 0;
 		for (int i = 0; i < n; i++) {
 			final HE_Mesh m = cells.getMesh(i);
@@ -166,10 +161,10 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 					final HE_Face f = fItr.next();
 					if (f.getInternalLabel() == -1) {
 						tmpfaces.add(f);
-						nv += f.getFaceOrder();
+						nv += f.getFaceDegree();
 					} else if (!on[f.getInternalLabel()] || membrane) {
 						tmpfaces.add(f);
-						nv += f.getFaceOrder();
+						nv += f.getFaceDegree();
 					}
 				}
 			}
@@ -182,12 +177,12 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 		int cid = 0;
 		for (int i = 0; i < tmpfaces.size(); i++) {
 			final HE_Face f = tmpfaces.get(i);
-			faces[i] = new int[f.getFaceOrder()];
-			labels[i] = f.getLabel();
+			faces[i] = new int[f.getFaceDegree()];
+			labels[i] = f.getUserLabel();
 			intlabels[i] = f.getInternalLabel();
 			colors[i] = f.getColor();
 			HE_Halfedge he = f.getHalfedge();
-			for (int j = 0; j < f.getFaceOrder(); j++) {
+			for (int j = 0; j < f.getFaceDegree(); j++) {
 				vertices[cid] = he.getVertex();
 				faces[i][j] = cid;
 				he = he.getNextInFace();
@@ -201,7 +196,7 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 		HE_Face f;
 		while (fItr.hasNext()) {
 			f = fItr.next();
-			f.setLabel(labels[i]);
+			f.setUserLabel(labels[i]);
 			f.setInternalLabel(intlabels[i]);
 			f.setColor(colors[i]);
 			i++;

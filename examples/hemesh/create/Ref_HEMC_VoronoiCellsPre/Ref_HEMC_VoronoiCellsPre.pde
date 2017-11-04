@@ -17,8 +17,7 @@ void setup() {
 
   container=new HE_Mesh(new HEC_Torus(120,320,16,64));
  HE_Mesh inner=new HE_Mesh(new HEC_Torus(60,320,16,64));
- HET_MeshOp.flipFaces(inner);
- container.add(inner);
+
   numpoints=500;
   points=new WB_Point[numpoints];
   WB_RandomPoint rp=new WB_RandomBox().set(container.getAABB());

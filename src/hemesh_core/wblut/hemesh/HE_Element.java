@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,7 +29,7 @@ public abstract class HE_Element {
 	}
 
 	protected final void setInternalLabel(final int label) {
-		labels = mergeLabels(label, getLabel());
+		labels = mergeLabels(label, getUserLabel());
 	}
 
 	/**
@@ -42,7 +37,7 @@ public abstract class HE_Element {
 	 *
 	 * @param label
 	 */
-	public final void setLabel(final int label) {
+	public final void setUserLabel(final int label) {
 		labels = mergeLabels(getInternalLabel(), label);
 	}
 
@@ -70,7 +65,7 @@ public abstract class HE_Element {
 	 *
 	 * @return
 	 */
-	public final int getLabel() {
+	public final int getUserLabel() {
 		return (int) labels;
 	}
 
@@ -109,7 +104,7 @@ public abstract class HE_Element {
 	 * @param el
 	 */
 	public void copyProperties(final HE_Element el) {
-		labels = mergeLabels(el.getInternalLabel(), el.getLabel());
+		labels = mergeLabels(el.getInternalLabel(), el.getUserLabel());
 	}
 
 	/**

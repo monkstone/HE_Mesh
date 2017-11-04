@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -19,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressCounter;
 
 /**
@@ -111,21 +106,24 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 			triangles.add(face);
 		} else if (tris.length > 3) {
 			final List<HE_Vertex> vertices = face.getFaceVertices();
+			int n = vertices.size();
+			final List<HE_Halfedge> halfedges = face.getFaceHalfedges();
 			final List<HE_TextureCoordinate> UVWs = face.getFaceUVWs();
-			HE_Halfedge he = face.getHalfedge();
-			do {
-				mesh.clearPair(he);
-				mesh.remove(he);
-				he = he.getNextInFace();
-			} while (he != face.getHalfedge());
+			/*
+			 * HE_Halfedge he = face.getHalfedge(); do { mesh.clearPair(he);
+			 * mesh.remove(he); he = he.getNextInFace(); } while (he !=
+			 * face.getHalfedge());
+			 */
 			for (int i = 0; i < tris.length; i += 3) {
 				final HE_Face f = new HE_Face();
-				mesh.add(f);
+				mesh.addDerivedElement(f, face);
 				triangles.add(f);
 				f.copyProperties(face);
-				final HE_Halfedge he1 = new HE_Halfedge();
-				final HE_Halfedge he2 = new HE_Halfedge();
-				final HE_Halfedge he3 = new HE_Halfedge();
+				final HE_Halfedge he1 = (tris[i] + 1) % n == tris[i + 1] ? halfedges.get(tris[i]) : new HE_Halfedge();
+				final HE_Halfedge he2 = (tris[i + 1] + 1) % n == tris[i + 2] ? halfedges.get(tris[i + 1])
+						: new HE_Halfedge();
+				final HE_Halfedge he3 = (tris[i + 2] + 1) % n == tris[i] ? halfedges.get(tris[i + 2])
+						: new HE_Halfedge();
 				he1.setUVW(UVWs.get(tris[i]));
 				he2.setUVW(UVWs.get(tris[i + 1]));
 				he3.setUVW(UVWs.get(tris[i + 2]));
@@ -158,7 +156,7 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 	 */
 	private List<int[]> triangulate(final List<HE_Face> faces) {
 
-		List<int[]> tris = new FastTable<int[]>();
+		List<int[]> tris = new FastList<int[]>();
 		try {
 			int threadCount = Runtime.getRuntime().availableProcessors();
 			int dfaces = faces.size() / threadCount;

@@ -1,21 +1,16 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
 import java.util.Map;
 
-import gnu.trove.map.TLongDoubleMap;
-import gnu.trove.map.hash.TLongDoubleHashMap;
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressCounter;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
@@ -62,18 +57,19 @@ public class HEM_Extrude extends HEM_Modifier {
 	/** Vertex normals. */
 	private Map<Long, WB_Coord> _faceNormals;
 	/** Halfedge normals. */
-	private Map<Long, WB_Coord> _halfedgeNormals;
+	private LongObjectHashMap<WB_Coord> _halfedgeNormals;
 	/** Extrusion widths. */
-	private TLongDoubleMap _halfedgeEWs;
+	private LongDoubleHashMap _halfedgeEWs;
 	/** Face centers. */
 	private Map<Long, WB_Coord> _faceCenters;
 	/**
 	 *
 	 */
 	private double[] heights;
-	public HE_Selection walls;
-	public HE_Selection extruded;
-
+	private HE_Selection walls;
+	private HE_Selection extruded;
+	private HE_Selection peaks;
+	private HE_Selection fused;
 	private List<HE_Face> failedFaces;
 	private List<Double> failedHeights;
 	boolean isFlat, isSpiky, isStraight;
@@ -105,7 +101,7 @@ public class HEM_Extrude extends HEM_Modifier {
 	 * @return self
 	 */
 	public HEM_Extrude setDistance(final double d) {
-		this.d = new WB_ConstantScalarParameter(d);
+		this.d = WB_Epsilon.isZero(d) ? WB_ScalarParameter.ZERO : new WB_ConstantScalarParameter(d);
 		isFlat = WB_Epsilon.isZero(d);
 
 		return this;
@@ -272,7 +268,8 @@ public class HEM_Extrude extends HEM_Modifier {
 		mesh.resetFaceInternalLabels();
 		walls = new HE_Selection(mesh);
 		extruded = new HE_Selection(mesh);
-
+		peaks = new HE_Selection(mesh);
+		fused = new HE_Selection(mesh);
 		if (chamfer == null && d == null && heights == null) {
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return mesh;
@@ -287,8 +284,8 @@ public class HEM_Extrude extends HEM_Modifier {
 		WB_ProgressCounter counter = new WB_ProgressCounter(nf, 10);
 
 		tracker.setCounterStatus(this, "Collecting halfedge information per face.", counter);
-		_halfedgeNormals = new FastMap<Long, WB_Coord>();
-		_halfedgeEWs = new TLongDoubleHashMap(10, 0.5f, -1L, Double.NaN);
+		_halfedgeNormals = new LongObjectHashMap<WB_Coord>();
+		_halfedgeEWs = new LongDoubleHashMap();
 		for (int i = 0; i < nf; i++) {
 			f = faces.get(i);
 			c = _faceCenters.get(f.getKey());
@@ -302,14 +299,28 @@ public class HEM_Extrude extends HEM_Modifier {
 			counter.increment();
 		}
 		if (isStraight) {
-			return applyStraight(mesh, mesh.getFaces());
+			applyStraight(mesh, mesh.getFaces());
+			HET_Texture.cleanUVW(mesh);
+			mesh.addSelection("extruded", extruded);
+			mesh.addSelection("walls", walls);
+			mesh.addSelection("peaks", peaks);
+			mesh.addSelection("fused", fused);
+			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
+			return mesh;
 		}
 		final List<HE_Face> facelist = mesh.getFaces();
 		if (isSpiky) {
-			return applyPeaked(mesh, facelist);
+			applyPeaked(mesh, facelist);
+			HET_Texture.cleanUVW(mesh);
+			mesh.addSelection("extruded", extruded);
+			mesh.addSelection("walls", walls);
+			mesh.addSelection("peaks", peaks);
+			mesh.addSelection("fused", fused);
+			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
+			return mesh;
 		}
-		failedFaces = new FastTable<HE_Face>();
-		failedHeights = new FastTable<Double>();
+		failedFaces = new FastList<HE_Face>();
+		failedHeights = new FastList<Double>();
 		applyFlat(mesh, faces, isFlat && fuse);
 
 		if (heights != null) {
@@ -358,6 +369,10 @@ public class HEM_Extrude extends HEM_Modifier {
 			}
 		}
 		HET_Texture.cleanUVW(mesh);
+		mesh.addSelection("extruded", extruded);
+		mesh.addSelection("walls", walls);
+		mesh.addSelection("peaks", peaks);
+		mesh.addSelection("fused", fused);
 		tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 		return mesh;
 	}
@@ -373,12 +388,14 @@ public class HEM_Extrude extends HEM_Modifier {
 		selection.parent.resetFaceInternalLabels();
 		walls = new HE_Selection(selection.parent);
 		extruded = new HE_Selection(selection.parent);
+		peaks = new HE_Selection(selection.parent);
+		fused = new HE_Selection(selection.parent);
 		if (selection.getNumberOfFaces() == 0) {
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return selection.parent;
 		}
-		_halfedgeNormals = new FastMap<Long, WB_Coord>();
-		_halfedgeEWs = new TLongDoubleHashMap(10, 0.5f, -1L, Double.NaN);
+		_halfedgeNormals = new LongObjectHashMap<WB_Coord>();
+		_halfedgeEWs = new LongDoubleHashMap();
 		if (chamfer == null && isFlat && heights == null) {
 			return selection.parent;
 		}
@@ -405,13 +422,27 @@ public class HEM_Extrude extends HEM_Modifier {
 			counter.increment();
 		}
 		if (isStraight) {
-			return applyStraight(selection.parent, selFaces);
+			applyStraight(selection.parent, selFaces);
+			HET_Texture.cleanUVW(selection.parent);
+			selection.parent.addSelection("extruded", extruded);
+			selection.parent.addSelection("walls", walls);
+			selection.parent.addSelection("peaks", peaks);
+			selection.parent.addSelection("fused", fused);
+			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
+			return selection.parent;
 		}
 		if (isSpiky) {
-			return applyPeaked(selection.parent, selFaces);
+			applyPeaked(selection.parent, selFaces);
+			HET_Texture.cleanUVW(selection.parent);
+			selection.parent.addSelection("extruded", extruded);
+			selection.parent.addSelection("walls", walls);
+			selection.parent.addSelection("peaks", peaks);
+			selection.parent.addSelection("fused", fused);
+			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
+			return selection.parent;
 		}
-		failedFaces = new FastTable<HE_Face>();
-		failedHeights = new FastTable<Double>();
+		failedFaces = new FastList<HE_Face>();
+		failedHeights = new FastList<Double>();
 		applyFlat(selection.parent, selFaces, isFlat && fuse);
 		if (heights != null) {
 			for (int i = 0; i < failedHeights.size(); i++) {
@@ -452,6 +483,10 @@ public class HEM_Extrude extends HEM_Modifier {
 			}
 		}
 		HET_Texture.cleanUVW(selection.parent);
+		selection.parent.addSelection("extruded", extruded);
+		selection.parent.addSelection("walls", walls);
+		selection.parent.addSelection("peaks", peaks);
+		selection.parent.addSelection("fused", fused);
 		tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 		return selection.parent;
 	}
@@ -510,18 +545,18 @@ public class HEM_Extrude extends HEM_Modifier {
 		}
 		final HE_Face f = selfaces.get(id);
 		final WB_Coord n = _faceNormals.get(f.key());
-		final List<HE_Face> neighborhood = new FastTable<HE_Face>();
+		final List<HE_Face> neighborhood = new FastList<HE_Face>();
 		neighborhood.add(f);
 		f.setInternalLabel(1);
 		visited[id] = true;
 
 		extruded.addFaces(neighborhood);
-		final List<HE_Halfedge> outerHalfedges = new FastTable<HE_Halfedge>();
-		final List<HE_Halfedge> halfedges = new FastTable<HE_Halfedge>();
-		final List<HE_Vertex> vertices = new FastTable<HE_Vertex>();
-		final List<HE_Halfedge> pairHalfedges = new FastTable<HE_Halfedge>();
-		final List<HE_Vertex> outerVertices = new FastTable<HE_Vertex>();
-		final List<HE_Vertex> extOuterVertices = new FastTable<HE_Vertex>();
+		final List<HE_Halfedge> outerHalfedges = new FastList<HE_Halfedge>();
+		final List<HE_Halfedge> halfedges = new FastList<HE_Halfedge>();
+		final List<HE_Vertex> vertices = new FastList<HE_Vertex>();
+		final List<HE_Halfedge> pairHalfedges = new FastList<HE_Halfedge>();
+		final List<HE_Vertex> outerVertices = new FastList<HE_Vertex>();
+		final List<HE_Vertex> extOuterVertices = new FastList<HE_Vertex>();
 		for (int i = 0; i < neighborhood.size(); i++) {
 			HE_Halfedge he = neighborhood.get(i).getHalfedge();
 			do {
@@ -561,7 +596,7 @@ public class HEM_Extrude extends HEM_Modifier {
 				mesh.setHalfedge(extOuterVertices.get(ovi), he);
 			}
 		}
-		final List<HE_Halfedge> newhes = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> newhes = new FastList<HE_Halfedge>();
 		for (int c = 0; c < outerHalfedges.size(); c++) {
 			final HE_Face fNew = new HE_Face();
 			walls.add(fNew);
@@ -603,7 +638,7 @@ public class HEM_Extrude extends HEM_Modifier {
 			mesh.setFace(heNew4, fNew);
 			mesh.setNext(heNew4, heNew1);
 			mesh.setVertex(heOrig1, v4);
-			mesh.add(fNew);
+			mesh.addDerivedElement(fNew, heOrig1, heOrig2);
 			mesh.add(heNew1);
 			mesh.add(heNew2);
 			mesh.add(heNew3);
@@ -638,7 +673,7 @@ public class HEM_Extrude extends HEM_Modifier {
 		}
 		final HE_Face f = selfaces.get(id);
 		final WB_Coord n = _faceNormals.get(f.key());
-		final List<HE_Face> neighborhood = new FastTable<HE_Face>();
+		final List<HE_Face> neighborhood = new FastList<HE_Face>();
 		neighborhood.add(f);
 		f.setInternalLabel(1);
 		visited[id] = true;
@@ -668,12 +703,12 @@ public class HEM_Extrude extends HEM_Modifier {
 			no = nn;
 		} while (neighborhood.size() > nn);
 		extruded.addFaces(neighborhood);
-		final List<HE_Halfedge> outerHalfedges = new FastTable<HE_Halfedge>();
-		final List<HE_Halfedge> halfedges = new FastTable<HE_Halfedge>();
-		final List<HE_Vertex> vertices = new FastTable<HE_Vertex>();
-		final List<HE_Halfedge> pairHalfedges = new FastTable<HE_Halfedge>();
-		final List<HE_Vertex> outerVertices = new FastTable<HE_Vertex>();
-		final List<HE_Vertex> extOuterVertices = new FastTable<HE_Vertex>();
+		final List<HE_Halfedge> outerHalfedges = new FastList<HE_Halfedge>();
+		final List<HE_Halfedge> halfedges = new FastList<HE_Halfedge>();
+		final List<HE_Vertex> vertices = new FastList<HE_Vertex>();
+		final List<HE_Halfedge> pairHalfedges = new FastList<HE_Halfedge>();
+		final List<HE_Vertex> outerVertices = new FastList<HE_Vertex>();
+		final List<HE_Vertex> extOuterVertices = new FastList<HE_Vertex>();
 		for (int i = 0; i < neighborhood.size(); i++) {
 			HE_Halfedge he = neighborhood.get(i).getHalfedge();
 			do {
@@ -713,7 +748,7 @@ public class HEM_Extrude extends HEM_Modifier {
 				mesh.setHalfedge(extOuterVertices.get(ovi), he);
 			}
 		}
-		final List<HE_Halfedge> newhes = new FastTable<HE_Halfedge>();
+		final List<HE_Halfedge> newhes = new FastList<HE_Halfedge>();
 		for (int c = 0; c < outerHalfedges.size(); c++) {
 			final HE_Face fNew = new HE_Face();
 			walls.add(fNew);
@@ -748,6 +783,9 @@ public class HEM_Extrude extends HEM_Modifier {
 			mesh.setVertex(heNew3, v3);
 			mesh.setHalfedge(v3, heNew3);
 			mesh.setFace(heNew3, fNew);
+			mesh.remove(heOrig1);
+			mesh.add(heOrig1);
+
 			mesh.setPair(heNew3, heOrig1);
 			mesh.setNext(heNew3, heNew4);
 			mesh.setVertex(heNew4, v4);
@@ -755,7 +793,7 @@ public class HEM_Extrude extends HEM_Modifier {
 			mesh.setFace(heNew4, fNew);
 			mesh.setNext(heNew4, heNew1);
 			mesh.setVertex(heOrig1, v4);
-			mesh.add(fNew);
+			mesh.addDerivedElement(fNew, heOrig1, heOrig2);
 			mesh.add(heNew1);
 			mesh.add(heNew2);
 			mesh.add(heNew3);
@@ -820,12 +858,14 @@ public class HEM_Extrude extends HEM_Modifier {
 		final WB_Vector n = new WB_Vector(_faceNormals.get(f.key()));
 		final WB_Point fc = new WB_Point(_faceCenters.get(f.key()));
 		walls.add(f);
+		peaks.add(f);
 		f.setInternalLabel(4);
 		final HE_Face[] newFaces = HEM_TriSplit.splitFaceTri(mesh, f, fc.addSelf(n.mulSelf(d))).getFacesAsArray();
 		for (final HE_Face newFace : newFaces) {
 			newFace.copyProperties(f);
 		}
 		walls.addFaces(newFaces);
+		peaks.addFaces(newFaces);
 	}
 
 	/**
@@ -839,8 +879,8 @@ public class HEM_Extrude extends HEM_Modifier {
 	private HE_Mesh applyFlat(final HE_Mesh mesh, final List<HE_Face> faces, final boolean fuse) {
 		final HE_Selection sel = new HE_Selection(mesh);
 		sel.addFaces(faces);
-		sel.collectEdgesByFace();
-		final List<HE_Halfedge> originalEdges = sel.getEdges();
+		sel.collectHalfedges();
+		final List<HE_Halfedge> originalEdges = sel.getHalfedges();
 		final int nf = faces.size();
 		WB_ProgressCounter counter = new WB_ProgressCounter(nf, 10);
 
@@ -876,18 +916,25 @@ public class HEM_Extrude extends HEM_Modifier {
 			tracker.setCounterStatus(this, "Fusing original edges.", counter);
 			for (int i = 0; i < originalEdges.size(); i++) {
 				final HE_Halfedge e = originalEdges.get(i);
+
 				final HE_Face f1 = e.getFace();
 				final HE_Face f2 = e.getPair().getFace();
+
 				if (f1 != null && f2 != null) {
+					// System.out.println(f1.getInternalLabel() + " " +
+					// f2.getInternalLabel());
 					if (f1.getInternalLabel() == 2 && f2.getInternalLabel() == 2) {
+
 						if (WB_Vector.cross(f1.getFaceNormal(), f2.getFaceNormal()).getSqLength() < sin2FA) {
 							final HE_Face f = mesh.deleteEdge(e);
 							if (f != null) {
 								f.setInternalLabel(3);
+								fused.add(f);
 							}
 						}
 					}
 				}
+
 				counter.increment();
 			}
 		}
@@ -905,11 +952,11 @@ public class HEM_Extrude extends HEM_Modifier {
 	private boolean applyFlatToOneFace(final int id, final List<HE_Face> selFaces, final HE_Mesh mesh) {
 		final HE_Face f = selFaces.get(id);
 		final WB_Coord fc = _faceCenters.get(f.key());
-		final List<HE_Vertex> faceVertices = new FastTable<HE_Vertex>();
-		final List<HE_Halfedge> faceHalfedges = new FastTable<HE_Halfedge>();
-		final List<WB_Coord> faceHalfedgeNormals = new FastTable<WB_Coord>();
-		final List<WB_Coord> faceEdgeCenters = new FastTable<WB_Coord>();
-		final List<HE_Vertex> extFaceVertices = new FastTable<HE_Vertex>();
+		final List<HE_Vertex> faceVertices = new FastList<HE_Vertex>();
+		final List<HE_Halfedge> faceHalfedges = new FastList<HE_Halfedge>();
+		final List<WB_Coord> faceHalfedgeNormals = new FastList<WB_Coord>();
+		final List<WB_Coord> faceEdgeCenters = new FastList<WB_Coord>();
+		final List<HE_Vertex> extFaceVertices = new FastList<HE_Vertex>();
 		HE_Halfedge he = f.getHalfedge();
 		do {
 			faceVertices.add(he.getVertex());
@@ -977,7 +1024,7 @@ public class HEM_Extrude extends HEM_Modifier {
 		if (isPossible) {
 			extruded.add(f);
 			f.setInternalLabel(1);
-			final List<HE_Halfedge> newhes = new FastTable<HE_Halfedge>();
+			final List<HE_Halfedge> newhes = new FastList<HE_Halfedge>();
 			int c = 0;
 			he = f.getHalfedge();
 			do {
@@ -1009,6 +1056,8 @@ public class HEM_Extrude extends HEM_Modifier {
 				mesh.setVertex(heNew3, v3);
 				mesh.setHalfedge(v3, heNew3);
 				mesh.setFace(heNew3, fNew);
+				mesh.remove(heOrig1);
+				mesh.add(heOrig1);
 				mesh.setPair(heNew3, heOrig1);
 				mesh.setNext(heNew3, heNew4);
 				mesh.setVertex(heNew4, v4);
@@ -1016,7 +1065,7 @@ public class HEM_Extrude extends HEM_Modifier {
 				mesh.setFace(heNew4, fNew);
 				mesh.setNext(heNew4, heNew1);
 				mesh.setVertex(heOrig1, v4);
-				mesh.add(fNew);
+				mesh.addDerivedElement(fNew, heOrig1, heOrig2);
 				mesh.add(v3);
 				mesh.add(heNew1);
 				mesh.add(heNew2);
@@ -1030,7 +1079,7 @@ public class HEM_Extrude extends HEM_Modifier {
 				c++;
 			} while (he != f.getHalfedge());
 			mesh.pairHalfedges(newhes);
-			final List<HE_Halfedge> edgesToRemove = new FastTable<HE_Halfedge>();
+			final List<HE_Halfedge> edgesToRemove = new FastList<HE_Halfedge>();
 			for (int i = 0; i < newhes.size(); i++) {
 				final HE_Halfedge e = newhes.get(i);
 				if (e.isEdge()) {

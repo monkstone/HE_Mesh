@@ -20,8 +20,8 @@ void setup() {
   //panelize the hull
   HEMC_Panelizer multiCreator=new HEMC_Panelizer();
   multiCreator.setMesh(hull);
-  multiCreator.setThickness(2);
-  multiCreator.setOffset(new Gradient());
+  multiCreator.setThickness(4);
+  multiCreator.setOffset(-20);
   panels=new HE_MeshCollection();
   panels.createThreaded(multiCreator);
 
@@ -54,9 +54,9 @@ void drawFaces(){
   fill(255);
   render.drawFaces(panels);
 }
-
+/*
 class Gradient implements WB_ScalarParameter {
   public double evaluate(double... x) {
     return  max(0,map((float)x[2],-300,300,0,50));
   }
-}
+}*/

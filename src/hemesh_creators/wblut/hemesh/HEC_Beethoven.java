@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.DataInputStream;
@@ -14,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.InflaterInputStream;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  * Model: sourced from a free Beethoven obj floating around, origin untraceable.
@@ -39,15 +34,15 @@ public class HEC_Beethoven extends HEC_Creator {
 			final int numVertices = dis.readInt();
 			final int numHalfedges = dis.readInt();
 			final int numFaces = dis.readInt();
-			final FastTable<HE_Vertex> vertices = new FastTable<HE_Vertex>();
+			final FastList<HE_Vertex> vertices = new FastList<HE_Vertex>();
 			for (int i = 0; i < numVertices; i++) {
 				vertices.add(new HE_Vertex());
 			}
-			final FastTable<HE_Halfedge> halfedges = new FastTable<HE_Halfedge>();
+			final FastList<HE_Halfedge> halfedges = new FastList<HE_Halfedge>();
 			for (int i = 0; i < numHalfedges; i++) {
 				halfedges.add(new HE_Halfedge());
 			}
-			final FastTable<HE_Face> faces = new FastTable<HE_Face>();
+			final FastList<HE_Face> faces = new FastList<HE_Face>();
 			for (int i = 0; i < numFaces; i++) {
 				faces.add(new HE_Face());
 			}

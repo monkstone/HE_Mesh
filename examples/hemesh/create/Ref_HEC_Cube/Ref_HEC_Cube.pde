@@ -11,7 +11,7 @@ void setup() {
   size(1000,1000,P3D);
   smooth(8);
   HEC_Cube creator=new HEC_Cube();
-  creator.setEdge(200); 
+  creator.setEdge(400); 
   //alternatively 
   //creator.setRadius(200);
   //creator.setInnerRadius(200);// radius of sphere inscribed in cube
@@ -35,4 +35,3 @@ void draw() {
   noStroke();
   render.drawFaces(mesh);
 }
-

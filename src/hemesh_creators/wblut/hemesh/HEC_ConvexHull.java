@@ -1,19 +1,15 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
-import javolution.util.FastMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+
 import wblut.external.QuickHull3D.WB_QuickHull3D;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Point;
@@ -180,13 +176,14 @@ public class HEC_ConvexHull extends HEC_Creator {
 		final HEC_FromFacelist ffl = new HEC_FromFacelist().setVertices(hull.getVertices()).setFaces(faceIndices)
 				.setDuplicate(false).setCheckNormals(false).setCleanUnused(false);
 		final HE_Mesh result = ffl.createBase();
-		vertexToPointIndex = new FastMap<Long, Integer>();
+		vertexToPointIndex = new UnifiedMap<Long, Integer>();
 		final Iterator<HE_Vertex> vItr = result.vItr();
 		int i = 0;
 		while (vItr.hasNext()) {
 			vertexToPointIndex.put(vItr.next().key(), originalindices[i++]);
 		}
 		result.cleanUnusedElementsByFace();
+		result.capHalfedges();
 		return result;
 	}
 }

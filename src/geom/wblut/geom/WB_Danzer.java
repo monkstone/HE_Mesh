@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -13,7 +7,7 @@ package wblut.geom;
 import java.util.Collections;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_MTRandom;
 
 public class WB_Danzer {
@@ -139,8 +133,8 @@ public class WB_Danzer {
 		r1 = c / (a + 2 * c);
 		r2 = c / (a + b + c);
 		r3 = b / (a + b + c);
-		points = new FastTable<WB_Point>();
-		tiles = new FastTable<WB_DanzerTile>();
+		points = new FastList<WB_Point>();
+		tiles = new FastList<WB_DanzerTile>();
 		type = t;
 		final WB_DanzerTile T = new WB_DanzerTile(type, 0);
 		WB_Point q;
@@ -227,7 +221,7 @@ public class WB_Danzer {
 	 *
 	 */
 	public void inflate() {
-		final List<WB_DanzerTile> newTiles = new FastTable<WB_DanzerTile>();
+		final List<WB_DanzerTile> newTiles = new FastList<WB_DanzerTile>();
 		for (int i = 0; i < tiles.size(); i++) {
 			newTiles.addAll(inflateTileInt(tiles.get(i), 2.0));
 		}
@@ -249,7 +243,7 @@ public class WB_Danzer {
 	 *
 	 */
 	public void inflate(final double probability) {
-		final List<WB_DanzerTile> newTiles = new FastTable<WB_DanzerTile>();
+		final List<WB_DanzerTile> newTiles = new FastList<WB_DanzerTile>();
 		for (int i = 0; i < tiles.size(); i++) {
 			newTiles.addAll(inflateTileInt(tiles.get(i), probability));
 		}
@@ -274,7 +268,7 @@ public class WB_Danzer {
 	 * @return
 	 */
 	protected List<WB_DanzerTile> inflateTileInt(final WB_DanzerTile T, final double probability) {
-		final List<WB_DanzerTile> newTiles = new FastTable<WB_DanzerTile>();
+		final List<WB_DanzerTile> newTiles = new FastList<WB_DanzerTile>();
 
 		if (rnd.nextDouble() >= probability) {
 			newTiles.add(T);
@@ -568,7 +562,7 @@ public class WB_Danzer {
 	 * @return
 	 */
 	public List<WB_Polygon> getTiles() {
-		final List<WB_Polygon> faces = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> faces = new FastList<WB_Polygon>();
 		clean();
 		for (final WB_DanzerTile T : tiles) {
 			faces.add(geometryfactory.createSimplePolygon(points.get(T.p1), points.get(T.p2), points.get(T.p3)));
@@ -582,7 +576,7 @@ public class WB_Danzer {
 	 * @return
 	 */
 	public List<WB_Triangle> getTriangles() {
-		final List<WB_Triangle> faces = new FastTable<WB_Triangle>();
+		final List<WB_Triangle> faces = new FastList<WB_Triangle>();
 		clean();
 		for (final WB_DanzerTile T : tiles) {
 			faces.add(geometryfactory.createTriangle(points.get(T.p1), points.get(T.p2), points.get(T.p3)));
@@ -623,7 +617,7 @@ public class WB_Danzer {
 			used[T.p3] = true;
 		}
 		int ni = 0;
-		final List<WB_Point> newpoints = new FastTable<WB_Point>();
+		final List<WB_Point> newpoints = new FastList<WB_Point>();
 		for (int i = 0; i < points.size(); i++) {
 			if (used[i]) {
 				newindices[i] = ni++;

@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.File;
@@ -18,8 +13,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.zip.GZIPOutputStream;
 
-import gnu.trove.map.TLongIntMap;
-import gnu.trove.map.hash.TLongIntHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
+
 import wblut.geom.WB_Coord;
 
 class HET_WriterOBJ {
@@ -518,7 +513,7 @@ class HET_WriterOBJ {
 		final int nOffset = getCurrNormalOffset() + 1;
 		startNewObject(new Long(mesh.getKey()).toString());
 		// vertices
-		final TLongIntMap keyToIndex = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap keyToIndex = new LongIntHashMap();
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		int i = 0;
@@ -539,7 +534,7 @@ class HET_WriterOBJ {
 		while (fItr.hasNext()) {
 			f = fItr.next();
 			he = f.getHalfedge();
-			final int n = f.getFaceOrder();
+			final int n = f.getFaceDegree();
 			final int[] indices = new int[n];
 			final int[] normalindices = new int[n];
 			for (i = 0; i < n; i++) {
@@ -560,7 +555,7 @@ class HET_WriterOBJ {
 		final int vOffset = getCurrVertexOffset() + 1;
 		startNewObject(new Long(mesh.getKey()).toString());
 		// vertices
-		final TLongIntMap keyToIndex = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap keyToIndex = new LongIntHashMap();
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		int i = 0;
@@ -577,7 +572,7 @@ class HET_WriterOBJ {
 		while (fItr.hasNext()) {
 			f = fItr.next();
 			he = f.getHalfedge();
-			final int n = f.getFaceOrder();
+			final int n = f.getFaceDegree();
 			final int[] indices = new int[n];
 			for (i = 0; i < n; i++) {
 				indices[i] = keyToIndex.get(he.getVertex().key()) + vOffset;
@@ -599,7 +594,7 @@ class HET_WriterOBJ {
 		objWriter.println("mtllib " + name + ".mtl");
 		startNewObject(new Long(mesh.getKey()).toString());
 		// vertices
-		final TLongIntMap keyToIndex = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap keyToIndex = new LongIntHashMap();
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		int i = 0;
@@ -623,7 +618,7 @@ class HET_WriterOBJ {
 			he = f.getHalfedge();
 			writeFaceColor(fi, f.getColor());
 			objWriter.println("usemtl f" + fi++);
-			final int n = f.getFaceOrder();
+			final int n = f.getFaceDegree();
 			final int[] indices = new int[n];
 			final int[] normalindices = new int[n];
 			for (i = 0; i < n; i++) {
@@ -647,7 +642,7 @@ class HET_WriterOBJ {
 		objWriter.println("mtllib " + name + ".mtl");
 		startNewObject(new Long(mesh.getKey()).toString());
 		// vertices
-		final TLongIntMap keyToIndex = new TLongIntHashMap(10, 0.5f, -1L, -1);
+		final LongIntHashMap keyToIndex = new LongIntHashMap();
 		Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		int i = offset;
@@ -670,7 +665,7 @@ class HET_WriterOBJ {
 		while (fItr.hasNext()) {
 			f = fItr.next();
 			he = f.getHalfedge();
-			final int n = f.getFaceOrder();
+			final int n = f.getFaceDegree();
 			final int[] indices = new int[n];
 			final int[] normalindices = new int[n];
 			for (i = 0; i < n; i++) {

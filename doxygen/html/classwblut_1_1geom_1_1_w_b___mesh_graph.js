@@ -14,6 +14,7 @@ var classwblut_1_1geom_1_1_w_b___mesh_graph =
     [ "getFrame", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#ab5d8d33db1db1c93db9a47c0c975bd30", null ],
     [ "getFrame", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#a344a8fafd297b75207c7bf8e9fc1d9aa", null ],
     [ "getFrame", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#a0ac0031c4278dea39929ff7c2f95fb5b", null ],
+    [ "getShortestDistanceBetweenVertices", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#aa4f51b69e41f20b1067c1bd4c0cdacbb", null ],
     [ "getShortestPathBetweenVertices", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#aaece5b094970276345d5d9d4c803e75b", null ],
     [ "getVertexIndex", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#a6f9d24929b51c61f3f21afafd915343a", null ],
     [ "lastSource", "classwblut_1_1geom_1_1_w_b___mesh_graph.html#a15d400e3011038dc86dcfc9c09bfb0ae", null ],

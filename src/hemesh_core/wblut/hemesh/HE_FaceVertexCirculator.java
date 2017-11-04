@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
@@ -36,7 +31,9 @@ public class HE_FaceVertexCirculator implements Iterator<HE_Vertex> {
 		_current = null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.util.Iterator#hasNext()
 	 */
 	@Override
@@ -44,10 +41,12 @@ public class HE_FaceVertexCirculator implements Iterator<HE_Vertex> {
 		if (_start == null) {
 			return false;
 		}
-		return (_current == null) || (_current.getNextInFace() != _start);
+		return _current == null || _current.getNextInFace() != _start;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.util.Iterator#next()
 	 */
 	@Override
@@ -60,7 +59,9 @@ public class HE_FaceVertexCirculator implements Iterator<HE_Vertex> {
 		return _current.getVertex();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.util.Iterator#remove()
 	 */
 	@Override

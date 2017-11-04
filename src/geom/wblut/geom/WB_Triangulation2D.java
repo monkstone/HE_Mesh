@@ -1,19 +1,14 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastMap;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
 /**
  *
@@ -80,7 +75,7 @@ public class WB_Triangulation2D {
 	private void extractEdges(final int[] tris) {
 		high = -1;
 		final int f = tris.length;
-		final FastMap<Long, int[]> map = new FastMap<Long, int[]>();
+		final UnifiedMap<Long, int[]> map = new UnifiedMap<Long, int[]>();
 		for (int i = 0; i < tris.length; i += 3) {
 			final int v0 = tris[i];
 			high = Math.max(high, v0);

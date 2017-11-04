@@ -1,6 +1,6 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
+ * http://creativecommons.org/publicdomain/zero/1.0/
+
  * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
  * rights.
  *
@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 public class WB_Mesh {
 
@@ -84,7 +84,7 @@ public class WB_Mesh {
 	 *
 	 */
 	protected WB_Mesh() {
-		vertices = new FastTable<WB_Coord>();
+		vertices = new FastList<WB_Coord>();
 		this.faces = new int[0][];
 	}
 
@@ -95,7 +95,7 @@ public class WB_Mesh {
 	 * @return
 	 */
 	private List<WB_Coord> createVertices(final Collection<? extends WB_Coord> points) {
-		vertices = new FastTable<WB_Coord>();
+		vertices = new FastList<WB_Coord>();
 		for (WB_Coord p : points) {
 			vertices.add(new WB_Point(p));
 		}
@@ -109,7 +109,7 @@ public class WB_Mesh {
 	 * @return
 	 */
 	private List<WB_Coord> createVertices(final WB_Coord[] points) {
-		vertices = new FastTable<WB_Coord>();
+		vertices = new FastList<WB_Coord>();
 		for (WB_Coord p : points) {
 			vertices.add(new WB_Point(p));
 		}
@@ -264,7 +264,7 @@ public class WB_Mesh {
 	 * @return
 	 */
 	public List<WB_Plane> getPlanes(final double d) {
-		final List<WB_Plane> planes = new FastTable<WB_Plane>();
+		final List<WB_Plane> planes = new FastList<WB_Plane>();
 		for (int i = 0; i < faces.length; i++) {
 			planes.add(getPlane(i, d));
 		}
@@ -301,7 +301,7 @@ public class WB_Mesh {
 	 * @return
 	 */
 	public List<WB_Polygon> getPolygons() {
-		final List<WB_Polygon> polygons = new FastTable<WB_Polygon>();
+		final List<WB_Polygon> polygons = new FastList<WB_Polygon>();
 		for (int i = 0; i < faces.length; i++) {
 			polygons.add(getPolygon(i));
 		}
@@ -343,7 +343,7 @@ public class WB_Mesh {
 		final double acz = AABB.getCenterZ();
 		double f = Math.min(AABB.getWidth() / self.getWidth(), AABB.getHeight() / self.getHeight());
 		f = Math.min(f, AABB.getDepth() / self.getDepth());
-		final List<WB_Point> rescaled = new FastTable<WB_Point>();
+		final List<WB_Point> rescaled = new FastList<WB_Point>();
 		for (int i = 0; i < vertices.size(); i++) {
 			final WB_Point p = new WB_Point(-scx, -scy, -scz).add(vertices.get(i));
 
@@ -387,7 +387,7 @@ public class WB_Mesh {
 	 * @return
 	 */
 	private WB_Mesh triangulateST() {
-		tris = new FastTable<int[]>();
+		tris = new FastList<int[]>();
 		int[] face;
 		int[] triangles;
 		int id = 0;
@@ -759,7 +759,7 @@ public class WB_Mesh {
 	}
 
 	public WB_Mesh apply(final WB_Transform WB_Point) {
-		final FastTable<WB_Point> newvertices = new FastTable<WB_Point>();
+		final FastList<WB_Point> newvertices = new FastList<WB_Point>();
 
 		WB_Point point;
 		for (int i = 0; i < vertices.size(); i++) {

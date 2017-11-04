@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.processing;
 
 import java.util.ArrayList;
@@ -429,6 +424,9 @@ public class WB_Render3D extends WB_Render2D {
 	 *            the mesh
 	 */
 	public void drawEdges(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Halfedge> eItr = mesh.eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
@@ -446,6 +444,9 @@ public class WB_Render3D extends WB_Render2D {
 	 *            selection to draw
 	 */
 	public void drawEdges(final HE_Selection selection) {
+		if (selection == null) {
+			return;
+		}
 		final Iterator<HE_Halfedge> eItr = selection.eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
@@ -471,6 +472,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawEdgesWithInternalLabel(final int label, final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Halfedge> eItr = mesh.eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
@@ -492,12 +496,15 @@ public class WB_Render3D extends WB_Render2D {
 	 *            the mesh
 	 */
 	public void drawEdgesWithLabel(final int label, final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Halfedge> eItr = mesh.eItr();
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
 			e = eItr.next();
 			if (e.isVisible()) {
-				if (e.getLabel() == label) {
+				if (e.getUserLabel() == label) {
 					line(e.getVertex(), e.getEndVertex());
 				}
 			}
@@ -527,7 +534,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		final int fo = f.getFaceOrder();
+		final int fo = f.getFaceDegree();
 
 		final List<HE_Vertex> vertices = f.getFaceVertices();
 
@@ -602,7 +609,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		final int fo = f.getFaceOrder();
+		final int fo = f.getFaceDegree();
 
 		final List<HE_Vertex> vertices = f.getFaceVertices();
 
@@ -695,7 +702,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		final int fo = f.getFaceOrder();
+		final int fo = f.getFaceDegree();
 		final List<HE_Vertex> vertices = f.getFaceVertices();
 		if (fo < 3 || vertices.size() < 3) {
 		} else if (fo == 3) {
@@ -771,7 +778,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		final int fo = f.getFaceOrder();
+		final int fo = f.getFaceDegree();
 		final List<HE_Vertex> vertices = f.getFaceVertices();
 		if (fo < 3 || vertices.size() < 3) {
 		} else if (fo == 3) {
@@ -864,7 +871,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		final int fo = f.getFaceOrder();
+		final int fo = f.getFaceDegree();
 		final int fti = f.getTextureId();
 		final List<HE_Vertex> vertices = f.getFaceVertices();
 		if (fo < 3 || vertices.size() < 3) {
@@ -1042,7 +1049,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			home.pushStyle();
 			home.fill(f.getColor());
 			final int[] tris = f.getTriangles();
@@ -1086,7 +1093,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			home.pushStyle();
 			home.fill(f.getColor());
 			final int[] tris = f.getTriangles();
@@ -1149,7 +1156,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			final int[] tris = f.getTriangles();
 			final List<HE_Vertex> vertices = f.getFaceVertices();
 			final List<HE_Halfedge> halfedges = f.getFaceHalfedges();
@@ -1197,7 +1204,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			final int[] tris = f.getTriangles();
 			final List<HE_Vertex> vertices = f.getFaceVertices();
 			final List<HE_Halfedge> halfedges = f.getFaceHalfedges();
@@ -1282,7 +1289,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		final int fo = f.getFaceOrder();
+		final int fo = f.getFaceDegree();
 		final List<HE_Vertex> vertices = f.getFaceVertices();
 		if (fo < 3 || vertices.size() < 3) {
 		} else if (fo == 3) {
@@ -1437,7 +1444,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			final int[] tris = f.getTriangles();
 			final List<HE_Vertex> vertices = f.getFaceVertices();
 			HE_Vertex v0, v1, v2;
@@ -1484,7 +1491,7 @@ public class WB_Render3D extends WB_Render2D {
 		if (!f.isVisible()) {
 			return;
 		}
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			final int[] tris = f.getTriangles();
 			final List<HE_Vertex> vertices = f.getFaceVertices();
 			HE_Vertex v0, v1, v2;
@@ -1559,6 +1566,9 @@ public class WB_Render3D extends WB_Render2D {
 	 *            the mesh
 	 */
 	public void drawFaces(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1574,6 +1584,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param texture
 	 */
 	public void drawFaces(final HE_MeshStructure mesh, final PImage texture) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1589,6 +1602,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param textures
 	 */
 	public void drawFaces(final HE_MeshStructure mesh, final PImage[] textures) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 
 		while (fItr.hasNext()) {
@@ -1603,6 +1619,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesFC(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1617,6 +1636,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesHC(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1632,7 +1654,9 @@ public class WB_Render3D extends WB_Render2D {
 	 *            the mesh
 	 */
 	public void drawFacesSmooth(final HE_MeshStructure mesh) {
-
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1648,7 +1672,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param texture
 	 */
 	public void drawFacesSmooth(final HE_MeshStructure mesh, final PImage texture) {
-
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1664,7 +1690,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param textures
 	 */
 	public void drawFacesSmooth(final HE_MeshStructure mesh, final PImage[] textures) {
-
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		while (fItr.hasNext()) {
 			drawFace(fItr.next(), textures, true);
@@ -1678,6 +1706,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesSmoothFC(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1692,6 +1723,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesSmoothHC(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1706,6 +1740,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesSmoothVC(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1720,6 +1757,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesVC(final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
@@ -1735,6 +1775,9 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 */
 	public void drawFacesWithInternalLabel(final int label, final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		HE_Face f;
@@ -1756,12 +1799,15 @@ public class WB_Render3D extends WB_Render2D {
 	 *            the mesh
 	 */
 	public void drawFacesWithLabel(final int label, final HE_MeshStructure mesh) {
+		if (mesh == null) {
+			return;
+		}
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		HE_Face f;
 		while (fItr.hasNext()) {
 			f = fItr.next();
-			if (f.getLabel() == label) {
+			if (f.getUserLabel() == label) {
 				drawFaceInt(f);
 			}
 		}
@@ -1821,7 +1867,7 @@ public class WB_Render3D extends WB_Render2D {
 		while (heItr.hasNext()) {
 			he = heItr.next();
 			if (he.isVisible()) {
-				if (he.getLabel() == label) {
+				if (he.getUserLabel() == label) {
 					line(he.getVertex(), he.getEndVertex().mulAddMul(0.8, 0.2, he.getVertex()));
 				}
 			}
@@ -4639,7 +4685,7 @@ public class WB_Render3D extends WB_Render2D {
 		HE_Vertex v;
 		while (vItr.hasNext()) {
 			v = vItr.next();
-			if (v.isVisible() && v.getLabel() == label) {
+			if (v.isVisible() && v.getUserLabel() == label) {
 				drawVertex(v, d);
 			}
 		}

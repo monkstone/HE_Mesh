@@ -1,21 +1,14 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
 
-import gnu.trove.map.TLongDoubleMap;
-import gnu.trove.map.hash.TLongDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap;
 
 public class WB_HashGridDouble {
 
-	private final TLongDoubleMap values;
+	private final LongDoubleHashMap values;
 
 	private final double defaultValue;
 
@@ -35,7 +28,7 @@ public class WB_HashGridDouble {
 		this.M = M;
 		KL = K * L;
 		this.defaultValue = defaultValue;
-		values = new TLongDoubleHashMap(10, 0.5f, -1L, defaultValue);
+		values = new LongDoubleHashMap();
 	}
 
 	/**
@@ -51,7 +44,7 @@ public class WB_HashGridDouble {
 		this.M = M;
 		KL = K * L;
 		defaultValue = 0;
-		values = new TLongDoubleHashMap(10, 0.5f, -1L, defaultValue);
+		values = new LongDoubleHashMap();
 	}
 
 	/**
@@ -206,7 +199,7 @@ public class WB_HashGridDouble {
 	 * @return
 	 */
 	public long[] getKeys() {
-		return values.keys();
+		return values.keySet().toArray();
 	}
 
 	/**

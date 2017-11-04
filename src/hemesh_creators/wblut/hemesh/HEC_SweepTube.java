@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import wblut.geom.WB_Curve;
@@ -89,7 +84,9 @@ public class HEC_SweepTube extends HEC_Creator {
 		return this;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see wblut.hemesh.HEC_Creator#setScale(double)
 	 */
 	@Override
@@ -169,7 +166,7 @@ public class HEC_SweepTube extends HEC_Creator {
 	protected HE_Mesh createBase() {
 		final WB_Point[] vertices = new WB_Point[(steps + 1) * facets];
 		final WB_Point[] basevertices = new WB_Point[facets];
-		final double da = (2 * Math.PI) / facets;
+		final double da = 2 * Math.PI / facets;
 		for (int i = 0; i < facets; i++) {
 			// normal(0,0,1);
 			basevertices[i] = new WB_Point(R * Math.cos(da * i), R * Math.sin(da * i), 0);
@@ -179,10 +176,10 @@ public class HEC_SweepTube extends HEC_Creator {
 		WB_Vector deriv;
 		WB_Vector oldderiv = new WB_Vector(0, 0, 1);
 		final WB_Point origin = new WB_Point(0, 0, 0);
-		for (int i = 0; i < (steps + 1); i++) {
-			onCurve = curve.curvePoint(umin + (i * ds));
+		for (int i = 0; i < steps + 1; i++) {
+			onCurve = curve.curvePoint(umin + i * ds);
 
-			deriv = curve.curveDirection(umin + (i * ds));
+			deriv = curve.curveDirection(umin + i * ds);
 
 			final WB_Vector axis = oldderiv.cross(deriv);
 			final double angle = Math.acos(WB_Math.clamp(oldderiv.dot(deriv), -1, 1));
@@ -190,8 +187,8 @@ public class HEC_SweepTube extends HEC_Creator {
 				if (!WB_Epsilon.isZeroSq(axis.getSqLength())) {
 					basevertices[j].rotateAboutAxisSelf(angle, origin, axis);
 				}
-				vertices[j + (i * facets)] = new WB_Point(basevertices[j]);
-				vertices[j + (i * facets)].addSelf(onCurve);
+				vertices[j + i * facets] = new WB_Point(basevertices[j]);
+				vertices[j + i * facets].addSelf(onCurve);
 			}
 			oldderiv = deriv;
 		}
@@ -218,14 +215,14 @@ public class HEC_SweepTube extends HEC_Creator {
 				faces[bc][facets - 1 - j] = j;
 			}
 			if (topcap) {
-				faces[tc][j] = (steps * facets) + j;
+				faces[tc][j] = steps * facets + j;
 			}
 			for (int i = 0; i < steps; i++) {
-				faces[j + (i * facets)] = new int[4];
-				faces[j + (i * facets)][0] = j + (i * facets);
-				faces[j + (i * facets)][3] = j + (i * facets) + facets;
-				faces[j + (i * facets)][2] = ((j + 1) % facets) + facets + (i * facets);
-				faces[j + (i * facets)][1] = ((j + 1) % facets) + (i * facets);
+				faces[j + i * facets] = new int[4];
+				faces[j + i * facets][0] = j + i * facets;
+				faces[j + i * facets][3] = j + i * facets + facets;
+				faces[j + i * facets][2] = (j + 1) % facets + facets + i * facets;
+				faces[j + i * facets][1] = (j + 1) % facets + i * facets;
 			}
 		}
 		final HEC_FromFacelist fl = new HEC_FromFacelist();

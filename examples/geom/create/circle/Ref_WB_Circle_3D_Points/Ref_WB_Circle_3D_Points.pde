@@ -38,3 +38,8 @@ void draw() {
   render.drawPlane(circle.getPlane(),340.0);
   
 }
+
+void mouseClicked(){
+   circle=new WB_Circle(WB_Point.ORIGIN(),new WB_Vector(random(-1.0,1.0),random(-1.0,1.0),random(-1.0,1.0)), 300.0);
+   points=circle.getPoints(36);
+}

@@ -2,6 +2,8 @@ var classwblut_1_1hemesh_1_1_h_e___selection =
 [
     [ "HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html#a1b496c6192ed2219e556c7767de1c47e", null ],
     [ "add", "classwblut_1_1hemesh_1_1_h_e___selection.html#a1ca1ee21d976068fab5d5eeee8b9f416", null ],
+    [ "add", "classwblut_1_1hemesh_1_1_h_e___selection.html#ad44493320b9ac1ad2a526281ddd7c116", null ],
+    [ "addEdge", "classwblut_1_1hemesh_1_1_h_e___selection.html#a290bf570429f79eff3e4a8808f58c28b", null ],
     [ "cleanSelection", "classwblut_1_1hemesh_1_1_h_e___selection.html#aed14f6a4856f13fb3c9900395a8e8219", null ],
     [ "collectEdgesByFace", "classwblut_1_1hemesh_1_1_h_e___selection.html#a541b8f5467251d5e9c2aacf580817dd0", null ],
     [ "collectEdgesByVertex", "classwblut_1_1hemesh_1_1_h_e___selection.html#a7f826bbe79b04ddffbe03307c2d4bb0c", null ],

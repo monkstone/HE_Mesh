@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.io.BufferedReader;
@@ -16,11 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import gnu.trove.map.TIntDoubleMap;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntDoubleHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_ScalarParameter;
 
@@ -109,24 +103,24 @@ public class WB_IsoSurface2D {
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> xedges;
+	private IntObjectHashMap<WB_Point> xedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> yedges;
+	private IntObjectHashMap<WB_Point> yedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<WB_Point> vertices;
+	private IntObjectHashMap<WB_Point> vertices;
 	/**
 	 *
 	 */
-	private TIntObjectMap<VertexRemap> vertexremaps;
+	private IntObjectHashMap<VertexRemap> vertexremaps;
 
 	/**
 	 *
 	 */
-	private TIntDoubleMap valueremaps;
+	private IntDoubleHashMap valueremaps;
 	/**
 	 *
 	 */
@@ -136,7 +130,7 @@ public class WB_IsoSurface2D {
 	 *
 	 */
 	private boolean invert;
-	private FastTable<WB_Segment> segs;
+	private FastList<WB_Segment> segs;
 
 	/**
 	 *
@@ -334,9 +328,9 @@ public class WB_IsoSurface2D {
 	}
 
 	public List<WB_Segment> getSegments() {
-		vertices = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		xedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
-		yedges = new TIntObjectHashMap<WB_Point>(1024, 0.5f, -1);
+		vertices = new IntObjectHashMap<WB_Point>();
+		xedges = new IntObjectHashMap<WB_Point>();
+		yedges = new IntObjectHashMap<WB_Point>();
 		valueremaps = null;
 		if (gamma > 0) {
 			mapvertices();
@@ -355,8 +349,8 @@ public class WB_IsoSurface2D {
 	 */
 	private void mapvertices() {
 
-		vertexremaps = new TIntObjectHashMap<VertexRemap>(1024, 0.5f, -1);
-		valueremaps = new TIntDoubleHashMap(1024, 0.5f, -1, Double.NaN);
+		vertexremaps = new IntObjectHashMap<VertexRemap>();
+		valueremaps = new IntDoubleHashMap();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy);
 		if (Double.isNaN(boundary)) {
 			for (int i = 0; i < resx; i++) {
@@ -398,7 +392,7 @@ public class WB_IsoSurface2D {
 	 */
 	private void polygonise() {
 
-		segs = new FastTable<WB_Segment>();
+		segs = new FastList<WB_Segment>();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy);
 		if (Double.isNaN(boundary)) {
 			for (int i = 0; i < resx; i++) {
@@ -827,7 +821,7 @@ public class WB_IsoSurface2D {
 	 */
 	private double value(final int i, final int j) {
 		if (valueremaps != null) {
-			double val = valueremaps.get(index(i, j));
+			double val = valueremaps.getIfAbsent(index(i, j), Double.NaN);
 			if (!Double.isNaN(val)) {
 				return isolevel;
 			}

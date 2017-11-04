@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -16,7 +10,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.core.WB_ProgressTracker;
 
 public class WB_AABBTree2D {
@@ -54,7 +49,7 @@ public class WB_AABBTree2D {
 				"Starting WB_AABBTree2D construction. Max. number of faces per node: " + maxNumberOfFaces);
 
 		root = new WB_AABBNode2D();
-		final List<WB_Triangle> faces = new FastTable<WB_Triangle>();
+		final List<WB_Triangle> faces = new FastList<WB_Triangle>();
 		faces.addAll(mesh);
 		buildNode(root, faces, mesh, 0);
 		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");
@@ -83,8 +78,8 @@ public class WB_AABBTree2D {
 			return;
 		}
 
-		List<WB_Triangle> subsetA = new FastTable<WB_Triangle>();
-		List<WB_Triangle> subsetB = new FastTable<WB_Triangle>();
+		List<WB_Triangle> subsetA = new FastList<WB_Triangle>();
+		List<WB_Triangle> subsetB = new FastList<WB_Triangle>();
 
 		double sah = Double.POSITIVE_INFINITY;
 
@@ -106,8 +101,8 @@ public class WB_AABBTree2D {
 			sah = findOptimalSubset(sah, node, subsetA, subsetB, faces);
 		}
 
-		List<WB_Triangle> childA = new FastTable<WB_Triangle>();
-		List<WB_Triangle> childB = new FastTable<WB_Triangle>();
+		List<WB_Triangle> childA = new FastList<WB_Triangle>();
+		List<WB_Triangle> childB = new FastList<WB_Triangle>();
 
 		if (subsetA.size() < subsetB.size()) {
 			childA.addAll(subsetB);
@@ -333,7 +328,7 @@ public class WB_AABBTree2D {
 		 */
 		public WB_AABBNode2D() {
 			level = -1;
-			faces = new FastTable<WB_Triangle>();
+			faces = new FastList<WB_Triangle>();
 		}
 
 		/**

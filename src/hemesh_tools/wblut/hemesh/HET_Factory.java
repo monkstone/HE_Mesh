@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 /**
@@ -28,6 +29,5 @@ public class HET_Factory {
 	public static HET_Factory instance() {
 		return factory;
 	}
-
 
 }

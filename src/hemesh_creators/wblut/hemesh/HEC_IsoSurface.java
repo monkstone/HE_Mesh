@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.BufferedReader;
@@ -15,10 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import gnu.trove.map.TIntDoubleMap;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntDoubleHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_HashGridDouble;
 import wblut.geom.WB_IsoValues3D;
@@ -121,28 +115,28 @@ public class HEC_IsoSurface extends HEC_Creator {
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> xedges;
+	private IntObjectHashMap<HE_Vertex> xedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> yedges;
+	private IntObjectHashMap<HE_Vertex> yedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> zedges;
+	private IntObjectHashMap<HE_Vertex> zedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> vertices;
+	private IntObjectHashMap<HE_Vertex> vertices;
 	/**
 	 *
 	 */
-	private TIntObjectMap<VertexRemap> vertexremaps;
+	private IntObjectHashMap<VertexRemap> vertexremaps;
 
 	/**
 	 *
 	 */
-	private TIntDoubleMap valueremaps;
+	private IntDoubleHashMap valueremaps;
 	/**
 	 *
 	 */
@@ -374,10 +368,10 @@ public class HEC_IsoSurface extends HEC_Creator {
 	@Override
 	protected HE_Mesh createBase() {
 		mesh = new HE_Mesh();
-		vertices = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
-		xedges = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
-		yedges = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
-		zedges = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
+		vertices = new IntObjectHashMap<HE_Vertex>();
+		xedges = new IntObjectHashMap<HE_Vertex>();
+		yedges = new IntObjectHashMap<HE_Vertex>();
+		zedges = new IntObjectHashMap<HE_Vertex>();
 		valueremaps = null;
 		if (gamma > 0) {
 			mapvertices();
@@ -399,8 +393,8 @@ public class HEC_IsoSurface extends HEC_Creator {
 	 */
 	private void mapvertices() {
 
-		vertexremaps = new TIntObjectHashMap<VertexRemap>(1024, 0.5f, -1);
-		valueremaps = new TIntDoubleHashMap(1024, 0.5f, -1, Double.NaN);
+		vertexremaps = new IntObjectHashMap<VertexRemap>();
+		valueremaps = new IntDoubleHashMap();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy, cz - 0.5 * resz * dz);
 		if (Double.isNaN(boundary)) {
 			for (int i = 0; i < resx; i++) {
@@ -1082,7 +1076,7 @@ public class HEC_IsoSurface extends HEC_Creator {
 	 */
 	private double value(final int i, final int j, final int k) {
 		if (valueremaps != null) {
-			double val = valueremaps.get(index(i, j, k));
+			double val = valueremaps.getIfAbsent(index(i, j, k), Double.NaN);
 			if (!Double.isNaN(val)) {
 				return isolevel;
 			}

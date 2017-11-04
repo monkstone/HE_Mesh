@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import static wblut.geom.WB_Classification.BACK;
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
@@ -62,8 +63,8 @@ class HET_FaceSplitter {
 	}
 
 	void processEdges(final List<HE_Vertex> coords, final WB_Plane P) {
-		splitPoly = new FastTable<PolyEdge>();
-		edgesOnLine = new FastTable<PolyEdge>();
+		splitPoly = new FastList<PolyEdge>();
+		edgesOnLine = new FastList<PolyEdge>();
 		for (int i = 0; i < coords.size(); i++) {
 
 			WB_Classification edgeStartSide = WB_GeometryOp3D.classifyPointToPlane3D(coords.get(i), P);
@@ -191,7 +192,7 @@ class HET_FaceSplitter {
 
 		for (PolyEdge e : splitPoly) {
 			if (!e.visited) {
-				List<PolyEdge> edges = new FastTable<PolyEdge>();
+				List<PolyEdge> edges = new FastList<PolyEdge>();
 				PolyEdge curEdge = e;
 				do {
 					curEdge.visited = true;
@@ -248,13 +249,14 @@ class HET_FaceSplitter {
 
 		@Override
 		public int compare(final PolyEdge e0, final PolyEdge e1) {
-			double d = WB_GeometryOp3D.getParameterOfPointOnLine3D(e0.pos, L) - WB_GeometryOp3D.getParameterOfPointOnLine3D(e1.pos, L);
+			double d = WB_GeometryOp3D.getParameterOfPointOnLine3D(e0.pos, L)
+					- WB_GeometryOp3D.getParameterOfPointOnLine3D(e1.pos, L);
 			return WB_Epsilon.isZero(d) ? 0 : d > 0 ? 1 : -1;
 		}
 	}
 
 	WB_Polygon polygonFromArray(final double[][] points) {
-		List<WB_Coord> coords = new FastTable<WB_Coord>();
+		List<WB_Coord> coords = new FastList<WB_Coord>();
 		for (double[] p : points) {
 			if (p.length == 2) {
 				coords.add(new WB_Point(p[0], p[1]));

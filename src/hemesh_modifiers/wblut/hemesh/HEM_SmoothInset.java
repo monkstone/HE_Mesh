@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.Iterator;
@@ -25,16 +20,6 @@ public class HEM_SmoothInset extends HEM_Modifier {
 	 *
 	 */
 	private double offset;
-
-	/**
-	 *
-	 */
-	public HE_Selection walls;
-
-	/**
-	 *
-	 */
-	public HE_Selection inset;
 
 	/**
 	 *
@@ -76,16 +61,16 @@ public class HEM_SmoothInset extends HEM_Modifier {
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(offset).setRelative(false);
 		mesh.modify(ext);
 		for (int i = 0; i < rep; i++) {
-			ext.extruded.collectEdgesByFace();
-			final Iterator<HE_Halfedge> eItr = ext.extruded.eItr();
+			mesh.getSelection("extruded").collectEdgesByFace();
+			final Iterator<HE_Halfedge> eItr = mesh.getSelection("extruded").eItr();
 			while (eItr.hasNext()) {
 				HET_MeshOp.divideEdge(mesh, eItr.next(), 2);
 			}
-			ext.extruded.collectVertices();
-			ext.extruded.modify(new HEM_Smooth());
+			mesh.getSelection("extruded").collectVertices();
+			mesh.getSelection("extruded").modify(new HEM_Smooth());
 		}
-		inset = ext.extruded;
-		walls = ext.walls;
+		mesh.renameSelection("extruded", "inset");
+
 		return mesh;
 	}
 
@@ -100,16 +85,15 @@ public class HEM_SmoothInset extends HEM_Modifier {
 		final HEM_Extrude ext = new HEM_Extrude().setChamfer(offset).setRelative(false);
 		selection.modify(ext);
 		for (int i = 0; i < rep; i++) {
-			ext.extruded.collectEdgesByFace();
-			final Iterator<HE_Halfedge> eItr = ext.extruded.eItr();
+			selection.parent.getSelection("extruded").collectEdgesByFace();
+			final Iterator<HE_Halfedge> eItr = selection.parent.getSelection("extruded").eItr();
 			while (eItr.hasNext()) {
 				HET_MeshOp.divideEdge(selection.parent, eItr.next(), 2);
 			}
-			ext.extruded.collectVertices();
-			ext.extruded.modify(new HEM_Smooth());
+			selection.parent.getSelection("extruded").collectVertices();
+			selection.parent.getSelection("extruded").modify(new HEM_Smooth());
 		}
-		inset = ext.extruded;
-		walls = ext.walls;
+		selection.parent.renameSelection("extruded", "inset");
 		return selection.parent;
 	}
 }

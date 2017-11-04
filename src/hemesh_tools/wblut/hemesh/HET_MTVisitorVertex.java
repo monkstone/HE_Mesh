@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -18,122 +13,108 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import javolution.util.FastTable;
-
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  * @author FVH
  *
  */
-public  class HET_MTVisitorVertex<E extends Object> {
+public class HET_MTVisitorVertex<E extends Object> {
 	HET_InfoVertex<E> vertexInfo;
 
-
 	/**
-	 * 
 	 *
-	 * @param vertexInfo 
+	 *
+	 * @param vertexInfo
 	 */
-	public HET_MTVisitorVertex(final HET_InfoVertex<E> vertexInfo){
-		this.vertexInfo=vertexInfo;
+	public HET_MTVisitorVertex(final HET_InfoVertex<E> vertexInfo) {
+		this.vertexInfo = vertexInfo;
 	}
 
-
 	/**
-	 * 
 	 *
-	 * @param mesh 
-	 * @return 
+	 *
+	 * @param mesh
+	 * @return
 	 */
-	public List<E> getVertexInfo(final HE_MeshStructure mesh){
+	public List<E> getVertexInfo(final HE_MeshStructure mesh) {
 		return visit(mesh.vertices.getObjects());
 	}
 
 	/**
-	 * 
 	 *
-	 * @param vertices 
-	 * @return 
+	 *
+	 * @param vertices
+	 * @return
 	 */
-	private List<E> visit(final List<HE_Vertex> vertices){
+	private List<E> visit(final List<HE_Vertex> vertices) {
 
-		List<E> result=new FastTable<E>();
+		List<E> result = new FastList<E>();
 		try {
 			int threadCount = Runtime.getRuntime().availableProcessors();
 			int dvertices = vertices.size() / threadCount;
 			final ExecutorService executor = Executors.newFixedThreadPool(threadCount);
-			final List<Future<List<E>>>  list=new ArrayList<Future<List<E>>>();
+			final List<Future<List<E>>> list = new ArrayList<Future<List<E>>>();
 			int i = 0;
-			for (i = 0; i < (threadCount - 1); i++) {
-				final Callable<List<E>> runner = new HET_VertexVisitor(dvertices * i, (dvertices * (i + 1)) - 1,i,vertices);
+			for (i = 0; i < threadCount - 1; i++) {
+				final Callable<List<E>> runner = new HET_VertexVisitor(dvertices * i, dvertices * (i + 1) - 1, i,
+						vertices);
 				list.add(executor.submit(runner));
 			}
-			final Callable<List<E>> runner = new HET_VertexVisitor(dvertices * i, vertices.size() - 1,i,vertices);
+			final Callable<List<E>> runner = new HET_VertexVisitor(dvertices * i, vertices.size() - 1, i, vertices);
 			list.add(executor.submit(runner));
 
 			for (Future<List<E>> future : list) {
 				result.addAll(future.get());
 			}
 
-
-
 			executor.shutdown();
 
-		}catch(final InterruptedException ex) {
+		} catch (final InterruptedException ex) {
 			ex.printStackTrace();
-		} catch(final ExecutionException ex) {
+		} catch (final ExecutionException ex) {
 			ex.printStackTrace();
 		}
 		return result;
 	}
 
-
-
-
-	class HET_VertexVisitor implements Callable<List<E>>{
+	class HET_VertexVisitor implements Callable<List<E>> {
 		int start;
 		int end;
 		int id;
 		List<HE_Vertex> vertices;
 
-
 		/**
-		 * 
 		 *
-		 * @param s 
-		 * @param e 
-		 * @param id 
-		 * @param vertices 
+		 *
+		 * @param s
+		 * @param e
+		 * @param id
+		 * @param vertices
 		 */
-		public HET_VertexVisitor(final int s, final int e,final int id,final List<HE_Vertex> vertices) {
+		public HET_VertexVisitor(final int s, final int e, final int id, final List<HE_Vertex> vertices) {
 			start = s;
 			end = e;
-			this.id=id;
-			this.vertices=vertices;
+			this.id = id;
+			this.vertices = vertices;
 
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.util.concurrent.Callable#call()
 		 */
 		@Override
 		public List<E> call() {
-			ArrayList<E> result=new ArrayList<E>();
-			ListIterator<HE_Vertex> itr=vertices.listIterator(start);
+			ArrayList<E> result = new ArrayList<E>();
+			ListIterator<HE_Vertex> itr = vertices.listIterator(start);
 			for (int i = start; i <= end; i++) {
 				result.add(vertexInfo.retrieve(itr.next()));
 			}
 			return result;
 		}
 
-
-
-
-
 	}
-
-
-
-
 
 }

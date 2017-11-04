@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.io.BufferedReader;
@@ -15,8 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
+
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_HashGridDouble2D;
@@ -107,16 +102,16 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> xedges;
+	private IntObjectHashMap<HE_Vertex> xedges;
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> yedges;
+	private IntObjectHashMap<HE_Vertex> yedges;
 
 	/**
 	 *
 	 */
-	private TIntObjectMap<HE_Vertex> vertices;
+	private IntObjectHashMap<HE_Vertex> vertices;
 	/**
 	 *
 	 */
@@ -492,9 +487,9 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 	 * Polygonise.
 	 */
 	private void polygonise() {
-		xedges = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
-		yedges = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
-		vertices = new TIntObjectHashMap<HE_Vertex>(1024, 0.5f, -1);
+		xedges = new IntObjectHashMap<HE_Vertex>();
+		yedges = new IntObjectHashMap<HE_Vertex>();
+		vertices = new IntObjectHashMap<HE_Vertex>();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy);
 
 		for (int i = 0; i < resx; i++) {

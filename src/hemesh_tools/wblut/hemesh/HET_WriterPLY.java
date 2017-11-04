@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 package wblut.hemesh;
 
@@ -18,14 +12,8 @@ import java.util.zip.GZIPOutputStream;
 
 import wblut.geom.WB_Coord;
 
-/**
- *
- */
 public class HET_WriterPLY {
 
-	/**
-	 *
-	 */
 	private static final byte[] buf = new byte[4];
 
 	/**
@@ -46,8 +34,8 @@ public class HET_WriterPLY {
 	 */
 	private static final byte[] le(final int i) {
 		buf[3] = (byte) (i >>> 24);
-		buf[2] = (byte) ((i >> 16) & 0xff);
-		buf[1] = (byte) ((i >> 8) & 0xff);
+		buf[2] = (byte) (i >> 16 & 0xff);
+		buf[1] = (byte) (i >> 8 & 0xff);
 		buf[0] = (byte) (i & 0xff);
 		return buf;
 	}
@@ -60,20 +48,17 @@ public class HET_WriterPLY {
 	 */
 	public static void saveMesh(final HE_Mesh mesh, final OutputStream stream) {
 		try {
-			final BufferedOutputStream out = new BufferedOutputStream(stream,
-					0x20000);
+			final BufferedOutputStream out = new BufferedOutputStream(stream, 0x20000);
 			out.write("ply\n".getBytes());
 			out.write("format binary_little_endian 1.0\n".getBytes());
-			out.write(("element vertex " + mesh.getNumberOfVertices() + "\n")
-					.getBytes());
+			out.write(("element vertex " + mesh.getNumberOfVertices() + "\n").getBytes());
 			out.write("property float x\n".getBytes());
 			out.write("property float y\n".getBytes());
 			out.write("property float z\n".getBytes());
 			out.write("property float nx\n".getBytes());
 			out.write("property float ny\n".getBytes());
 			out.write("property float nz\n".getBytes());
-			out.write(("element face " + mesh.getNumberOfFaces() + "\n")
-					.getBytes());
+			out.write(("element face " + mesh.getNumberOfFaces() + "\n").getBytes());
 			out.write("property list uchar uint vertex_indices\n".getBytes());
 			out.write("end_header\n".getBytes());
 			final WB_Coord[] verts = mesh.getVerticesAsArray();
@@ -112,7 +97,7 @@ public class HET_WriterPLY {
 	 * @return
 	 */
 	public static final int red(final int what) {
-		return (what >> 16) & 0xff;
+		return what >> 16 & 0xff;
 	}
 
 	/**
@@ -122,7 +107,7 @@ public class HET_WriterPLY {
 	 * @return
 	 */
 	public static final int green(final int what) {
-		return (what >> 8) & 0xff;
+		return what >> 8 & 0xff;
 	}
 
 	/**
@@ -132,7 +117,7 @@ public class HET_WriterPLY {
 	 * @return
 	 */
 	public static final int blue(final int what) {
-		return (what) & 0xff;
+		return what & 0xff;
 	}
 
 	/**
@@ -142,8 +127,7 @@ public class HET_WriterPLY {
 	 * @param path
 	 * @param name
 	 */
-	public static void saveMesh(final HE_Mesh mesh, final String path,
-			final String name) {
+	public static void saveMesh(final HE_Mesh mesh, final String path, final String name) {
 		try {
 			saveMesh(mesh, createOutputStream(new File(path, name + ".ply")));
 		} catch (final IOException e) {
@@ -158,8 +142,7 @@ public class HET_WriterPLY {
 	 * @return
 	 * @throws IOException
 	 */
-	static public OutputStream createOutputStream(final File file)
-			throws IOException {
+	static public OutputStream createOutputStream(final File file) throws IOException {
 		if (file == null) {
 			throw new IllegalArgumentException("file can't be null");
 		}
@@ -186,8 +169,7 @@ public class HET_WriterPLY {
 				}
 			}
 		} catch (final SecurityException se) {
-			System.err.println("No permissions to create "
-					+ file.getAbsolutePath());
+			System.err.println("No permissions to create " + file.getAbsolutePath());
 		}
 	}
 
@@ -197,15 +179,12 @@ public class HET_WriterPLY {
 	 * @param mesh
 	 * @param stream
 	 */
-	public static void saveMeshWithVertexColor(final HE_Mesh mesh,
-			final OutputStream stream) {
+	public static void saveMeshWithVertexColor(final HE_Mesh mesh, final OutputStream stream) {
 		try {
-			final BufferedOutputStream out = new BufferedOutputStream(stream,
-					0x20000);
+			final BufferedOutputStream out = new BufferedOutputStream(stream, 0x20000);
 			out.write("ply\n".getBytes());
 			out.write("format ascii 1.0\n".getBytes());
-			out.write(("element vertex " + mesh.getNumberOfVertices() + "\n")
-					.getBytes());
+			out.write(("element vertex " + mesh.getNumberOfVertices() + "\n").getBytes());
 			out.write("property float x\n".getBytes());
 			out.write("property float y\n".getBytes());
 			out.write("property float z\n".getBytes());
@@ -216,8 +195,7 @@ public class HET_WriterPLY {
 			out.write("property uchar green\n".getBytes());
 			out.write("property uchar blue\n".getBytes());
 			out.write("property uchar alpha\n".getBytes());
-			out.write(("element face " + mesh.getNumberOfFaces() + "\n")
-					.getBytes());
+			out.write(("element face " + mesh.getNumberOfFaces() + "\n").getBytes());
 			out.write("property list uchar uint vertex_indices\n".getBytes());
 			out.write("end_header\n".getBytes());
 			final WB_Coord[] verts = mesh.getVerticesAsArray();
@@ -261,11 +239,9 @@ public class HET_WriterPLY {
 	 * @param path
 	 * @param name
 	 */
-	public static void saveMeshWithVertexColor(final HE_Mesh mesh,
-			final String path, final String name) {
+	public static void saveMeshWithVertexColor(final HE_Mesh mesh, final String path, final String name) {
 		try {
-			saveMeshWithVertexColor(mesh, createOutputStream(new File(path,
-					name + ".ply")));
+			saveMeshWithVertexColor(mesh, createOutputStream(new File(path, name + ".ply")));
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -277,23 +253,19 @@ public class HET_WriterPLY {
 	 * @param mesh
 	 * @param stream
 	 */
-	public static void saveMeshWithFaceColor(final HE_Mesh mesh,
-			final OutputStream stream) {
+	public static void saveMeshWithFaceColor(final HE_Mesh mesh, final OutputStream stream) {
 		try {
-			final BufferedOutputStream out = new BufferedOutputStream(stream,
-					0x20000);
+			final BufferedOutputStream out = new BufferedOutputStream(stream, 0x20000);
 			out.write("ply\n".getBytes());
 			out.write("format ascii 1.0\n".getBytes());
-			out.write(("element vertex " + mesh.getNumberOfVertices() + "\n")
-					.getBytes());
+			out.write(("element vertex " + mesh.getNumberOfVertices() + "\n").getBytes());
 			out.write("property float x\n".getBytes());
 			out.write("property float y\n".getBytes());
 			out.write("property float z\n".getBytes());
 			out.write("property float nx\n".getBytes());
 			out.write("property float ny\n".getBytes());
 			out.write("property float nz\n".getBytes());
-			out.write(("element face " + mesh.getNumberOfFaces() + "\n")
-					.getBytes());
+			out.write(("element face " + mesh.getNumberOfFaces() + "\n").getBytes());
 			out.write("property list uchar uint vertex_indices\n".getBytes());
 			out.write("property uchar red\n".getBytes());
 			out.write("property uchar green\n".getBytes());
@@ -341,11 +313,9 @@ public class HET_WriterPLY {
 	 * @param path
 	 * @param name
 	 */
-	public static void saveMeshWithFaceColor(final HE_Mesh mesh,
-			final String path, final String name) {
+	public static void saveMeshWithFaceColor(final HE_Mesh mesh, final String path, final String name) {
 		try {
-			saveMeshWithFaceColor(mesh, createOutputStream(new File(path, name
-					+ ".ply")));
+			saveMeshWithFaceColor(mesh, createOutputStream(new File(path, name + ".ply")));
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

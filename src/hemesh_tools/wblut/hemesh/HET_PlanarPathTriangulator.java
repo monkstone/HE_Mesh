@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
@@ -19,7 +14,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressCounter;
 import wblut.core.WB_ProgressTracker;
 import wblut.geom.WB_Coord;
@@ -91,7 +86,7 @@ class HET_PlanarPathTriangulator {
 		}
 		tracker.setDuringStatus("HET_PlanarPathTriangulator", "Extracting polygons from contours tree.");
 		final List<WB_Polygon> polygons = ringtree.extractPolygons();
-		final List<WB_Coord[]> triangles = new FastTable<WB_Coord[]>();
+		final List<WB_Coord[]> triangles = new FastList<WB_Coord[]>();
 		WB_ProgressCounter counter = new WB_ProgressCounter(polygons.size(), 10);
 		tracker.setCounterStatus("HET_PlanarPathTriangulator", "Triangulating polygons.", counter);
 		for (final WB_Polygon poly : polygons) {

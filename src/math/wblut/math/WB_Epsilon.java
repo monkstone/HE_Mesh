@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.math;
 
 /**
@@ -18,10 +13,10 @@ package wblut.math;
  */
 public class WB_Epsilon {
 	/** General precision. */
-	static public double EPSILON = 1e-6;
+	static public double EPSILON = 1e-12;
 	/** General precision when square is used > EPSILON*EPSILON. */
 	static public double SQEPSILON = EPSILON * EPSILON;
-	static public double EPSILONANGLE = 1e-3 * Math.PI / 180.0;
+	static public double EPSILONANGLE = 1e-5 * Math.PI / 180.0;
 
 	/**
 	 * Clamp value to range with error margin.

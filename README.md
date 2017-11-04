@@ -8,19 +8,17 @@ HE_Mesh, a Java library for creating and manipulating polygonal meshes. Aimed pr
 The first thing you need to do is download or fork this repository and import the code in Eclipse.
 You need to add some other external *.jar files to the properties of your Eclipse project to compile HE_Mesh. These are included in the repository (folder external).
 
-* `core.jar`: This is the core Processing API for Processing 3. Download the latest version of Processing here: http://processing.org/
-* `javolution-6.1.0.jar`: Javolution is used to make HE_Mesh faster. You'll need version 6.1.0, download here: http://www.wblut.com/hemesh/javolution-6.1.0.zip (http://javolution.org/)
-* `jts.jar`: The JTS Topology Suite is an API of spatial predicates and functions for processing planar geometry. You need version 1.14. Download here: https://sourceforge.net/projects/jts-topo-suite (http://tsusiatsoftware.net/jts/main.html)
-* `trove-3.1a1.jar`: A collection of high speed primitive based collections. Download here: http://www.wblut.com/hemesh/trove-3.1a1.zip
-  (http://trove.starlight-systems.com/)
-* `hemesh-external-3_0_0.jar`: HE_Mesh contains source code from other authors that was converted to use my geometry classes for convenience. To protect the rights of the original authors whose work is not in the public domain, the source code is only available on request. The required JAR can be downloaded here: http://www.wblut.com/hemesh/hemesh-external.zip
-* `hemesh-data-3_0_0.jar`: Data for HE_Mesh. The required JAR can be downloaded here: http://www.wblut.com/hemesh/hemesh-data.zip
-* `exp4j.jar`: A simple expression evaluator for Java: https://github.com/fasseg/exp4j. Download a built version here: http://www.objecthunter.net/exp4j/download.html
-* `EJML`: some functions use least-square approximations and other linear algebra approaches: http://ejml.org/
+* `core.jar`: This is the core Processing API for Processing 3. (http://processing.org/)
+* `jts.jar`: The JTS Topology Suite is an API of spatial predicates and functions for processing planar geometry.  (http://tsusiatsoftware.net/jts/main.html)
+* `eclipse-collections-9.0.0.jar`: Eclipse Collections project.(http://www.eclipse.org/collections/)
+* `hemesh-external-3_0_0.jar`: HE_Mesh contains source code from other authors that was converted to use my geometry classes for convenience. To protect the rights of the original authors whose work is not in the public domain, the source code is only available on request.
+* `hemesh-data-4_0_0.jar`: Data for HE_Mesh.
+* `exp4j.jar`: A simple expression evaluator for Java. (https://github.com/fasseg/exp4j)
+* `ParallelColt-0.9.4.jar` and dependecies: some functions use least-square approximations and other linear algebra approaches. (https://sites.google.com/site/piotrwendykier/software/parallelcolt)
 
-## Build-of-the-day HE_Mesh (2017/08/08)
+## Build-of-the-day HE_Mesh (2017/11/04)
 
-Download a recent built here: http://www.wblut.com/hemesh/hemesh20170808.zip.
+Download a recent built here: http://www.wblut.com/hemesh/hemesh20171104.zip.
 
 ## License
 

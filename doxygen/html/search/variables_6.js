@@ -5,7 +5,7 @@ var searchData=
   ['f4',['F4',['../classwblut_1_1math_1_1_w_b___s_noise.html#a9021082e19950ebd81ef543ac1aba1af',1,'wblut::math::WB_SNoise']]],
   ['face',['face',['../classwblut_1_1hemesh_1_1_h_e___face_intersection.html#a8a904705070be93438f24b5ffffb2bf7',1,'wblut::hemesh::HE_FaceIntersection']]],
   ['facecolors',['faceColors',['../classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#ad5df541469d1228741690742dbee52b3',1,'wblut::hemesh::HEC_FromFacelist']]],
-  ['facecorrelation',['faceCorrelation',['../classwblut_1_1hemesh_1_1_h_e_c___copy.html#af4dc2434aefa6c937cfa26aeeb2697ae',1,'wblut::hemesh::HEC_Copy']]],
+  ['facecorrelation',['faceCorrelation',['../classwblut_1_1hemesh_1_1_h_e_c___copy.html#a95e94dc83c0289a667d36244d2678613',1,'wblut::hemesh::HEC_Copy']]],
   ['facefaces',['faceFaces',['../classwblut_1_1hemesh_1_1_h_e_s___doo_sabin.html#aea76a2b16a6e7edd06d2289c69bdbff3',1,'wblut::hemesh::HES_DooSabin']]],
   ['facefactor',['faceFactor',['../classwblut_1_1hemesh_1_1_h_e_s___doo_sabin.html#a66ec9c0c2faf1d4821d2bbbc801b576a',1,'wblut::hemesh::HES_DooSabin']]],
   ['faceinternallabels',['faceInternalLabels',['../classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#a5448516df65016433454f4ad4af3a640',1,'wblut::hemesh::HEC_FromFacelist']]],
@@ -19,6 +19,7 @@ var searchData=
   ['facevisibility',['faceVisibility',['../classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#aff80d14321a0d860d0346415cb84803f',1,'wblut::hemesh::HEC_FromFacelist']]],
   ['factor',['factor',['../classwblut_1_1hemesh_1_1_h_e_m___inflate.html#aaab170b992d2596a132813d5e71df457',1,'wblut.hemesh.HEM_Inflate.factor()'],['../classwblut_1_1hemesh_1_1_h_e_m___spherify.html#a102dd033a3a91422c990717d53d83e93',1,'wblut.hemesh.HEM_Spherify.factor()'],['../classwblut_1_1math_1_1_w_b___factor_scalar_parameter.html#aa809e1a41863ace63499f9e46d65a159',1,'wblut.math.WB_FactorScalarParameter.factor()']]],
   ['factory',['factory',['../classwblut_1_1hemesh_1_1_h_e_t___factory.html#a674833d68259fee5519484e91b1f82d0',1,'wblut::hemesh::HET_Factory']]],
+  ['failed',['failed',['../classwblut_1_1hemesh_1_1_h_e_m___flat_extrude.html#a17537b5961867f721e928e741ba42aff',1,'wblut::hemesh::HEM_FlatExtrude']]],
   ['failedfaces',['failedFaces',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a8962c314fa3dd9af696adc87ca2067a4',1,'wblut::hemesh::HEM_Extrude']]],
   ['failedheights',['failedHeights',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#ae2d0c293c636e992ff1fd13c0f26edc6',1,'wblut::hemesh::HEM_Extrude']]],
   ['fidget',['fidget',['../classwblut_1_1hemesh_1_1_h_e_c___from_frame.html#ac0305dfcc71c1088fd8a73ee5bfd6f52',1,'wblut.hemesh.HEC_FromFrame.fidget()'],['../classwblut_1_1hemesh_1_1_h_e_m___wireframe.html#ad7a8e134564c53a64f899a4efcbcfcb2',1,'wblut.hemesh.HEM_Wireframe.fidget()']]],
@@ -32,9 +33,9 @@ var searchData=
   ['frame',['frame',['../classwblut_1_1hemesh_1_1_h_e_c___from_frame.html#abaefe7f4dd7c9137467c0c9285391c92',1,'wblut::hemesh::HEC_FromFrame']]],
   ['front',['FRONT',['../enumwblut_1_1geom_1_1_w_b___classification.html#a565b1b445a02699c3967023b5e67dea1',1,'wblut::geom::WB_Classification']]],
   ['frontexcl',['FRONTEXCL',['../enumwblut_1_1geom_1_1_w_b___classification.html#a2755f26b731b96a7b5a8d17215c76bd5',1,'wblut::geom::WB_Classification']]],
-  ['frontfaces',['frontFaces',['../classwblut_1_1hemesh_1_1_h_e_m___slice_surface.html#ac2f47ade22c0a07e5e514584bedda5ab',1,'wblut::hemesh::HEM_SliceSurface']]],
   ['function',['function',['../classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_function2_d.html#a96c4a66aa532e87fd212e36ec5e66800',1,'wblut.geom.WB_IsoValues2D.Function2D.function()'],['../classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_function3_d.html#a6532565273583b7fa3f1420a4e0f7a11',1,'wblut.geom.WB_IsoValues3D.Function3D.function()']]],
   ['fuse',['fuse',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a403aad3b91ed84636d566c7050ee3976',1,'wblut.hemesh.HEM_Extrude.fuse()'],['../classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a1d1839897ad3f8034a2103f9a8f4f4c3',1,'wblut.hemesh.HEM_Lattice.fuse()'],['../classwblut_1_1hemesh_1_1_h_e_m___punch_holes.html#a68a1ab2b5b0d17bfec2f25d0cf17f8ee',1,'wblut.hemesh.HEM_PunchHoles.fuse()']]],
   ['fuseangle',['fuseAngle',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a2b55c482738cdc63abbde3f7209cb450',1,'wblut.hemesh.HEM_Extrude.fuseAngle()'],['../classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a055a63860adec30a9f038cf377f5680b',1,'wblut.hemesh.HEM_Lattice.fuseAngle()'],['../classwblut_1_1hemesh_1_1_h_e_m___punch_holes.html#a729754e41bc026e571ffc1468564ba14',1,'wblut.hemesh.HEM_PunchHoles.fuseAngle()']]],
+  ['fused',['fused',['../classwblut_1_1hemesh_1_1_h_e_m___extrude.html#ab70f52a9fb407819daf1f8fac2cd995a',1,'wblut::hemesh::HEM_Extrude']]],
   ['fxi',['fxi',['../classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_function2_d.html#a2369979613653a0c43ac90f18acb204b',1,'wblut.geom.WB_IsoValues2D.Function2D.fxi()'],['../classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_function3_d.html#ae4c537d146232cfff92614f0e2384510',1,'wblut.geom.WB_IsoValues3D.Function3D.fxi()']]]
 ];

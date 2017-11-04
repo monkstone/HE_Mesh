@@ -1,20 +1,15 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastMap;
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 /**
  * WB_AlphaTriangulation3D stores the results of
@@ -29,7 +24,7 @@ public class WB_AlphaTriangulation3D {
 	 */
 	private int[] tetrahedra;
 	private double[] alpha;
-	private FastTable<WB_Coord> points;
+	private FastList<WB_Coord> points;
 
 	/**
 	 *
@@ -39,7 +34,7 @@ public class WB_AlphaTriangulation3D {
 	 */
 	public WB_AlphaTriangulation3D(final int[] tetra, final WB_CoordCollection points) {
 		tetrahedra = Arrays.copyOf(tetra, tetra.length);
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (int i = 0; i < points.size(); i++) {
 			this.points.add(points.get(i));
 		}
@@ -59,7 +54,7 @@ public class WB_AlphaTriangulation3D {
 			tetrahedra[4 * i + 2] = tetra[i][2];
 			tetrahedra[4 * i + 3] = tetra[i][3];
 		}
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (int i = 0; i < points.size(); i++) {
 			this.points.add(points.get(i));
 		}
@@ -75,7 +70,7 @@ public class WB_AlphaTriangulation3D {
 	 */
 	public WB_AlphaTriangulation3D(final int[] tetra, final Collection<? extends WB_Coord> points) {
 		tetrahedra = Arrays.copyOf(tetra, tetra.length);
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		this.points.addAll(points);
 		setAlpha();
 	}
@@ -93,7 +88,7 @@ public class WB_AlphaTriangulation3D {
 			tetrahedra[4 * i + 2] = tetra[i][2];
 			tetrahedra[4 * i + 3] = tetra[i][3];
 		}
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		this.points.addAll(points);
 		setAlpha();
 
@@ -106,7 +101,7 @@ public class WB_AlphaTriangulation3D {
 	 */
 	public WB_AlphaTriangulation3D(final int[] tetra, final WB_Coord[] points) {
 		tetrahedra = Arrays.copyOf(tetra, tetra.length);
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (WB_Coord p : points) {
 			this.points.add(p);
 		}
@@ -126,7 +121,7 @@ public class WB_AlphaTriangulation3D {
 			tetrahedra[4 * i + 2] = tetra[i][2];
 			tetrahedra[4 * i + 3] = tetra[i][3];
 		}
-		this.points = new FastTable<WB_Coord>();
+		this.points = new FastList<WB_Coord>();
 		for (WB_Coord p : points) {
 			this.points.add(p);
 		}
@@ -162,7 +157,7 @@ public class WB_AlphaTriangulation3D {
 	 * @return
 	 */
 	public List<WB_Coord> getpoints() {
-		return points.unmodifiable();
+		return points.asUnmodifiable();
 	}
 
 	/**
@@ -211,7 +206,7 @@ public class WB_AlphaTriangulation3D {
 	 */
 	public int[] getAlphaTriangles(final double a) {
 
-		FastMap<Key, Triple> tris = new FastMap<Key, Triple>();
+		UnifiedMap<Key, Triple> tris = new UnifiedMap<Key, Triple>();
 		for (int i = 0; i < tetrahedra.length; i += 4) {
 			if (alpha[i / 4] <= a || Double.isNaN(alpha[i / 4])) {
 				Key key = new Key(tetrahedra[i], tetrahedra[i + 1], tetrahedra[i + 2]);

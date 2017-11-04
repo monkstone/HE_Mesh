@@ -1,12 +1,13 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 public class WB_Quadtree<V> {
 	protected WB_AABB2D box;
@@ -53,7 +54,7 @@ public class WB_Quadtree<V> {
 		if (box.contains(p)) {
 			if (hsize <= minNodeSize) {
 				if (entries == null) {
-					entries = new FastTable<WB_QuadtreeEntry<V>>();
+					entries = new FastList<WB_QuadtreeEntry<V>>();
 				}
 				entries.add(new WB_QuadtreeEntry<V>(p, value));
 
@@ -132,7 +133,7 @@ public class WB_Quadtree<V> {
 	}
 
 	public List<WB_Quadtree<V>> getNodes() {
-		List<WB_Quadtree<V>> result = new FastTable<WB_Quadtree<V>>();
+		List<WB_Quadtree<V>> result = new FastList<WB_Quadtree<V>>();
 		if (numNodes > 0) {
 			for (int i = 0; i < 4; i++) {
 				if (nodes[i] != null) {
@@ -201,9 +202,9 @@ public class WB_Quadtree<V> {
 	}
 
 	public List<WB_QuadtreeEntry<V>> getEntries() {
-		FastTable<WB_QuadtreeEntry<V>> result = null;
+		FastList<WB_QuadtreeEntry<V>> result = null;
 		if (entries != null) {
-			result = new FastTable<WB_QuadtreeEntry<V>>();
+			result = new FastList<WB_QuadtreeEntry<V>>();
 
 			result.addAll(entries);
 
@@ -213,21 +214,21 @@ public class WB_Quadtree<V> {
 					List<WB_QuadtreeEntry<V>> childPoints = nodes[i].getEntries();
 					if (childPoints != null) {
 						if (result == null) {
-							result = new FastTable<WB_QuadtreeEntry<V>>();
+							result = new FastList<WB_QuadtreeEntry<V>>();
 						}
 						result.addAll(childPoints);
 					}
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_QuadtreeEntry<V>> getEntriesInRange(final WB_AABB2D AABB) {
-		FastTable<WB_QuadtreeEntry<V>> result = new FastTable<WB_QuadtreeEntry<V>>();
+		FastList<WB_QuadtreeEntry<V>> result = new FastList<WB_QuadtreeEntry<V>>();
 		if (box.intersects(AABB)) {
 			if (entries != null) {
-				result = new FastTable<WB_QuadtreeEntry<V>>();
+				result = new FastList<WB_QuadtreeEntry<V>>();
 				for (WB_QuadtreeEntry<V> oe : entries) {
 					if (AABB.contains(oe.coord)) {
 						result.add(oe);
@@ -245,11 +246,11 @@ public class WB_Quadtree<V> {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_QuadtreeEntry<V>> getEntriesInRange(final WB_Circle circle) {
-		FastTable<WB_QuadtreeEntry<V>> result = new FastTable<WB_QuadtreeEntry<V>>();
+		FastList<WB_QuadtreeEntry<V>> result = new FastList<WB_QuadtreeEntry<V>>();
 		if (box.intersects(circle)) {
 			if (entries != null) {
 				for (WB_QuadtreeEntry<V> oe : entries) {
@@ -276,7 +277,7 @@ public class WB_Quadtree<V> {
 	}
 
 	public List<WB_Coord> getPoints() {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		if (entries != null) {
 			for (WB_QuadtreeEntry<V> oe : entries) {
 				result.add(oe.coord);
@@ -291,23 +292,23 @@ public class WB_Quadtree<V> {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_AABB2D AABB) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_QuadtreeEntry<V> eo : getEntriesInRange(AABB)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Circle circle) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_QuadtreeEntry<V> eo : getEntriesInRange(circle)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Coord center, final double radius) {
@@ -316,7 +317,7 @@ public class WB_Quadtree<V> {
 
 	public List<V> getValues() {
 		List<WB_QuadtreeEntry<V>> allEntries = getEntries();
-		FastTable<V> result = new FastTable<V>();
+		FastList<V> result = new FastList<V>();
 		for (WB_QuadtreeEntry<V> eo : allEntries) {
 			result.add(eo.value);
 		}
@@ -326,7 +327,7 @@ public class WB_Quadtree<V> {
 
 	public List<V> getValuesInRange(final WB_AABB2D AABB) {
 		List<WB_QuadtreeEntry<V>> entriesInRange = getEntriesInRange(AABB);
-		FastTable<V> result = new FastTable<V>();
+		FastList<V> result = new FastList<V>();
 		for (WB_QuadtreeEntry<V> eo : entriesInRange) {
 			result.add(eo.value);
 		}
@@ -335,7 +336,7 @@ public class WB_Quadtree<V> {
 
 	public List<V> getValuesInRange(final WB_Circle circle) {
 		List<WB_QuadtreeEntry<V>> entriesInRange = getEntriesInRange(circle);
-		FastTable<V> result = new FastTable<V>();
+		FastList<V> result = new FastList<V>();
 		for (WB_QuadtreeEntry<V> eo : entriesInRange) {
 			result.add(eo.value);
 		}

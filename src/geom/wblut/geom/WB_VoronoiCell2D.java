@@ -1,53 +1,48 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- * 
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- * 
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.List;
 
 /**
- * 
+ *
  */
 public class WB_VoronoiCell2D {
 
 	/**
-	 * 
+	 *
 	 */
 	WB_Polygon polygon;
 
 	/**
-	 * 
+	 *
 	 */
 	int index;
 
 	/**
-	 * 
+	 *
 	 */
 	double area;
 
 	/**
-	 * 
+	 *
 	 */
 	WB_Point centroid;
 
 	/**
-	 * 
+	 *
 	 */
 	WB_Point generator;
 
 	/**
-	 * 
+	 *
 	 */
 	private WB_GeometryFactory geometryfactory = new WB_GeometryFactory();
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param points
 	 * @param index
@@ -65,7 +60,7 @@ public class WB_VoronoiCell2D {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param points
 	 * @param index
@@ -73,8 +68,8 @@ public class WB_VoronoiCell2D {
 	 * @param area
 	 * @param centroid
 	 */
-	protected WB_VoronoiCell2D(final WB_Coord[] points, final int index, final WB_Point generator,
-			final double area, final WB_Point centroid) {
+	protected WB_VoronoiCell2D(final WB_Coord[] points, final int index, final WB_Point generator, final double area,
+			final WB_Point centroid) {
 		polygon = geometryfactory.createSimplePolygon(points);
 		this.index = index;
 		this.area = area;
@@ -83,7 +78,7 @@ public class WB_VoronoiCell2D {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */
@@ -92,7 +87,7 @@ public class WB_VoronoiCell2D {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */
@@ -101,7 +96,7 @@ public class WB_VoronoiCell2D {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */
@@ -110,7 +105,7 @@ public class WB_VoronoiCell2D {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */
@@ -119,7 +114,7 @@ public class WB_VoronoiCell2D {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */

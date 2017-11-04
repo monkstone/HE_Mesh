@@ -1,13 +1,14 @@
-/**
- *
+/*
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javolution.util.FastTable;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 public class WB_OctreeInteger {
 	protected WB_AABB box;
@@ -53,7 +54,7 @@ public class WB_OctreeInteger {
 		if (box.contains(p)) {
 			if (hsize <= minNodeSize) {
 				if (entries == null) {
-					entries = new FastTable<WB_OctreeIntegerEntry>();
+					entries = new FastList<WB_OctreeIntegerEntry>();
 				}
 				entries.add(new WB_OctreeIntegerEntry(p, value));
 
@@ -140,7 +141,7 @@ public class WB_OctreeInteger {
 	}
 
 	public List<WB_OctreeInteger> getNodes() {
-		List<WB_OctreeInteger> result = new FastTable<WB_OctreeInteger>();
+		List<WB_OctreeInteger> result = new FastList<WB_OctreeInteger>();
 		if (numNodes > 0) {
 			for (int i = 0; i < 8; i++) {
 				if (nodes[i] != null) {
@@ -209,9 +210,9 @@ public class WB_OctreeInteger {
 	}
 
 	public List<WB_OctreeIntegerEntry> getEntries() {
-		FastTable<WB_OctreeIntegerEntry> result = null;
+		FastList<WB_OctreeIntegerEntry> result = null;
 		if (entries != null) {
-			result = new FastTable<WB_OctreeIntegerEntry>();
+			result = new FastList<WB_OctreeIntegerEntry>();
 
 			result.addAll(entries);
 
@@ -221,21 +222,21 @@ public class WB_OctreeInteger {
 					List<WB_OctreeIntegerEntry> childPoints = nodes[i].getEntries();
 					if (childPoints != null) {
 						if (result == null) {
-							result = new FastTable<WB_OctreeIntegerEntry>();
+							result = new FastList<WB_OctreeIntegerEntry>();
 						}
 						result.addAll(childPoints);
 					}
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_OctreeIntegerEntry> getEntriesInRange(final WB_AABB AABB) {
-		FastTable<WB_OctreeIntegerEntry> result = new FastTable<WB_OctreeIntegerEntry>();
+		FastList<WB_OctreeIntegerEntry> result = new FastList<WB_OctreeIntegerEntry>();
 		if (box.intersects(AABB)) {
 			if (entries != null) {
-				result = new FastTable<WB_OctreeIntegerEntry>();
+				result = new FastList<WB_OctreeIntegerEntry>();
 				for (WB_OctreeIntegerEntry oe : entries) {
 					if (AABB.contains(oe.coord)) {
 						result.add(oe);
@@ -253,11 +254,11 @@ public class WB_OctreeInteger {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_OctreeIntegerEntry> getEntriesInRange(final WB_Sphere sphere) {
-		FastTable<WB_OctreeIntegerEntry> result = new FastTable<WB_OctreeIntegerEntry>();
+		FastList<WB_OctreeIntegerEntry> result = new FastList<WB_OctreeIntegerEntry>();
 		if (box.intersects(sphere)) {
 			if (entries != null) {
 				for (WB_OctreeIntegerEntry oe : entries) {
@@ -284,7 +285,7 @@ public class WB_OctreeInteger {
 	}
 
 	public List<WB_Coord> getPoints() {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		if (entries != null) {
 			for (WB_OctreeIntegerEntry oe : entries) {
 				result.add(oe.coord);
@@ -299,23 +300,23 @@ public class WB_OctreeInteger {
 				}
 			}
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_AABB AABB) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_OctreeIntegerEntry eo : getEntriesInRange(AABB)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Sphere sphere) {
-		FastTable<WB_Coord> result = new FastTable<WB_Coord>();
+		FastList<WB_Coord> result = new FastList<WB_Coord>();
 		for (WB_OctreeIntegerEntry eo : getEntriesInRange(sphere)) {
 			result.add(eo.coord);
 		}
-		return result.unmodifiable();
+		return result.asUnmodifiable();
 	}
 
 	public List<WB_Coord> getPointsInRange(final WB_Coord center, final double radius) {

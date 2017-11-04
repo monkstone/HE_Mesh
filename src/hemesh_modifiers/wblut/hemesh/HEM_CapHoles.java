@@ -1,17 +1,11 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.List;
 
-import javolution.util.FastTable;
 import wblut.core.WB_ProgressCounter;
 
 /**
@@ -19,14 +13,14 @@ import wblut.core.WB_ProgressCounter;
  */
 public class HEM_CapHoles extends HEM_Modifier {
 
-	public List<HE_Face> caps = new FastTable<HE_Face>();
+	private HE_Selection caps;
 
 	/**
 	 *
 	 */
 	public HEM_CapHoles() {
 		super();
-		caps = new FastTable<HE_Face>();
+		caps = null;
 	}
 
 	/*
@@ -37,7 +31,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		tracker.setStartStatus(this, "Starting HEM_CapHoles.");
-		caps = new FastTable<HE_Face>();
+		caps = new HE_Selection(mesh);
 		final List<HE_Halfedge> unpairedEdges = mesh.getUnpairedHalfedges();
 		HE_RAS<HE_Halfedge> loopedHalfedges;
 		HE_Halfedge start;
@@ -51,7 +45,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 		tracker.setCounterStatus(this, "Finding loops and closing holes.", counter);
 		while (unpairedEdges.size() > 0) {
 			boolean abort = false;
-			loopedHalfedges = new HE_RAS.HE_RASTrove<HE_Halfedge>();
+			loopedHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
 			start = unpairedEdges.get(0);
 			loopedHalfedges.add(start);
 			he = start;
@@ -100,7 +94,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 					mesh.add(nf);
 					caps.add(nf);
 				}
-				newHalfedges = new HE_RAS.HE_RASTrove<HE_Halfedge>();
+				newHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
 				for (int i = 0; i < loopedHalfedges.size(); i++) {
 					phe = loopedHalfedges.get(i);
 					nhe = new HE_Halfedge();
@@ -127,7 +121,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 		}
 		mesh.cleanUnusedElementsByFace();
 		mesh.capHalfedges();
-
+		mesh.addSelection("caps", caps);
 		tracker.setStopStatus(this, "Exiting HEM_CapHoles.");
 		return mesh;
 	}

@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 package wblut.processing;
 
@@ -74,7 +68,7 @@ public class WB_DebugRender3D {
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		while (vItr.hasNext()) {
 			v = vItr.next();
-			if ((v.getHalfedge()==null) || !mesh.contains(v.getHalfedge())) {
+			if (v.getHalfedge() == null || !mesh.contains(v.getHalfedge())) {
 				home.pushMatrix();
 				home.translate(v.xf(), v.yf(), v.zf());
 				home.box((float) d);
@@ -170,8 +164,8 @@ public class WB_DebugRender3D {
 			f = fItr.next();
 			fc = f.getFaceCenter();
 			fn = f.getFaceNormal();
-			home.line(fc.xf(), fc.yf(), fc.zf(), (fc.xf() + ((float) d * fn.xf())), (fc.yf() + ((float) d * fn.yf())),
-					(fc.zf() + ((float) d * fn.zf())));
+			home.line(fc.xf(), fc.yf(), fc.zf(), fc.xf() + (float) d * fn.xf(), fc.yf() + (float) d * fn.yf(),
+					fc.zf() + (float) d * fn.zf());
 		}
 	}
 
@@ -397,8 +391,8 @@ public class WB_DebugRender3D {
 	 * @param d
 	 */
 	private void draw(final WB_Coord p, final WB_Coord v, final double d) {
-		home.line(p.xf(), p.yf(), p.zf(), p.xf() + ((float) d * v.xf()), p.yf() + ((float) d * v.yf()),
-				p.zf() + ((float) d * v.zf()));
+		home.line(p.xf(), p.yf(), p.zf(), p.xf() + (float) d * v.xf(), p.yf() + (float) d * v.yf(),
+				p.zf() + (float) d * v.zf());
 	}
 
 	/**
@@ -407,7 +401,7 @@ public class WB_DebugRender3D {
 	 * @param f
 	 */
 	private void drawFace(final HE_Face f) {
-		if (f.getFaceOrder() > 2) {
+		if (f.getFaceDegree() > 2) {
 			final int[] tris = f.getTriangles();
 			final List<HE_Vertex> vertices = f.getFaceVertices();
 			WB_Coord v0, v1, v2;

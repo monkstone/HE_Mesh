@@ -13,13 +13,13 @@ void setup() {
   createMesh();
   modifier=new HEM_Slice();
   P=new WB_Plane(0,0,0,1,1,1); 
-  modifier.setPlane(P);// Cut plane 
-  //you can also pass directly as origin and normal:  modifier.setPlane(0,0,-200,0,0,1)
+  modifier.setPlane(P);
   modifier.setOffset(0);// shift cut plane along normal
   modifier.setCap(true);// cap holes
   modifier.setReverse(false);// keep other side of plane
   mesh.modify(modifier);
-  
+ 
+println(mesh.getSelection("edges").getNumberOfEdges());
   render=new WB_Render(this);
 }
 
@@ -34,12 +34,15 @@ void draw() {
   noStroke();
   render.drawFaces(mesh);
   fill(255,0,0);
-  render.drawFaces(modifier.capFaces);
+  render.drawFaces(mesh.getSelection("caps"));
   fill(0,0,255);
-  render.drawFaces(modifier.cutFaces);
+  render.drawFaces(mesh.getSelection("cuts"));
+  
   noFill();
   stroke(0);
   render.drawEdges(mesh);
+  stroke(0,255,0);
+  render.drawEdges(mesh.getSelection("edges"));
   stroke(255,0,0);
   render.drawPlane(P,300);
 

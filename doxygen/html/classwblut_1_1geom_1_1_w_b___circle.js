@@ -12,6 +12,7 @@ var classwblut_1_1geom_1_1_w_b___circle =
     [ "getNormal", "classwblut_1_1geom_1_1_w_b___circle.html#ae812954fa0b32245d5eaf89bad44f148", null ],
     [ "getPlane", "classwblut_1_1geom_1_1_w_b___circle.html#a200f02bbe262f68a8eb2fa491325e3cb", null ],
     [ "getPlane", "classwblut_1_1geom_1_1_w_b___circle.html#a591e4b1ed5e8ca285f3c3ebaa69921c7", null ],
+    [ "getPoints", "classwblut_1_1geom_1_1_w_b___circle.html#a33050069200fabe01e191c014e84bfb7", null ],
     [ "getPoints", "classwblut_1_1geom_1_1_w_b___circle.html#aa4564c5bdf546f4de9be03092c327cb0", null ],
     [ "getPointsAsArray", "classwblut_1_1geom_1_1_w_b___circle.html#aa7207669a72ab40e07b598e669b55985", null ],
     [ "getRadius", "classwblut_1_1geom_1_1_w_b___circle.html#a32c68eacd6cb6ef0e536683d98b0a2ba", null ],

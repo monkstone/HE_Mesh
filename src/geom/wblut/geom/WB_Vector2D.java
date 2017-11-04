@@ -1,12 +1,7 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.geom;
 
 import wblut.math.WB_Ease;
@@ -17,11 +12,11 @@ import wblut.math.WB_Math;
 /**
  *
  */
-public class WB_Vector2D extends WB_SimpleVector2D implements WB_MutableCoordinateFull2D {
-	private static final WB_Coord X = new WB_SimpleVector2D(1, 0);
-	private static final WB_Coord Y = new WB_SimpleVector2D(0, 1);
-	private static final WB_Coord ORIGIN = new WB_SimpleVector2D(0, 0);
-	private static final WB_Coord ZERO = new WB_SimpleVector2D(0, 0);
+public class WB_Vector2D extends WB_MutableCoordinate2D implements WB_MutableCoordinateFull2D {
+	private static final WB_Coord X = new WB_MutableCoordinate2D(1, 0);
+	private static final WB_Coord Y = new WB_MutableCoordinate2D(0, 1);
+	private static final WB_Coord ORIGIN = new WB_MutableCoordinate2D(0, 0);
+	private static final WB_Coord ZERO = new WB_MutableCoordinate2D(0, 0);
 
 	/**
 	 *
@@ -980,7 +975,7 @@ public class WB_Vector2D extends WB_SimpleVector2D implements WB_MutableCoordina
 
 	@Override
 	/**
-	 * 
+	 *
 	 * @param angle
 	 * @param p
 	 * @return

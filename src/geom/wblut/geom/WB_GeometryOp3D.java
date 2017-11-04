@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -15,14 +9,14 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.ejml.data.DMatrixRMaj;
-import org.ejml.dense.row.EigenOps_DDRM;
-import org.ejml.dense.row.factory.DecompositionFactory_DDRM;
-import org.ejml.dense.row.factory.LinearSolverFactory_DDRM;
-import org.ejml.interfaces.decomposition.EigenDecomposition;
-import org.ejml.interfaces.linsol.LinearSolver;
+import org.eclipse.collections.impl.list.mutable.FastList;
 
-import javolution.util.FastTable;
+import cern.colt.matrix.tdouble.DoubleFactory1D;
+import cern.colt.matrix.tdouble.DoubleFactory2D;
+import cern.colt.matrix.tdouble.DoubleMatrix1D;
+import cern.colt.matrix.tdouble.DoubleMatrix2D;
+import cern.colt.matrix.tdouble.algo.DenseDoubleAlgebra;
+import cern.colt.matrix.tdouble.algo.decomposition.DenseDoubleEigenvalueDecomposition;
 import wblut.geom.WB_AABBTree.WB_AABBNode;
 import wblut.math.WB_Ease;
 import wblut.math.WB_Epsilon;
@@ -2258,11 +2252,8 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	 * @return
 	 */
 	protected static boolean coplanarTriangles(final WB_Vector n, final WB_Triangle v, final WB_Triangle u) {
-		/**
-		 * TODO
-		 *
-		 */
-		// First project onto an axis-aligned plane that maximizes the are of
+
+		// First project onto an axis-aligned plane that maximizes the area of
 		// the triangles.
 		int i0;
 		int i1;
@@ -2327,10 +2318,7 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	 */
 	protected static boolean coplanarTriangles(final WB_Vector n, final WB_Coord p1, final WB_Coord p2,
 			final WB_Coord p3, final WB_Coord q1, final WB_Coord q2, final WB_Coord q3) {
-		/**
-		 * TODO
-		 *
-		 */
+
 		// First project onto an axis-aligned plane that maximizes the are of
 		// the triangles.
 		int i0;
@@ -3898,8 +3886,8 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 		if (!poly.isSimple()) {
 			throw new UnsupportedOperationException("Only simple polygons are supported at this time!");
 		}
-		final List<WB_Coord> frontVerts = new FastTable<WB_Coord>();
-		final List<WB_Coord> backVerts = new FastTable<WB_Coord>();
+		final List<WB_Coord> frontVerts = new FastList<WB_Coord>();
+		final List<WB_Coord> backVerts = new FastList<WB_Coord>();
 		final int numVerts = poly.numberOfShellPoints;
 		if (numVerts > 0) {
 			WB_Coord a = poly.points.get(numVerts - 1);
@@ -3982,25 +3970,40 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	 */
 	public static WB_Polygon trimConvexPolygon(WB_Polygon poly, final double[] d) {
 		final WB_Polygon cpoly = new WB_Polygon(poly.points);
+
 		final int n = cpoly.numberOfShellPoints; // get number of vertices
+
 		final WB_Plane P = cpoly.getPlane(); // get plane of poly
+
 		WB_Coord p1, p2;
+
 		WB_Point origin;
 		WB_Vector v, normal;
 		for (int i = 0, j = n - 1; i < n; j = i, i++) {
+
 			p1 = cpoly.getPoint(i);// startpoint of edge
+
 			p2 = cpoly.getPoint(j);// endpoint of edge
+
 			// vector along edge
 			v = gf.createNormalizedVectorFromTo(p1, p2);
+
 			// edge normal is perpendicular to edge and plane normal
+
 			normal = v.cross(P.getNormal());
+
 			// center of edge
 			origin = new WB_Point(p1).addSelf(p2).mulSelf(0.5);
+
 			// offset cutting plane origin by the desired distance d
 			origin.addMulSelf(d[j], normal);
+
 			final WB_Polygon[] split = splitPolygon(poly, new WB_Plane(origin, normal));
+
 			poly = split[0];
+
 		}
+
 		return poly;
 	}
 
@@ -4228,7 +4231,9 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	}
 
 	public static WB_Sphere fitSphereToPoints(final Collection<? extends WB_Coord> points) {
-		DMatrixRMaj A = new DMatrixRMaj(5, 5);
+		DoubleFactory2D factory = DoubleFactory2D.dense;
+		DoubleMatrix2D A = factory.make(5, 5);
+
 		double x, y, z, x2, y2, z2, xy, xz, yz, r2, xr2, yr2, zr2, r4;
 		for (WB_Coord p : points) {
 			x = p.xd();
@@ -4246,24 +4251,24 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 			zr2 = z * r2;
 			r4 = r2 * r2;
 
-			A.add(0, 1, x);
-			A.add(0, 2, y);
-			A.add(0, 3, z);
-			A.add(0, 4, r2);
-			A.add(1, 1, x2);
-			A.add(1, 2, xy);
-			A.add(1, 3, xz);
-			A.add(1, 4, xr2);
-			A.add(2, 2, y2);
-			A.add(2, 3, yz);
-			A.add(2, 4, yr2);
-			A.add(3, 3, z2);
-			A.add(3, 4, zr2);
-			A.add(4, 4, r4);
+			A.set(0, 1, A.get(0, 1) + x);
+			A.set(0, 2, A.get(0, 2) + y);
+			A.set(0, 3, A.get(0, 3) + z);
+			A.set(0, 4, A.get(0, 4) + r2);
+			A.set(1, 1, A.get(1, 1) + x2);
+			A.set(1, 2, A.get(1, 2) + xy);
+			A.set(1, 3, A.get(1, 3) + xz);
+			A.set(1, 4, A.get(1, 4) + xr2);
+			A.set(2, 2, A.get(2, 2) + y2);
+			A.set(2, 3, A.get(2, 3) + yz);
+			A.set(2, 4, A.get(2, 4) + yr2);
+			A.set(3, 3, A.get(3, 3) + z2);
+			A.set(3, 4, A.get(3, 4) + zr2);
+			A.set(4, 4, A.get(4, 4) + r4);
 
 		}
 
-		A.set(0, 0, points.size());
+		A.set(points.size(), 0, 0);
 
 		for (int row = 0; row < 5; ++row) {
 			for (int col = 0; col < row; ++col) {
@@ -4277,23 +4282,24 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 				A.set(row, col, A.get(row, col) * invNumPoints);
 			}
 		}
-		EigenDecomposition<DMatrixRMaj> eigen = DecompositionFactory_DDRM.eig(5, true, true);
-		eigen.decompose(A);
-		int numEigenValues = eigen.getNumberOfEigenvalues();
+
+		DenseDoubleEigenvalueDecomposition dded = new DenseDoubleEigenvalueDecomposition(A);
+
+		DoubleMatrix2D eigenValues = dded.getD();
+		double lowestValue = eigenValues.get(0, 0);
 		int index = 0;
-		for (int i = 1; i < numEigenValues; i++) {
-			if (EigenOps_DDRM.computeEigenValue(A, eigen.getEigenVector(i)) < EigenOps_DDRM.computeEigenValue(A,
-					eigen.getEigenVector(index))) {
-				index = i;
+		for (int row = 1; row < eigenValues.rows(); row++) {
+			if (eigenValues.get(row, row) < lowestValue) {
+				lowestValue = eigenValues.get(row, row);
+				index = row;
 			}
-
 		}
-		DMatrixRMaj eigenVector0 = eigen.getEigenVector(index);
+		DoubleMatrix2D eigenVectors = dded.getV();
 
-		double inv = 1.0 / eigenVector0.get(4, 0);
+		double inv = 1.0 / eigenVectors.get(4, index);
 		double[] coefficients = new double[4];
 		for (int row = 0; row < 4; ++row) {
-			coefficients[row] = inv * eigenVector0.get(row, 0);
+			coefficients[row] = inv * eigenVectors.get(row, index);
 		}
 		WB_Point center = new WB_Point(-0.5 * coefficients[1], -0.5 * coefficients[2], -0.5 * coefficients[3]);
 		double radius = Math.sqrt(Math.abs(center.dot(center) - coefficients[0]));
@@ -4340,7 +4346,9 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	}
 
 	public static WB_Sphere fitSphereToPoints(final WB_Coord[] points) {
-		DMatrixRMaj A = new DMatrixRMaj(5, 5);
+		DoubleFactory2D factory = DoubleFactory2D.dense;
+		DoubleMatrix2D A = factory.make(5, 5);
+
 		double x, y, z, x2, y2, z2, xy, xz, yz, r2, xr2, yr2, zr2, r4;
 		for (WB_Coord p : points) {
 			x = p.xd();
@@ -4358,24 +4366,24 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 			zr2 = z * r2;
 			r4 = r2 * r2;
 
-			A.add(0, 1, x);
-			A.add(0, 2, y);
-			A.add(0, 3, z);
-			A.add(0, 4, r2);
-			A.add(1, 1, x2);
-			A.add(1, 2, xy);
-			A.add(1, 3, xz);
-			A.add(1, 4, xr2);
-			A.add(2, 2, y2);
-			A.add(2, 3, yz);
-			A.add(2, 4, yr2);
-			A.add(3, 3, z2);
-			A.add(3, 4, zr2);
-			A.add(4, 4, r4);
+			A.set(0, 1, A.get(0, 1) + x);
+			A.set(0, 2, A.get(0, 2) + y);
+			A.set(0, 3, A.get(0, 3) + z);
+			A.set(0, 4, A.get(0, 4) + r2);
+			A.set(1, 1, A.get(1, 1) + x2);
+			A.set(1, 2, A.get(1, 2) + xy);
+			A.set(1, 3, A.get(1, 3) + xz);
+			A.set(1, 4, A.get(1, 4) + xr2);
+			A.set(2, 2, A.get(2, 2) + y2);
+			A.set(2, 3, A.get(2, 3) + yz);
+			A.set(2, 4, A.get(2, 4) + yr2);
+			A.set(3, 3, A.get(3, 3) + z2);
+			A.set(3, 4, A.get(3, 4) + zr2);
+			A.set(4, 4, A.get(4, 4) + r4);
 
 		}
 
-		A.set(0, 0, points.length);
+		A.set(points.length, 0, 0);
 
 		for (int row = 0; row < 5; ++row) {
 			for (int col = 0; col < row; ++col) {
@@ -4389,23 +4397,24 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 				A.set(row, col, A.get(row, col) * invNumPoints);
 			}
 		}
-		EigenDecomposition<DMatrixRMaj> eigen = DecompositionFactory_DDRM.eig(5, true, true);
-		eigen.decompose(A);
-		int numEigenValues = eigen.getNumberOfEigenvalues();
+
+		DenseDoubleEigenvalueDecomposition dded = new DenseDoubleEigenvalueDecomposition(A);
+
+		DoubleMatrix2D eigenValues = dded.getD();
+		double lowestValue = eigenValues.get(0, 0);
 		int index = 0;
-		for (int i = 1; i < numEigenValues; i++) {
-			if (EigenOps_DDRM.computeEigenValue(A, eigen.getEigenVector(i)) < EigenOps_DDRM.computeEigenValue(A,
-					eigen.getEigenVector(index))) {
-				index = i;
+		for (int row = 1; row < eigenValues.rows(); row++) {
+			if (eigenValues.get(row, row) < lowestValue) {
+				lowestValue = eigenValues.get(row, row);
+				index = row;
 			}
-
 		}
-		DMatrixRMaj eigenVector0 = eigen.getEigenVector(index);
+		DoubleMatrix2D eigenVectors = dded.getV();
 
-		double inv = 1.0 / eigenVector0.get(4, 0);
+		double inv = 1.0 / eigenVectors.get(4, index);
 		double[] coefficients = new double[4];
 		for (int row = 0; row < 4; ++row) {
-			coefficients[row] = inv * eigenVector0.get(row, 0);
+			coefficients[row] = inv * eigenVectors.get(row, index);
 		}
 		WB_Point center = new WB_Point(-0.5 * coefficients[1], -0.5 * coefficients[2], -0.5 * coefficients[3]);
 		double radius = Math.sqrt(Math.abs(center.dot(center) - coefficients[0]));
@@ -5127,8 +5136,8 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	 * @return
 	 */
 	public static double cotan(final WB_Coord p0, final WB_Coord p1, final WB_Coord p2) {
-		WB_Vector v0 = WB_Vector.subToVector3D(p0, p1);
-		WB_Vector v1 = WB_Vector.subToVector3D(p0, p2);
+		WB_Vector v0 = WB_Vector.subToVector3D(p1, p0);
+		WB_Vector v1 = WB_Vector.subToVector3D(p2, p0);
 		return WB_Vector.dot(v0, v1) / WB_Vector.cross(v0, v1).getLength();
 
 	}
@@ -5726,8 +5735,9 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 			cd += c[i] * d[i];
 
 		}
+		DoubleFactory2D factory2D = DoubleFactory2D.dense;
+		DoubleMatrix2D A = factory2D.make(3, 3);
 
-		DMatrixRMaj A = new DMatrixRMaj(3, 3);
 		A.set(0, 0, a2);
 		A.set(0, 1, ab);
 		A.set(0, 2, ac);
@@ -5737,33 +5747,15 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 		A.set(2, 0, ac);
 		A.set(2, 1, bc);
 		A.set(2, 2, c2);
+		DoubleFactory1D factory1D = DoubleFactory1D.dense;
+		DoubleMatrix1D B = factory1D.make(3);
+		B.set(0, -ad);
+		B.set(0, -bd);
+		B.set(0, -cd);
 
-		DMatrixRMaj B = new DMatrixRMaj(3, 1);
-		B.set(0, 0, -ad);
-		B.set(1, 0, -bd);
-		B.set(2, 0, -cd);
+		DoubleMatrix1D X = new DenseDoubleAlgebra().solve(A, B);
 
-		try {
-
-			LinearSolver<DMatrixRMaj> solver = LinearSolverFactory_DDRM.qr(A.numRows, A.numCols);
-			if (!solver.setA(A)) {
-				// throw new IllegalArgumentException("Singular matrix");
-				return result;
-			}
-
-			if (solver.quality() <= 1e-6) {
-				// throw new IllegalArgumentException("Nearly singular matrix");
-				return result;
-			}
-
-			DMatrixRMaj x = new DMatrixRMaj(3, 1);
-			solver.solve(B, x);
-
-			result = new WB_Point(x.get(0, 0), x.get(1, 0), x.get(2, 0));
-
-		} catch (Exception e) {
-			return result;
-		}
+		result = new WB_Point(X.get(0), X.get(1), X.get(2));
 
 		return result;
 	}

@@ -1,16 +1,12 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
+
 package wblut.hemesh;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -62,7 +58,14 @@ public class HES_PlanarMidEdge extends HES_Subdividor {
 			mesh.cycleHalfedges(faceHalfedges);
 		}
 		mesh.pairHalfedges();
-		mesh.replaceFaces(newFaces);
+		List<HE_Face> faces = mesh.getFaces();
+		mesh.addFaces(newFaces);
+		for (HE_Face f : faces) {
+			if (!newFaces.contains(f)) {
+				mesh.remove(f);
+			}
+
+		}
 		return mesh;
 	}
 

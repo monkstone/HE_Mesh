@@ -1,11 +1,5 @@
 /*
- * This file is part of HE_Mesh, a library for creating and manipulating meshes.
- * It is dedicated to the public domain. To the extent possible under law,
- * I , Frederik Vanhoutte, have waived all copyright and related or neighboring
- * rights.
- *
- * This work is published from Belgium. (http://creativecommons.org/publicdomain/zero/1.0/)
- *
+ * http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -14,11 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.ejml.data.DMatrixRMaj;
-import org.ejml.dense.row.EigenOps_DDRM;
-import org.ejml.dense.row.factory.DecompositionFactory_DDRM;
-import org.ejml.interfaces.decomposition.EigenDecomposition;
-
+import cern.colt.matrix.tdouble.DoubleFactory2D;
+import cern.colt.matrix.tdouble.DoubleMatrix2D;
+import cern.colt.matrix.tdouble.algo.decomposition.DenseDoubleEigenvalueDecomposition;
 import wblut.math.WB_Ease;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_Math;
@@ -2284,7 +2276,8 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 	}
 
 	public static final WB_Circle fitCircleToPoints2D(final Collection<? extends WB_Coord> points) {
-		DMatrixRMaj A = new DMatrixRMaj(4, 4);
+		DoubleFactory2D factory = DoubleFactory2D.dense;
+		DoubleMatrix2D A = factory.make(4, 4);
 		double x, y, x2, y2, xy, r2, xr2, yr2, r4;
 		for (WB_Coord p : points) {
 			x = p.xd();
@@ -2297,15 +2290,15 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 			yr2 = y * r2;
 			r4 = r2 * r2;
 
-			A.add(0, 1, x);
-			A.add(0, 2, y);
-			A.add(0, 3, r2);
-			A.add(1, 1, x2);
-			A.add(1, 2, xy);
-			A.add(1, 3, xr2);
-			A.add(2, 2, y2);
-			A.add(2, 3, yr2);
-			A.add(3, 3, r4);
+			A.set(0, 1, A.get(0, 1) + x);
+			A.set(0, 2, A.get(0, 2) + y);
+			A.set(0, 3, A.get(0, 3) + r2);
+			A.set(1, 1, A.get(1, 1) + x2);
+			A.set(1, 2, A.get(1, 2) + xy);
+			A.set(1, 3, A.get(1, 3) + xr2);
+			A.set(2, 2, A.get(2, 2) + y2);
+			A.set(2, 3, A.get(2, 3) + yr2);
+			A.set(3, 3, A.get(3, 3) + r4);
 
 		}
 
@@ -2323,23 +2316,25 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 				A.set(row, col, A.get(row, col) * invNumPoints);
 			}
 		}
-		EigenDecomposition<DMatrixRMaj> eigen = DecompositionFactory_DDRM.eig(4, true, true);
-		eigen.decompose(A);
-		int numEigenValues = eigen.getNumberOfEigenvalues();
+
+		DenseDoubleEigenvalueDecomposition dded = new DenseDoubleEigenvalueDecomposition(A);
+
+		DoubleMatrix2D eigenValues = dded.getD();
+
+		double lowestValue = eigenValues.get(0, 0);
 		int index = 0;
-		for (int i = 1; i < numEigenValues; i++) {
-			if (EigenOps_DDRM.computeEigenValue(A, eigen.getEigenVector(i)) < EigenOps_DDRM.computeEigenValue(A,
-					eigen.getEigenVector(index))) {
-				index = i;
+		for (int row = 1; row < eigenValues.rows(); row++) {
+			if (eigenValues.get(row, row) < lowestValue) {
+				lowestValue = eigenValues.get(row, row);
+				index = row;
 			}
-
 		}
-		DMatrixRMaj eigenVector0 = eigen.getEigenVector(index);
+		DoubleMatrix2D eigenVectors = dded.getV();
 
-		double inv = 1.0 / eigenVector0.get(3, 0);
+		double inv = 1.0 / eigenVectors.get(3, index);
 		double[] coefficients = new double[3];
 		for (int row = 0; row < 3; ++row) {
-			coefficients[row] = inv * eigenVector0.get(row, 0);
+			coefficients[row] = inv * eigenVectors.get(row, index);
 		}
 		WB_Point center = new WB_Point(-0.5 * coefficients[1], -0.5 * coefficients[2]);
 		double radius = Math.sqrt(Math.abs(center.dot(center) - coefficients[0]));
@@ -2386,7 +2381,8 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 	}
 
 	public static final WB_Circle fitCircleToPoints2D(final WB_Coord[] points) {
-		DMatrixRMaj A = new DMatrixRMaj(4, 4);
+		DoubleFactory2D factory = DoubleFactory2D.dense;
+		DoubleMatrix2D A = factory.make(4, 4);
 		double x, y, x2, y2, xy, r2, xr2, yr2, r4;
 		for (WB_Coord p : points) {
 			x = p.xd();
@@ -2399,15 +2395,15 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 			yr2 = y * r2;
 			r4 = r2 * r2;
 
-			A.add(0, 1, x);
-			A.add(0, 2, y);
-			A.add(0, 3, r2);
-			A.add(1, 1, x2);
-			A.add(1, 2, xy);
-			A.add(1, 3, xr2);
-			A.add(2, 2, y2);
-			A.add(2, 3, yr2);
-			A.add(3, 3, r4);
+			A.set(0, 1, A.get(0, 1) + x);
+			A.set(0, 2, A.get(0, 2) + y);
+			A.set(0, 3, A.get(0, 3) + r2);
+			A.set(1, 1, A.get(1, 1) + x2);
+			A.set(1, 2, A.get(1, 2) + xy);
+			A.set(1, 3, A.get(1, 3) + xr2);
+			A.set(2, 2, A.get(2, 2) + y2);
+			A.set(2, 3, A.get(2, 3) + yr2);
+			A.set(3, 3, A.get(3, 3) + r4);
 
 		}
 
@@ -2425,23 +2421,25 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 				A.set(row, col, A.get(row, col) * invNumPoints);
 			}
 		}
-		EigenDecomposition<DMatrixRMaj> eigen = DecompositionFactory_DDRM.eig(4, true, true);
-		eigen.decompose(A);
-		int numEigenValues = eigen.getNumberOfEigenvalues();
+
+		DenseDoubleEigenvalueDecomposition dded = new DenseDoubleEigenvalueDecomposition(A);
+
+		DoubleMatrix2D eigenValues = dded.getD();
+
+		double lowestValue = eigenValues.get(0, 0);
 		int index = 0;
-		for (int i = 1; i < numEigenValues; i++) {
-			if (EigenOps_DDRM.computeEigenValue(A, eigen.getEigenVector(i)) < EigenOps_DDRM.computeEigenValue(A,
-					eigen.getEigenVector(index))) {
-				index = i;
+		for (int row = 1; row < eigenValues.rows(); row++) {
+			if (eigenValues.get(row, row) < lowestValue) {
+				lowestValue = eigenValues.get(row, row);
+				index = row;
 			}
-
 		}
-		DMatrixRMaj eigenVector0 = eigen.getEigenVector(index);
+		DoubleMatrix2D eigenVectors = dded.getV();
 
-		double inv = 1.0 / eigenVector0.get(3, 0);
+		double inv = 1.0 / eigenVectors.get(3, index);
 		double[] coefficients = new double[3];
 		for (int row = 0; row < 3; ++row) {
-			coefficients[row] = inv * eigenVector0.get(row, 0);
+			coefficients[row] = inv * eigenVectors.get(row, index);
 		}
 		WB_Point center = new WB_Point(-0.5 * coefficients[1], -0.5 * coefficients[2]);
 		double radius = Math.sqrt(Math.abs(center.dot(center) - coefficients[0]));
