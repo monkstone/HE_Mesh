@@ -16,9 +16,9 @@ You need to add some other external *.jar files to the properties of your Eclips
 * `exp4j.jar`: A simple expression evaluator for Java. (https://github.com/fasseg/exp4j)
 * `ParallelColt-0.9.4.jar` and dependecies: some functions use least-square approximations and other linear algebra approaches. (https://sites.google.com/site/piotrwendykier/software/parallelcolt)
 
-## Build-of-the-day HE_Mesh (2017/11/04)
+## Build-of-the-day HE_Mesh (2017/11/05)
 
-Download a recent built here: http://www.wblut.com/hemesh/hemesh20171104.zip.
+Download a recent built here: http://www.wblut.com/hemesh/hemesh20171105.zip.
 
 ## License
 
@@ -28,7 +28,14 @@ To the extent possible under law, I, Frederik Vanhoutte, have waived all copyrig
 
 The following classes are subject to the license agreement of their original authors, included in the source file:
 
+* wblut.geom.WB_Earcut
+* wblut.geom.WB_PolygonDecomposer
+* wblut.geom.WB_PolygonSplitter
 * wblut.geom.WB_ShapeReader
+* wblut.hemesh.HEC_SuperDuper
+* wblut.geom.HET_FaceSplitter
+* wblut.math.WB_DoubleDouble
+* wblut.math.WB_Ease
 * wblut.math.WB_MTRandom
 * wblut.math.WB_OSNoise
 * wblut.math.WB_PNoise

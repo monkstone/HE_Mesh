@@ -11,12 +11,11 @@ import wblut.geom.WB_Polygon;
 import wblut.geom.WB_Vector;
 import wblut.math.WB_Epsilon;
 
-// TODO: Auto-generated Javadoc
 /**
  * @author Frederik Vanhoutte, W:Blut
  *
- *         Creates a rectangular prism. If a thickness is specified the result
- *         is a solid, otherwise it's a surface, a regular polygon.
+ *         Creates an antiprism. If a thickness is specified the result is a
+ *         solid, otherwise it's a surface, a regular polygon.
  */
 public class HEC_Antiprism extends HEC_Creator {
 	/**

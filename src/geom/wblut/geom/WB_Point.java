@@ -209,11 +209,19 @@ public class WB_Point extends WB_Vector {
 		return new WB_Vector(p.xd() - q.xd(), p.yd() - q.yd(), p.zd() - q.zd());
 	}
 
+	public static WB_Vector subToVector(final WB_Coord p, final WB_Coord q) {
+		return new WB_Vector(p.xd() - q.xd(), p.yd() - q.yd(), p.zd() - q.zd());
+	}
+
 	public static WB_Vector subToVector2D(final WB_Coord p, final double x, final double y) {
 		return new WB_Vector(p.xd() - x, p.yd() - y);
 	}
 
 	public static WB_Vector subToVector3D(final WB_Coord p, final double x, final double y, final double z) {
+		return new WB_Vector(p.xd() - x, p.yd() - y, p.zd() - z);
+	}
+
+	public static WB_Vector subToVector(final WB_Coord p, final double x, final double y, final double z) {
 		return new WB_Vector(p.xd() - x, p.yd() - y, p.zd() - z);
 	}
 
@@ -295,6 +303,22 @@ public class WB_Point extends WB_Vector {
 	 * @return
 	 */
 	public static WB_Point getOrthoNormal3D(final WB_Coord p) {
+		if (Math.abs(p.zd()) > WB_Epsilon.EPSILON) {
+			final WB_Point a = new WB_Point(1, 0, -p.xd() / p.zd());
+			a.normalizeSelf();
+			return a;
+		} else {
+			return new WB_Point(0, 0, 1);
+		}
+	}
+
+	/**
+	 *
+	 *
+	 * @param p
+	 * @return
+	 */
+	public static WB_Point getOrthoNormal(final WB_Coord p) {
 		if (Math.abs(p.zd()) > WB_Epsilon.EPSILON) {
 			final WB_Point a = new WB_Point(1, 0, -p.xd() / p.zd());
 			a.normalizeSelf();

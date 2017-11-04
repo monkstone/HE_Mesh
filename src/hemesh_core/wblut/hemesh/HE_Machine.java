@@ -10,7 +10,7 @@ import wblut.core.WB_ProgressTracker;
  *
  */
 public abstract class HE_Machine {
-
+	private String name;
 	/**
 	 *
 	 */
@@ -31,5 +31,13 @@ public abstract class HE_Machine {
 	 * @return
 	 */
 	public abstract HE_Mesh apply(HE_Selection selection);
+
+	public String getName() {
+		return name;
+	}
+
+	public String setName(final String name) {
+		this.name = name;
+	}
 
 }

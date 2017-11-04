@@ -338,6 +338,17 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 * @param p
 	 * @return
 	 */
+	public static double getDistance(final WB_Coord q, final WB_Coord p) {
+		return WB_GeometryOp3D.getDistance3D(q.xd(), q.yd(), q.zd(), p.xd(), p.yd(), p.zd());
+	}
+
+	/**
+	 *
+	 *
+	 * @param q
+	 * @param p
+	 * @return
+	 */
 	public static double getSqDistance2D(final WB_Coord q, final WB_Coord p) {
 		return WB_GeometryOp2D.getSqDistance2D(q.xd(), q.yd(), p.xd(), p.yd());
 	}
@@ -350,6 +361,17 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 * @return
 	 */
 	public static double getSqDistance3D(final WB_Coord q, final WB_Coord p) {
+		return WB_GeometryOp3D.getSqDistance3D(q.xd(), q.yd(), q.zd(), p.xd(), p.yd(), p.zd());
+	}
+
+	/**
+	 *
+	 *
+	 * @param q
+	 * @param p
+	 * @return
+	 */
+	public static double getSqDistance(final WB_Coord q, final WB_Coord p) {
 		return WB_GeometryOp3D.getSqDistance3D(q.xd(), q.yd(), q.zd(), p.xd(), p.yd(), p.zd());
 	}
 
@@ -376,6 +398,16 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	/**
 	 *
 	 *
+	 * @param p
+	 * @return
+	 */
+	public static double getLength(final WB_Coord p) {
+		return WB_GeometryOp3D.getLength3D(p.xd(), p.yd(), p.zd());
+	}
+
+	/**
+	 *
+	 *
 	 * @param v
 	 * @return
 	 */
@@ -390,6 +422,16 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 * @return
 	 */
 	public static double getSqLength3D(final WB_Coord v) {
+		return WB_GeometryOp3D.getSqLength3D(v.xd(), v.yd(), v.zd());
+	}
+
+	/**
+	 *
+	 *
+	 * @param v
+	 * @return
+	 */
+	public static double getSqLength(final WB_Coord v) {
 		return WB_GeometryOp3D.getSqLength3D(v.xd(), v.yd(), v.zd());
 	}
 
@@ -652,6 +694,22 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 * @return
 	 */
 	public static WB_Vector getOrthoNormal3D(final WB_Coord p) {
+		if (Math.abs(p.zd()) > WB_Epsilon.EPSILON) {
+			final WB_Vector a = new WB_Vector(1, 0, -p.xd() / p.zd());
+			a.normalizeSelf();
+			return a;
+		} else {
+			return new WB_Vector(0, 0, 1);
+		}
+	}
+
+	/**
+	 *
+	 *
+	 * @param p
+	 * @return
+	 */
+	public static WB_Vector getOrthoNormal(final WB_Coord p) {
 		if (Math.abs(p.zd()) > WB_Epsilon.EPSILON) {
 			final WB_Vector a = new WB_Vector(1, 0, -p.xd() / p.zd());
 			a.normalizeSelf();
@@ -2285,7 +2343,6 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 * @param p
 	 * @return
 	 */
-	@Deprecated
 	@Override
 	public double getDistance3D(final WB_Coord p) {
 		return getDistance(p);
@@ -2313,7 +2370,6 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 * @param p
 	 * @return
 	 */
-	@Deprecated
 	@Override
 	public double getSqDistance3D(final WB_Coord p) {
 		return getSqDistance(p);
@@ -2335,10 +2391,7 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 *
 	 * @see wblut.geom.WB_CoordinateMetric#getLength3D()
 	 */
-	/**
-	 * @deprecated Use {@link #getLength()} instead
-	 */
-	@Deprecated
+
 	@Override
 	public double getLength3D() {
 		return getLength();
@@ -2362,6 +2415,7 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	/**
 	 * @deprecated Use {@link #getSqLength()} instead
 	 */
+
 	@Deprecated
 	@Override
 	public double getSqLength3D() {
@@ -2404,10 +2458,7 @@ public class WB_Vector extends WB_MutableCoordinate implements WB_MutableCoordin
 	 *
 	 * @see wblut.geom.WB_CoordinateMetric#getOrthoNormal3D()
 	 */
-	/**
-	 * @deprecated Use {@link #getOrthoNormal()} instead
-	 */
-	@Deprecated
+
 	@Override
 	public WB_Vector getOrthoNormal3D() {
 		return getOrthoNormal();

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_Point;
 
 /**
@@ -165,7 +166,7 @@ public class HEC_FromOBJFile extends HEC_Creator {
 		return new HE_Mesh(creator);
 	}
 
-	// Code excerpts form processing.core
+	// Code excerpts from processing.core
 	/**
 	 *
 	 *
