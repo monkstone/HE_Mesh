@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_Point;

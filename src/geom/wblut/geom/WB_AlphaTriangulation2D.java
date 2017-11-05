@@ -6,10 +6,9 @@ package wblut.geom;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
 /**
  * WB_AlphaTriangulation2D stores the results of
@@ -17,7 +16,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
  * corresponding circumcircle radii.
  *
  */
-public class WB_AlphaTriangulation2D {
+public class WB_AlphaTriangulation2D implements WB_TriangleGenerator {
 
 	/**
 	 *
@@ -131,6 +130,7 @@ public class WB_AlphaTriangulation2D {
 	 *
 	 * @return
 	 */
+	@Override
 	public int[] getTriangles() {
 		return triangles;
 	}
@@ -178,8 +178,9 @@ public class WB_AlphaTriangulation2D {
 	 *
 	 * @return
 	 */
-	public List<WB_Coord> getPoints() {
-		return points.asUnmodifiable();
+	@Override
+	public WB_CoordCollection getPoints() {
+		return WB_CoordCollection.getCollection(points);
 	}
 
 	/**

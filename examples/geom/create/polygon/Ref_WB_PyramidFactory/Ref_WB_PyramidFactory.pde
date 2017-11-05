@@ -15,7 +15,7 @@ void setup() {
   size(1000, 1000, P3D);
   smooth(8);
   render=new WB_Render3D(this);
-  create(50);
+  create(250);
   background(55);
   noCursor();
 }
@@ -39,7 +39,7 @@ void draw() {
 }
 
 void mousePressed() {
-  create(50);
+  create(250);
 }
 
 void create(float h) {

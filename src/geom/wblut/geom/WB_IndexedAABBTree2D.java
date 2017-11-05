@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressTracker;
+
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 
 public class WB_IndexedAABBTree2D {
 
@@ -30,7 +31,7 @@ public class WB_IndexedAABBTree2D {
 	 * @param points
 	 * @param mnof
 	 */
-	public WB_IndexedAABBTree2D(final int[] triangles, final List<? extends WB_Coord> points, final int mnof) {
+	public WB_IndexedAABBTree2D(final int[] triangles, final WB_CoordCollection points, final int mnof) {
 		List<WB_IndexedTriangle> mesh = new FastList<WB_IndexedTriangle>();
 		for (int i = 0; i < triangles.length; i += 3) {
 			mesh.add(new WB_IndexedTriangle(i, triangles, points));
@@ -48,7 +49,7 @@ public class WB_IndexedAABBTree2D {
 	 * @param points
 	 * @param mnof
 	 */
-	public WB_IndexedAABBTree2D(final WB_Triangulation2D triangulation, final List<? extends WB_Coord> points,
+	public WB_IndexedAABBTree2D(final WB_Triangulation2D triangulation, final WB_CoordCollection points,
 			final int mnof) {
 		List<WB_IndexedTriangle> mesh = new FastList<WB_IndexedTriangle>();
 		for (int i = 0; i < triangulation.getTriangles().length; i += 3) {

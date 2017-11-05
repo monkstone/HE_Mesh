@@ -8,7 +8,7 @@ WB_GeometryFactory gf=new WB_GeometryFactory();
 WB_Render2D render;
 WB_Triangulation2DWithPoints confTri;
 List<WB_Coord> points;
-List<WB_Coord> pointsAfterTriangulation;
+WB_CoordCollection pointsAfterTriangulation;
 int[] triangles;
 
 void setup() {

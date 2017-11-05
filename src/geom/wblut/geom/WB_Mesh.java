@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
 
-public class WB_Mesh {
+public class WB_Mesh implements WB_TriangleGenerator {
 
 	protected int[][] faces;
 
@@ -459,6 +459,50 @@ public class WB_Mesh {
 		return this;
 	}
 
+	private int[] triangulateMTIndices() {
+		int[] triangles = new int[0];
+		try {
+			int threadCount = Runtime.getRuntime().availableProcessors();
+			int dfaces = faces.length / threadCount;
+			if (dfaces < 1024) {
+				dfaces = 1024;
+				threadCount = (int) Math.ceil(faces.length / 1024.0);
+
+			}
+			final ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+			final Set<Future<ArrayList<int[]>>> set = new HashSet<Future<ArrayList<int[]>>>();
+			int i = 0;
+			for (i = 0; i < threadCount - 1; i++) {
+				final Callable<ArrayList<int[]>> runner = new TriangulateRunner(dfaces * i, dfaces * (i + 1) - 1, i);
+				set.add(executor.submit(runner));
+			}
+			final Callable<ArrayList<int[]>> runner = new TriangulateRunner(dfaces * i, faces.length - 1, i);
+			set.add(executor.submit(runner));
+
+			ArrayList<int[]> tris = new ArrayList<int[]>();
+			for (Future<ArrayList<int[]>> future : set) {
+
+				tris.addAll(future.get());
+
+			}
+			triangles = new int[3 * tris.size()];
+			i = 0;
+			for (final int[] tri : tris) {
+				triangles[i++] = tri[0];
+				triangles[i++] = tri[1];
+				triangles[i++] = tri[2];
+			}
+
+			executor.shutdown();
+
+		} catch (final InterruptedException ex) {
+			ex.printStackTrace();
+		} catch (final ExecutionException ex) {
+			ex.printStackTrace();
+		}
+		return triangles;
+	}
+
 	class TriangulateRunner implements Callable<ArrayList<int[]>> {
 
 		int start;
@@ -558,8 +602,9 @@ public class WB_Mesh {
 		return vertices.get(i);
 	}
 
-	public List<WB_Coord> getPoints() {
-		return vertices;
+	@Override
+	public WB_CoordCollection getPoints() {
+		return WB_CoordCollection.getCollection(vertices);
 	}
 
 	/**
@@ -973,5 +1018,15 @@ public class WB_Mesh {
 		dcurv = tri.dcurv;
 		curvaturesUpdated = true;
 		DCurvaturesUpdated = true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see wblut.geom.WB_TriangleGenerator#getTriangles()
+	 */
+	@Override
+	public int[] getTriangles() {
+		return triangulateMTIndices();
 	}
 }

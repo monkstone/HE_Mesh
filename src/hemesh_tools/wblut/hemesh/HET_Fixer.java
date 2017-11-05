@@ -17,8 +17,8 @@ import java.util.concurrent.Future;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressCounter;
-import wblut.core.WB_ProgressTracker;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_AABBTree.WB_AABBNode;

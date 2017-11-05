@@ -5,10 +5,9 @@
 package wblut.hemesh;
 
 import java.util.Collection;
-import java.util.List;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_Triangulation2D;
 import wblut.geom.WB_Triangulation2DWithPoints;
 
@@ -22,7 +21,7 @@ import wblut.geom.WB_Triangulation2DWithPoints;
 public class HEC_FromTriangulation extends HEC_Creator {
 	/** Source triangles. */
 	WB_Triangulation2D tri;
-	private List<WB_Coord> points;
+	private WB_CoordCollection points;
 
 	/**
 	 *
@@ -43,17 +42,18 @@ public class HEC_FromTriangulation extends HEC_Creator {
 		return this;
 	}
 
+	public HEC_FromTriangulation setPoints(final WB_CoordCollection points) {
+		this.points = points;
+		return this;
+	}
+
 	public HEC_FromTriangulation setPoints(final Collection<? extends WB_Coord> points) {
-		this.points = new FastList<WB_Coord>();
-		this.points.addAll(points);
+		this.points = WB_CoordCollection.getCollection(points);
 		return this;
 	}
 
 	public HEC_FromTriangulation setPoints(final WB_Coord[] points) {
-		this.points = new FastList<WB_Coord>();
-		for (WB_Coord p : points) {
-			this.points.add(p);
-		}
+		this.points = WB_CoordCollection.getCollection(points);
 		return this;
 	}
 

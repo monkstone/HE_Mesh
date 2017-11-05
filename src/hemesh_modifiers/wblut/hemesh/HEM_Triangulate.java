@@ -6,7 +6,7 @@ package wblut.hemesh;
 
 import java.util.List;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Vector;
 import wblut.math.WB_Epsilon;
 

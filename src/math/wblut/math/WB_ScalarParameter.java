@@ -12,6 +12,7 @@ package wblut.math;
 public interface WB_ScalarParameter {
 
 	public static final WB_ScalarParameter ZERO = new WB_ConstantScalarParameter(0.0);
+	public static final WB_ScalarParameter ONE = new WB_ConstantScalarParameter(1.0);
 
 	/**
 	 *

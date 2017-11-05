@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Point;

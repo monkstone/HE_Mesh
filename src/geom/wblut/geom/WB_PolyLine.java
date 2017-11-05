@@ -5,9 +5,9 @@
 package wblut.geom;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.math.WB_Epsilon;
 
 /**
@@ -349,8 +349,8 @@ public class WB_PolyLine {
 	 *
 	 * @return
 	 */
-	public List<WB_Point> getPoints() {
-		return points;
+	public WB_CoordCollection getPoints() {
+		return WB_CoordCollection.getCollection(points);
 
 	}
 }

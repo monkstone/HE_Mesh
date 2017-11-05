@@ -33,7 +33,7 @@ The following classes are subject to the license agreement of their original aut
 * wblut.geom.WB_PolygonSplitter
 * wblut.geom.WB_ShapeReader
 * wblut.hemesh.HEC_SuperDuper
-* wblut.geom.HET_FaceSplitter
+* wblut.hemesh.HET_FaceSplitter
 * wblut.math.WB_DoubleDouble
 * wblut.math.WB_Ease
 * wblut.math.WB_MTRandom

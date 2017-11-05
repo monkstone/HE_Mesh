@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 
 /**
  *

@@ -13,7 +13,7 @@ import java.util.Map;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_GeometryOp3D;

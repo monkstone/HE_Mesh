@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_GeometryOp3D;

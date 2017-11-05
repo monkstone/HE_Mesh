@@ -11,7 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_KDTreeInteger;
 import wblut.geom.WB_KDTreeInteger.WB_KDEntryInteger;
 import wblut.geom.WB_Point;
@@ -75,6 +77,11 @@ public class HEC_FromFacelist extends HEC_Creator {
 	 */
 	public HEC_FromFacelist setVertices(final WB_Coord[] vs) {
 		vertices = vs;
+		return this;
+	}
+
+	public HEC_FromFacelist setVertices(final WB_CoordCollection vs) {
+		vertices = vs.toArray();
 		return this;
 	}
 

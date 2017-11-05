@@ -15,8 +15,8 @@ import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressCounter;
-import wblut.core.WB_ProgressTracker;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_KDTree;

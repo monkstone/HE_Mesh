@@ -43,7 +43,11 @@ public class WB_PolygonDecomposer {
 		return polys;
 	}
 
-	private static void decomposePolygon(final List<WB_Point> pointlist, final List<WB_Polygon> accumulator) {
+	private static void decomposePolygon(final List<WB_Coord> pointlist, final List<WB_Polygon> accumulator) {
+		decomposePolygon(WB_CoordCollection.getCollection(pointlist), accumulator);
+	}
+
+	private static void decomposePolygon(final WB_CoordCollection pointlist, final List<WB_Polygon> accumulator) {
 		int n = pointlist.size();
 		WB_Point upperIntersection = gf.createPoint();
 		WB_Point lowerIntersection = gf.createPoint();
@@ -54,25 +58,25 @@ public class WB_PolygonDecomposer {
 		int lowerIndex = 0;
 		int closestIndex = 0;
 
-		List<WB_Point> lower = new FastList<WB_Point>();
-		List<WB_Point> upper = new FastList<WB_Point>();
+		List<WB_Coord> lower = new FastList<WB_Coord>();
+		List<WB_Coord> upper = new FastList<WB_Coord>();
 
 		for (int i = 0; i < n; i++) {
-			WB_Point iVertex = pointlist.get(i);
-			WB_Point iVertexPrev = pointlist.get(i == 0 ? n - 1 : i - 1);
-			WB_Point iVertexNext = pointlist.get(i + 1 == n ? 0 : i + 1);
+			WB_Coord iVertex = pointlist.get(i);
+			WB_Coord iVertexPrev = pointlist.get(i == 0 ? n - 1 : i - 1);
+			WB_Coord iVertexNext = pointlist.get(i + 1 == n ? 0 : i + 1);
 			if (WB_GeometryOp3D.isReflex2D(iVertexPrev, iVertex, iVertexNext)) {
 				for (int j = 0; j < n; j++) {
-					WB_Point jVertex = pointlist.get(j);
-					WB_Point jVertexPrev = pointlist.get(j == 0 ? n - 1 : j - 1);
-					WB_Point jVertexNext = pointlist.get(j + 1 == n ? 0 : j + 1);
+					WB_Coord jVertex = pointlist.get(j);
+					WB_Coord jVertexPrev = pointlist.get(j == 0 ? n - 1 : j - 1);
+					WB_Coord jVertexNext = pointlist.get(j + 1 == n ? 0 : j + 1);
 					WB_Point intersection = gf.createPoint();
 					if (WB_GeometryOp3D.isLeftStrict2D(iVertexPrev, iVertex, jVertex)
 							&& WB_GeometryOp3D.isRight2D(iVertexPrev, iVertex, jVertexPrev)) {
 						if (WB_GeometryOp3D.getLineIntersectionInto2D(iVertexPrev, iVertex, jVertex, jVertexPrev,
 								intersection)) {
 							if (WB_GeometryOp3D.isRightStrict2D(iVertexNext, iVertex, intersection)) {
-								double dist = iVertex.getSqDistance2D(intersection);
+								double dist = WB_Point.getSqDistance2D(iVertex, intersection);
 								if (dist < lowerDistance) {
 									lowerDistance = dist;
 									lowerIntersection.set(intersection);
@@ -86,7 +90,7 @@ public class WB_PolygonDecomposer {
 						if (WB_GeometryOp3D.getLineIntersectionInto2D(iVertexNext, iVertex, jVertex, jVertexNext,
 								intersection)) {
 							if (WB_GeometryOp3D.isLeftStrict2D(iVertexPrev, iVertex, intersection)) {
-								double dist = iVertex.getSqDistance2D(intersection);
+								double dist = WB_Point.getSqDistance2D(iVertex, intersection);
 								if (dist < upperDistance) {
 									upperDistance = dist;
 									upperIntersection.set(intersection);
@@ -99,6 +103,7 @@ public class WB_PolygonDecomposer {
 				if (lowerIndex == (upperIndex + 1) % n) {
 					WB_Point midpoint = upperIntersection.add(lowerIntersection).mulSelf(0.5);
 					if (i < upperIndex) {
+
 						lower.addAll(pointlist.subList(i, upperIndex + 1));
 						lower.add(midpoint);
 						upper.add(midpoint);
@@ -122,13 +127,13 @@ public class WB_PolygonDecomposer {
 					closestIndex = lowerIndex;
 					for (int j = lowerIndex; j <= upperIndex; j++) {
 						int jmod = j % n;
-						WB_Point q = pointlist.get(jmod);
+						WB_Coord q = pointlist.get(jmod);
 
 						if (q == iVertex || q == iVertexPrev || q == iVertexNext) {
 							continue;
 						}
 						if (isVisible(pointlist, i, jmod)) {
-							double dist = iVertex.getSqDistance2D(q);
+							double dist = WB_Point.getSqDistance2D(iVertex, q);
 							if (dist < closestDistance) {
 								closestDistance = dist;
 								closestIndex = jmod;
@@ -165,12 +170,12 @@ public class WB_PolygonDecomposer {
 		accumulator.add(gf.createSimplePolygon(pointlist));
 	}
 
-	private static boolean isVisible(final List<WB_Point> pointlist, final int i, final int j) {
+	private static boolean isVisible(final WB_CoordCollection pointlist, final int i, final int j) {
 		int n = pointlist.size();
-		WB_Point iVertex, jVertex;
+		WB_Coord iVertex, jVertex;
 		iVertex = pointlist.get(i);
 		jVertex = pointlist.get(j);
-		WB_Point iVertexPrev, iVertexNext, jVertexPrev, jVertexNext;
+		WB_Coord iVertexPrev, iVertexNext, jVertexPrev, jVertexNext;
 		iVertexPrev = pointlist.get(i == 0 ? n - 1 : i - 1);
 		iVertexNext = pointlist.get(i + 1 == n ? 0 : i + 1);
 		jVertexPrev = pointlist.get(j == 0 ? n - 1 : j - 1);
@@ -203,8 +208,8 @@ public class WB_PolygonDecomposer {
 			if (k == i || k == j || knext == i || knext == j) {
 				continue;
 			}
-			WB_Point kVertex = pointlist.get(k);
-			WB_Point kVertexNext = pointlist.get(knext);
+			WB_Coord kVertex = pointlist.get(k);
+			WB_Coord kVertexNext = pointlist.get(knext);
 
 			WB_Coord in = WB_GeometryOp3D.getSegmentIntersection2D(iVertex, jVertex, kVertex, kVertexNext);
 			if (in != null) {

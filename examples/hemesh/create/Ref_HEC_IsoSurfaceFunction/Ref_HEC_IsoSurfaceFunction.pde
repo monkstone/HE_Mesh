@@ -14,7 +14,7 @@ void setup() {
 
 
   HEC_IsoSurface creator=new HEC_IsoSurface();
-  creator.setResolution(128, 64,64);
+  creator.setResolution(64, 64,64);
   creator.setSize(8, 8,8);
   //3D grids of values can take up a lot of memory, using a function
   //can decrease the memory use, allow larger grids. The resulting number
@@ -48,6 +48,6 @@ void draw() {
 
 class ScalarField implements WB_ScalarParameter{
   double evaluate(double... x){
-   return noise(0.35*(float)(x[0]-6.4),0.35*(float)(x[1]-3.2),0.35*(float)(x[2]-3.2)); 
+   return noise(0.35*(float)(x[0]-3.2),0.35*(float)(x[1]-3.2),0.35*(float)(x[2]-3.2)); 
   }
 }

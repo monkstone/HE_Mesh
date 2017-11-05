@@ -32,7 +32,7 @@ void setup() {
   mesh=new HE_Mesh(new HEC_Dual(mesh).setFixNonPlanarFaces(false));
   HEM_Extrude ext=new HEM_Extrude().setDistance(0).setChamfer(5).setRelative(false);
   mesh.modify(ext);
-  ext.extruded.modify(new HEM_Extrude().setDistance(-20));
+  mesh.getSelection("extruded").modify(new HEM_Extrude().setDistance(-20));
   render=new WB_Render3D(this);
 }
 

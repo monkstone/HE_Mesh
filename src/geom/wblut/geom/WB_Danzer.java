@@ -8,9 +8,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.math.WB_MTRandom;
 
-public class WB_Danzer {
+public class WB_Danzer implements WB_TriangleGenerator {
 
 	private WB_GeometryFactory geometryfactory = new WB_GeometryFactory();
 
@@ -552,8 +553,9 @@ public class WB_Danzer {
 	 *
 	 * @return
 	 */
-	public List<WB_Point> getPoints() {
-		return points;
+	@Override
+	public WB_CoordCollection getPoints() {
+		return WB_CoordCollection.getCollection(points);
 	}
 
 	/**
@@ -575,13 +577,18 @@ public class WB_Danzer {
 	 *
 	 * @return
 	 */
-	public List<WB_Triangle> getTriangles() {
-		final List<WB_Triangle> faces = new FastList<WB_Triangle>();
+	@Override
+	public int[] getTriangles() {
+
 		clean();
+		int[] triangles = new int[3 * tiles.size()];
+		int id = 0;
 		for (final WB_DanzerTile T : tiles) {
-			faces.add(geometryfactory.createTriangle(points.get(T.p1), points.get(T.p2), points.get(T.p3)));
+			triangles[id++] = T.p1;
+			triangles[id++] = T.p2;
+			triangles[id++] = T.p3;
 		}
-		return faces;
+		return triangles;
 	}
 
 	public WB_Triangulation2DWithPoints getTriangulation() {

@@ -10,19 +10,19 @@ List<WB_Segment> segments;
 void setup() {
   fullScreen(P3D);
   smooth(8);
-
+  noiseDetail(8);
   float[][] values=new float[81][51];
   for (int i = 0; i < 81; i++) {
     for (int j = 0; j < 51; j++) {
-      values[i][j]=2.5*sin(radians(12*i))*cos(radians(15*j));
+      values[i][j]= 2.5*sin(i)*cos(j)+4*noise(0.2*i,0.2*j); 
     }
   }
 
   WB_IsoSurface2D creator=new WB_IsoSurface2D();
   creator.setSize(12, 12);
   creator.setValues(values);
-  creator.setIsolevel(0.2);
-   creator.setBoundary(-200);// value outside grid
+  creator.setIsolevel(0.5);
+   creator.setBoundary(200);// value outside grid
   // use creator.clearBoundary() to rest boundary values to "no value".
   
   //Gamma controls level of grid snap, 0.0-0.5. Can improve the 

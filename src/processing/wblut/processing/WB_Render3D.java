@@ -14,13 +14,14 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PMatrix3D;
 import processing.opengl.PGraphicsOpenGL;
-import wblut.core.WB_ProgressTracker;
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_AABBTree.WB_AABBNode;
 import wblut.geom.WB_Circle;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_Curve;
 import wblut.geom.WB_Frame;
 import wblut.geom.WB_Frame.WB_FrameNode;
@@ -47,6 +48,7 @@ import wblut.geom.WB_Segment;
 import wblut.geom.WB_Tetrahedron;
 import wblut.geom.WB_Transform;
 import wblut.geom.WB_Triangle;
+import wblut.geom.WB_TriangleGenerator;
 import wblut.geom.WB_Triangulation2D;
 import wblut.geom.WB_Triangulation3D;
 import wblut.geom.WB_Vector;
@@ -2560,6 +2562,22 @@ public class WB_Render3D extends WB_Render2D {
 	/**
 	 *
 	 *
+	 * @param indices
+	 * @param points
+	 */
+	public void drawPolygon(final int[] indices, final WB_CoordCollection points) {
+		if (points != null && indices != null) {
+			home.beginShape(PConstants.POLYGON);
+			for (final int indice : indices) {
+				home.vertex(points.get(indice).xf(), points.get(indice).yf(), points.get(indice).zf());
+			}
+			home.endShape(PConstants.CLOSE);
+		}
+	}
+
+	/**
+	 *
+	 *
 	 * @param P
 	 */
 
@@ -2590,6 +2608,16 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param points
 	 */
 	public void drawPolygonEdges(final int[] indices, final List<? extends WB_Coord> points) {
+		if (points != null && indices != null) {
+			home.beginShape();
+			for (final int indice : indices) {
+				home.vertex(points.get(indice).xf(), points.get(indice).yf(), points.get(indice).zf());
+			}
+			home.endShape(PConstants.CLOSE);
+		}
+	}
+
+	public void drawPolygonEdges(final int[] indices, final WB_CoordCollection points) {
 		if (points != null && indices != null) {
 			home.beginShape();
 			for (final int indice : indices) {
@@ -4775,6 +4803,18 @@ public class WB_Render3D extends WB_Render2D {
 
 		home.popStyle();
 
+	}
+
+	public void drawTriangle(final WB_TriangleGenerator triangleGenerator) {
+		int[] tri = triangleGenerator.getTriangles();
+		WB_CoordCollection points = triangleGenerator.getPoints();
+		for (int i = 0; i < tri.length; i += 3) {
+			home.beginShape(PConstants.TRIANGLES);
+			vertex(points.get(tri[i]));
+			vertex(points.get(tri[i + 1]));
+			vertex(points.get(tri[i + 2]));
+			home.endShape();
+		}
 	}
 
 }

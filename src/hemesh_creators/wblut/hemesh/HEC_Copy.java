@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.hemesh.HE_RAS.HE_RASEC;
 
 /**

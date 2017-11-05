@@ -8,15 +8,17 @@ import static wblut.geom.WB_GeometryOp3D.projectOnPlane;
 
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.operation.valid.IsValidOp;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_CoordinateSystem3D;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Map2D;
@@ -26,6 +28,7 @@ import wblut.geom.WB_Point;
 import wblut.geom.WB_Polygon;
 import wblut.geom.WB_PolygonTriangulatorJTS;
 import wblut.geom.WB_Triangle;
+import wblut.geom.WB_TriangleGenerator;
 import wblut.geom.WB_Vector;
 import wblut.math.WB_Epsilon;
 
@@ -35,7 +38,7 @@ import wblut.math.WB_Epsilon;
  * @author Frederik Vanhoutte (W:Blut)
  *
  */
-public class HE_Face extends HE_MeshElement implements Comparable<HE_Face> {
+public class HE_Face extends HE_MeshElement implements Comparable<HE_Face>, WB_TriangleGenerator {
 	/** Halfedge associated with this face. */
 	private HE_Halfedge _halfedge;
 	private int textureId;
@@ -548,6 +551,7 @@ public class HE_Face extends HE_MeshElement implements Comparable<HE_Face> {
 	 *
 	 * @return
 	 */
+	@Override
 	public int[] getTriangles() {
 		return getTriangles(true);
 	}
@@ -912,6 +916,17 @@ public class HE_Face extends HE_MeshElement implements Comparable<HE_Face> {
 		WB_Coord n = getFaceNormal();
 		WB_Vector v = WB_Vector.cross(n, u);
 		return new WB_CoordinateSystem3D(getFaceCenter(), u, v, n);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see wblut.geom.WB_TriangleGenerator#getPoints()
+	 */
+	@Override
+	public WB_CoordCollection getPoints() {
+
+		return WB_CoordCollection.getCollection(getFaceVertices());
 	}
 
 }

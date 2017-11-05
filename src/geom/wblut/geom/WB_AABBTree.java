@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
 
-import wblut.core.WB_ProgressTracker;
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_FaceSort;
 import wblut.hemesh.HE_Mesh;

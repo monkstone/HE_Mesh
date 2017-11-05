@@ -4,7 +4,7 @@
 
 package wblut.hemesh;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Plane;

@@ -42,7 +42,6 @@ void draw() {
   text("click",0,350);
   rotateY(mouseX*1.0f/width*TWO_PI);
   rotateX(mouseY*1.0f/height*TWO_PI);
-  translate(0, 0, -200);
   noFill();
   stroke(0);
   strokeWeight(2);

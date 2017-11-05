@@ -18,7 +18,7 @@ ArrayList<WB_Point>[] holes;
 WB_Polygon polygon;
 int[] triangles;
 ArrayList<WB_Point> points;
-List<WB_Coord> pointsAfterTriangulation;
+WB_CoordCollection pointsAfterTriangulation;
 void setup() {
   size(800, 800);
   smooth(8);

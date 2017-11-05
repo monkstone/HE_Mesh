@@ -6,8 +6,6 @@ package wblut.geom;
 
 import java.util.List;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
-
 /**
  *
  */
@@ -16,12 +14,17 @@ public class WB_Triangulation2DWithPoints extends WB_Triangulation2D {
 	/**
 	 *
 	 */
-	private List<WB_Coord> _points;
+	private WB_CoordCollection _points;
 
 	/**
 	 *
 	 */
 	public WB_Triangulation2DWithPoints() {
+	}
+
+	public WB_Triangulation2DWithPoints(final int[] T, final int[] E, final WB_CoordCollection P) {
+		super(T, E);
+		_points = P;
 	}
 
 	/**
@@ -33,8 +36,23 @@ public class WB_Triangulation2DWithPoints extends WB_Triangulation2D {
 	 */
 	public WB_Triangulation2DWithPoints(final int[] T, final int[] E, final List<? extends WB_Coord> P) {
 		super(T, E);
-		_points = new FastList<WB_Coord>();
-		_points.addAll(P);
+		_points = WB_CoordCollection.getCollection(P);
+	}
+
+	public WB_Triangulation2DWithPoints(final int[] T, final int[] E, final WB_Coord[] P) {
+		super(T, E);
+		_points = WB_CoordCollection.getCollection(P);
+	}
+
+	/**
+	 *
+	 *
+	 * @param T
+	 * @param P
+	 */
+	public WB_Triangulation2DWithPoints(final int[] T, final WB_CoordCollection P) {
+		super(T);
+		_points = P;
 	}
 
 	/**
@@ -45,8 +63,18 @@ public class WB_Triangulation2DWithPoints extends WB_Triangulation2D {
 	 */
 	public WB_Triangulation2DWithPoints(final int[] T, final List<? extends WB_Coord> P) {
 		super(T);
-		_points = new FastList<WB_Coord>();
-		_points.addAll(P);
+		_points = WB_CoordCollection.getCollection(P);
+	}
+
+	/**
+	 *
+	 *
+	 * @param T
+	 * @param P
+	 */
+	public WB_Triangulation2DWithPoints(final int[] T, final WB_Coord[] P) {
+		super(T);
+		_points = WB_CoordCollection.getCollection(P);
 	}
 
 	/**
@@ -64,7 +92,7 @@ public class WB_Triangulation2DWithPoints extends WB_Triangulation2D {
 	 *
 	 * @return
 	 */
-	public List<WB_Coord> getPoints() {
+	public WB_CoordCollection getPoints() {
 		return _points;
 	}
 }

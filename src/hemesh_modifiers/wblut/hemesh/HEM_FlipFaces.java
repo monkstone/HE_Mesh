@@ -4,7 +4,7 @@
 
 package wblut.hemesh;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 
 /**
  * Flip face normals.

@@ -4,15 +4,12 @@ import wblut.core.*;
 import wblut.hemesh.*;
 import wblut.geom.*;
 
-
 HE_Mesh mesh;
 WB_Render render;
-WB_ProgressReporter pr;
+
 void setup() {
   size(1000,1000,P3D);
   smooth(8);
-  pr=new WB_ProgressReporter(3);
-  pr.start();
   createMesh();
   // Tries to create a mesh lattice by insetting all faces,making an expanded copy and
   // then connect the inset faces...

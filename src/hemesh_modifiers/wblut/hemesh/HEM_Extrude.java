@@ -7,11 +7,11 @@ package wblut.hemesh;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
@@ -52,8 +52,7 @@ public class HEM_Extrude extends HEM_Modifier {
 	private boolean peak;
 	/** Limit angle for face fusion. */
 	private double fuseAngle;
-	/** sin(fuseAngle). */
-	private double sin2FA;
+
 	/** Vertex normals. */
 	private Map<Long, WB_Coord> _faceNormals;
 	/** Halfedge normals. */
@@ -83,13 +82,11 @@ public class HEM_Extrude extends HEM_Modifier {
 		isFlat = true;
 		isSpiky = false;
 		isStraight = true;
-		thresholdAngle = -1;
+		thresholdAngle = Math.PI;
 		chamfer = new WB_ConstantScalarParameter(0.0);
 		hardEdgeChamfer = new WB_ConstantScalarParameter(0.0);
 		relative = true;
 		fuseAngle = Math.PI / 36;
-		sin2FA = Math.sin(fuseAngle);
-		sin2FA *= sin2FA;
 		heights = null;
 	}
 
@@ -213,8 +210,7 @@ public class HEM_Extrude extends HEM_Modifier {
 	 */
 	public HEM_Extrude setFuseAngle(final double a) {
 		fuseAngle = a;
-		sin2FA = Math.sin(fuseAngle);
-		sin2FA *= sin2FA;
+
 		return this;
 	}
 
@@ -292,8 +288,9 @@ public class HEM_Extrude extends HEM_Modifier {
 			he = f.getHalfedge();
 			do {
 				_halfedgeNormals.put(he.key(), he.getHalfedgeNormal());
+
 				_halfedgeEWs.put(he.key(), he.getHalfedgeDihedralAngle() < thresholdAngle
-						? hardEdgeChamfer.evaluate(c.xd(), c.yd(), c.zd()) : chamfer.evaluate(c.xd(), c.yd(), c.zd()));
+						? chamfer.evaluate(c.xd(), c.yd(), c.zd()) : hardEdgeChamfer.evaluate(c.xd(), c.yd(), c.zd()));
 				he = he.getNextInFace();
 			} while (he != f.getHalfedge());
 			counter.increment();
@@ -416,7 +413,7 @@ public class HEM_Extrude extends HEM_Modifier {
 			do {
 				_halfedgeNormals.put(he.key(), he.getHalfedgeNormal());
 				_halfedgeEWs.put(he.key(), he.getHalfedgeDihedralAngle() < thresholdAngle
-						? hardEdgeChamfer.evaluate(c.xd(), c.yd(), c.zd()) : chamfer.evaluate(c.xd(), c.yd(), c.zd()));
+						? chamfer.evaluate(c.xd(), c.yd(), c.zd()) : hardEdgeChamfer.evaluate(c.xd(), c.yd(), c.zd()));
 				he = he.getNextInFace();
 			} while (he != f.getHalfedge());
 			counter.increment();
@@ -878,9 +875,7 @@ public class HEM_Extrude extends HEM_Modifier {
 	 */
 	private HE_Mesh applyFlat(final HE_Mesh mesh, final List<HE_Face> faces, final boolean fuse) {
 		final HE_Selection sel = new HE_Selection(mesh);
-		sel.addFaces(faces);
-		sel.collectHalfedges();
-		final List<HE_Halfedge> originalEdges = sel.getHalfedges();
+
 		final int nf = faces.size();
 		WB_ProgressCounter counter = new WB_ProgressCounter(nf, 10);
 
@@ -889,7 +884,7 @@ public class HEM_Extrude extends HEM_Modifier {
 		if (heights != null) {
 			if (heights.length == faces.size()) {
 				for (int i = 0; i < nf; i++) {
-					if (!applyFlatToOneFace(i, faces, mesh)) {
+					if (!applyFlatToOneFace(i, faces, mesh, sel)) {
 						failedFaces.add(faces.get(i));
 						failedHeights.add(heights[i]);
 					}
@@ -901,7 +896,7 @@ public class HEM_Extrude extends HEM_Modifier {
 			}
 		} else {
 			for (int i = 0; i < nf; i++) {
-				if (!applyFlatToOneFace(i, faces, mesh)) {
+				if (!applyFlatToOneFace(i, faces, mesh, sel)) {
 					failedFaces.add(faces.get(i));
 					fc = faces.get(i).getFaceCenter();
 					failedHeights.add(d.evaluate(fc.xd(), fc.yd(), fc.zd()));
@@ -910,31 +905,34 @@ public class HEM_Extrude extends HEM_Modifier {
 
 			counter.increment();
 		}
+
 		if (fuse) {
-			counter = new WB_ProgressCounter(originalEdges.size(), 10);
+
+			counter = new WB_ProgressCounter(sel.getNumberOfHalfedges(), 10);
 
 			tracker.setCounterStatus(this, "Fusing original edges.", counter);
-			for (int i = 0; i < originalEdges.size(); i++) {
-				final HE_Halfedge e = originalEdges.get(i);
 
-				final HE_Face f1 = e.getFace();
-				final HE_Face f2 = e.getPair().getFace();
+			for (int i = 0; i < sel.getNumberOfHalfedges(); i++) {
+				final HE_Halfedge e = sel.getHalfedgeWithIndex(i);
+				if (e.isEdge()) {
+					final HE_Face f1 = e.getFace();
+					final HE_Face f2 = e.getPair().getFace();
 
-				if (f1 != null && f2 != null) {
-					// System.out.println(f1.getInternalLabel() + " " +
-					// f2.getInternalLabel());
-					if (f1.getInternalLabel() == 2 && f2.getInternalLabel() == 2) {
+					if (f1 != null && f2 != null) {
+						// System.out.println(f1.getInternalLabel() + " " +
+						// f2.getInternalLabel());
+						if (f1.getInternalLabel() == 2 && f2.getInternalLabel() == 2) {
 
-						if (WB_Vector.cross(f1.getFaceNormal(), f2.getFaceNormal()).getSqLength() < sin2FA) {
-							final HE_Face f = mesh.deleteEdge(e);
-							if (f != null) {
-								f.setInternalLabel(3);
-								fused.add(f);
+							if (Math.abs(Math.PI - f1.getHalfedge(f2).getEdgeDihedralAngle()) < fuseAngle) {
+								final HE_Face f = mesh.deleteEdge(e);
+								if (f != null) {
+									f.setInternalLabel(3);
+									fused.add(f);
+								}
 							}
 						}
 					}
 				}
-
 				counter.increment();
 			}
 		}
@@ -949,7 +947,8 @@ public class HEM_Extrude extends HEM_Modifier {
 	 * @param mesh
 	 * @return true, if successful
 	 */
-	private boolean applyFlatToOneFace(final int id, final List<HE_Face> selFaces, final HE_Mesh mesh) {
+	private boolean applyFlatToOneFace(final int id, final List<HE_Face> selFaces, final HE_Mesh mesh,
+			final HE_Selection fuse) {
 		final HE_Face f = selFaces.get(id);
 		final WB_Coord fc = _faceCenters.get(f.key());
 		final List<HE_Vertex> faceVertices = new FastList<HE_Vertex>();
@@ -984,20 +983,11 @@ public class HEM_Extrude extends HEM_Modifier {
 			for (int i = 0; i < n; i++) {
 				d[i] = _halfedgeEWs.get(faceHalfedges.get(i).key());
 			}
-			if (!isStraight && f.getFaceType() == WB_Classification.CONVEX) {
-				final WB_Point[] vPos = new WB_Point[n];
-				for (int i = 0; i < n; i++) {
-					final HE_Vertex v = faceVertices.get(i);
-					vPos[i] = new WB_Point(v);
-				}
-				WB_Polygon poly = gf.createSimplePolygon(vPos);
+			if (f.getFaceType() == WB_Classification.CONVEX) {
+				WB_Polygon poly = f.toPolygon();
 				poly = poly.trimConvexPolygon(d);
-				if (poly.getNumberOfShellPoints() == n) {
-					final int inew = poly.closestIndex(faceVertices.get(0));
-					for (int i = 0; i < n; i++) {
-						extFaceVertices.get(i).set(poly.getPoint((inew + i) % n));
-					}
-				} else if (poly.getNumberOfShellPoints() > 2) {
+				if (poly.getNumberOfShellPoints() > 2) {
+
 					for (int i = 0; i < n; i++) {
 						extFaceVertices.get(i).set(poly.closestPoint(faceVertices.get(i)));
 					}
@@ -1035,6 +1025,7 @@ public class HEM_Extrude extends HEM_Modifier {
 				final HE_Halfedge heOrig1 = he;
 				final HE_Halfedge heOrig2 = he.getPair();
 				final HE_Halfedge heNew1 = new HE_Halfedge();
+				fuse.add(heNew1);
 				final HE_Halfedge heNew2 = new HE_Halfedge();
 				final HE_Halfedge heNew3 = new HE_Halfedge();
 				final HE_Halfedge heNew4 = new HE_Halfedge();
@@ -1082,11 +1073,11 @@ public class HEM_Extrude extends HEM_Modifier {
 			final List<HE_Halfedge> edgesToRemove = new FastList<HE_Halfedge>();
 			for (int i = 0; i < newhes.size(); i++) {
 				final HE_Halfedge e = newhes.get(i);
-				if (e.isEdge()) {
-					if (WB_Epsilon.isZeroSq(WB_GeometryOp3D.getSqDistance3D(e.getStartVertex(), e.getEndVertex()))) {
-						edgesToRemove.add(e);
-					}
+				// if (e.isEdge()) {
+				if (WB_Epsilon.isZeroSq(WB_GeometryOp3D.getSqDistance3D(e.getStartVertex(), e.getEndVertex()))) {
+					edgesToRemove.add(e);
 				}
+				// }
 			}
 			for (int i = 0; i < edgesToRemove.size(); i++) {
 				HET_MeshOp.collapseEdge(mesh, edgesToRemove.get(i));

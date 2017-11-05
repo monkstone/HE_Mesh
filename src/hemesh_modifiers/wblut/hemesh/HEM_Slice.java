@@ -7,7 +7,7 @@ package wblut.hemesh;
 import java.util.Iterator;
 import java.util.List;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Plane;

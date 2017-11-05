@@ -37,7 +37,7 @@ void draw() {
   stroke(255,0,0);
   while(vItr.hasNext()){
    v=vItr.next();
-    WB_Coord n=v.getVertexNormalMeanCurvature();
+    WB_Coord n=v.getVertexNormal();
     render.drawVector(v,n,50.0);
     
   }

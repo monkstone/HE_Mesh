@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import com.vividsolutions.jts.algorithm.ConvexHull;
 import com.vividsolutions.jts.densify.Densifier;
 import com.vividsolutions.jts.geom.Coordinate;
@@ -28,7 +30,6 @@ import com.vividsolutions.jts.operation.buffer.BufferOp;
 import com.vividsolutions.jts.operation.buffer.BufferParameters;
 import com.vividsolutions.jts.simplify.TopologyPreservingSimplifier;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_Math;
 
@@ -1448,6 +1449,10 @@ public class WB_GeometryFactory2D {
 	 * @return
 	 */
 	public WB_Polygon createSimplePolygon(final WB_Coord... points) {
+		return new WB_Polygon(points);
+	}
+
+	public WB_Polygon createSimplePolygon(final WB_CoordCollection points) {
 		return new WB_Polygon(points);
 	}
 

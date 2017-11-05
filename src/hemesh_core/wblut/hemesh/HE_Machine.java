@@ -4,7 +4,7 @@
 
 package wblut.hemesh;
 
-import wblut.core.WB_ProgressTracker;
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 
 /**
  *
@@ -36,7 +36,7 @@ public abstract class HE_Machine {
 		return name;
 	}
 
-	public String setName(final String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 

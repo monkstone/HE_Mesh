@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+
 import com.vividsolutions.jts.algorithm.CGAlgorithms;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Envelope;
@@ -20,8 +23,6 @@ import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.hemesh.HEC_Archimedes;
 import wblut.hemesh.HEM_ChamferCorners;
 import wblut.hemesh.HEM_Crocodile;
@@ -247,11 +248,12 @@ public class WB_PolygonTriangulatorJTS {
 		}
 		final int[] triangles = triangulation.getTriangles();
 		final int[] edges = triangulation.getEdges();
-		final List<WB_Coord> tripoints = triangulation.getPoints();
+		final WB_CoordCollection tripoints = triangulation.getPoints();
 		final int[] intmap = new int[tripoints.size()];
 		index = 0;
-		for (final WB_Coord point : tripoints) {
-			final int found = pointmap.getNearestNeighbor(point).value;
+
+		for (int i = 0; i < tripoints.size(); i++) {
+			final int found = pointmap.getNearestNeighbor(tripoints.get(i)).value;
 			intmap[index++] = found;
 		}
 		for (int i = 0; i < triangles.length; i++) {

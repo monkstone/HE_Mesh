@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.math.WB_Epsilon;
 
 /**
@@ -32,7 +33,7 @@ public class WB_PolygonSplitter {
 	// Split a convex or concave polygon without holes with a given line
 	public static List<WB_Polygon> splitSimplePolygon2D(final WB_Polygon polygon, final WB_Line L) {
 		List<WB_Polygon> polys = new ArrayList<WB_Polygon>();
-		List<WB_Point> coords = polygon.getPoints();
+		List<WB_Coord> coords = polygon.getPoints().toList();
 		splitEdges(coords, L);
 		sortEdges(L);
 		splitPolygon();
@@ -50,7 +51,7 @@ public class WB_PolygonSplitter {
 			polys.add(polygon);
 		} else {
 
-			List<WB_Point> coords = polygon.getPoints();
+			List<WB_Coord> coords = polygon.getPoints().toList();
 			splitEdges(coords, P);
 			sortEdges((WB_Line) intersection.object);
 			splitPolygon();
@@ -62,7 +63,7 @@ public class WB_PolygonSplitter {
 	public static List<WB_Polygon> splitPolygon2D(final WB_Polygon polygon, final WB_Line L) {
 		List<WB_Polygon> polys = new ArrayList<WB_Polygon>();
 		WB_Polygon spolygon = gf.createSimplePolygon(polygon);
-		List<WB_Point> coords = spolygon.getPoints();
+		List<WB_Coord> coords = spolygon.getPoints().toList();
 		splitEdges(coords, L);
 		sortEdges(L);
 		splitPolygon();
@@ -81,7 +82,7 @@ public class WB_PolygonSplitter {
 			polys.add(spolygon);
 		} else {
 
-			List<WB_Point> coords = spolygon.getPoints();
+			List<WB_Coord> coords = spolygon.getPoints().toList();
 			splitEdges(coords, P);
 			sortEdges((WB_Line) intersection.object);
 			splitPolygon();

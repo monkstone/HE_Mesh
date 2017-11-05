@@ -48,21 +48,17 @@ public abstract class WB_CoordCollection {
 		return new WB_CoordCollectionList(coords);
 	}
 
-	public WB_Coord get(final int i) {
-		return null;
+	abstract public WB_Coord get(final int i);
+
+	public List<WB_Coord> subList(final int fromInc, final int toExcl) {
+		return toList().subList(fromInc, toExcl);
 	}
 
-	public int size() {
-		return 0;
-	}
+	abstract public int size();
 
-	public WB_Coord[] toArray() {
-		return null;
-	}
+	abstract public WB_Coord[] toArray();
 
-	public List<WB_Coord> toList() {
-		return null;
-	}
+	abstract public List<WB_Coord> toList();
 
 	static class WB_CoordCollectionArray extends WB_CoordCollection {
 		WB_Coord[] array;
@@ -131,6 +127,7 @@ public abstract class WB_CoordCollection {
 
 			return list;
 		}
+
 	}
 
 	static class WB_CoordCollectionPolygon extends WB_CoordCollection {
@@ -169,6 +166,7 @@ public abstract class WB_CoordCollection {
 
 			return list;
 		}
+
 	}
 
 	static class WB_CoordCollectionNoise extends WB_CoordCollection {
@@ -213,6 +211,7 @@ public abstract class WB_CoordCollection {
 
 			return list;
 		}
+
 	}
 
 	static class WB_CoordCollectionMap extends WB_CoordCollection {
@@ -254,6 +253,7 @@ public abstract class WB_CoordCollection {
 
 			return list;
 		}
+
 	}
 
 	static class WB_CoordCollectionUnmap3D extends WB_CoordCollection {
@@ -295,6 +295,7 @@ public abstract class WB_CoordCollection {
 
 			return list;
 		}
+
 	}
 
 	static class WB_CoordCollectionUnmap2D extends WB_CoordCollection {
@@ -336,6 +337,7 @@ public abstract class WB_CoordCollection {
 
 			return list;
 		}
+
 	}
 
 }

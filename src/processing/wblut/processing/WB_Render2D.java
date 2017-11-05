@@ -17,6 +17,7 @@ import wblut.geom.WB_AABBTree2D.WB_AABBNode2D;
 import wblut.geom.WB_AlphaTriangulation2D;
 import wblut.geom.WB_Circle;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_IndexedAABBTree2D;
 import wblut.geom.WB_IndexedAABBTree2D.WB_IndexedAABBNode2D;
 import wblut.geom.WB_Line;
@@ -28,6 +29,7 @@ import wblut.geom.WB_Ray;
 import wblut.geom.WB_Ring;
 import wblut.geom.WB_Segment;
 import wblut.geom.WB_Triangle;
+import wblut.geom.WB_TriangleGenerator;
 import wblut.geom.WB_Triangulation2D;
 import wblut.geom.WB_Triangulation2DWithPoints;
 
@@ -367,6 +369,17 @@ public class WB_Render2D extends WB_Processing {
 	 */
 
 	public void drawTriangulation2D(final WB_Triangulation2D tri, final List<? extends WB_Coord> points) {
+		final int[] triangles = tri.getTriangles();
+		home.beginShape(PConstants.TRIANGLES);
+		for (int i = 0; i < triangles.length; i += 3) {
+			vertex2D(points.get(triangles[i]));
+			vertex2D(points.get(triangles[i + 1]));
+			vertex2D(points.get(triangles[i + 2]));
+		}
+		home.endShape();
+	}
+
+	public void drawTriangulation2D(final WB_Triangulation2D tri, final WB_CoordCollection points) {
 		final int[] triangles = tri.getTriangles();
 		home.beginShape(PConstants.TRIANGLES);
 		for (int i = 0; i < triangles.length; i += 3) {
@@ -1155,4 +1168,17 @@ public class WB_Render2D extends WB_Processing {
 		home.popStyle();
 
 	}
+
+	public void drawTriangle2D(final WB_TriangleGenerator triangleGenerator) {
+		int[] tri = triangleGenerator.getTriangles();
+		WB_CoordCollection points = triangleGenerator.getPoints();
+		for (int i = 0; i < tri.length; i += 3) {
+			home.beginShape(PConstants.TRIANGLES);
+			vertex2D(points.get(tri[i]));
+			vertex2D(points.get(tri[i + 1]));
+			vertex2D(points.get(tri[i + 2]));
+			home.endShape();
+		}
+	}
+
 }

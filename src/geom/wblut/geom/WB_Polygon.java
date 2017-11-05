@@ -9,12 +9,13 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.math.WB_Epsilon;
 
 /**
  *
  */
-public class WB_Polygon extends WB_Ring {
+public class WB_Polygon extends WB_Ring implements WB_TriangleGenerator {
 
 	/**
 	 *
@@ -48,6 +49,24 @@ public class WB_Polygon extends WB_Ring {
 		this.points = new FastList<WB_Point>();
 		for (WB_Coord p : points) {
 			this.points.add(new WB_Point(p));
+		}
+		calculateDirections();
+		numberOfContours = 1;
+		numberOfPointsPerContour = new int[] { numberOfPoints };
+	}
+
+	/**
+	 *
+	 *
+	 * @param points
+	 */
+	public WB_Polygon(final WB_CoordCollection points) {
+		numberOfPoints = points.size();
+		numberOfShellPoints = points.size();
+		this.points = new FastList<WB_Point>();
+
+		for (int i = 0; i < points.size(); i++) {
+			this.points.add(new WB_Point(points.get(i)));
 		}
 		calculateDirections();
 		numberOfContours = 1;
@@ -271,6 +290,7 @@ public class WB_Polygon extends WB_Ring {
 	 *
 	 * @return
 	 */
+	@Override
 	public int[] getTriangles() {
 
 		return getTriangles(true);

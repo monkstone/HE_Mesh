@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryCollection;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -18,8 +21,6 @@ import com.vividsolutions.jts.triangulate.ConformingDelaunayTriangulationBuilder
 import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 import com.vividsolutions.jts.triangulate.quadedge.QuadEdgeSubdivision;
 
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.external.constrainedDelaunay.WB_ConstrainedTriangulation;
 import wblut.math.WB_Epsilon;
 
@@ -532,9 +533,10 @@ class WB_Triangulate2D {
 
 		WB_Triangulation2DWithPoints tri = getConformingTriangles2D(coords, constraints, tol);
 		List<WB_Point> upoints = new FastList<WB_Point>();
-		for (WB_Coord point : tri.getPoints()) {
+		WB_CoordCollection points = tri.getPoints();
+		for (int i = 0; i < points.size(); i++) {
 			WB_Point q = new WB_Point();
-			context.unmapPoint2D(point, q);
+			context.unmapPoint2D(points.get(i), q);
 			upoints.add(q);
 		}
 		return new WB_Triangulation2DWithPoints(tri.getTriangles(), tri.getEdges(), upoints);

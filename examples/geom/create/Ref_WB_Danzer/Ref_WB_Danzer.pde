@@ -8,7 +8,7 @@ import wblut.processing.*;
 
 WB_Render3D render;
 WB_Danzer danzerA, danzerB, danzerC;
-ArrayList<WB_Polygon> polys;
+
 float scale;
 
 void setup() {
@@ -26,17 +26,15 @@ void setup() {
   danzerB.inflate(3);
   danzerC=new WB_Danzer(scale, WB_Danzer.Type.C,new WB_Point(250,0,0));
   danzerC.inflate(3);
-  polys=new ArrayList<WB_Polygon>();
-  polys.addAll(danzerA.getTiles());
-  polys.addAll(danzerB.getTiles());
-  polys.addAll(danzerC.getTiles());
+
 }
 
 void draw() {
   background(55);
   translate(width/2, height/2);
   stroke(0);
-  for (WB_Polygon poly : polys) {
-    render.drawPolygon(poly);
-  }  
+  render.drawTriangle2D(danzerA);
+  render.drawTriangle2D(danzerB);
+  render.drawTriangle2D(danzerC);
+   
 }

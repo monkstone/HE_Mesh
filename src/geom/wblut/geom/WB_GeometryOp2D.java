@@ -2210,7 +2210,7 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 	 * @param p1
 	 * @return
 	 */
-	public static final boolean isReflex2D(final WB_Point p0, final WB_Point p, final WB_Point p1) {
+	public static final boolean isReflex2D(final WB_Coord p0, final WB_Coord p, final WB_Coord p1) {
 		return isRightStrict2D(p1, p0, p);
 	}
 

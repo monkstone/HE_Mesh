@@ -40,7 +40,6 @@ public interface WB_IsoValues2D {
 		 */
 		@Override
 		public double value(final int i, final int j) {
-			// TODO Auto-generated method stub
 			return values[i][j];
 		}
 

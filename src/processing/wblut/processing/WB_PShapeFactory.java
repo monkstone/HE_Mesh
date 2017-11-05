@@ -12,6 +12,7 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PShape;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_Mesh;
 import wblut.geom.WB_Vector;
@@ -182,7 +183,7 @@ public class WB_PShapeFactory {
 		final PShape retained = home.createShape();
 		retained.beginShape(PConstants.TRIANGLES);
 		final WB_Mesh lmesh = geometryfactory.createTriMesh(mesh);
-		final List<WB_Coord> seq = lmesh.getPoints();
+		final WB_CoordCollection seq = lmesh.getPoints();
 		WB_Coord p = seq.get(0);
 		for (int i = 0; i < lmesh.getNumberOfFaces(); i++) {
 			int id = lmesh.getFace(i)[0];
@@ -465,7 +466,7 @@ public class WB_PShapeFactory {
 		retained.beginShape(PConstants.TRIANGLES);
 		final WB_Mesh lmesh = geometryfactory.createTriMesh(mesh);
 		final WB_Vector v = geometryfactory.createVector();
-		final List<WB_Coord> seq = lmesh.getPoints();
+		final WB_CoordCollection seq = lmesh.getPoints();
 		WB_Coord p = seq.get(0);
 		for (int i = 0; i < lmesh.getNumberOfFaces(); i++) {
 			int id = lmesh.getFace(i)[0];

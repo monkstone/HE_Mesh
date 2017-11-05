@@ -10,7 +10,7 @@ import java.util.List;
 import org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Plane;
 import wblut.geom.WB_Triangle;
 import wblut.geom.WB_Vector;

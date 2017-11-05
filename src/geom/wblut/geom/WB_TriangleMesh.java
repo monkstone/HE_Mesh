@@ -89,7 +89,7 @@ public class WB_TriangleMesh extends WB_Mesh {
 	 * @param mesh
 	 */
 	protected WB_TriangleMesh(final WB_Mesh mesh) {
-		vertices = mesh.getPoints();
+		vertices = mesh.getPoints().toList();
 		faces = mesh.getFacesAsInt();
 		aabb = new WB_AABB(vertices);
 		triangulate();

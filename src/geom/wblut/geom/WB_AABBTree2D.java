@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
 
-import wblut.core.WB_ProgressTracker;
+import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 
 public class WB_AABBTree2D {
 
@@ -38,6 +38,13 @@ public class WB_AABBTree2D {
 		buildTree(mesh);
 	}
 
+	public WB_AABBTree2D(final int[] triangles, final WB_CoordCollection points, final int mnof) {
+		maxLevel = 2 * (int) Math.ceil(Math.log(triangles.length) / Math.log(2.0));
+		maxNumberOfFaces = Math.max(1, mnof);
+		depth = 0;
+		buildTree(triangles, points);
+	}
+
 	/**
 	 *
 	 *
@@ -50,6 +57,23 @@ public class WB_AABBTree2D {
 
 		root = new WB_AABBNode2D();
 		final List<WB_Triangle> faces = new FastList<WB_Triangle>();
+		faces.addAll(mesh);
+		buildNode(root, faces, mesh, 0);
+		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");
+	}
+
+	private void buildTree(final int[] triangles, final WB_CoordCollection points) {
+
+		tracker.setStartStatus(this,
+				"Starting WB_AABBTree2D construction. Max. number of faces per node: " + maxNumberOfFaces);
+
+		root = new WB_AABBNode2D();
+		final List<WB_Triangle> faces = new FastList<WB_Triangle>();
+		List<WB_Triangle> mesh = new FastList<WB_Triangle>();
+		for (int i = 0; i < triangles.length; i += 3) {
+			mesh.add(new WB_Triangle(points.get(triangles[i]), points.get(triangles[i + 1]),
+					points.get(triangles[i + 2])));
+		}
 		faces.addAll(mesh);
 		buildNode(root, faces, mesh, 0);
 		tracker.setStopStatus(this, "Exiting WB_AABBTree construction.");

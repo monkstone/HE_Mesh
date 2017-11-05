@@ -20,10 +20,11 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
 
-import wblut.core.WB_ProgressCounter;
+import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
+import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_Frame;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_KDTree;
@@ -34,7 +35,7 @@ import wblut.geom.WB_Plane;
 import wblut.geom.WB_Point;
 import wblut.geom.WB_Polygon;
 import wblut.geom.WB_Transform;
-import wblut.geom.WB_Triangle;
+import wblut.geom.WB_TriangleGenerator;
 import wblut.geom.WB_Vector;
 import wblut.hemesh.HE_RAS.HE_RASEC;
 import wblut.math.WB_Epsilon;
@@ -46,12 +47,13 @@ import wblut.math.WB_MTRandom;
  * @author Frederik Vanhoutte (W:Blut)
  *
  */
-public class HE_Mesh extends HE_MeshStructure {
+public class HE_Mesh extends HE_MeshStructure implements WB_TriangleGenerator {
 	Future<HE_Mesh> future;
 	ExecutorService executor;
 	LinkedList<Callable<HE_Mesh>> tasks;
 	Map<String, HE_Selection> selections;
 	boolean finished;
+	int[] triangles;
 
 	/**
 	 * Instantiates a new HE_Mesh.
@@ -64,6 +66,7 @@ public class HE_Mesh extends HE_MeshStructure {
 		future = null;
 		executor = null;
 		finished = true;
+		triangles = null;
 	}
 
 	public void createThreaded(final HEC_Creator creator) {
@@ -131,6 +134,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	public HE_Mesh(final HEC_Creator creator) {
 		this();
 		setNoCopy(creator.create());
+		triangles = null;
 	}
 
 	/**
@@ -140,6 +144,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	 */
 	public HE_Mesh(final WB_Mesh mesh) {
 		this(new HEC_FromWBMesh(mesh));
+		triangles = null;
 	}
 
 	/**
@@ -149,6 +154,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	 */
 	public HE_Mesh(final WB_MeshCreator mesh) {
 		this(new HEC_FromWBMesh(mesh.create()));
+		triangles = null;
 	}
 
 	/**
@@ -159,6 +165,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	public HE_Mesh(final HE_Mesh mesh) {
 		this();
 		set(mesh);
+		triangles = null;
 	}
 
 	/**
@@ -1225,6 +1232,7 @@ public class HE_Mesh extends HE_MeshStructure {
 	 * @return fused face (or null)
 	 */
 	public HE_Face deleteEdge(final HE_Halfedge e) {
+
 		HE_Face f = null;
 		final HE_Halfedge he1 = e.isEdge() ? e : e.getPair();
 		final HE_Halfedge he2 = he1.getPair();
@@ -1269,18 +1277,21 @@ public class HE_Mesh extends HE_MeshStructure {
 	 *
 	 * @return
 	 */
-	public List<WB_Triangle> getTriangles() {
-		final List<WB_Triangle> result = new FastList<WB_Triangle>();
-		final HE_Mesh trimesh = this.copy();
-		trimesh.triangulate();
-		final Iterator<HE_Face> fItr = trimesh.fItr();
-		HE_Face f;
-		while (fItr.hasNext()) {
-			f = fItr.next();
-			result.add(gf.createTriangle(f.getHalfedge().getVertex(), f.getHalfedge().getNextInFace().getVertex(),
-					f.getHalfedge().getPrevInFace().getVertex()));
+	@Override
+	public int[] getTriangles() {
+		if (triangles == null) {
+			final HE_Mesh trimesh = this.copy();
+			trimesh.triangulate();
+			triangles = new int[trimesh.getNumberOfFaces()];
+			final Iterator<HE_Face> fItr = trimesh.fItr();
+			HE_Face f;
+			int id = 0;
+			while (fItr.hasNext()) {
+				f = fItr.next();
+				triangles[id++] = getIndex(f.getHalfedge().getVertex());
+			}
 		}
-		return result;
+		return triangles;
 	}
 
 	/**
@@ -1638,10 +1649,11 @@ public class HE_Mesh extends HE_MeshStructure {
 		return getVertexWithIndex(i);
 	}
 
-	public List<WB_Coord> getPoints() {
+	@Override
+	public WB_CoordCollection getPoints() {
 		final List<WB_Coord> result = new FastList<WB_Coord>();
 		result.addAll(vertices.getObjects());
-		return result;
+		return WB_CoordCollection.getCollection(result);
 	}
 
 	/**
@@ -2788,6 +2800,14 @@ public class HE_Mesh extends HE_MeshStructure {
 			sel.remove(v);
 
 		}
+	}
+
+	@Override
+	public void clearPrecomputed() {
+		triangles = null;
+		clearPrecomputedFaces();
+		clearPrecomputedVertices();
+		clearPrecomputedHalfedges();
 	}
 
 	/**
