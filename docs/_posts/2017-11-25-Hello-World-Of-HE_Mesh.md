@@ -3,7 +3,7 @@ layout: post
 title: HE_Mesh
 ---
 
-[](http://www.wblut.com/blog/wp-content/2009/05/WindsweptBeethoven_00403.png)
+![](http://www.wblut.com/blog/wp-content/2009/05/WindsweptBeethoven_00403.png)
 
 HE_Mesh* is a Java library for creating and manipulating polygonal meshes. Containing no display functionality of its own, it is meant to be used with [Processing](http://processing.org/).
 
@@ -103,7 +103,7 @@ void draw() {
 
 ### Hello world!
 
-[](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
+![](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
 
 ```java
 import wblut.core.*;
