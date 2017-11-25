@@ -1,5 +1,3 @@
-/*BROKEN in 6.0.0*/
-
 
 import wblut.math.*;
 import wblut.processing.*;
@@ -17,7 +15,7 @@ HE_Mesh fusedcells;
 WB_Render3D render;
 
 void setup() {
-  size(1000, 1000, P3D);
+  fullScreen(P3D);
   smooth(8);
   createContainer();
   numpoints=100;

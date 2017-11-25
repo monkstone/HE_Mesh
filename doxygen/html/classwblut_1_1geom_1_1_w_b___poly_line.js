@@ -19,7 +19,7 @@ var classwblut_1_1geom_1_1_w_b___poly_line =
     [ "getParametricPointOnLine", "classwblut_1_1geom_1_1_w_b___poly_line.html#a9182d6899940db5ed9f354983223d691", null ],
     [ "getPoint", "classwblut_1_1geom_1_1_w_b___poly_line.html#a86d75281b683ddaa2373eaf11f6b4e98", null ],
     [ "getPointOnLine", "classwblut_1_1geom_1_1_w_b___poly_line.html#a172a72f76a5c49aa9cce5335de93cb28", null ],
-    [ "getPoints", "classwblut_1_1geom_1_1_w_b___poly_line.html#ad478454cb02f83ad17ad37dfeca56fd5", null ],
+    [ "getPoints", "classwblut_1_1geom_1_1_w_b___poly_line.html#a0325785e237ad1550a547add4d79622a", null ],
     [ "getSegment", "classwblut_1_1geom_1_1_w_b___poly_line.html#a8bb3729a053ef245b0cd0321a9f3772e", null ],
     [ "hashCode", "classwblut_1_1geom_1_1_w_b___poly_line.html#a34b926f3f78e856284b7b88c28444d51", null ],
     [ "geometryfactory", "classwblut_1_1geom_1_1_w_b___poly_line.html#ac4e074675163a6c8be08c3e048994d46", null ]

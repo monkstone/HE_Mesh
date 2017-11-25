@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.core;
@@ -14,6 +19,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import wblut.hemesh.HE_Element;
 
+/**
+ * Output log to file and console
+ *
+ * @author FVH
+ *
+ */
 public class WB_ProgressReporter extends Thread {
 
 	WB_ProgressTracker tracker;
@@ -75,6 +86,8 @@ public class WB_ProgressReporter extends Thread {
 						String s = status.getText();
 						if (s != null) {
 							output.println(s);
+							// HARDWIRED LIMIT ON CONSOLE OUTPUT TO STOP
+							// Processing IDE FROM FREEZING
 							if (status.getLevel() < 2) {
 								System.out.println(status.getConsoleText());
 							}

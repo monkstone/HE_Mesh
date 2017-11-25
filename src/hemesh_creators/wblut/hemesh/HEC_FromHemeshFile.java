@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -114,15 +119,16 @@ public class HEC_FromHemeshFile extends HEC_Creator {
 			z = Double.parseDouble(subresult[2]);
 			heid = Integer.parseInt(subresult[3]);
 			v.setColor(Integer.parseInt(subresult[4]));
-			v.labels = Long.parseLong(subresult[5]);
-			hasuvw = Integer.parseInt(subresult[6]);
+			v.setInternalLabel(Integer.parseInt(subresult[5]));
+			v.setUserLabel(Integer.parseInt(subresult[6]));
+			hasuvw = Integer.parseInt(subresult[7]);
 			v.set(x, y, z);
 			if (heid > -1) {
 				mesh.setHalfedge(v, halfedges.get(heid));
 			}
 			if (hasuvw == 1) {
-				v.setUVW(Double.parseDouble(subresult[7]), Double.parseDouble(subresult[8]),
-						Double.parseDouble(subresult[9]));
+				v.setUVW(Double.parseDouble(subresult[8]), Double.parseDouble(subresult[9]),
+						Double.parseDouble(subresult[10]));
 			}
 
 			id++;
@@ -136,8 +142,9 @@ public class HEC_FromHemeshFile extends HEC_Creator {
 			hepairid = Integer.parseInt(subresult[2]);
 			fid = Integer.parseInt(subresult[3]);
 			he.setColor(Integer.parseInt(subresult[4]));
-			he.labels = Long.parseLong(subresult[5]);
-			hasuvw = Integer.parseInt(subresult[6]);
+			he.setInternalLabel(Integer.parseInt(subresult[5]));
+			he.setUserLabel(Integer.parseInt(subresult[6]));
+			hasuvw = Integer.parseInt(subresult[7]);
 			if (vid > -1) {
 				mesh.setVertex(he, vertices.get(vid));
 			}
@@ -152,8 +159,8 @@ public class HEC_FromHemeshFile extends HEC_Creator {
 				mesh.setFace(he, faces.get(fid));
 			}
 			if (hasuvw == 1) {
-				he.setUVW(Double.parseDouble(subresult[7]), Double.parseDouble(subresult[8]),
-						Double.parseDouble(subresult[9]));
+				he.setUVW(Double.parseDouble(subresult[8]), Double.parseDouble(subresult[9]),
+						Double.parseDouble(subresult[10]));
 			}
 			id++;
 		}
@@ -168,7 +175,8 @@ public class HEC_FromHemeshFile extends HEC_Creator {
 			}
 			f.setColor(Integer.parseInt(subresult[1]));
 			f.setTextureId(Integer.parseInt(subresult[2]));
-			f.labels = Long.parseLong(subresult[3]);
+			f.setInternalLabel(Integer.parseInt(subresult[3]));
+			f.setUserLabel(Integer.parseInt(subresult[4]));
 			id++;
 		}
 		mesh.addVertices(vertices);

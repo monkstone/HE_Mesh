@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.processing;
@@ -18,6 +23,7 @@ import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_AABBTree.WB_AABBNode;
+import wblut.geom.WB_BinaryGrid3D;
 import wblut.geom.WB_Circle;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
@@ -4626,6 +4632,10 @@ public class WB_Render3D extends WB_Render2D {
 		home.vertex(p.xf(), p.yf(), p.zf());
 	}
 
+	public void vertex(final double x, final double y, final double z) {
+		home.vertex((float) x, (float) y, (float) z);
+	}
+
 	/**
 	 *
 	 *
@@ -4682,6 +4692,14 @@ public class WB_Render3D extends WB_Render2D {
 		home.beginShape(PConstants.LINES);
 		vertex(p);
 		vertex(q);
+		home.endShape();
+	}
+
+	public void line(final double x1, final double y1, final double z1, final double x2, final double y2,
+			final double z2) {
+		home.beginShape(PConstants.LINES);
+		vertex(x1, y1, z1);
+		vertex(x2, y2, z2);
 		home.endShape();
 	}
 
@@ -4814,6 +4832,181 @@ public class WB_Render3D extends WB_Render2D {
 			vertex(points.get(tri[i + 1]));
 			vertex(points.get(tri[i + 2]));
 			home.endShape();
+		}
+	}
+
+	public void drawOutline(final WB_BinaryGrid3D grid) {
+		home.pushMatrix();
+		translate(grid.getMin());
+		drawXEdges(grid);
+		drawYEdges(grid);
+		drawZEdges(grid);
+		home.popMatrix();
+	}
+
+	public void draw(final WB_BinaryGrid3D grid) {
+		home.pushMatrix();
+		translate(grid.getMin());
+		drawXFaces(grid);
+		drawYFaces(grid);
+		drawZFaces(grid);
+		home.popMatrix();
+	}
+
+	void drawXEdges(final WB_BinaryGrid3D grid) {
+		int val00, valm0, valmm, val0m, sum;
+		double x, y, z;
+		for (int i = 0; i < grid.getSizeX(); i++) {
+			x = i * grid.getDX();
+			for (int j = 0; j <= grid.getSizeY(); j++) {
+				y = j * grid.getDY();
+				for (int k = 0; k <= grid.getSizeZ(); k++) {
+					z = k * grid.getDZ();
+					val00 = grid.get(i, j, k) ? 1 : 0;
+					valm0 = grid.get(i, j - 1, k) ? 1 : 0;
+					valmm = grid.get(i, j - 1, k - 1) ? 1 : 0;
+					val0m = grid.get(i, j, k - 1) ? 1 : 0;
+					sum = val00 + valm0 + valmm + val0m;
+					if (sum == 1 || sum == 3) {
+						line(x, y, z, x + grid.getDX(), y, z);
+					}
+					if (sum == 2) {
+						if (val00 + valmm == 2 || val0m + valm0 == 2) {
+							line(x, y, z, x + grid.getDX(), y, z);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void drawXFaces(final WB_BinaryGrid3D grid) {
+		int val0, valm, sum;
+		double x, y, z;
+		for (int i = 0; i <= grid.getSizeX(); i++) {
+			x = i * grid.getDX();
+			for (int j = 0; j < grid.getSizeY(); j++) {
+				y = j * grid.getDY();
+				for (int k = 0; k < grid.getSizeZ(); k++) {
+					z = k * grid.getDZ();
+					val0 = grid.get(i, j, k) ? 1 : 0;
+					valm = grid.get(i - 1, j, k) ? 1 : 0;
+					sum = val0 + valm;
+					if (sum == 1) {
+						home.beginShape();
+						vertex(x, y, z);
+						vertex(x, y + grid.getDY(), z);
+						vertex(x, y + grid.getDY(), z + grid.getDZ());
+						vertex(x, y, z + grid.getDZ());
+						home.endShape();
+					}
+				}
+			}
+		}
+	}
+
+	void drawYEdges(final WB_BinaryGrid3D grid) {
+		int val00, valm0, valmm, val0m, sum;
+		double x, y, z;
+		for (int j = 0; j < grid.getSizeY(); j++) {
+			y = j * grid.getDY();
+			for (int i = 0; i <= grid.getSizeX(); i++) {
+				x = i * grid.getDX();
+				for (int k = 0; k <= grid.getSizeZ(); k++) {
+					z = k * grid.getDZ();
+					val00 = grid.get(i, j, k) ? 1 : 0;
+					valm0 = grid.get(i - 1, j, k) ? 1 : 0;
+					valmm = grid.get(i - 1, j, k - 1) ? 1 : 0;
+					val0m = grid.get(i, j, k - 1) ? 1 : 0;
+					sum = val00 + valm0 + valmm + val0m;
+					sum = val00 + valm0 + valmm + val0m;
+					if (sum == 1 || sum == 3) {
+						line(x, y, z, x, y + grid.getDY(), z);
+					}
+					if (sum == 2) {
+						if (val00 + valmm == 2 || val0m + valm0 == 2) {
+							line(x, y, z, x, y + grid.getDY(), z);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void drawYFaces(final WB_BinaryGrid3D grid) {
+		int val0, valm, sum;
+		double x, y, z;
+		for (int i = 0; i < grid.getSizeX(); i++) {
+			x = i * grid.getDX();
+			for (int j = 0; j <= grid.getSizeY(); j++) {
+				y = j * grid.getDY();
+				for (int k = 0; k < grid.getSizeZ(); k++) {
+					z = k * grid.getDZ();
+					val0 = grid.get(i, j, k) ? 1 : 0;
+					valm = grid.get(i, j - 1, k) ? 1 : 0;
+					sum = val0 + valm;
+					if (sum == 1) {
+						home.beginShape();
+						vertex(x, y, z);
+						vertex(x + grid.getDX(), y, z);
+						vertex(x + grid.getDX(), y, z + grid.getDZ());
+						vertex(x, y, z + grid.getDZ());
+						home.endShape();
+					}
+				}
+			}
+		}
+	}
+
+	void drawZEdges(final WB_BinaryGrid3D grid) {
+		int val00, valm0, valmm, val0m, sum;
+		double x, y, z;
+		for (int k = 0; k < grid.getSizeZ(); k++) {
+			z = k * grid.getDZ();
+			for (int j = 0; j <= grid.getSizeY(); j++) {
+				y = j * grid.getDY();
+				for (int i = 0; i <= grid.getSizeX(); i++) {
+					x = i * grid.getDX();
+					val00 = grid.get(i, j, k) ? 1 : 0;
+					valm0 = grid.get(i - 1, j, k) ? 1 : 0;
+					valmm = grid.get(i - 1, j - 1, k) ? 1 : 0;
+					val0m = grid.get(i, j - 1, k) ? 1 : 0;
+					sum = val00 + valm0 + valmm + val0m;
+					if (sum == 1 || sum == 3) {
+						line(x, y, z, x, y, z + grid.getDZ());
+					}
+					if (sum == 2) {
+						if (val00 + valmm == 2 || val0m + valm0 == 2) {
+							line(x, y, z, x, y, z + grid.getDZ());
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void drawZFaces(final WB_BinaryGrid3D grid) {
+		int val0, valm, sum;
+		double x, y, z;
+		for (int i = 0; i < grid.getSizeX(); i++) {
+			x = i * grid.getDX();
+			for (int j = 0; j < grid.getSizeY(); j++) {
+				y = j * grid.getDY();
+				for (int k = 0; k <= grid.getSizeZ(); k++) {
+					z = k * grid.getDZ();
+					val0 = grid.get(i, j, k) ? 1 : 0;
+					valm = grid.get(i, j, k - 1) ? 1 : 0;
+					sum = val0 + valm;
+					if (sum == 1) {
+						home.beginShape();
+						vertex(x, y, z);
+						vertex(x + grid.getDX(), y, z);
+						vertex(x + grid.getDX(), y + grid.getDY(), z);
+						vertex(x, y + grid.getDY(), z);
+						home.endShape();
+					}
+				}
+			}
 		}
 	}
 

@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.processing;
@@ -434,7 +439,7 @@ public class WB_Color {
 			color(255, 230, 230), color(255, 232, 232), color(255, 235, 235), color(255, 237, 237),
 			color(255, 240, 240), color(255, 243, 243), color(255, 246, 246), color(255, 249, 249),
 			color(255, 251, 251), color(255, 253, 253), color(255, 255, 255) };
-	public static int[] SPECTRUM = new int[256];
+	static public int[] SPECTRUM = new int[256];
 	static {
 		for (int i = 0; i < 256; i++) {
 			SPECTRUM[i] = spectralColor(400.0 + 300.0 / 255.0 * i);
@@ -1102,42 +1107,42 @@ public class WB_Color {
 	}
 	// http://planetpixelemporium.com/tutorialpages/light.html
 
-	static int Candle = color(255, 147, 41);
+	static public int Candle = color(255, 147, 41);
 
-	static int Tungsten40W = color(255, 197, 143);
+	static public int Tungsten40W = color(255, 197, 143);
 
-	static int Tungsten100W = color(255, 214, 170);
+	static public int Tungsten100W = color(255, 214, 170);
 
-	static int Halogen = color(255, 241, 224);
+	static public int Halogen = color(255, 241, 224);
 
-	static int CarbonArc = color(255, 250, 244);
+	static public int CarbonArc = color(255, 250, 244);
 
-	static int HighNoonSun = color(255, 255, 251);
+	static public int HighNoonSun = color(255, 255, 251);
 
-	static int DirectSunlight = color(255, 255, 255);
+	static public int DirectSunlight = color(255, 255, 255);
 
-	static int OvercastSky = color(201, 226, 255);
+	static public int OvercastSky = color(201, 226, 255);
 
-	static int ClearBlueSky = color(64, 156, 255);
+	static public int ClearBlueSky = color(64, 156, 255);
 
-	static int WarmFluorescent = color(255, 244, 229);
+	static public int WarmFluorescent = color(255, 244, 229);
 
-	static int StandardFluorescent = color(244, 255, 250);
+	static public int StandardFluorescent = color(244, 255, 250);
 
-	static int CoolWhiteFluorescent = color(212, 235, 255);
+	static public int CoolWhiteFluorescent = color(212, 235, 255);
 
-	static int FullSpectrumFluorescent = color(255, 244, 242);
+	static public int FullSpectrumFluorescent = color(255, 244, 242);
 
-	static int GrowLightFluorescent = color(255, 239, 247);
+	static public int GrowLightFluorescent = color(255, 239, 247);
 
-	static int BlackLightFluorescent = color(167, 0, 255);
+	static public int BlackLightFluorescent = color(167, 0, 255);
 
-	static int MercuryVapor = color(216, 247, 255);
+	static public int MercuryVapor = color(216, 247, 255);
 
-	static int SodiumVapor = color(255, 209, 178);
+	static public int SodiumVapor = color(255, 209, 178);
 
-	static int MetalHalide = color(242, 252, 255);
+	static public int MetalHalide = color(242, 252, 255);
 
-	static int HighPressureSodium = color(255, 183, 76);
+	static public int HighPressureSodium = color(255, 183, 76);
 
 }

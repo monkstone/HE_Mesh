@@ -2,7 +2,7 @@ var classwblut_1_1hemesh_1_1_h_e_m___extrude =
 [
     [ "HEM_Extrude", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a406d5fcdd5b04a75d82ad6c261708d9e", null ],
     [ "applyFlat", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a617e2fe084634c450789639118dafbca", null ],
-    [ "applyFlatToOneFace", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a76367b21c64f15b8ac3db161fdfadd4b", null ],
+    [ "applyFlatToOneFace", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a4325effc83d4caafa5eda6e1aff8823d", null ],
     [ "applyPeaked", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a0c654fd6bf19cafe4be6e7329ab442c7", null ],
     [ "applyPeakToOneFace", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a9f54625a0b2fdbdaf88bc55274752801", null ],
     [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a446b2861760e82266e4777a2e2935494", null ],
@@ -41,7 +41,6 @@ var classwblut_1_1hemesh_1_1_h_e_m___extrude =
     [ "peak", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#afe8fac532e08670ae3465680eaadc869", null ],
     [ "peaks", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a462945391cfe8f4f1562c0f80d67407b", null ],
     [ "relative", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#af3e56950f7335e642605b7318920de8a", null ],
-    [ "sin2FA", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#ae6d9ff5022445c8c659b3f8e8c499ff2", null ],
     [ "thresholdAngle", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a2b45ca9f1aefc046cadec99c99bad085", null ],
     [ "walls", "classwblut_1_1hemesh_1_1_h_e_m___extrude.html#a57e81530f9c05b7663477f3befa33f6f", null ]
 ];

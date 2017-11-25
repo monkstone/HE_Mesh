@@ -45,9 +45,6 @@ var dir_167c6ae416135911a71f6703a35ad46b =
     [ "HEM_FaceExpand.java", "_h_e_m___face_expand_8java.html", [
       [ "HEM_FaceExpand", "classwblut_1_1hemesh_1_1_h_e_m___face_expand.html", "classwblut_1_1hemesh_1_1_h_e_m___face_expand" ]
     ] ],
-    [ "HEM_FlatExtrude.java", "_h_e_m___flat_extrude_8java.html", [
-      [ "HEM_FlatExtrude", "classwblut_1_1hemesh_1_1_h_e_m___flat_extrude.html", "classwblut_1_1hemesh_1_1_h_e_m___flat_extrude" ]
-    ] ],
     [ "HEM_FlipFaces.java", "_h_e_m___flip_faces_8java.html", [
       [ "HEM_FlipFaces", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces.html", "classwblut_1_1hemesh_1_1_h_e_m___flip_faces" ]
     ] ],

@@ -1,5 +1,10 @@
-/*
- * http://creativecommons.org/publicdomain/zero/1.0/
+/**
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ *
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ *
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -7,38 +12,38 @@ package wblut.hemesh;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- *
+ * Base element of the halfedge datastructure. Contains a unique key (long), a
+ * user definable userLabel (int) and an internalLabel (int). The userLabel is
+ * never modified by HE_Mesh. The internalLabel is set and reset by HE_Mesh.
  */
 public abstract class HE_Element {
 
 	protected static AtomicLong currentKey = new AtomicLong(0);
 	protected final long key;
-	protected long labels;
+	protected int internalLabel;
+	protected int userLabel;
 
 	/**
 	 *
 	 */
 	public HE_Element() {
 		key = currentKey.getAndAdd(1);
-		labels = mergeLabels(-1, -1);
-	}
-
-	private static long mergeLabels(final int internal, final int external) {
-		return (long) internal << 32 | external & 0xffffffffL;
-
+		internalLabel = -1;
+		userLabel = -1;
 	}
 
 	protected final void setInternalLabel(final int label) {
-		labels = mergeLabels(label, getUserLabel());
+		internalLabel = label;
 	}
 
 	/**
-	 *
+	 * Set the user label to an integer value. -1 is the default value.
 	 *
 	 * @param label
 	 */
 	public final void setUserLabel(final int label) {
-		labels = mergeLabels(getInternalLabel(), label);
+
+		userLabel = label;
 	}
 
 	/**
@@ -56,7 +61,7 @@ public abstract class HE_Element {
 	 * @return
 	 */
 	public final int getInternalLabel() {
-		return (int) (labels >> 32);
+		return internalLabel;
 
 	}
 
@@ -66,7 +71,7 @@ public abstract class HE_Element {
 	 * @return
 	 */
 	public final int getUserLabel() {
-		return (int) labels;
+		return userLabel;
 	}
 
 	/*
@@ -104,7 +109,8 @@ public abstract class HE_Element {
 	 * @param el
 	 */
 	public void copyProperties(final HE_Element el) {
-		labels = mergeLabels(el.getInternalLabel(), el.getUserLabel());
+		internalLabel = el.getInternalLabel();
+		userLabel = el.getUserLabel();
 	}
 
 	/**

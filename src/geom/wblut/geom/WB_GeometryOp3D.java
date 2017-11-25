@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -732,6 +737,31 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 			if (checkIntersection3D(aabb, current.getAABB())) {
 				if (current.isLeaf()) {
 					result.add(current);
+				} else {
+					if (current.getChildA() != null) {
+						queue.add(current.getChildA());
+					}
+					if (current.getChildB() != null) {
+						queue.add(current.getChildB());
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	public static List<WB_AABBNode[]> getIntersection3D(final WB_AABBTree tree1, final WB_AABBTree tree2) {
+		final List<WB_AABBNode[]> result = new ArrayList<WB_AABBNode[]>();
+		final LinkedList<WB_AABBNode> queue = new LinkedList<WB_AABBNode>();
+		queue.add(tree1.getRoot());
+		WB_AABBNode current;
+		while (!queue.isEmpty()) {
+			current = queue.pop();
+			if (checkIntersection3D(current.getAABB(), tree2)) {
+				if (current.isLeaf()) {
+					for (WB_AABBNode node : getIntersection3D(current.getAABB(), tree2)) {
+						result.add(new WB_AABBNode[] { current, node });
+					}
 				} else {
 					if (current.getChildA() != null) {
 						queue.add(current.getChildA());
@@ -2005,7 +2035,7 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 		// intersection
 		final WB_Plane P2 = gf.createPlane(u);
 		final WB_Vector n2 = P2.getNormal();
-		final double d2 = -P2.d();
+		final double d2 = P2.d();
 		// Compute plane equation of second triangle: n2 * x + d2 = 0
 		// Evaluate first triangle with plane equation 2 to determine signed
 		// distances to the plane.

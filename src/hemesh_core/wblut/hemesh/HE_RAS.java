@@ -9,11 +9,6 @@
  */
 package wblut.hemesh;
 
-/**
- * Random Access Set of HE_Element
- * Combines advantages of an ArrayList - random access, sizeable -
- * with those of a HashMap - fast lookup, unique members -.
- */
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,9 +19,18 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.LongIntHashMap;
 
 /**
+ * Random Access Set of HE_Element
  *
+ * Contains 2 datastructures: a list of HE_Element objects, and a Hashmap
+ * <long,int>. The list or array contains all elements. The hashmap allows
+ * lookup by the HE_Element key and returns the index of the HE_Element in the
+ * list.
+ *
+ * Implementations of HE_RAS have to ensure that each element can only be
+ * present once.
  *
  * @param <E>
+ *            a class extending HE_Element
  */
 public abstract class HE_RAS<E extends HE_Element> extends AbstractSet<E> {
 
@@ -149,8 +153,12 @@ public abstract class HE_RAS<E extends HE_Element> extends AbstractSet<E> {
 
 	/**
 	 *
+	 * Implementation of HE_RAS using Eclipse Collections library
+	 *
+	 * @author FVH
 	 *
 	 * @param <E>
+	 *            a class extending HE_Element
 	 */
 	public static class HE_RASEC<E extends HE_Element> extends HE_RAS<E> {
 

@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -736,7 +741,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	 * Returns the discrete Gaussian curvature and the mean normal. These
 	 * discrete operators are described in "Discrete Differential-Geometry
 	 * Operators for Triangulated 2-Manifolds", Mark Meyer, Mathieu Desbrun,
-	 * Peter Schr�der, and Alan H. Barr.
+	 * Peter Schr???der, and Alan H. Barr.
 	 * http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf
 	 * http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf Note: on a
 	 * sphere, the Gaussian curvature is very accurate, but not the mean
@@ -753,7 +758,7 @@ public class HE_Vertex extends HE_MeshElement implements WB_MutableCoordinateFul
 	/**
 	 * Returns the discrete Gaussian curvature. These discrete operators are
 	 * described in "Discrete Differential-Geometry Operators for Triangulated
-	 * 2-Manifolds", Mark Meyer, Mathieu Desbrun, Peter Schr�der, and Alan H.
+	 * 2-Manifolds", Mark Meyer, Mathieu Desbrun, Peter Schr???der, and Alan H.
 	 * Barr. http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf
 	 * http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf Note: on a
 	 * sphere, the Gaussian curvature is very accurate, but not the mean

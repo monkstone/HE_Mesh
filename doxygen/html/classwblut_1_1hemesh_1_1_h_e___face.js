@@ -39,6 +39,7 @@ var classwblut_1_1hemesh_1_1_h_e___face =
     [ "getOrthonormalBase", "classwblut_1_1hemesh_1_1_h_e___face.html#a01114923f37c48ef275a8f151247a50c", null ],
     [ "getPlane", "classwblut_1_1hemesh_1_1_h_e___face.html#ab0f832a6b66dddc93ebb8e3b3a6d18e3", null ],
     [ "getPlane", "classwblut_1_1hemesh_1_1_h_e___face.html#ad47694923806ad8446e706786f2c2dc5", null ],
+    [ "getPoints", "classwblut_1_1hemesh_1_1_h_e___face.html#acb5ba49c2dd02919df655a6efa2e7bd3", null ],
     [ "getTextureId", "classwblut_1_1hemesh_1_1_h_e___face.html#a09f9fde39827921c514146f0f0429f1d", null ],
     [ "getTriangles", "classwblut_1_1hemesh_1_1_h_e___face.html#a31f5b9fd00f85a000acd37327a0ac392", null ],
     [ "getTriangles", "classwblut_1_1hemesh_1_1_h_e___face.html#a340e35dbdef328f06cc5baa7d8b5f434", null ],

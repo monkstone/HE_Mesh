@@ -26,6 +26,7 @@ var classwblut_1_1hemesh_1_1_h_e_c___from_facelist =
     [ "setVertexUVW", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#a4d454a76ab685ed69c66a6bea3a8c7b9", null ],
     [ "setVertexUVW", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#a6b77e15c666d1166afea46facd3ab0fc", null ],
     [ "setVertices", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#ab466a4440a6db047dfcb7c0092423e5a", null ],
+    [ "setVertices", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#a7192d005bfc825f2f82ad26e2779c47d", null ],
     [ "setVertices", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#aa4e9735089083f9510a8ce15846554f5", null ],
     [ "setVertices", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#a67066447a3d693a3a513a933dcaee1f9", null ],
     [ "setVertices", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html#a8c2c171c7c71f0f4e7aff4efb9331562", null ],

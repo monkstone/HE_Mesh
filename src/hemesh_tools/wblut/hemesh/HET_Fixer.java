@@ -1,32 +1,29 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
+
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
-import wblut.geom.WB_AABB;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_AABBTree.WB_AABBNode;
+import wblut.geom.WB_GeometryOp;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_IntersectionResult;
-import wblut.geom.WB_Point;
-import wblut.geom.WB_RandomOnSphere;
 import wblut.geom.WB_Segment;
+import wblut.geom.WB_Triangle;
 import wblut.geom.WB_Vector;
 import wblut.math.WB_Epsilon;
 
@@ -384,152 +381,45 @@ public class HET_Fixer {
 		}
 	}
 
-	/**
-	 *
-	 *
-	 * @param tri
-	 * @param tree
-	 * @return
-	 */
-	static List<HET_SelfIntersectionResult> checkSelfIntersection(final HE_Face tri, final WB_AABBTree tree) {
+	public static List<HET_SelfIntersectionResult> getSelfIntersection(final HE_Mesh mesh) {
 		final List<HET_SelfIntersectionResult> selfints = new FastList<HET_SelfIntersectionResult>();
-		final HE_RAS.HE_RASEC<HE_Face> candidates = new HE_RAS.HE_RASEC<HE_Face>();
-		final WB_AABB aabb = tri.getAABB();
-		final List<WB_AABBNode> nodes = WB_GeometryOp3D.getIntersection3D(aabb, tree);
-		for (final WB_AABBNode n : nodes) {
-			candidates.addAll(n.getFaces());
-		}
-		for (final HE_Vertex v : tri.getFaceVertices()) {
-			candidates.removeAll(v.getFaceStar());
-		}
-		for (final HE_Face candidate : candidates) {
-			if (candidate.getKey() > tri.getKey()) {// Check each face pair only
-				// once
-				final WB_IntersectionResult ir = WB_GeometryOp3D.getIntersection3D(tri.getHalfedge().getVertex(),
-						tri.getHalfedge().getEndVertex(), tri.getHalfedge().getNextInFace().getEndVertex(),
-						candidate.getHalfedge().getVertex(), candidate.getHalfedge().getEndVertex(),
-						candidate.getHalfedge().getNextInFace().getEndVertex());
-				if (ir.intersection && ir.object != null && !WB_Epsilon.isZero(((WB_Segment) ir.object).getLength())) {
-					candidate.setInternalLabel(1);
-					selfints.add(new HET_SelfIntersectionResult(tri, candidate, (WB_Segment) ir.object));
-				}
-			}
-		}
-		return selfints;
-	}
-
-	/**
-	 *
-	 *
-	 * @param mesh
-	 * @return
-	 */
-	public static List<HET_SelfIntersectionResult> checkSelfIntersection(final HE_Mesh mesh) {
-
 		mesh.triangulate();
 		mesh.resetFaceInternalLabels();
-		final WB_AABBTree tree = new WB_AABBTree(mesh, 1);
 
 		HE_Selection sifs = new HE_Selection(mesh);
-		List<HET_SelfIntersectionResult> result = checkSelfIntersection(mesh.faces.getObjects(), tree);
-		for (HET_SelfIntersectionResult sir : result) {
-			sifs.add(sir.f1);
-			sifs.add(sir.f2);
+		WB_AABBTree tree = new WB_AABBTree(mesh, 1);
+		List<WB_AABBNode[]> atat = WB_GeometryOp.getIntersection3D(tree, tree);
+		WB_Triangle T0, T1;
+		List<HE_Face> neighbors;
+		for (WB_AABBNode[] node : atat) {
+			for (HE_Face f0 : node[0].getFaces()) {
+				T0 = f0.toTriangle();
+				neighbors = f0.getNeighborFaces();
+				for (HE_Face f1 : node[1].getFaces()) {
+					if (!neighbors.contains(f1) && f1.getKey() > f0.getKey()) {// Check
+																				// each
+																				// face
+																				// pair
+																				// only
+						T1 = f1.toTriangle();
+						final WB_IntersectionResult ir = WB_GeometryOp3D.getIntersection3D(T0, T1);
+						if (ir.intersection && ir.object != null
+								&& !WB_Epsilon.isZero(((WB_Segment) ir.object).getLength())) {
+							f0.setInternalLabel(1);
+							f1.setInternalLabel(1);
+							sifs.add(f0);
+							sifs.add(f1);
+							selfints.add(new HET_SelfIntersectionResult(f0, f1, (WB_Segment) ir.object));
+						}
+					}
+				}
+			}
+
 		}
-		mesh.replaceSelection("intersection", sifs);
-		return result;
-	}
 
-	/**
-	 *
-	 *
-	 * @param faces
-	 * @param tree
-	 * @return
-	 */
-	private static List<HET_SelfIntersectionResult> checkSelfIntersection(final List<HE_Face> faces,
-			final WB_AABBTree tree) {
+		mesh.addSelection("self", sifs);
 
-		List<HET_SelfIntersectionResult> selfints = new FastList<HET_SelfIntersectionResult>();
-		try {
-			int threadCount = Runtime.getRuntime().availableProcessors();
-			int dfaces = faces.size() / threadCount;
-			if (dfaces < 1024) {
-				dfaces = 1024;
-				threadCount = (int) Math.ceil(faces.size() / 1024.0);
-
-			}
-			final ExecutorService executor = Executors.newFixedThreadPool(threadCount);
-			final List<Future<List<HET_SelfIntersectionResult>>> list = new ArrayList<Future<List<HET_SelfIntersectionResult>>>();
-			int i = 0;
-			for (i = 0; i < threadCount - 1; i++) {
-				final Callable<List<HET_SelfIntersectionResult>> runner = new SelfIntersectionChecker(dfaces * i,
-						dfaces * (i + 1) - 1, i, faces, tree);
-
-				list.add(executor.submit(runner));
-			}
-			final Callable<List<HET_SelfIntersectionResult>> runner = new SelfIntersectionChecker(dfaces * i,
-					faces.size() - 1, i, faces, tree);
-			list.add(executor.submit(runner));
-
-			for (Future<List<HET_SelfIntersectionResult>> future : list) {
-				selfints.addAll(future.get());
-			}
-
-			executor.shutdown();
-
-		} catch (final InterruptedException ex) {
-			ex.printStackTrace();
-		} catch (final ExecutionException ex) {
-			ex.printStackTrace();
-		}
 		return selfints;
-	}
-
-	/**
-	 *
-	 */
-	static class SelfIntersectionChecker implements Callable<List<HET_SelfIntersectionResult>> {
-		int start;
-		int end;
-		int id;
-		int[] triangles;
-		List<HE_Face> faces;
-		WB_AABBTree tree;
-
-		/**
-		 *
-		 *
-		 * @param s
-		 * @param e
-		 * @param id
-		 * @param faces
-		 * @param tree
-		 */
-		public SelfIntersectionChecker(final int s, final int e, final int id, final List<HE_Face> faces,
-				final WB_AABBTree tree) {
-			start = s;
-			end = e;
-			this.id = id;
-			this.faces = faces;
-			this.tree = tree;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.util.concurrent.Callable#call()
-		 */
-		@Override
-		public List<HET_SelfIntersectionResult> call() {
-			ArrayList<HET_SelfIntersectionResult> selfints = new ArrayList<HET_SelfIntersectionResult>();
-			ListIterator<HE_Face> itr = faces.listIterator(start);
-			for (int i = start; i <= end; i++) {
-				selfints.addAll(checkSelfIntersection(itr.next(), tree));
-
-			}
-			return selfints;
-		}
 	}
 
 	/**
@@ -588,33 +478,6 @@ public class HET_Fixer {
 		public WB_Segment getSegment() {
 			return segment;
 		}
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(final String[] args) {
-		WB_RandomOnSphere rs = new WB_RandomOnSphere().setRadius(400);
-		HEC_ConvexHull creator = new HEC_ConvexHull();
-
-		int num = (int) (Math.random() * 17 + 8);
-		WB_Point[] points = new WB_Point[num];
-		for (int i = 0; i < num; i++) {
-			points[i] = rs.nextPoint();
-		}
-		creator.setPoints(points);
-		creator.setN(num);
-		HE_Mesh mesh = new HE_Mesh(creator);
-
-		mesh = new HE_Mesh(new HEC_Dual(mesh).setFixNonPlanarFaces(false));
-
-		HEM_Extrude ext = new HEM_Extrude().setChamfer(25).setRelative(false);
-		mesh.modify(ext);
-		HE_Selection sel = mesh.getSelection("extruded");
-		ext = new HEM_Extrude().setDistance(-10);
-		sel.modify(ext);
-		System.out.println(checkSelfIntersection(mesh.get()).size());
-
 	}
 
 }

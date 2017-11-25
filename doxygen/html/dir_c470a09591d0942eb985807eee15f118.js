@@ -169,12 +169,6 @@ var dir_c470a09591d0942eb985807eee15f118 =
     [ "HEC_Transform.java", "_h_e_c___transform_8java.html", [
       [ "HEC_Transform", "classwblut_1_1hemesh_1_1_h_e_c___transform.html", "classwblut_1_1hemesh_1_1_h_e_c___transform" ]
     ] ],
-    [ "HEC_Tube.java", "_h_e_c___tube_8java.html", [
-      [ "HEC_Tube", "classwblut_1_1hemesh_1_1_h_e_c___tube.html", "classwblut_1_1hemesh_1_1_h_e_c___tube" ]
-    ] ],
-    [ "HEC_TubeSegment.java", "_h_e_c___tube_segment_8java.html", [
-      [ "HEC_TubeSegment", "classwblut_1_1hemesh_1_1_h_e_c___tube_segment.html", "classwblut_1_1hemesh_1_1_h_e_c___tube_segment" ]
-    ] ],
     [ "HEC_UVParametric.java", "_h_e_c___u_v_parametric_8java.html", [
       [ "HEC_UVParametric", "classwblut_1_1hemesh_1_1_h_e_c___u_v_parametric.html", "classwblut_1_1hemesh_1_1_h_e_c___u_v_parametric" ]
     ] ],

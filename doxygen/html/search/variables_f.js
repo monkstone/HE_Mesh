@@ -7,7 +7,7 @@ var searchData=
   ['offsete',['offsete',['../classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_strut.html#ab290079e6b3f3564692a39d4ca3ec8e7',1,'wblut::geom::WB_Frame::WB_FrameStrut']]],
   ['offsets',['offsets',['../classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_strut.html#ad982261a46e3159234debd723662ee81',1,'wblut::geom::WB_Frame::WB_FrameStrut']]],
   ['on',['ON',['../enumwblut_1_1geom_1_1_w_b___classification.html#a30d78619e6afd4d232f7cc1ffd2138dd',1,'wblut.geom.WB_Classification.ON()'],['../classwblut_1_1hemesh_1_1_h_e_c___from_voronoi_cells.html#afbde2beb77af92428671b32832f77b3b',1,'wblut.hemesh.HEC_FromVoronoiCells.on()']]],
-  ['one',['ONE',['../classwblut_1_1math_1_1_w_b___double_double.html#a447d42dce38e045b2bb86afb4117902d',1,'wblut::math::WB_DoubleDouble']]],
+  ['one',['ONE',['../classwblut_1_1math_1_1_w_b___double_double.html#a447d42dce38e045b2bb86afb4117902d',1,'wblut.math.WB_DoubleDouble.ONE()'],['../interfacewblut_1_1math_1_1_w_b___scalar_parameter.html#ab30bcf95a70f3627db1743e6736b8c10',1,'wblut.math.WB_ScalarParameter.ONE()']]],
   ['optimal',['OPTIMAL',['../classwblut_1_1processing_1_1_w_b___color.html#a213f68c046a120cfd1acdfb3ecfb5dde',1,'wblut::processing::WB_Color']]],
   ['optimizecap',['optimizeCap',['../classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a97a872a0c903c326881456d1c1693945',1,'wblut.hemesh.HEM_MultiSlice.optimizeCap()'],['../classwblut_1_1hemesh_1_1_h_e_m___slice.html#a7e6940bfc90e49a309a32bdfe23d2524',1,'wblut.hemesh.HEM_Slice.optimizeCap()']]],
   ['orienterrorbound',['orientErrorBound',['../classwblut_1_1geom_1_1_w_b___predicates.html#a1e7dbaaf265eeac7c48e96c08e5ebe3a',1,'wblut::geom::WB_Predicates']]],
@@ -17,7 +17,6 @@ var searchData=
   ['origweight',['origWeight',['../classwblut_1_1hemesh_1_1_h_e_s___smooth.html#af91f2f0e2b5169ac04ddf50a459a1133',1,'wblut::hemesh::HES_Smooth']]],
   ['osubs',['OSubs',['../classwblut_1_1geom_1_1_w_b___subdivision.html#ac30fc35d9fd269f2c5bf8173b64fb38a',1,'wblut::geom::WB_Subdivision']]],
   ['outer',['outer',['../classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#a7a4d937e30eb0e82deb9d25ddaf22ccc',1,'wblut.hemesh.HEC_VoronoiCell.outer()'],['../classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#abb3031099a64e016ef64dbacbb21d57d',1,'wblut.hemesh.HEMC_VoronoiCells.outer()'],['../classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a8368edbaef2209066d24e056535cd2fc',1,'wblut.hemesh.HEMC_VoronoiCellsPre.outer()']]],
-  ['outerradius',['outerRadius',['../classwblut_1_1hemesh_1_1_h_e_c___tube.html#a0fad0e34ed410c0f059b9cc9761b0705',1,'wblut.hemesh.HEC_Tube.outerRadius()'],['../classwblut_1_1hemesh_1_1_h_e_c___tube_segment.html#ac3214db11379e20b59edbb01a1388117',1,'wblut.hemesh.HEC_TubeSegment.outerRadius()']]],
   ['outside',['OUTSIDE',['../enumwblut_1_1geom_1_1_w_b___classification.html#ab40d676c9f2b6ae02515594a9b131ced',1,'wblut::geom::WB_Classification']]],
   ['override',['override',['../classwblut_1_1hemesh_1_1_h_e_c___creator.html#ae0a0aeb42ee2036926d15f2b67d0d397',1,'wblut::hemesh::HEC_Creator']]]
 ];

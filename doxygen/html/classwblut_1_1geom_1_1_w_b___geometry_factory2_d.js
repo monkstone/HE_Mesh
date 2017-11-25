@@ -118,6 +118,7 @@ var classwblut_1_1geom_1_1_w_b___geometry_factory2_d =
     [ "createSegmentWithLength2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a7549f4bf3fe29f142af72ac242a3031b", null ],
     [ "createShape", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#aeeec0f1059ba5b3dc794b9ba2ae78644", null ],
     [ "createSimplePolygon", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a4e20da65b48304346d41c24b0f787e57", null ],
+    [ "createSimplePolygon", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a3bafc262a645af153598c38799b571d4", null ],
     [ "createSimplePolygon", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a7b8b0c9f459a1c87ec9ff14519a9ed03", null ],
     [ "createSimplePolygon", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a958c5b6476e22e81be819115fe226b91", null ],
     [ "createSimplePolygon", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a54a7476976b9ffe205df84c689399b54", null ],

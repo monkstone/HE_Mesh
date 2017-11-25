@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -56,7 +61,8 @@ public class HEC_Beethoven extends HEC_Creator {
 				z = dis.readDouble();
 				heid = dis.readInt();
 				v.setColor(dis.readInt());
-				v.labels = dis.readLong();
+				v.setInternalLabel(dis.readInt());
+				v.setUserLabel(dis.readInt());
 				hasuvw = dis.readInt();
 				v.set(x, y, z);
 				if (heid > -1) {
@@ -76,7 +82,8 @@ public class HEC_Beethoven extends HEC_Creator {
 				hepairid = dis.readInt();
 				fid = dis.readInt();
 				he.setColor(dis.readInt());
-				he.labels = dis.readLong();
+				he.setInternalLabel(dis.readInt());
+				he.setUserLabel(dis.readInt());
 				hasuvw = dis.readInt();
 				if (vid > -1) {
 					mesh.setVertex(he, vertices.get(vid));
@@ -106,7 +113,8 @@ public class HEC_Beethoven extends HEC_Creator {
 				}
 				f.setColor(dis.readInt());
 				f.setTextureId(dis.readInt());
-				f.labels = dis.readLong();
+				f.setInternalLabel(dis.readInt());
+				f.setUserLabel(dis.readInt());
 			}
 			dis.close();
 			mesh.addVertices(vertices);

@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -14,7 +19,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.LongObjectHashMap;
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
-import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_IntersectionResult;
 import wblut.geom.WB_Point;
@@ -32,10 +36,7 @@ import wblut.math.WB_ScalarParameter;
  *
  */
 public class HEM_Extrude extends HEM_Modifier {
-	/**
-	 *
-	 */
-	private static WB_GeometryFactory gf = new WB_GeometryFactory();
+
 	/** Extrusion distance. */
 	private WB_ScalarParameter d;
 	/** Threshold angle for hard edges. */
@@ -945,6 +946,7 @@ public class HEM_Extrude extends HEM_Modifier {
 	 * @param id
 	 * @param selFaces
 	 * @param mesh
+	 * @param fuse
 	 * @return true, if successful
 	 */
 	private boolean applyFlatToOneFace(final int id, final List<HE_Face> selFaces, final HE_Mesh mesh,

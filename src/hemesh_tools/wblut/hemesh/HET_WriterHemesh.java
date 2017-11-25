@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -103,7 +108,8 @@ public class HET_WriterHemesh {
 	 * @param heid
 	 */
 	public void vertex(final HE_Vertex v, final int heid) {
-		String s = v.xd() + " " + v.yd() + " " + v.zd() + " " + heid + " " + v.getColor() + " " + v.labels;
+		String s = v.xd() + " " + v.yd() + " " + v.zd() + " " + heid + " " + v.getColor() + " " + v.getInternalLabel()
+				+ " " + v.getUserLabel();
 		if (v.hasVertexUVW()) {
 			s += " 1 " + v.getVertexUVW().xd() + " " + v.getVertexUVW().yd() + " " + v.getVertexUVW().zd();
 
@@ -126,7 +132,8 @@ public class HET_WriterHemesh {
 	 */
 	public void halfedge(final HE_Halfedge he, final int vid, final int henextid, final int hepairid,
 			final int faceid) {
-		String s = vid + " " + henextid + " " + hepairid + " " + faceid + " " + he.getColor() + " " + he.labels;
+		String s = vid + " " + henextid + " " + hepairid + " " + faceid + " " + he.getColor() + " "
+				+ he.getInternalLabel() + " " + he.getUserLabel();
 		if (he.hasHalfedgeUVW()) {
 			s += " 1 " + he.getHalfedgeUVW().xd() + " " + he.getHalfedgeUVW().yd() + " " + he.getHalfedgeUVW().zd();
 
@@ -144,7 +151,8 @@ public class HET_WriterHemesh {
 	 * @param heid
 	 */
 	public void face(final HE_Face f, final int heid) {
-		hemeshWriter.println(heid + " " + f.getColor() + " " + f.getTextureId() + " " + f.labels);
+		hemeshWriter.println(heid + " " + f.getColor() + " " + f.getTextureId() + " " + f.getInternalLabel() + " "
+				+ f.getUserLabel());
 	}
 
 	/**

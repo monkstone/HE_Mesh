@@ -1,5 +1,3 @@
-/*BROKEN in 6.0.0*/
-
 import wblut.math.*;
 import wblut.processing.*;
 import wblut.core.*;

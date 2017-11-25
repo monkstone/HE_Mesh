@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.geom;
@@ -660,7 +665,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * Point from ellipsoidal coordinates
 	 * http://en.wikipedia.org/wiki/Ellipsoidal_coordinates
 	 *
-	 * lambda<c�<mu<b�<nu<a�
+	 * lambda<c???<mu<b???<nu<a???
 	 *
 	 * @param a
 	 *            ,b,c focus
@@ -773,7 +778,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * Point from conical coordinates
 	 * http://en.wikipedia.org/wiki/Conical_coordinates
 	 *
-	 * nu�<c�<mu�<b�
+	 * nu???<c???<mu???<b???
 	 *
 	 * @param b
 	 *            ,c conical constants
@@ -1195,7 +1200,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * Vector from ellipsoidal coordinates
 	 * http://en.wikipedia.org/wiki/Ellipsoidal_coordinates
 	 *
-	 * lambda<c�<mu<b�<nu<a�
+	 * lambda<c???<mu<b???<nu<a???
 	 *
 	 * @param a
 	 *            ,b,c focus
@@ -1309,7 +1314,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	 * Vector from conical coordinates
 	 * http://en.wikipedia.org/wiki/Conical_coordinates
 	 *
-	 * nu�<c�<mu�<b�
+	 * nu???<c???<mu???<b???
 	 *
 	 * @param b
 	 *            ,c conical constants

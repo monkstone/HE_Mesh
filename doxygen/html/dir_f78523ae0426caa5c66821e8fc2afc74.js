@@ -436,6 +436,9 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     [ "WB_Triangle.java", "_w_b___triangle_8java.html", [
       [ "WB_Triangle", "classwblut_1_1geom_1_1_w_b___triangle.html", "classwblut_1_1geom_1_1_w_b___triangle" ]
     ] ],
+    [ "WB_TriangleGenerator.java", "_w_b___triangle_generator_8java.html", [
+      [ "WB_TriangleGenerator", "interfacewblut_1_1geom_1_1_w_b___triangle_generator.html", "interfacewblut_1_1geom_1_1_w_b___triangle_generator" ]
+    ] ],
     [ "WB_TriangleMesh.java", "_w_b___triangle_mesh_8java.html", [
       [ "WB_TriangleMesh", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html", "classwblut_1_1geom_1_1_w_b___triangle_mesh" ]
     ] ],

@@ -18,9 +18,6 @@ void setup() {
   //creator.setOuterRadius(200);// radius of sphere circumscribing cube
   //creator.setMidRadius(200);// radius of sphere tangential to edges
   mesh=new HE_Mesh(creator); 
-  mesh.modify(new HEM_Crocodile().setDistance(200));
-  
-
   HET_Diagnosis.validate(mesh);
   render=new WB_Render(this);
 }
@@ -37,10 +34,4 @@ void draw() {
    
   noStroke();
   render.drawFaces(mesh);
-}
-
-void mousePressed(){
-  println("click");
- mesh.modify(new HEM_FaceExpandLS().setDistance(10)); 
-  
 }

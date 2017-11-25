@@ -131,6 +131,7 @@ var namespacewblut_1_1geom =
     [ "WB_Transform2D", "classwblut_1_1geom_1_1_w_b___transform2_d.html", "classwblut_1_1geom_1_1_w_b___transform2_d" ],
     [ "WB_TransformMap", "classwblut_1_1geom_1_1_w_b___transform_map.html", "classwblut_1_1geom_1_1_w_b___transform_map" ],
     [ "WB_Triangle", "classwblut_1_1geom_1_1_w_b___triangle.html", "classwblut_1_1geom_1_1_w_b___triangle" ],
+    [ "WB_TriangleGenerator", "interfacewblut_1_1geom_1_1_w_b___triangle_generator.html", "interfacewblut_1_1geom_1_1_w_b___triangle_generator" ],
     [ "WB_TriangleMesh", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html", "classwblut_1_1geom_1_1_w_b___triangle_mesh" ],
     [ "WB_TriangleSort", "interfacewblut_1_1geom_1_1_w_b___triangle_sort.html", null ],
     [ "WB_Triangulate", "classwblut_1_1geom_1_1_w_b___triangulate.html", "classwblut_1_1geom_1_1_w_b___triangulate" ],

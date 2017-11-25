@@ -26,7 +26,7 @@ void setup() {
     fitr.next().setColor(color(0, 200, 50));
   }
 
-  numpoints=10;
+  numpoints=100;
   points=new float[numpoints][3];
   for (int i=0; i<numpoints; i++) {
     points[i][0]=random(-250, 250);
@@ -37,7 +37,7 @@ void setup() {
   HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells();
   multiCreator.setPoints(points);
   multiCreator.setContainer(container);
-  multiCreator.setOffset(15);
+  multiCreator.setOffset(10);
   multiCreator.setSimpleCap(false);
   cells=multiCreator.create();
 
@@ -64,7 +64,20 @@ void drawFaces() {
   noStroke();
   fill(255);
   HE_MeshIterator mItr=cells.mItr();
+  HE_Mesh mesh;
+  HE_FaceIterator fItr;
+  HE_Face f;
   while (mItr.hasNext()) {
-    render.drawFacesFC(mItr.next());
+    mesh=mItr.next();
+    fItr=mesh.fItr();
+    while (fItr.hasNext()) {
+      f=fItr.next();
+      if (f.getInternalLabel()==-1) {
+        fill(WB_Color.spectralColorZucconi6(mesh.getInternalLabel()*2.6+420));
+      } else {
+        fill(WB_Color.spectralColorZucconi6(f.getInternalLabel()*2.6+420));
+      }
+      render.drawFace(f);
+    }
   }
 }

@@ -1,6 +1,7 @@
 var classwblut_1_1geom_1_1_w_b___polygon =
 [
     [ "WB_Polygon", "classwblut_1_1geom_1_1_w_b___polygon.html#ac02b78915b66f5c1a200299213a6386f", null ],
+    [ "WB_Polygon", "classwblut_1_1geom_1_1_w_b___polygon.html#a88f3654e0c632773533072270bb4a1fa", null ],
     [ "WB_Polygon", "classwblut_1_1geom_1_1_w_b___polygon.html#a78cb616d0e5bceef42059b6c82ac8884", null ],
     [ "WB_Polygon", "classwblut_1_1geom_1_1_w_b___polygon.html#a6d8d9018e6b5450803807b06aa1cc256", null ],
     [ "WB_Polygon", "classwblut_1_1geom_1_1_w_b___polygon.html#af816f9c1e1da69e66d6fc1b0c868c4aa", null ],

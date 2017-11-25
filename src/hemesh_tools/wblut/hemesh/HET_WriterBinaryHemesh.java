@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -108,7 +113,8 @@ public class HET_WriterBinaryHemesh {
 			hemeshWriter.writeDouble(v.zd());
 			hemeshWriter.writeInt(heid);
 			hemeshWriter.writeInt(v.getColor());
-			hemeshWriter.writeLong(v.labels);
+			hemeshWriter.writeInt(v.getInternalLabel());
+			hemeshWriter.writeInt(v.getUserLabel());
 			if (v.hasVertexUVW()) {
 				hemeshWriter.writeInt(1);
 				hemeshWriter.writeDouble(v.getVertexUVW().xd());
@@ -139,8 +145,8 @@ public class HET_WriterBinaryHemesh {
 			hemeshWriter.writeInt(henextid);
 			hemeshWriter.writeInt(hepairid);
 			hemeshWriter.writeInt(faceid);
-			hemeshWriter.writeInt(he.getColor());
-			hemeshWriter.writeLong(he.labels);
+			hemeshWriter.writeInt(he.getInternalLabel());
+			hemeshWriter.writeInt(he.getUserLabel());
 			if (he.hasHalfedgeUVW()) {
 				hemeshWriter.writeInt(1);
 				hemeshWriter.writeDouble(he.getHalfedgeUVW().xd());
@@ -165,7 +171,8 @@ public class HET_WriterBinaryHemesh {
 			hemeshWriter.writeInt(heid);
 			hemeshWriter.writeInt(f.getColor());
 			hemeshWriter.writeInt(f.getTextureId());
-			hemeshWriter.writeLong(f.labels);
+			hemeshWriter.writeInt(f.getInternalLabel());
+			hemeshWriter.writeInt(f.getUserLabel());
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

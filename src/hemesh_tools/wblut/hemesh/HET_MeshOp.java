@@ -1,5 +1,10 @@
 /*
- * http://creativecommons.org/publicdomain/zero/1.0/
+ * HE_Mesh  Frederik Vanhoutte - www.wblut.com
+ * 
+ * https://github.com/wblut/HE_Mesh
+ * A Processing/Java library for for creating and manipulating polygonal meshes.
+ * 
+ * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
@@ -22,6 +27,7 @@ import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_CoordinateSystem3D;
 import wblut.geom.WB_GeometryFactory;
+import wblut.geom.WB_GeometryOp;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_IntersectionResult;
 import wblut.geom.WB_Line;
@@ -37,6 +43,64 @@ import wblut.math.WB_M33;
 import wblut.math.WB_Math;
 
 public class HET_MeshOp {
+	/**
+	 *
+	 */
+	public static class HET_IntersectionResult {
+		/**
+		 *
+		 */
+		HE_Face f1;
+		/**
+		 *
+		 */
+		HE_Face f2;
+		/**
+		 *
+		 */
+		WB_Segment segment;
+
+		/**
+		 *
+		 *
+		 * @param f1
+		 * @param f2
+		 * @param seg
+		 */
+		public HET_IntersectionResult(final HE_Face f1, final HE_Face f2, final WB_Segment seg) {
+			this.f1 = f1;
+			this.f2 = f2;
+			segment = seg;
+		}
+
+		/**
+		 *
+		 *
+		 * @return
+		 */
+		public HE_Face getFace1() {
+			return f1;
+		}
+
+		/**
+		 *
+		 *
+		 * @return
+		 */
+		public HE_Face getFace2() {
+			return f2;
+		}
+
+		/**
+		 *
+		 *
+		 * @return
+		 */
+		public WB_Segment getSegment() {
+			return segment;
+		}
+	}
+
 	private HET_MeshOp() {
 	}
 
@@ -3208,7 +3272,7 @@ public class HET_MeshOp {
 	 * Returns the discrete Gaussian curvature and the mean normal. These
 	 * discrete operators are described in "Discrete Differential-Geometry
 	 * Operators for Triangulated 2-Manifolds", Mark Meyer, Mathieu Desbrun,
-	 * Peter Schrï¿½der, and Alan H. Barr.
+	 * Peter Schr???der, and Alan H. Barr.
 	 * http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf
 	 * http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf Note: on a
 	 * sphere, the Gaussian curvature is very accurate, but not the mean
@@ -3267,7 +3331,7 @@ public class HET_MeshOp {
 	/**
 	 * Returns the discrete Gaussian curvature. These discrete operators are
 	 * described in "Discrete Differential-Geometry Operators for Triangulated
-	 * 2-Manifolds", Mark Meyer, Mathieu Desbrun, Peter Schröder, and Alan H.
+	 * 2-Manifolds", Mark Meyer, Mathieu Desbrun, Peter Schr?der, and Alan H.
 	 * Barr. http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf
 	 * http://www.cs.caltech.edu/~mmeyer/Publications/diffGeomOps.pdf Note: on a
 	 * sphere, the Gaussian curvature is very accurate, but not the mean
@@ -3373,34 +3437,6 @@ public class HET_MeshOp {
 		final WB_Vector X = t1.mulAddMul(e1, e2, t2);
 		final WB_Vector Y = t1.mulAddMul(-e2, e1, t2);
 		return gf.createCSFromOXYZ(v, X, Y, tangent.getZ());
-	}
-
-	/**
-	 *
-	 *
-	 * @param p0
-	 * @param p1
-	 * @param p2
-	 * @param tempD1
-	 * @param tempD2
-	 * @param ret
-	 * @return
-	 */
-	private static double computeNormal3D(final WB_Coord p0, final WB_Coord p1, final WB_Coord p2, WB_Vector tempD1,
-			WB_Vector tempD2, final WB_Vector ret) {
-		tempD1 = WB_Point.subToVector3D(p1, p2);
-		tempD2 = WB_Point.subToVector3D(p2, p0);
-		tempD1.crossInto(ret, tempD2);
-		double norm = ret.getLength();
-		if (norm * norm > WB_Epsilon.SQEPSILON
-				* (tempD1.xd() * tempD1.xd() + tempD1.yd() * tempD1.yd() + tempD1.zd() * tempD1.zd()
-						+ tempD2.xd() * tempD2.xd() + tempD2.yd() * tempD2.yd() + tempD2.zd() * tempD2.zd())) {
-			ret.mulSelf(1.0 / norm);
-		} else {
-			ret.set(0, 0, 0);
-			norm = 0.0;
-		}
-		return 0.5 * norm;
 	}
 
 	/**
@@ -4190,6 +4226,47 @@ public class HET_MeshOp {
 
 		return ED1.getColumnCompressed(true);
 
+	}
+
+	public static List<HET_IntersectionResult> getIntersection(final HE_Mesh mesh1, final HE_Mesh mesh2) {
+		final List<HET_IntersectionResult> ints = new FastList<HET_IntersectionResult>();
+		mesh1.triangulate();
+		mesh1.resetFaceInternalLabels();
+		mesh2.triangulate();
+		mesh2.resetFaceInternalLabels();
+		HE_Selection sifs1 = new HE_Selection(mesh1);
+		WB_AABBTree tree1 = new WB_AABBTree(mesh1, 1);
+		HE_Selection sifs2 = new HE_Selection(mesh2);
+		WB_AABBTree tree2 = new WB_AABBTree(mesh2, 1);
+		List<WB_AABBNode[]> atat = WB_GeometryOp.getIntersection3D(tree1, tree2);
+		WB_Triangle T0, T1;
+		List<HE_Face> neighbors;
+		for (WB_AABBNode[] node : atat) {
+			for (HE_Face f0 : node[0].getFaces()) {
+				T0 = f0.toTriangle();
+				neighbors = f0.getNeighborFaces();
+				for (HE_Face f1 : node[1].getFaces()) {
+					if (!neighbors.contains(f1) && f1.getKey() > f0.getKey()) {
+						T1 = f1.toTriangle();
+						final WB_IntersectionResult ir = WB_GeometryOp3D.getIntersection3D(T0, T1);
+						if (ir.intersection && ir.object != null
+								&& !WB_Epsilon.isZero(((WB_Segment) ir.object).getLength())) {
+							f0.setInternalLabel(1);
+							f1.setInternalLabel(1);
+							sifs1.add(f0);
+							sifs2.add(f1);
+							ints.add(new HET_IntersectionResult(f0, f1, (WB_Segment) ir.object));
+						}
+					}
+				}
+			}
+
+		}
+
+		mesh1.addSelection("intersection", sifs1);
+		mesh2.addSelection("intersection", sifs2);
+
+		return ints;
 	}
 
 }

@@ -14,7 +14,6 @@ var searchData=
   ['inferno',['INFERNO',['../classwblut_1_1processing_1_1_w_b___color.html#a3b2e066b31d26ff2b4e890bdedcfd987',1,'wblut::processing::WB_Color']]],
   ['inline',['INLINE',['../enumwblut_1_1geom_1_1_w_b___classification.html#ab7349fe7a22a87c8234f2a550cf05444',1,'wblut::geom::WB_Classification']]],
   ['inner',['inner',['../classwblut_1_1hemesh_1_1_h_e_c___voronoi_cell.html#aa3918a955d98b4b327585d16cc3ff710',1,'wblut.hemesh.HEC_VoronoiCell.inner()'],['../classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a7d3e5ab5a46afd69b41839455c7a5c33',1,'wblut.hemesh.HEMC_VoronoiCells.inner()'],['../classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a2e0d3aad86496aca2d2b94273fdf39b5',1,'wblut.hemesh.HEMC_VoronoiCellsPre.inner()']]],
-  ['innerradius',['innerRadius',['../classwblut_1_1hemesh_1_1_h_e_c___tube.html#ab995010c09d7c58aaed00774b0d2744c',1,'wblut.hemesh.HEC_Tube.innerRadius()'],['../classwblut_1_1hemesh_1_1_h_e_c___tube_segment.html#ad109b2b60248632e5bad8ac9ceef1ada',1,'wblut.hemesh.HEC_TubeSegment.innerRadius()']]],
   ['inside',['INSIDE',['../enumwblut_1_1geom_1_1_w_b___classification.html#a40609111785f2d8c63df9b48c0cf5e71',1,'wblut::geom::WB_Classification']]],
   ['insphereerrorbound',['insphereErrorBound',['../classwblut_1_1geom_1_1_w_b___predicates.html#a274f7efa0fa99fc7b168650060a7b887',1,'wblut::geom::WB_Predicates']]],
   ['intersection',['intersection',['../classwblut_1_1geom_1_1_w_b___intersection_result.html#aafe8d95a0d340dfac79392dd6df840d7',1,'wblut::geom::WB_IntersectionResult']]],
