@@ -4,10 +4,8 @@ title: About
 permalink: /about/
 ---
 
-# HE_Mesh
-=========
-
-HE_Mesh, a Java library for creating and manipulating polygonal meshes. Aimed primarily at [Processing](http://processing.org/).
+HE_Mesh, a Java/[Processing](http://processing.org/) library for creating and manipulating polygonal meshes.
+.
 
 ## Building HE_Mesh from source.
 
@@ -24,7 +22,7 @@ You need to add some other external *.jar files to the properties of your Eclips
 
 ## Build-of-the-day HE_Mesh (2017/11/06)
 
-Download a recent built here: http://www.wblut.com/hemesh/hemesh20171106.zip.
+Download a recent built [here](http://www.wblut.com/hemesh/hemesh20171106.zip).
 
 ## License
 
@@ -49,11 +47,11 @@ The following classes are subject to the license agreement of their original aut
 
 The following packages are part of hemesh-external.jar and are subject to the license agreement of their original authors:
 
-* wblut.external.constrainedDelaunay https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-56.html
-* wblut.external.Delaunay https://github.com/visad/visad 
-* wblut.external.ProGAL http://www.diku.dk/~rfonseca/ProGAL/
-* wblut.external.straightskeleton https://code.google.com/p/campskeleton/
-* wblut.external.QuickHull3D https://www.cs.ubc.ca/~lloyd/java/quickhull3d.html
+* [wblut.external.constrainedDelaunay] (https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-56.html)
+* [wblut.external.Delaunay] (https://github.com/visad/visad)
+* [wblut.external.ProGAL] (http://www.diku.dk/~rfonseca/ProGAL/)
+* [wblut.external.straightskeleton] (https://code.google.com/p/campskeleton/)
+* [wblut.external.QuickHull3D] (https://www.cs.ubc.ca/~lloyd/java/quickhull3d.html)
 
 The modified code is available on request.
 
