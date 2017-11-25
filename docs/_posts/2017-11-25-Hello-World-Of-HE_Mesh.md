@@ -75,12 +75,74 @@ Always close the Processing IDE and delete your previous hemesh installation bef
 
 This is my minimal framework for a Processing 3 sketch using HE_Mesh.
 
-<script src="https://gist.github.com/wblut/5bd96aa9252020a9993fa5a406874abe.js"></script>
+```java
+import wblut.nurbs.*;
+import wblut.hemesh.*;
+import wblut.core.*;
+import wblut.geom.*;
+import wblut.processing.*;
+import wblut.math.*;
+
+WB_Render3D render;
+
+void setup() {
+ fullScreen(P3D);
+ smooth(8);
+ render=new WB_Render3D(this);
+}
+
+void draw() {
+ background(55);
+ directionalLight(255, 255, 255, 1, 1, -1);
+ directionalLight(127, 127, 127, -1, -1, 1);
+ translate(width/2, height/2, 0);
+ rotateY(map(mouseX,0,width,-PI,PI));
+ rotateX(map(mouseY,0,height,PI,-PI));
+}
+```
 
 ### Hello world!
 
 ![](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
 
-<script src="https://gist.github.com/wblut/1896eec3e49e03a54cf47a2fc132da42.js"></script>
+```java
+import wblut.core.*;
+import wblut.geom.*;
+import wblut.hemesh.*;
+import wblut.math.*;
+import wblut.nurbs.*;
+import wblut.processing.*;
+
+WB_Render3D render;
+HE_Mesh mesh;
+
+void setup() {
+  fullScreen(P3D);
+  smooth(8);
+  render=new WB_Render3D(this);
+  create();
+}
+
+void create(){
+ HEC_Geodesic creator=new HEC_Geodesic().setRadius(250);
+ mesh=new HE_Mesh(creator);
+}
+
+void draw() {
+  background(55);
+  directionalLight(255, 255, 255, 1, 1, -1);
+  directionalLight(127, 127, 127, -1, -1, 1);
+  translate(width/2, height/2, 0);
+  rotateY(map(mouseX,0,width,-PI,PI));
+  rotateX(map(mouseY,0,height,PI,-PI));
+  noStroke();
+  fill(255);
+  render.drawFaces(mesh);
+  stroke(0);
+  noFill();
+  render.drawEdges(mesh);
+}
+```
+
 
 [download](http://wblut.com/tutorial/basic/HelloWorld.zip)
