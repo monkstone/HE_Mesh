@@ -5,20 +5,20 @@ title: HE_Mesh
 
 ![](http://www.wblut.com/blog/wp-content/2009/05/WindsweptBeethoven_00403.png)
 
-HE_Mesh* is a Java library for creating and manipulating polygonal meshes. Containing no display functionality of its own, it is meant to be used with [Processing](http://processing.org/).
+HE_Mesh* is aÂ Java library for creating and manipulating polygonal meshes. Containing no display functionality of its own, it is meant to be used withÂ [Processing](http://processing.org/).
 
-My code quality warnings for the constructs are doubly valid here. HE_Mesh is an after-hours hobby project aggregating years of code snippets and 3rd part libraries. It is by no means production strength, neither in robustness, performance, consistency or maintenance. Consider it a toy, playground, a sandbox** that allows me to explore a range of possibilities that I wouldn't be able to otherwise. Friends*** asked me to share this toy, this library.
+MyÂ code quality warnings for the constructs are doubly valid here. HE_Mesh is an after-hours hobby project aggregating years of code snippets and 3rdÂ part libraries. It is by no means production strength, neither in robustness,Â performance, consistency or maintenance.Â Consider it aÂ toy, playground, aÂ sandbox** that allows me to explore aÂ range of possibilities that IÂ wouldn't be able to otherwise. Friends*** asked me to share this toy, this library.
 
-Since I cannot give you any guarantees or reliable support,  the code I write for the HE_Mesh library is public domain. Very little in the library is *invented* by me. The knowledge required to create it is all out there.
+Since IÂ cannot give you any guarantees or reliable support, Â the code IÂ write for the HE_Mesh library is public domain. Very little in the library isÂ *invented*Â by me. The knowledge required to create it is all out there.
 
-* Full name: *HE_Mesh*, short name/tag: *hemesh\
-*** If you ever played in a sandbox, you will remember some of the nastier things hiding in the sand. The analogy is apt.\
+* Full name:Â *HE_Mesh*, short name/tag:Â *hemesh\
+*** If you ever played in aÂ sandbox, you will remember some of the nastier things hiding in the sand. The analogy is apt.\
 ** With friends like that, who needs...
 
 Support
 -------
 
-If you wish to support the further development of HE_Mesh, it helped you somehow in a project, or you still need some help, you might consider [this innocent little Paypal link](https://www.paypal.me/wblut).
+If you wish to support the further development of HE_Mesh, it helped you somehow in aÂ project, or you still need some help, you might considerÂ [this innocent little Paypal link](https://www.paypal.me/wblut).
 
 License
 -------
@@ -42,11 +42,11 @@ The following classes are subject to the license agreement of their original aut
 
 The following packages are part of hemesh-external.jar and are subject to the license agreement of their original authors:
 
--   wblut.external.constrainedDelaunay <https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-56.html>
--   wblut.external.Delaunay <https://github.com/visad/visad>
--   wblut.external.ProGAL <http://www.diku.dk/~rfonseca/ProGAL/>
--   wblut.external.straightskeleton <https://code.google.com/p/campskeleton/>
--   wblut.external.QuickHull3D <https://www.cs.ubc.ca/~lloyd/java/quickhull3d.html>
+-   [wblut.external.constrainedDelaunay](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-56.html)
+-   [wblut.external.Delaunay](https://github.com/visad/visad)
+-   [wblut.external.ProGAL](http://www.diku.dk/~rfonseca/ProGAL/)
+-   [wblut.external.straightskeleton](https://code.google.com/p/campskeleton/)
+-   [wblut.external.QuickHull3D](https://www.cs.ubc.ca/~lloyd/java/quickhull3d.html)
 
 The modified code is available on request.
 
@@ -55,94 +55,32 @@ Getting HE_Mesh
 
 ### Download
 
--   Latest release (6.0.1): [download](http://wblut.com/hemesh/hemesh.zip)
--   Build of the day (2017-11-06): [download](http://wblut.com/hemesh/hemesh20171105.zip)
--   Repository: [github](https://github.com/wblut/HE_Mesh)
+-   Latest release (6.0.1):Â [download](http://wblut.com/hemesh/hemesh.zip)
+-   Build of the day (2017-11-06):Â [download](http://wblut.com/hemesh/hemesh20171105.zip)
+-   Repository:Â [github](https://github.com/wblut/HE_Mesh)
 
 ### Installation for Processing
 
-Processing documentation: [How to Install a Contributed Library](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library)
+Processing documentation:Â [How to Install a Contributed Library](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library)
 
 If you want to keep up with the build of the day, manual installation is necessary.
 
-Contributed libraries for Processing are installed inside the *libraries* subfolder of the sketchbook. If you don't know where Processing saves your sketches you can check this in the File->Preferences... menu.
+Contributed libraries for Processing are installed inside theÂ *libraries*Â subfolder of the sketchbook. If you don't know where Processing saves your sketches you can check this in the File->Preferences... menu.
 
-Inside the downloaded zip-file is a single directory *hemesh* with several subfolders. Unzip this folder to the *libraries *subfolder of your sketchbook. Make sure you retain the entire directory structure.
+Inside the downloaded zip-file is aÂ single directoryÂ *hemesh*Â with several subfolders. Unzip this folder to theÂ *librariesÂ *subfolder of your sketchbook. Make sure you retain the entire directory structure.
 
-Always close the Processing IDE and delete your previous hemesh installation before installing a new version.
+Always close the ProcessingÂ IDEÂ and delete your previous hemesh installation before installing aÂ new version.
 
-### Setting up a HE_Mesh Processing sketch
+### Setting up aÂ HE_Mesh Processing sketch
 
-This is my minimal framework for a Processing 3 sketch using HE_Mesh.
+This is my minimal framework for aÂ Processing 3Â sketch using HE_Mesh.
 
-```java
-import wblut.nurbs.*;
-import wblut.hemesh.*;
-import wblut.core.*;
-import wblut.geom.*;
-import wblut.processing.*;
-import wblut.math.*;
-
-WB_Render3D render;
-
-void setup() {
- fullScreen(P3D);
- smooth(8);
- render=new WB_Render3D(this);
-}
-
-void draw() {
- background(55);
- directionalLight(255, 255, 255, 1, 1, -1);
- directionalLight(127, 127, 127, -1, -1, 1);
- translate(width/2, height/2, 0);
- rotateY(map(mouseX,0,width,-PI,PI));
- rotateX(map(mouseY,0,height,PI,-PI));
-}
-```
+<script src="https://gist.github.com/wblut/5bd96aa9252020a9993fa5a406874abe.js"></script> 
 
 ### Hello world!
 
 ![](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
 
-```java
-import wblut.core.*;
-import wblut.geom.*;
-import wblut.hemesh.*;
-import wblut.math.*;
-import wblut.nurbs.*;
-import wblut.processing.*;
-
-WB_Render3D render;
-HE_Mesh mesh;
-
-void setup() {
-  fullScreen(P3D);
-  smooth(8);
-  render=new WB_Render3D(this);
-  create();
-}
-
-void create(){
- HEC_Geodesic creator=new HEC_Geodesic().setRadius(250);
- mesh=new HE_Mesh(creator);
-}
-
-void draw() {
-  background(55);
-  directionalLight(255, 255, 255, 1, 1, -1);
-  directionalLight(127, 127, 127, -1, -1, 1);
-  translate(width/2, height/2, 0);
-  rotateY(map(mouseX,0,width,-PI,PI));
-  rotateX(map(mouseY,0,height,PI,-PI));
-  noStroke();
-  fill(255);
-  render.drawFaces(mesh);
-  stroke(0);
-  noFill();
-  render.drawEdges(mesh);
-}
-```
-
+<script src="https://gist.github.com/wblut/1896eec3e49e03a54cf47a2fc132da42.js"></script> 
 
 [download](http://wblut.com/tutorial/basic/HelloWorld.zip)
