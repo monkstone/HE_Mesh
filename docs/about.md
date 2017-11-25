@@ -47,11 +47,11 @@ The following classes are subject to the license agreement of their original aut
 
 The following packages are part of hemesh-external.jar and are subject to the license agreement of their original authors:
 
-* [wblut.external.constrainedDelaunay] (https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-56.html)
-* [wblut.external.Delaunay] (https://github.com/visad/visad)
-* [wblut.external.ProGAL] (http://www.diku.dk/~rfonseca/ProGAL/)
-* [wblut.external.straightskeleton] (https://code.google.com/p/campskeleton/)
-* [wblut.external.QuickHull3D] (https://www.cs.ubc.ca/~lloyd/java/quickhull3d.html)
+* [wblut.external.constrainedDelaunay](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-56.html)
+* [wblut.external.Delaunay](https://github.com/visad/visad)
+* [wblut.external.ProGAL](http://www.diku.dk/~rfonseca/ProGAL/)
+* [wblut.external.straightskeleton](https://code.google.com/p/campskeleton/)
+* [wblut.external.QuickHull3D](https://www.cs.ubc.ca/~lloyd/java/quickhull3d.html)
 
 The modified code is available on request.
 
