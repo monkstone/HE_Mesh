@@ -75,12 +75,12 @@ Always close the Processing IDE and delete your previous hemesh installation bef
 
 This is my minimal framework for a Processing 3 sketch using HE_Mesh.
 
-<script src="https://gist.github.com/wblut/5bd96aa9252020a9993fa5a406874abe"></script>
+{% gist 5bd96aa9252020a9993fa5a406874abe %}
 
 ### Hello world!
 
 ![](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
 
-<script src="https://gist.github.com/wblut/1896eec3e49e03a54cf47a2fc132da42"></script>
+{% gist 1896eec3e49e03a54cf47a2fc132da42 %}
 
 [download](http://wblut.com/tutorial/basic/HelloWorld.zip)
