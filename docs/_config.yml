@@ -6,10 +6,10 @@
 name: HE_Mesh
 
 # Short bio or description (displayed in the header)
-description: Web Developer from Somewhere
+description: a Processing/Java library for creating and manipulating polygonal meshes
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://github.com/wblut/HE_Mesh/blob/master/docs/images/hemeshLogo.jpg
+avatar: 
 
 #
 # Flags below are optional
