@@ -75,116 +75,12 @@ Always close the Processing IDE and delete your previous hemesh installation bef
 
 This is my minimal framework for a Processing 3 sketch using HE_Mesh.
 
-DATA HOSTED WITH  BY [PASTEBIN.COM](https://pastebin.com/) - [DOWNLOAD RAW](https://pastebin.com/raw/GKCvpRmi) - [SEE ORIGINAL](https://pastebin.com/GKCvpRmi)
-
-1.  import wblut.nurbs.*;
-
-2.  import wblut.hemesh.*;
-
-3.  import wblut.core.*;
-
-4.  import wblut.geom.*;
-
-5.  import wblut.processing.*;
-
-6.  import wblut.math.*;
-
-8.  WB_Render3D render;
-
-10. void setup() {
-
-11. fullScreen(P3D);
-
-12. smooth(8);
-
-13. render=new WB_Render3D(this);
-
-14. }
-
-16. void draw() {
-
-17. background(55);
-
-18. directionalLight(255, 255, 255, 1, 1, -1);
-
-19. directionalLight(127, 127, 127, -1, -1, 1);
-
-20. translate(width/2, height/2, 0);
-
-21. rotateY(map(mouseX,0,width,-PI,PI));
-
-22. rotateX(map(mouseY,0,height,PI,-PI));
-
-23. }
+<script src="https://gist.github.com/wblut/5bd96aa9252020a9993fa5a406874abe"></script>
 
 ### Hello world!
 
 ![](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
 
-DATA HOSTED WITH  BY [PASTEBIN.COM](https://pastebin.com/) - [DOWNLOAD RAW](https://pastebin.com/raw/50HPP265) - [SEE ORIGINAL](https://pastebin.com/50HPP265)
-
-1.  import wblut.core.*;
-
-2.  import wblut.geom.*;
-
-3.  import wblut.hemesh.*;
-
-4.  import wblut.math.*;
-
-5.  import wblut.nurbs.*;
-
-6.  import wblut.processing.*;
-
-8.  WB_Render3D render;
-
-9.  HE_Mesh mesh;
-
-11. void setup() {
-
-12. fullScreen(P3D);
-
-13. smooth(8);
-
-14. render=new WB_Render3D(this);
-
-15. create();
-
-16. }
-
-18. void create(){
-
-19. HEC_Geodesic creator=new HEC_Geodesic().setRadius(250);
-
-20. mesh=new HE_Mesh(creator);
-
-21. }
-
-23. void draw() {
-
-24. background(55);
-
-25. directionalLight(255, 255, 255, 1, 1, -1);
-
-26. directionalLight(127, 127, 127, -1, -1, 1);
-
-27. translate(width/2, height/2, 0);
-
-28. rotateY(map(mouseX,0,width,-PI,PI));
-
-29. rotateX(map(mouseY,0,height,PI,-PI));
-
-30. noStroke();
-
-31. fill(255);
-
-32. render.drawFaces(mesh);
-
-33. stroke(0);
-
-34. noFill();
-
-35. render.drawEdges(mesh);
-
-36. }
+<script src="https://gist.github.com/wblut/1896eec3e49e03a54cf47a2fc132da42"></script>
 
 [download](http://wblut.com/tutorial/basic/HelloWorld.zip)
