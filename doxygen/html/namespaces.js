@@ -1,4 +1,4 @@
 var namespaces =
 [
-    [ "wblut", "namespacewblut.html", "namespacewblut" ]
+    [ "wblut", "d8/d2b/namespacewblut.html", "d8/d2b/namespacewblut" ]
 ];
