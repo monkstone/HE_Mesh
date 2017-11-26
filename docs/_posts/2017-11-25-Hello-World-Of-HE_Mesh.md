@@ -5,15 +5,17 @@ title: HE_Mesh
 
 ![](http://www.wblut.com/blog/wp-content/2009/05/WindsweptBeethoven_00403.png)
 
-HE_Mesh* is a Java library for creating and manipulating polygonal meshes. Containing no display functionality of its own, it is meant to be used with [Processing](http://processing.org/).
+HE_Mesh\* is a Java library for creating and manipulating polygonal meshes. Containing no display functionality of its own, it is meant to be used with [Processing](http://processing.org/).
 
-My code quality warnings for the constructs are doubly valid here. HE_Mesh is an after-hours hobby project aggregating years of code snippets and 3rd part libraries. It is by no means production strength, neither in robustness, performance, consistency or maintenance. Consider it a toy, playground, a sandbox** that allows me to explore a range of possibilities that I wouldn't be able to otherwise. Friends*** asked me to share this toy, this library.
+My code quality warnings for the constructs are doubly valid here. HE_Mesh is an after-hours hobby project aggregating years of code snippets and 3rd part libraries. It is by no means production strength, neither in robustness, performance, consistency or maintenance. Consider it a toy, playground, a sandbox\*\* that allows me to explore a range of possibilities that I wouldn't be able to otherwise. Friends\*\*\* asked me to share this toy, this library.
 
 Since I cannot give you any guarantees or reliable support,  the code I write for the HE_Mesh library is public domain. Very little in the library is *invented* by me. The knowledge required to create it is all out there.
 
-* Full name: *HE_Mesh*, short name/tag: *hemesh\
-*** If you ever played in a sandbox, you will remember some of the nastier things hiding in the sand. The analogy is apt.\
-** With friends like that, who needs...
+\* Full name: *HE_Mesh*, short name/tag: *hemesh*
+
+\*\* If you ever played in a sandbox, you will remember some of the nastier things hiding in the sand. The analogy is apt.
+
+\*\*\* With friends like that, who needs...
 
 Support
 -------
@@ -75,12 +77,12 @@ Always close the Processing IDE and delete your previous hemesh installation b
 
 This is my minimal framework for a Processing 3 sketch using HE_Mesh.
 
-<script src="https://gist.github.com/wblut/5bd96aa9252020a9993fa5a406874abe.js"></script> 
+<script src="https://pastebin.com/embed_js/GKCvpRmi"></script>
 
 ### Hello world!
 
 ![](http://www.wblut.com/blog/wp-content/2016/01/screen-900x506.png)
 
-<script src="https://gist.github.com/wblut/1896eec3e49e03a54cf47a2fc132da42.js"></script> 
+<script src="https://pastebin.com/embed_js/50HPP265"></script>
 
 [download](http://wblut.com/tutorial/basic/HelloWorld.zip)
