@@ -13,6 +13,7 @@ var classwblut_1_1geom_1_1_w_b___mutable_coordinate =
     [ "getd", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#af3882a163fa25413b86fbee1df9d51f9", null ],
     [ "getf", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a64c5c226e25599b54b2817bcbd03909d", null ],
     [ "hashCode", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a81da10d75b70482bebb9e285c20330f9", null ],
+    [ "ORIGIN", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#adaf56c4ad438f200ac3db9810e7d74d6", null ],
     [ "set", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a4337bd6ac3612d908ac237900ab7099d", null ],
     [ "set", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a3a7f2147ec11dc164ae3d82485d673ee", null ],
     [ "set", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a6d5a58cbf028d4a5ab190badf80be3bc", null ],
@@ -25,10 +26,19 @@ var classwblut_1_1geom_1_1_w_b___mutable_coordinate =
     [ "toString", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a62ea8584897a53cabb60723c33734c70", null ],
     [ "wd", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a21ce532380c4c92fd5b61882fdb91cd1", null ],
     [ "wf", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a4774df7b6be6cdf31358ba8cfd03faff", null ],
+    [ "X", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#ad3d8c2a2b0904d822968844adf15af78", null ],
     [ "xd", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a7e4d122b6407540c5f867bbbcf6ce658", null ],
     [ "xf", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a1d649bf2edf2fd9977964fb0864e21b8", null ],
+    [ "Y", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a86c11d0e0215b22b647994c645509421", null ],
     [ "yd", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a114b72d5ce35f5431524323d34a5a2d1", null ],
     [ "yf", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#aaea36e5898b148f5695b220c7909d01c", null ],
+    [ "Z", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a2ddb4c09522b0f7614124fa77d299630", null ],
     [ "zd", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a2da565587c99204551902279272c339a", null ],
-    [ "zf", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a614b621a9a46bf5ee5901f51c6aebd6f", null ]
+    [ "ZERO", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#ae1b03e3d2162f5aabaca30ddd3bb42b1", null ],
+    [ "zf", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a614b621a9a46bf5ee5901f51c6aebd6f", null ],
+    [ "ORIGIN", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#af6d371172ab0298226553b01621999b4", null ],
+    [ "X", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#aaedd8b723c5ff87ddb677d170c7dd09c", null ],
+    [ "Y", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a1b5b8359168cf79072ea8eb77eead423", null ],
+    [ "Z", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a699ac673ff4b4234dc30e864da6425ec", null ],
+    [ "ZERO", "classwblut_1_1geom_1_1_w_b___mutable_coordinate.html#a90c841bd829fe10c9056e0bf41293eec", null ]
 ];

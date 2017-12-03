@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 
 /**
@@ -45,7 +46,7 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		triangles = new HE_Selection(mesh);
+		triangles = HE_Selection.getSelection(mesh);
 		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final int n = mesh.getNumberOfFaces();
 
@@ -74,7 +75,7 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection selection) {
-		triangles = new HE_Selection(selection.parent);
+		triangles = HE_Selection.getSelection(selection.parent);
 		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final int n = selection.getNumberOfFaces();
 		List<HE_Face> faces = selection.faces.getObjects();

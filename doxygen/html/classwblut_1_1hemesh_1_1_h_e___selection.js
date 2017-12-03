@@ -1,5 +1,6 @@
 var classwblut_1_1hemesh_1_1_h_e___selection =
 [
+    [ "HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html#aed6140f4e3f61ffa8b75808bff1a4def", null ],
     [ "HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html#a1b496c6192ed2219e556c7767de1c47e", null ],
     [ "add", "classwblut_1_1hemesh_1_1_h_e___selection.html#a1ca1ee21d976068fab5d5eeee8b9f416", null ],
     [ "add", "classwblut_1_1hemesh_1_1_h_e___selection.html#ad44493320b9ac1ad2a526281ddd7c116", null ],
@@ -11,6 +12,7 @@ var classwblut_1_1hemesh_1_1_h_e___selection =
     [ "collectHalfedges", "classwblut_1_1hemesh_1_1_h_e___selection.html#af9a0ceb8b8f3be0f27a3e8d6364b1ef2", null ],
     [ "collectVertices", "classwblut_1_1hemesh_1_1_h_e___selection.html#abaf62793f221153baf0fd8072b3ef91e", null ],
     [ "completeFromFaces", "classwblut_1_1hemesh_1_1_h_e___selection.html#a106a9c7f1bc50f2aae3eda8ec8240209", null ],
+    [ "createdBy", "classwblut_1_1hemesh_1_1_h_e___selection.html#af4967df89988454e46a3d0da73ba8dce", null ],
     [ "get", "classwblut_1_1hemesh_1_1_h_e___selection.html#a83794175a4326832fbb789f0db575945", null ],
     [ "getAsMesh", "classwblut_1_1hemesh_1_1_h_e___selection.html#aa3028cd67a0b28d9c07cd40836c8532c", null ],
     [ "getBoundaryVertices", "classwblut_1_1hemesh_1_1_h_e___selection.html#a81eeb26636f99b58d18026e69ce30492", null ],
@@ -40,6 +42,5 @@ var classwblut_1_1hemesh_1_1_h_e___selection =
     [ "subtract", "classwblut_1_1hemesh_1_1_h_e___selection.html#a6aee3b33037ade50a17c1ebe261c10c9", null ],
     [ "surround", "classwblut_1_1hemesh_1_1_h_e___selection.html#acef5ef6a53711648cf4b7e63a0bb0b32", null ],
     [ "surround", "classwblut_1_1hemesh_1_1_h_e___selection.html#a72a262b51f9208c0c1461e81b5b38374", null ],
-    [ "union", "classwblut_1_1hemesh_1_1_h_e___selection.html#a7fc61bc57b66ced4cca11c68498a700d", null ],
-    [ "parent", "classwblut_1_1hemesh_1_1_h_e___selection.html#aa60e8d718e3c934132002b4e62f1248a", null ]
+    [ "union", "classwblut_1_1hemesh_1_1_h_e___selection.html#a7fc61bc57b66ced4cca11c68498a700d", null ]
 ];

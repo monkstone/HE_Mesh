@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -19,11 +19,19 @@ import wblut.math.WB_Epsilon;
  */
 public class HEM_HideEdges extends HEM_Modifier {
 
+	private double threshold;
+
 	/**
 	 * Instantiates a new HEM_FlipFaces.
 	 */
 	public HEM_HideEdges() {
 		super();
+		threshold = 0.0;
+	}
+
+	public HEM_HideEdges setThreshold(final double t) {
+		threshold = t;
+		return this;
 	}
 
 	/*
@@ -38,7 +46,7 @@ public class HEM_HideEdges extends HEM_Modifier {
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
 			e = eItr.next();
-			if (WB_Epsilon.isEqualAbs(e.getEdgeCosDihedralAngle(), -1.0)) {
+			if (WB_Epsilon.isEqualAbs(e.getEdgeCosDihedralAngle(), -1.0, threshold)) {
 				e.setVisible(false);
 			}
 		}
@@ -58,7 +66,7 @@ public class HEM_HideEdges extends HEM_Modifier {
 		HE_Halfedge e;
 		while (eItr.hasNext()) {
 			e = eItr.next();
-			if (WB_Epsilon.isEqualAbs(e.getEdgeCosDihedralAngle(), -1.0)) {
+			if (WB_Epsilon.isEqualAbs(e.getEdgeCosDihedralAngle(), -1.0, threshold)) {
 				e.setVisible(false);
 			}
 		}

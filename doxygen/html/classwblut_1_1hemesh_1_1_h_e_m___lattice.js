@@ -19,6 +19,7 @@ var classwblut_1_1hemesh_1_1_h_e_m___lattice =
     [ "d", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a34e99f60e017d6e6b768a27d3d7fbb26", null ],
     [ "fuse", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a1d1839897ad3f8034a2103f9a8f4f4c3", null ],
     [ "fuseAngle", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a055a63860adec30a9f038cf377f5680b", null ],
+    [ "gf", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a42ef9ae762a1c75e7c7995509be5e78a", null ],
     [ "hew", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a68a696a13affdd226dbec19b4dc079e4", null ],
     [ "ibulge", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a00321b86e69a424729840c42a28abb77", null ],
     [ "sew", "classwblut_1_1hemesh_1_1_h_e_m___lattice.html#a24ad4adcd98d020eaef76c676b987a33", null ],

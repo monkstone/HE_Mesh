@@ -48,6 +48,7 @@ public abstract class HEC_Creator extends HE_Machine {
 	 * Constructor.
 	 */
 	public HEC_Creator() {
+		super();
 		center = new WB_Point();
 		zaxis = new WB_Vector(WB_Vector.Z());
 		Z = new WB_Vector(WB_Vector.Z());

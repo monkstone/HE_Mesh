@@ -1,5 +1,6 @@
 var classwblut_1_1geom_1_1_w_b___danzer =
 [
+    [ "Type", "enumwblut_1_1geom_1_1_w_b___danzer_1_1_type.html", "enumwblut_1_1geom_1_1_w_b___danzer_1_1_type" ],
     [ "WB_Danzer", "classwblut_1_1geom_1_1_w_b___danzer.html#a87d95efade2d3bf53d5db68dda80fb11", null ],
     [ "WB_Danzer", "classwblut_1_1geom_1_1_w_b___danzer.html#a9f3e5d8d972e411896d203ca252b3655", null ],
     [ "WB_Danzer", "classwblut_1_1geom_1_1_w_b___danzer.html#a73fefeb766aa731f608dae4550da49ed", null ],

@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -170,8 +170,8 @@ public class HEM_Slice extends HEM_Modifier {
 		ss = new HEM_SliceSurface().setPlane(lP);
 		mesh.modify(ss);
 
-		final HE_Selection newFaces = new HE_Selection(mesh);
-		final HE_Selection facesToRemove = new HE_Selection(mesh);
+		final HE_Selection newFaces = HE_Selection.getSelection(mesh);
+		final HE_Selection facesToRemove = HE_Selection.getSelection(mesh);
 		HE_Face face;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
 		tracker.setCounterStatus(this, "Classifying faces.", counter);
@@ -210,7 +210,7 @@ public class HEM_Slice extends HEM_Modifier {
 
 				} else {
 					tracker.setDuringStatus(this, "Triangulating cut paths.");
-					HE_Selection caps = new HE_Selection(mesh);
+					HE_Selection caps = HE_Selection.getSelection(mesh);
 					final long[] triKeys = HET_PlanarPathTriangulator.getTriangleKeys(cutpaths, lP);
 					HE_Face tri = null;
 					HE_Vertex v0, v1, v2;
@@ -242,14 +242,14 @@ public class HEM_Slice extends HEM_Modifier {
 						caps.addEdge(he1);
 						caps.addEdge(he2);
 					}
-					mesh.addSelection("caps", caps);
+					mesh.addSelection("caps", this, caps);
 				}
 			}
 		}
 
 		mesh.pairHalfedges();
 		mesh.capHalfedges();
-		// HE_Selection edges = new HE_Selection(mesh);
+		// HE_Selection edges = HE_Selection.getSelection(mesh);
 		// edges.addHalfedges(mesh.getSelection("caps").getOuterEdges());
 		// mesh.addSelection("edges", edges);
 		if (optimizeCap) {

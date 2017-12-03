@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -56,7 +56,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		tracker.setStartStatus(this, "Starting HEM_TriSplit.");
-		splitFacesTri(HE_Selection.selectAllFaces(mesh), d);
+		splitFacesTri(mesh.selectAllFaces(), d);
 		tracker.setStopStatus(this, "Exiting HEM_TriSplit.");
 		return mesh;
 	}
@@ -84,7 +84,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 	 * @return selection of new faces and new vertex
 	 */
 	private void splitFacesTri(final HE_Selection selection, final double d) {
-		selectionOut = new HE_Selection(selection.parent);
+		selectionOut = HE_Selection.getSelection(selection.parent);
 		final HE_Face[] faces = selection.getFacesAsArray();
 		final int n = selection.getNumberOfFaces();
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
@@ -144,7 +144,7 @@ public class HEM_TriSplit extends HEM_Modifier {
 			vi.setUVW(u * ifo, v * ifo, w * ifo);
 		}
 		he = face.getHalfedge();
-		final HE_Selection out = new HE_Selection(mesh);
+		final HE_Selection out = HE_Selection.getSelection(mesh);
 		int c = 0;
 		boolean onEdge = false;
 		do {

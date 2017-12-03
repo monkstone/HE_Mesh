@@ -64,6 +64,10 @@ public class WB_Epsilon {
 		return WB_Math.fastAbs(x - y) < WB_Epsilon.EPSILON;
 	}
 
+	public static boolean isEqualAbs(final double x, final double y, final double threshold) {
+		return WB_Math.fastAbs(x - y) < threshold + WB_Epsilon.EPSILON;
+	}
+
 	/**
 	 * Equality with relative error range.
 	 *

@@ -1633,7 +1633,11 @@ public class WB_Render3D extends WB_Render2D {
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		home.beginShape(PConstants.TRIANGLES);
 		while (fItr.hasNext()) {
-			drawFaceFCInt(fItr.next());
+			try {
+				drawFaceFCInt(fItr.next());
+			} catch (Exception e) {
+
+			}
 		}
 		home.endShape();
 	}

@@ -17,21 +17,21 @@ public class WB_HashGridInteger {
 
 	private final int defaultValue;
 
-	private final int K, L, M, KL;
+	private final int sizeI, sizeJ, sizeK, sizeIJ;
 
 	/**
 	 *
 	 *
-	 * @param K
-	 * @param L
-	 * @param M
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
 	 * @param defaultValue
 	 */
-	public WB_HashGridInteger(final int K, final int L, final int M, final int defaultValue) {
-		this.K = K;
-		this.L = L;
-		this.M = M;
-		KL = K * L;
+	public WB_HashGridInteger(final int sizeI, final int sizeJ, final int sizeK, final int defaultValue) {
+		this.sizeI = sizeI;
+		this.sizeJ = sizeJ;
+		this.sizeK = sizeK;
+		sizeIJ = sizeI * sizeJ;
 		this.defaultValue = defaultValue;
 		values = new LongIntHashMap();
 	}
@@ -39,16 +39,16 @@ public class WB_HashGridInteger {
 	/**
 	 *
 	 *
-	 * @param K
-	 * @param L
-	 * @param M
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
 	 */
-	public WB_HashGridInteger(final int K, final int L, final int M) {
-		this.K = K;
-		this.L = L;
-		this.M = M;
-		KL = K * L;
-		defaultValue = Integer.MIN_VALUE;
+	public WB_HashGridInteger(final int sizeI, final int sizeJ, final int sizeK) {
+		this.sizeI = sizeI;
+		this.sizeJ = sizeJ;
+		this.sizeK = sizeK;
+		sizeIJ = sizeI * sizeJ;
+		defaultValue = 0;
 		values = new LongIntHashMap();
 	}
 
@@ -62,6 +62,9 @@ public class WB_HashGridInteger {
 	 * @return
 	 */
 	public boolean setValue(final int value, final int i, final int j, final int k) {
+		if (value != defaultValue) {
+			return false;
+		}
 		final long id = safeIndex(i, j, k);
 		if (id > 0) {
 			values.put(id, value);
@@ -118,7 +121,7 @@ public class WB_HashGridInteger {
 	 * @param k
 	 * @return
 	 */
-	public double getValue(final int i, final int j, final int k) {
+	public int getValue(final int i, final int j, final int k) {
 		final long id = safeIndex(i, j, k);
 		if (id == -1) {
 			return defaultValue;
@@ -141,22 +144,22 @@ public class WB_HashGridInteger {
 		if (i < 0) {
 			return -1;
 		}
-		if (i > K - 1) {
+		if (i > sizeI - 1) {
 			return -1;
 		}
 		if (j < 0) {
 			return -1;
 		}
-		if (j > L - 1) {
+		if (j > sizeJ - 1) {
 			return -1;
 		}
 		if (k < 0) {
 			return -1;
 		}
-		if (k > M - 1) {
+		if (k > sizeK - 1) {
 			return -1;
 		}
-		return i + j * K + k * KL;
+		return i + j * sizeI + k * sizeIJ;
 	}
 
 	/**
@@ -164,8 +167,8 @@ public class WB_HashGridInteger {
 	 *
 	 * @return
 	 */
-	public int getWidth() {
-		return K;
+	public int getSizeI() {
+		return sizeI;
 	}
 
 	/**
@@ -173,8 +176,8 @@ public class WB_HashGridInteger {
 	 *
 	 * @return
 	 */
-	public int getHeight() {
-		return L;
+	public int getSizeJ() {
+		return sizeJ;
 	}
 
 	/**
@@ -182,8 +185,8 @@ public class WB_HashGridInteger {
 	 *
 	 * @return
 	 */
-	public int getDepth() {
-		return M;
+	public int getSizeK() {
+		return sizeK;
 	}
 
 	/**

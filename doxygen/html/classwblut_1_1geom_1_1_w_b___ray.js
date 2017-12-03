@@ -18,5 +18,8 @@ var classwblut_1_1geom_1_1_w_b___ray =
     [ "hashCode", "classwblut_1_1geom_1_1_w_b___ray.html#a4bd199faec05a5dc6be220ec59c880f9", null ],
     [ "set", "classwblut_1_1geom_1_1_w_b___ray.html#ac10081b9ae1e0e49d0b27c48e52aedf1", null ],
     [ "setFromPoints", "classwblut_1_1geom_1_1_w_b___ray.html#a554f4d5c44586f80651121bb58e646f1", null ],
-    [ "toString", "classwblut_1_1geom_1_1_w_b___ray.html#aacd915cb412a534e92894ed0eeadd85e", null ]
+    [ "toString", "classwblut_1_1geom_1_1_w_b___ray.html#aacd915cb412a534e92894ed0eeadd85e", null ],
+    [ "X", "classwblut_1_1geom_1_1_w_b___ray.html#a0e7c12bc434b18c289eaadb3f5cf4ab0", null ],
+    [ "Y", "classwblut_1_1geom_1_1_w_b___ray.html#a63b1b2999fe39b1b39660bde08598658", null ],
+    [ "Z", "classwblut_1_1geom_1_1_w_b___ray.html#a435cb5ada9ec4e410e3ecdb05ca257a1", null ]
 ];

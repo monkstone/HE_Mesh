@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -140,11 +140,13 @@ public class HET_WriterBinaryHemesh {
 	 */
 	public void halfedge(final HE_Halfedge he, final int vid, final int henextid, final int hepairid,
 			final int faceid) {
+
 		try {
 			hemeshWriter.writeInt(vid);
 			hemeshWriter.writeInt(henextid);
 			hemeshWriter.writeInt(hepairid);
 			hemeshWriter.writeInt(faceid);
+			hemeshWriter.writeInt(he.getColor());
 			hemeshWriter.writeInt(he.getInternalLabel());
 			hemeshWriter.writeInt(he.getUserLabel());
 			if (he.hasHalfedgeUVW()) {

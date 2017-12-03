@@ -3,6 +3,7 @@ var classwblut_1_1hemesh_1_1_h_e_m___slice =
     [ "HEM_Slice", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#aa2780aa4ece47d565d4f9ca4d0502044", null ],
     [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#a49d0bafedbe1df3ccb3eb096dfac00c1", null ],
     [ "applySelf", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#ae297268f895a4bc26ec0ca7511ae03d0", null ],
+    [ "main", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#a7fca3f058db2a649502ed4ad13d73a94", null ],
     [ "setCap", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#a4dc05ddc6318fa7b8b2617c3489d45ff", null ],
     [ "setOffset", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#af3558051f409885c5ade7ad26c3b089a", null ],
     [ "setOptimizeCap", "classwblut_1_1hemesh_1_1_h_e_m___slice.html#ae95e8fc44955551ae00571b5664456c6", null ],

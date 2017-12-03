@@ -16,9 +16,9 @@ void setup() {
   
   subdividor.setRandom(true);// Randomize center edge and center face points 
   subdividor.setRange(0.4);// Random range of center offset, from 0 (no random) to 1(fully random)
-  subdividor.setSeed(1234L);// Seed of random point generator
+  subdividor.setSeed(1234);// Seed of random point generator
   subdividor.setKeepTriangles(true);// Subdivide triangles into 4 triangles instead of 3 quads
-  mesh.subdivide(subdividor,2);
+  mesh.subdivide(subdividor);
 
   render=new WB_Render(this);
 }

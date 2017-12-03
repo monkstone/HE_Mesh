@@ -18,22 +18,22 @@ public class WB_HashGridObject {
 
 	private final Object defaultValue;
 
-	private final int K, L, M, KL;
+	private final int sizeI, sizeJ, sizeK, sizeIJ;
 
 	/**
 	 *
 	 *
-	 * @param K
-	 * @param L
-	 * @param M
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
 	 * @param defaultValue
 	 */
 	@SuppressWarnings("rawtypes")
-	public WB_HashGridObject(final int K, final int L, final int M, final Object defaultValue) {
-		this.K = K;
-		this.L = L;
-		this.M = M;
-		KL = K * L;
+	public WB_HashGridObject(final int sizeI, final int sizeJ, final int sizeK, final Object defaultValue) {
+		this.sizeI = sizeI;
+		this.sizeJ = sizeJ;
+		this.sizeK = sizeK;
+		sizeIJ = sizeI * sizeJ;
 		this.defaultValue = defaultValue;
 		values = new LongObjectHashMap();
 	}
@@ -41,16 +41,16 @@ public class WB_HashGridObject {
 	/**
 	 *
 	 *
-	 * @param K
-	 * @param L
-	 * @param M
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
 	 */
 	@SuppressWarnings("rawtypes")
-	public WB_HashGridObject(final int K, final int L, final int M) {
-		this.K = K;
-		this.L = L;
-		this.M = M;
-		KL = K * L;
+	public WB_HashGridObject(final int sizeI, final int sizeJ, final int sizeK) {
+		this.sizeI = sizeI;
+		this.sizeJ = sizeJ;
+		this.sizeK = sizeK;
+		sizeIJ = sizeI * sizeJ;
 		defaultValue = null;
 		values = new LongObjectHashMap();
 	}
@@ -123,22 +123,22 @@ public class WB_HashGridObject {
 		if (i < 0) {
 			return -1;
 		}
-		if (i > K - 1) {
+		if (i > sizeI - 1) {
 			return -1;
 		}
 		if (j < 0) {
 			return -1;
 		}
-		if (j > L - 1) {
+		if (j > sizeJ - 1) {
 			return -1;
 		}
 		if (k < 0) {
 			return -1;
 		}
-		if (k > M - 1) {
+		if (k > sizeK - 1) {
 			return -1;
 		}
-		return i + j * K + k * KL;
+		return i + j * sizeI + k * sizeIJ;
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class WB_HashGridObject {
 	 * @return
 	 */
 	public int getWidth() {
-		return K;
+		return sizeI;
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class WB_HashGridObject {
 	 * @return
 	 */
 	public int getHeight() {
-		return L;
+		return sizeJ;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class WB_HashGridObject {
 	 * @return
 	 */
 	public int getDepth() {
-		return M;
+		return sizeK;
 	}
 
 	/**

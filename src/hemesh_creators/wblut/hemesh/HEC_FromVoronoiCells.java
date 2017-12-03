@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_Coord;
 
 /**
@@ -34,6 +35,7 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 	 *
 	 */
 	private boolean[] on;
+
 	/**
 	 *
 	 */
@@ -158,6 +160,7 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 		final int n = on.length;
 		final FastList<HE_Face> tmpfaces = new FastList<HE_Face>();
 		int nv = 0;
+
 		for (int i = 0; i < n; i++) {
 			final HE_Mesh m = cells.getMesh(i);
 			if (on[i]) {
@@ -208,7 +211,7 @@ public class HEC_FromVoronoiCells extends HEC_Creator {
 		}
 		HET_Fixer.fixNonManifoldVertices(result);
 		if (!capBoundaries) {
-			final HE_Selection sel = HE_Selection.selectFacesWithInternalLabel(result, -1);
+			final HE_Selection sel = result.selectFacesWithInternalLabel(-1);
 			final HE_FaceIterator fitr = sel.fItr();
 			while (fitr.hasNext()) {
 				result.deleteFace(fitr.next());

@@ -11,6 +11,7 @@ var classwblut_1_1nurbs_1_1_w_b___bezier =
     [ "getLowerU", "classwblut_1_1nurbs_1_1_w_b___bezier.html#a6e571a8256b4770a8454f86bbe073cfe", null ],
     [ "getUpperU", "classwblut_1_1nurbs_1_1_w_b___bezier.html#aaf06428725701d78b88a2f24d63c45d7", null ],
     [ "n", "classwblut_1_1nurbs_1_1_w_b___bezier.html#a783616844d7d5d2f185cb9f65698988e", null ],
+    [ "gf", "classwblut_1_1nurbs_1_1_w_b___bezier.html#a948f2aaac471e60b74baf04a59ffeb48", null ],
     [ "n", "classwblut_1_1nurbs_1_1_w_b___bezier.html#afce76ecd800ed749658023aa51a7cb24", null ],
     [ "points", "classwblut_1_1nurbs_1_1_w_b___bezier.html#aaa32403a0594adc59c02382f88825ce7", null ]
 ];

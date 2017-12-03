@@ -33,5 +33,12 @@ var classwblut_1_1geom_1_1_w_b___planar_map =
     [ "geometryfactory", "classwblut_1_1geom_1_1_w_b___planar_map.html#ad97963eb8e90f2b78e918eb1e08be237", null ],
     [ "mode", "classwblut_1_1geom_1_1_w_b___planar_map.html#ae126de066a2ed1e4f45dd315f028018d", null ],
     [ "offset", "classwblut_1_1geom_1_1_w_b___planar_map.html#a9ca4124a1bc38bbc828079356dc2cf6e", null ],
-    [ "T2D3D", "classwblut_1_1geom_1_1_w_b___planar_map.html#ac2df92aa0bf9d7cc68361cfa4fafde88", null ]
+    [ "PLANE", "classwblut_1_1geom_1_1_w_b___planar_map.html#a01e230ce717f3a27de149706db890a9d", null ],
+    [ "T2D3D", "classwblut_1_1geom_1_1_w_b___planar_map.html#ac2df92aa0bf9d7cc68361cfa4fafde88", null ],
+    [ "XY", "classwblut_1_1geom_1_1_w_b___planar_map.html#a9789f307b97b9e0941b10ca33caf0b4f", null ],
+    [ "XYrev", "classwblut_1_1geom_1_1_w_b___planar_map.html#add1c10eda95e39fd28726a9da738a2df", null ],
+    [ "XZ", "classwblut_1_1geom_1_1_w_b___planar_map.html#aa89c1ca038188331e008b189f0d1c08a", null ],
+    [ "XZrev", "classwblut_1_1geom_1_1_w_b___planar_map.html#abf8382eb2602717f0d58d1995520932a", null ],
+    [ "YZ", "classwblut_1_1geom_1_1_w_b___planar_map.html#ae0c1e59ca3658f104f7810e097550f7a", null ],
+    [ "YZrev", "classwblut_1_1geom_1_1_w_b___planar_map.html#a76e0ce1cc6f2582460e105ba679dc0ca", null ]
 ];

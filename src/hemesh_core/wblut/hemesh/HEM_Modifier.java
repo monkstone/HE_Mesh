@@ -18,6 +18,7 @@ abstract public class HEM_Modifier extends HE_Machine {
 	 * Instantiates a new HEM_Modifier.
 	 */
 	public HEM_Modifier() {
+		super();
 	}
 
 	@Override

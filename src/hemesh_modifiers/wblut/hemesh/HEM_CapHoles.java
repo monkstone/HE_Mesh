@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -36,7 +36,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		tracker.setStartStatus(this, "Starting HEM_CapHoles.");
-		caps = new HE_Selection(mesh);
+		caps = HE_Selection.getSelection(mesh);
 		final List<HE_Halfedge> unpairedEdges = mesh.getUnpairedHalfedges();
 		HE_RAS<HE_Halfedge> loopedHalfedges;
 		HE_Halfedge start;
@@ -126,7 +126,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 		}
 		mesh.cleanUnusedElementsByFace();
 		mesh.capHalfedges();
-		mesh.addSelection("caps", caps);
+		mesh.addSelection("caps", this, caps);
 		tracker.setStopStatus(this, "Exiting HEM_CapHoles.");
 		return mesh;
 	}

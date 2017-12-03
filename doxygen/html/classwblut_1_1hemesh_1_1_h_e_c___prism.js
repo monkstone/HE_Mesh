@@ -7,6 +7,7 @@ var classwblut_1_1hemesh_1_1_h_e_c___prism =
     [ "setHeight", "classwblut_1_1hemesh_1_1_h_e_c___prism.html#a63aedce7bba5d8372f7aa9f715a5c130", null ],
     [ "setRadius", "classwblut_1_1hemesh_1_1_h_e_c___prism.html#a7283e4af9cd307c9b8f62b81c14530df", null ],
     [ "facets", "classwblut_1_1hemesh_1_1_h_e_c___prism.html#ac78d108e084a2c67698d63dd8f4f951e", null ],
+    [ "gf", "classwblut_1_1hemesh_1_1_h_e_c___prism.html#acec0c409bb32e3cca09786d56cd74ced", null ],
     [ "radius", "classwblut_1_1hemesh_1_1_h_e_c___prism.html#a1a793c89d78cfd892b20922118251ce9", null ],
     [ "thickness", "classwblut_1_1hemesh_1_1_h_e_c___prism.html#a9fbeef1dca46696e35851a25cd322072", null ]
 ];

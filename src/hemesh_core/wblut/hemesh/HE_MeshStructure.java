@@ -49,6 +49,7 @@ public class HE_MeshStructure extends HE_MeshElement {
 	protected HE_RAS<HE_Halfedge> edges;
 	protected HE_RAS<HE_Halfedge> unpairedHalfedges;
 	protected HE_RAS<HE_Face> faces;
+	String name;
 
 	/**
 	 * Instantiates a new HE_MeshStructure.
@@ -61,6 +62,14 @@ public class HE_MeshStructure extends HE_MeshElement {
 		unpairedHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
 		faces = new HE_RAS.HE_RASEC<HE_Face>();
 
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 	/**

@@ -71,7 +71,7 @@ public class HEMC_Explode extends HEMC_MultiCreator {
 				break;
 			}
 			start.setVisited();// visited
-			submesh = new HE_Selection(mesh);
+			submesh = HE_Selection.getSelection(mesh);
 			submesh.add(start);
 			// find all unvisited faces connected to face
 			HE_RAS<HE_Face> facesToProcess = new HE_RAS.HE_RASEC<HE_Face>();

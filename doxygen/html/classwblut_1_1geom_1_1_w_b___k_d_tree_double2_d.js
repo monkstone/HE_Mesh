@@ -1,6 +1,7 @@
 var classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d =
 [
     [ "QueryResultDouble", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_query_result_double.html", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_query_result_double" ],
+    [ "WB_KDEntryDouble", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_entry_double.html", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_entry_double" ],
     [ "WB_KDNodeDouble", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_node_double.html", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_node_double" ],
     [ "WB_KDTreeDouble2D", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d.html#ae4b36632493a6090a2c46756e05b831a", null ],
     [ "WB_KDTreeDouble2D", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d.html#ad3f8df0a1ba57502365c82b45a326698", null ],

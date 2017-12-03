@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -106,8 +106,8 @@ public class HEM_SliceSurface extends HEM_Modifier {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		tracker.setStartStatus(this, "Starting HEM_SliceSurface.");
-		cutFaces = new HE_Selection(mesh);
-		newEdges = new HE_Selection(mesh);
+		cutFaces = HE_Selection.getSelection(mesh);
+		newEdges = HE_Selection.getSelection(mesh);
 
 		mesh.resetEdgeInternalLabels();
 		mesh.resetVertexInternalLabels();
@@ -131,7 +131,7 @@ public class HEM_SliceSurface extends HEM_Modifier {
 		}
 		tracker.setDuringStatus(this, "Creating bounding box tree.");
 		final WB_AABBTree tree = new WB_AABBTree(mesh, Math.max(64, (int) Math.sqrt(mesh.getNumberOfFaces())));
-		final HE_Selection faces = new HE_Selection(mesh);
+		final HE_Selection faces = HE_Selection.getSelection(mesh);
 		tracker.setDuringStatus(this, "Retrieving intersection candidates.");
 		faces.addFaces(HET_MeshOp.getPotentialIntersectedFaces(tree, lP));
 		faces.collectVertices();
@@ -159,7 +159,7 @@ public class HEM_SliceSurface extends HEM_Modifier {
 		counter = new WB_ProgressCounter(faces.getNumberOfEdges(), 10);
 
 		tracker.setCounterStatus(this, "Classifying edges.", counter);
-		final HE_Selection split = new HE_Selection(mesh);
+		final HE_Selection split = HE_Selection.getSelection(mesh);
 		final UnifiedMap<Long, Double> edgeInt = new UnifiedMap<Long, Double>();
 		final Iterator<HE_Halfedge> eItr = faces.eItr();
 		HE_Halfedge e;
@@ -238,8 +238,8 @@ public class HEM_SliceSurface extends HEM_Modifier {
 
 			}
 		}
-		mesh.addSelection("cuts", cutFaces);
-		mesh.addSelection("edges", newEdges);
+		mesh.addSelection("cuts", this, cutFaces);
+		mesh.addSelection("edges", this, newEdges);
 		return mesh;
 	}
 
@@ -256,8 +256,8 @@ public class HEM_SliceSurface extends HEM_Modifier {
 
 		selection.parent.resetVertexInternalLabels();
 
-		cutFaces = new HE_Selection(selection.parent);
-		newEdges = new HE_Selection(selection.parent);
+		cutFaces = HE_Selection.getSelection(selection.parent);
+		newEdges = HE_Selection.getSelection(selection.parent);
 		paths = new FastList<HE_Path>();
 		// no plane defined
 		if (P == null) {
@@ -272,7 +272,7 @@ public class HEM_SliceSurface extends HEM_Modifier {
 		final WB_Plane lP = new WB_Plane(P.getNormal(), -P.d() + offset);
 		tracker.setDuringStatus(this, "Creating bounding box tree.");
 		final WB_AABBTree tree = new WB_AABBTree(selection.parent, 64);
-		final HE_Selection faces = new HE_Selection(selection.parent);
+		final HE_Selection faces = HE_Selection.getSelection(selection.parent);
 		tracker.setDuringStatus(this, "Retrieving intersection candidates.");
 		faces.addFaces(HET_MeshOp.getPotentialIntersectedFaces(tree, lP));
 		final HE_Selection lsel = selection.get();
@@ -308,7 +308,7 @@ public class HEM_SliceSurface extends HEM_Modifier {
 		}
 		if (positiveVertexExists && negativeVertexExists) {
 			new ArrayList<HE_Vertex>();
-			final HE_Selection split = new HE_Selection(lsel.parent);
+			final HE_Selection split = HE_Selection.getSelection(lsel.parent);
 			final HashMap<Long, Double> edgeInt = new HashMap<Long, Double>();
 			final Iterator<HE_Halfedge> eItr = lsel.eItr();
 			HE_Halfedge e;
@@ -380,9 +380,9 @@ public class HEM_SliceSurface extends HEM_Modifier {
 			buildPaths(newEdges);
 		}
 
-		lsel.parent.addSelection("cuts", cutFaces);
+		lsel.parent.addSelection("cuts", this, cutFaces);
 		selection.addFaces(cutFaces);
-		lsel.parent.addSelection("edges", newEdges);
+		lsel.parent.addSelection("edges", this, newEdges);
 		tracker.setStopStatus(this, "Exiting HEM_SliceSurface.");
 		return lsel.parent;
 	}

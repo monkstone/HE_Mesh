@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -266,8 +266,8 @@ public class HEM_Lattice extends HEM_Modifier {
 		ff.applySelf(innerMesh);
 		final int nf = mesh.getNumberOfFaces();
 		final HE_Face[] origFaces = mesh.getFacesAsArray();
-		mesh.selectAllFaces("outer");
-		innerMesh.selectAllFaces("inner");
+		mesh.selectAllFaces();
+		innerMesh.selectAllFaces();
 
 		mesh.add(innerMesh);
 
@@ -285,8 +285,8 @@ public class HEM_Lattice extends HEM_Modifier {
 		WB_Coord co, ci;
 		double ob, ib;
 
-		HE_Selection connect = new HE_Selection(mesh);
-		HE_Selection boundary = new HE_Selection(mesh);
+		HE_Selection connect = HE_Selection.getSelection(mesh);
+		HE_Selection boundary = HE_Selection.getSelection(mesh);
 		tracker.setCounterStatus(this, "Connecting outer and inner faces.", counter);
 		for (int i = 0; i < nf; i++) {
 			fo = origFaces[i];
@@ -380,8 +380,8 @@ public class HEM_Lattice extends HEM_Modifier {
 			counter.increment();
 		}
 		mesh.pairHalfedges();
-		mesh.addSelection("connect", connect);
-		mesh.addSelection("boundary", boundary);
+		mesh.addSelection("connect", this, connect);
+		mesh.addSelection("boundary", this, boundary);
 		tracker.setStopStatus(this, "Exiting HEM_Lattice.");
 		return mesh;
 	}
@@ -449,8 +449,8 @@ public class HEM_Lattice extends HEM_Modifier {
 		ff.applySelf(innerMesh);
 		final int nf = selection.parent.getNumberOfFaces();
 		final HE_Face[] origFaces = selection.parent.getFacesAsArray();
-		selection.parent.selectAllFaces("outer");
-		innerMesh.selectAllFaces("inner");
+		selection.parent.selectAllFaces();
+		innerMesh.selectAllFaces();
 
 		selection.parent.add(innerMesh);
 		HE_Face fo;
@@ -465,8 +465,8 @@ public class HEM_Lattice extends HEM_Modifier {
 		counter = new WB_ProgressCounter(nf, 10);
 		WB_Coord co, ci;
 		double ob, ib;
-		HE_Selection connect = new HE_Selection(selection.parent);
-		HE_Selection boundary = new HE_Selection(selection.parent);
+		HE_Selection connect = HE_Selection.getSelection(selection.parent);
+		HE_Selection boundary = HE_Selection.getSelection(selection.parent);
 		tracker.setCounterStatus(this, "Connecting outer and inner faces.", counter);
 		for (int i = 0; i < nf; i++) {
 			fo = origFaces[i];
@@ -557,8 +557,8 @@ public class HEM_Lattice extends HEM_Modifier {
 			counter.increment();
 		}
 		selection.parent.pairHalfedges();
-		selection.parent.addSelection("connect", connect);
-		selection.parent.addSelection("boundary", boundary);
+		selection.parent.addSelection("connect", this, connect);
+		selection.parent.addSelection("boundary", this, boundary);
 		tracker.setStopStatus(this, "Exiting HEM_Lattice.");
 		return selection.parent;
 	}

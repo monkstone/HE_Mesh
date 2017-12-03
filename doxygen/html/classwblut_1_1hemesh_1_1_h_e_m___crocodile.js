@@ -8,5 +8,6 @@ var classwblut_1_1hemesh_1_1_h_e_m___crocodile =
     [ "setDistance", "classwblut_1_1hemesh_1_1_h_e_m___crocodile.html#adae6e76cee7418aad6c3410bc239c6bf", null ],
     [ "setDistance", "classwblut_1_1hemesh_1_1_h_e_m___crocodile.html#ac845864d3cde3035daca29e52b294425", null ],
     [ "chamfer", "classwblut_1_1hemesh_1_1_h_e_m___crocodile.html#a9f3ea6a05ec97030bce20f3100f44c05", null ],
-    [ "distance", "classwblut_1_1hemesh_1_1_h_e_m___crocodile.html#a6cf797984ea91e54ca836284bc771d9e", null ]
+    [ "distance", "classwblut_1_1hemesh_1_1_h_e_m___crocodile.html#a6cf797984ea91e54ca836284bc771d9e", null ],
+    [ "gf", "classwblut_1_1hemesh_1_1_h_e_m___crocodile.html#afdc5611b6daafd2d48e8245b55258b47", null ]
 ];

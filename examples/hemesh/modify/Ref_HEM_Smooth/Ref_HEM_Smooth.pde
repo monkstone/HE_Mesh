@@ -8,18 +8,18 @@ HE_Mesh mesh;
 WB_Render render;
 
 void setup() {
-  size(1000,1000,P3D);
+  size(1000, 1000, P3D);
   smooth(8);
-  createMesh();
-  
+  createMesh();    
+  render=new WB_Render(this);
+}
+
+void smooth() {
   //Laplacian modifier without adding vertices
   HEM_Smooth modifier=new HEM_Smooth();
-  modifier.setIterations(4);
+  modifier.setIterations(1);
   modifier.setAutoRescale(true);// rescale mesh to original extents
-  
   mesh.modify(modifier);
-  
-  render=new WB_Render(this);
 }
 
 void draw() {
@@ -37,21 +37,15 @@ void draw() {
 }
 
 
-void createMesh(){
+void createMesh() {
   HEC_SuperDuper creator=new HEC_SuperDuper();
   creator.setU(16).setV(8).setRadius(50);
   creator.setDonutParameters(0, 10, 10, 10, 3, 6, 12, 12, 3, 1);
   mesh=new HE_Mesh(creator);
   mesh.modify(new HEM_Extrude().setDistance(100).setChamfer(1));
-mesh.subdivide(new HES_Planar().setRandom(true).setRange(0.8));
-  
+  mesh.subdivide(new HES_Planar().setRandom(true).setRange(0.8));
 }
 
-void mousePressed(){
-    HEM_Smooth modifier=new HEM_Smooth();
-  modifier.setIterations(4);
-  modifier.setAutoRescale(true);// rescale mesh to original extents
-  
-  mesh.modify(modifier);
-  
+void mousePressed() {
+  smooth();
 }

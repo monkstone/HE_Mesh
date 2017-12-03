@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">HE_Mesh
-   &#160;<span id="projectnumber">5.1.2</span>
+   &#160;<span id="projectnumber">6.0.1</span>
    </div>
   </td>
  </tr>
@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Packages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -135,6 +134,10 @@ $(document).ready(function(){initNavTree('classwblut_1_1hemesh_1_1_h_e___mesh_st
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a70d8c6ce2b1436b6b5236fd4862e80b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a70d8c6ce2b1436b6b5236fd4862e80b1">HE_MeshStructure</a> ()</td></tr>
 <tr class="separator:a70d8c6ce2b1436b6b5236fd4862e80b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d008083a62bff0ff0f28cc68dd1eec"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac3d008083a62bff0ff0f28cc68dd1eec">getName</a> ()</td></tr>
+<tr class="separator:ac3d008083a62bff0ff0f28cc68dd1eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2567d64e050f45291f78031008402ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ae2567d64e050f45291f78031008402ee">setName</a> (final String name)</td></tr>
+<tr class="separator:ae2567d64e050f45291f78031008402ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb400d8417f8b63744e433d55eafe9b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#adb400d8417f8b63744e433d55eafe9b7">HE_MeshStructure</a> (final <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html">HE_MeshStructure</a> ms)</td></tr>
 <tr class="separator:adb400d8417f8b63744e433d55eafe9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c23daf275ef4b99b57271edc8751a4d"><td class="memItemLeft" align="right" valign="top">final int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">getNumberOfFaces</a> ()</td></tr>
@@ -595,15 +598,17 @@ Protected Attributes</h2></td></tr>
 <tr class="inherit_header pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classwblut_1_1hemesh_1_1_h_e___element')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html">wblut.hemesh.HE_Element</a></td></tr>
 <tr class="memitem:a520e1cd043363dcaa59c976663f0eabc inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memItemLeft" align="right" valign="top">final long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a520e1cd043363dcaa59c976663f0eabc">key</a></td></tr>
 <tr class="separator:a520e1cd043363dcaa59c976663f0eabc inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99eede04ec24dc381750f3c75adb2db8 inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a99eede04ec24dc381750f3c75adb2db8">labels</a></td></tr>
-<tr class="separator:a99eede04ec24dc381750f3c75adb2db8 inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab58bb773a6848ae65be4d43842e01a47 inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#ab58bb773a6848ae65be4d43842e01a47">internalLabel</a></td></tr>
+<tr class="separator:ab58bb773a6848ae65be4d43842e01a47 inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d0bff29f23210d4e566c078b14f2b8 inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#aa9d0bff29f23210d4e566c078b14f2b8">userLabel</a></td></tr>
+<tr class="separator:aa9d0bff29f23210d4e566c078b14f2b8 inherit pro_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html">wblut.hemesh.HE_MeshElement</a></td></tr>
 <tr class="memitem:a738958d431825629708b1449ac408ea9 inherit pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element"><td class="memItemLeft" align="right" valign="top">static final <a class="el" href="classwblut_1_1geom_1_1_w_b___geometry_factory.html">WB_GeometryFactory</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a738958d431825629708b1449ac408ea9">gf</a> = new <a class="el" href="classwblut_1_1geom_1_1_w_b___geometry_factory.html">WB_GeometryFactory</a>()</td></tr>
 <tr class="separator:a738958d431825629708b1449ac408ea9 inherit pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fa8c30eeeeb0894e7c222a81ea1a2f2 inherit pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element"><td class="memItemLeft" align="right" valign="top">static final WB_ProgressTracker&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a4fa8c30eeeeb0894e7c222a81ea1a2f2">tracker</a> = WB_ProgressTracker.instance()</td></tr>
+<tr class="memitem:a4fa8c30eeeeb0894e7c222a81ea1a2f2 inherit pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element"><td class="memItemLeft" align="right" valign="top">static final <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html">WB_ProgressTracker</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a4fa8c30eeeeb0894e7c222a81ea1a2f2">tracker</a> = <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#a871a5ae3a028058a3f8c92a58329abc3">WB_ProgressTracker.instance</a>()</td></tr>
 <tr class="separator:a4fa8c30eeeeb0894e7c222a81ea1a2f2 inherit pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___mesh_element"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___element')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html">wblut.hemesh.HE_Element</a></td></tr>
 <tr class="memitem:ac36ceff2215437dd4961d6203ea4cd0b inherit pro_static_attribs_classwblut_1_1hemesh_1_1_h_e___element"><td class="memItemLeft" align="right" valign="top">static AtomicLong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#ac36ceff2215437dd4961d6203ea4cd0b">currentKey</a> = new AtomicLong(0)</td></tr>
@@ -650,6 +655,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a1677d66eaa99dceb0ba2afd31204f87c">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.add()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ad418173dd9b5546c4be714c12a8dd272">wblut.hemesh.HE_MeshStructure.edges</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aa7c575a893dc39bc9532637267c174e3">wblut.hemesh.HE_MeshStructure.faces</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac590bf1c47f93f178ef428fb31f24a66">wblut.hemesh.HE_MeshStructure.halfedges</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a0ccf4231c2ababe082bd1826827f3108">wblut.hemesh.HE_MeshStructure.unpairedHalfedges</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aee52ec8236d4a0741f539739f9ebb935">wblut.hemesh.HE_MeshStructure.vertices</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -690,6 +697,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a1677d66eaa99dceb0ba2afd31204f87c">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a830578163cf12594b36b7e8a991bfad0"></a>
@@ -712,6 +721,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a1677d66eaa99dceb0ba2afd31204f87c">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.add()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#ad062c62f54940a8ad97f8d65eeb0f943">wblut.hemesh.HE_Halfedge.isEdge()</a>.</p>
 
 </div>
 </div>
@@ -736,6 +747,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a1677d66eaa99dceb0ba2afd31204f87c">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="adde1aef4ec6ebfa53a0a19a30ffb49a8"></a>
@@ -759,6 +772,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#afd35710da5be0ac05dfd562afc6f9245">wblut.hemesh.HE_MeshStructure.addFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a9903dc648a4a3fb43c741aae45a7a241">wblut.hemesh.HE_MeshStructure.addHalfedges()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a0eeefdd9a19a808f8143e6d00d0ec144">wblut.hemesh.HE_MeshStructure.addVertices()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2b0a972b69bf213da31ee6c897220e78"></a>
@@ -780,6 +795,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ad418173dd9b5546c4be714c12a8dd272">wblut.hemesh.HE_MeshStructure.edges</a>.</p>
 
 </div>
 </div>
@@ -804,6 +821,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aa01d0f3897ecd3f56922eca394b7a537"></a>
@@ -827,6 +846,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a8bd8158278fe656e0b4b3bcef0229ea1"></a>
@@ -848,6 +869,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aa7c575a893dc39bc9532637267c174e3">wblut.hemesh.HE_MeshStructure.faces</a>.</p>
 
 </div>
 </div>
@@ -872,6 +895,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a9ab2d18637d925e814eafcf861bc9cba"></a>
@@ -895,6 +920,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac8d38b59bccdcb269ef559fc46608bc6"></a>
@@ -916,6 +943,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ad418173dd9b5546c4be714c12a8dd272">wblut.hemesh.HE_MeshStructure.edges</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac590bf1c47f93f178ef428fb31f24a66">wblut.hemesh.HE_MeshStructure.halfedges</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a0ccf4231c2ababe082bd1826827f3108">wblut.hemesh.HE_MeshStructure.unpairedHalfedges</a>.</p>
 
 </div>
 </div>
@@ -940,6 +969,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a3356d0d4ef68033f49a3fa7609612972"></a>
@@ -961,6 +992,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aee52ec8236d4a0741f539739f9ebb935">wblut.hemesh.HE_MeshStructure.vertices</a>.</p>
 
 </div>
 </div>
@@ -985,6 +1018,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a7b2f19f2e29fa1c79acbfb7f9a7cbda5"></a>
@@ -1000,6 +1035,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Cap all remaining unpaired halfedges. Only use after <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c8b01846514ab1ef5bf9b46371cffda">pairHalfedges()</a>; </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#acf06bf42eed3e9fe065e8ef3d59c77aa">wblut.hemesh.HE_MeshStructure.getUnpairedHalfedges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_counter.html#a5a2d3f1b78287f80e75d110e6ced13f0">wblut.core.WB_ProgressReporter.WB_ProgressCounter.increment()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#ad9041ce8507e71e64c288c460a2dd459">wblut.hemesh.HE_MeshElement.isVisited()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#aba86ed831faf8e8980e076a9d009176f">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setCounterStatus()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a930f3ed568130a5db59ff4ce1b2fbe47">wblut.hemesh.HE_MeshStructure.setNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a7cb8e0161ee22d974c7bb0b679c60dad">wblut.hemesh.HE_MeshStructure.setPair()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#a01054a896c2fd93b502e5c7a8c63d48c">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setStartStatus()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#afa920630eacac71260ef6160c9eba997">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setStopStatus()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a2f0e4b32cb4a5a1ba8023b830283bf5e">wblut.hemesh.HE_MeshStructure.setVertex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#aa230295986466e9a3fda040155d1282a">wblut.hemesh.HE_MeshElement.setVisited()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a4fa8c30eeeeb0894e7c222a81ea1a2f2">wblut.hemesh.HE_MeshElement.tracker</a>.</p>
 
 </div>
 </div>
@@ -1018,6 +1055,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Clean all mesh elements not used by any faces.</p>
 <dl class="section return"><dt>Returns</dt><dd>self </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#afdda3865cd4eaa515230d842fbab5cb4">wblut.hemesh.HET_MeshOp.cleanUnusedElementsByFace()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a1cd3a159602811fa7eea807ff059ca8f"></a>
@@ -1033,6 +1072,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Clear entire structure. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a813583c74da94fe66106fae7d908aa10">wblut.hemesh.HE_MeshStructure.clearFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aaffc84366c968d006d6fa817b46ab8ca">wblut.hemesh.HE_MeshStructure.clearHalfedges()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a455f925fc8a9d9bcaf6e1c1f8162868b">wblut.hemesh.HE_MeshStructure.clearVertices()</a>.</p>
 
 </div>
 </div>
@@ -1081,6 +1122,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a4cbf467d158bae574ca764e6ba7967e7">wblut.hemesh.HE_Halfedge._clearFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a7cb8e0161ee22d974c7bb0b679c60dad">wblut.hemesh.HE_MeshStructure.setPair()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a813583c74da94fe66106fae7d908aa10"></a>
@@ -1120,6 +1163,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#ac7953596ac7f7bd55e68550bfb87cbde">wblut.hemesh.HE_Face._clearHalfedge()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a82e3b99f65398afda7cab694655f6b0b"></a>
@@ -1142,6 +1187,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a32239d7e7814014fe1555d500fced0a6">wblut.hemesh.HE_Vertex._clearHalfedge()</a>.</p>
 
 </div>
 </div>
@@ -1182,6 +1229,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a6f24059459e0989fe0e1ec8ad56b000f">wblut.hemesh.HE_Halfedge._clearNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a057389766d18487bdfda1100bf7781a1">wblut.hemesh.HE_Halfedge._clearPrev()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af02249e319437131a4cb510f1a284a13"></a>
@@ -1205,6 +1254,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#af8900c4520c6715cfe88819cf0dc3137">wblut.hemesh.HE_Halfedge._clearPair()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a50530c98cea6cd77701a7d58da92447e"></a>
@@ -1219,6 +1270,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a7709a7683fa874a0f8e6f8884494d994">wblut.hemesh.HE_MeshStructure.clearPrecomputedFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a14a698d8efd2ef578ed363ba331847c2">wblut.hemesh.HE_MeshStructure.clearPrecomputedHalfedges()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a67f673b9bb1d8c273835d268f551fee1">wblut.hemesh.HE_MeshStructure.clearPrecomputedVertices()</a>.</p>
 
 </div>
 </div>
@@ -1235,6 +1288,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#acc3310864149e4a93c819eeac20a3f8e">wblut.hemesh.HE_Face.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a14a698d8efd2ef578ed363ba331847c2"></a>
@@ -1250,6 +1305,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a6582dbb04202357eab2f07fa26aadf4a">wblut.hemesh.HE_Halfedge.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a67f673b9bb1d8c273835d268f551fee1"></a>
@@ -1264,6 +1321,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#af87bc88e7ae10b18d2d1f828cf4bf3d4">wblut.hemesh.HE_Vertex.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -1288,6 +1347,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a6f24059459e0989fe0e1ec8ad56b000f">wblut.hemesh.HE_Halfedge._clearNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a057389766d18487bdfda1100bf7781a1">wblut.hemesh.HE_Halfedge._clearPrev()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#ac0565810cede142f24bb6ef0ead01bc8">wblut.hemesh.HE_Halfedge.getPrevInFace()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ae589ed1ed4af1e126a622d6ec1e6c058"></a>
@@ -1310,6 +1371,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa34aadc09121f3686794e56d62466ae6">wblut.hemesh.HE_Halfedge._clearVertex()</a>.</p>
 
 </div>
 </div>
@@ -1341,6 +1404,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#ae174a24e288c624b5e9a7e498ae9f64c">wblut.hemesh.HE_MeshElement.clearVisited()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -1382,6 +1447,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true, if successful </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a4e5448579b6612b4dbf800fda15cbce5">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.contains()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a1acb8e75cd53610721b183cd87b4697b"></a>
@@ -1405,6 +1472,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true, if successful </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a4e5448579b6612b4dbf800fda15cbce5">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.contains()</a>.</p>
 
 </div>
 </div>
@@ -1430,6 +1499,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true, if successful </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a4e5448579b6612b4dbf800fda15cbce5">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.contains()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a65302282762e9122e44a053163c32df3"></a>
@@ -1452,6 +1523,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a5ede0baa3e4810e71bdb0954967180bd">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.containsKey()</a>.</p>
 
 </div>
 </div>
@@ -1476,6 +1549,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a5ede0baa3e4810e71bdb0954967180bd">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.containsKey()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6313b467da048c00e9ef439dfde1ed7d"></a>
@@ -1499,6 +1574,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a5ede0baa3e4810e71bdb0954967180bd">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.containsKey()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ab6fce98af4157f1610035ed0ab4edb8a"></a>
@@ -1521,6 +1598,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a5ede0baa3e4810e71bdb0954967180bd">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.containsKey()</a>.</p>
 
 </div>
 </div>
@@ -1556,6 +1635,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a0529a81d7bf8dcab8d7967fa405e9b7a">wblut.hemesh.HE_MeshStructure.getHalfedgeFromTo()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a6fb723bad69dd9c0b4591bb16cc356ce">wblut.hemesh.HE_MeshStructure.getVertexWithIndex()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="acb3395f26b840f8069d0d941b21f9220"></a>
@@ -1579,6 +1660,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a930f3ed568130a5db59ff4ce1b2fbe47">wblut.hemesh.HE_MeshStructure.setNext()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4cfc7c58d17c29349cd18cb626dc97ab"></a>
@@ -1601,6 +1684,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a930f3ed568130a5db59ff4ce1b2fbe47">wblut.hemesh.HE_MeshStructure.setNext()</a>.</p>
 
 </div>
 </div>
@@ -1652,6 +1737,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Iterate through all halfedges and reset the halfedge link to its face to itself. f=he.getFace() f.setHalfedge(he) </p>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a19d73eac07872ceb73cea09dccd232fe">wblut.hemesh.HE_Halfedge.getFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ab3369fb38c261679c6e4cd943c81a95e">wblut.hemesh.HE_MeshStructure.setHalfedge()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2624c3ca0436668ad587e48c1a313f9d"></a>
@@ -1667,6 +1754,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Iterate through all halfedges and reset the halfedge link to its vertex to itself. v=he.getVertex() v.setHalfedge(he) </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ab3369fb38c261679c6e4cd943c81a95e">wblut.hemesh.HE_MeshStructure.setHalfedge()</a>.</p>
 
 </div>
 </div>
@@ -1685,6 +1774,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Get axis-aligned bounding box surrounding mesh.</p>
 <dl class="section return"><dt>Returns</dt><dd>WB_AABB axis-aligned bounding box </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#a7d0b7c92e9f68514012cc19a6d51cf9d">wblut.geom.WB_GeometryFactory3D.createPoint()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#acfc9140ac5ef9f1ea8437d7725c55a5d">wblut.hemesh.HE_MeshStructure.getLimits()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="abf4c6663d1c886f21780d191f383ea5e"></a>
@@ -1701,6 +1792,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a111d106adf725abb1fd922100b79d873">wblut.hemesh.HE_MeshStructure.getBoundaryLoopHalfedges()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a3c174b254995ca237dd7842804c6c289"></a>
@@ -1716,6 +1809,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a4e20da65b48304346d41c24b0f787e57">wblut.geom.WB_GeometryFactory2D.createSimplePolygon()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a5a26487f540690faedbaa66f756c3638">wblut.hemesh.HE_MeshStructure.getBoundaryHalfedges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>.</p>
 
 </div>
 </div>
@@ -1734,6 +1829,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Collect all boundary halfedges.</p>
 <dl class="section return"><dt>Returns</dt><dd>boundary halfedges </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a111d106adf725abb1fd922100b79d873"></a>
@@ -1749,6 +1846,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a5a26487f540690faedbaa66f756c3638">wblut.hemesh.HE_MeshStructure.getBoundaryHalfedges()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>.</p>
 
 </div>
 </div>
@@ -1767,6 +1866,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Collect all boundary vertices.</p>
 <dl class="section return"><dt>Returns</dt><dd>boundary vertices </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac66bab6d17e13f03a452455645339c9a"></a>
@@ -1782,6 +1883,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1geom_1_1_w_b___geometry_op3_d.html#a9130ae420bd327f10ff16214b984d46e">wblut.geom.WB_GeometryOp3D.getBoundingSphere()</a>.</p>
 
 </div>
 </div>
@@ -1800,6 +1903,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all edge centers.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a054f2827e2ba24a2bfc4cb77f65e5274">wblut.hemesh.HE_Halfedge.getHalfedgeCenter()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18f6948be739323280efbe22f0786f0d">wblut.hemesh.HE_MeshStructure.getNumberOfEdges()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aa781f59529b2141e3c62d0e53e0005cb"></a>
@@ -1817,6 +1922,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all edge normals.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a6507778c60e114a3d0ba2b064127e73d">wblut.hemesh.HE_Halfedge.getEdgeNormal()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18f6948be739323280efbe22f0786f0d">wblut.hemesh.HE_MeshStructure.getNumberOfEdges()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6534f9bd633a3b4f571134a085590ebc"></a>
@@ -1832,6 +1939,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#adb480158952ecb814880e13c264f4d6e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getObjects()</a>.</p>
 
 </div>
 </div>
@@ -1850,6 +1959,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Edges as array.</p>
 <dl class="section return"><dt>Returns</dt><dd>all edges as <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html">HE_Halfedge</a>[] </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ad418173dd9b5546c4be714c12a8dd272">wblut.hemesh.HE_MeshStructure.edges</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18f6948be739323280efbe22f0786f0d">wblut.hemesh.HE_MeshStructure.getNumberOfEdges()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="acf2828bf3f466b847ecd0d45c3585648"></a>
@@ -1864,6 +1975,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18f6948be739323280efbe22f0786f0d">wblut.hemesh.HE_MeshStructure.getNumberOfEdges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#ae8645a529ca621a11ed4deb23862cd8f">wblut.hemesh.HE_Vertex.key()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -1889,6 +2002,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a9f1198ce562d464a20034830ab830632">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.get()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a817fc0e59dd525aded354278003a7e5c"></a>
@@ -1913,6 +2028,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>halfedge </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a319e79c64f89f9cf4985ab294c795c8e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getWithKey()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a04cc5f26d4f9077eaad9622249b0208b"></a>
@@ -1928,6 +2045,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18f6948be739323280efbe22f0786f0d">wblut.hemesh.HE_MeshStructure.getNumberOfEdges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>.</p>
 
 </div>
 </div>
@@ -1946,6 +2065,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all face centers.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#aeb5d44b6828291282b23f85ac843e219">wblut.hemesh.HE_Face.getFaceCenter()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a36cc1bfa1400432324d718988297e4f9"></a>
@@ -1961,6 +2082,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a90bb018cd013cb88c18f4c2881f4cba7">wblut.hemesh.HE_MeshElement.getColor()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a665866ba57ad1aa4bd569f4071a7cdab"></a>
@@ -1975,6 +2098,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>.</p>
 
 </div>
 </div>
@@ -1993,6 +2118,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all face normals.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a645722b33359c802dc396cad0949135b">wblut.hemesh.HE_Face.getFaceNormal()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a9d61366b0c72848f2db8debfe86ce06a"></a>
@@ -2008,6 +2135,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#adb480158952ecb814880e13c264f4d6e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getObjects()</a>.</p>
 
 </div>
 </div>
@@ -2026,6 +2155,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Faces as array.</p>
 <dl class="section return"><dt>Returns</dt><dd>all faces as <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html">HE_Face</a>[] </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aa7c575a893dc39bc9532637267c174e3">wblut.hemesh.HE_MeshStructure.faces</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a0e050e2af40109cf75de68020d536ecd"></a>
@@ -2043,6 +2174,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return the faces as array of vertex indices.</p>
 <dl class="section return"><dt>Returns</dt><dd>2D array of int. First index gives face. Second index gives vertices. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a18a3cb0b3a9cd8c9037cbebf705683fc">wblut.hemesh.HE_Face.getFaceDegree()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#abe9fa33fa2796b2862d61967f6b7bbf7">wblut.hemesh.HE_Face.getHalfedge()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a24ed97773061ca1e0a5bd1b8deedff4d">wblut.hemesh.HE_MeshStructure.getVertexKeyToIndexMap()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#ae8645a529ca621a11ed4deb23862cd8f">wblut.hemesh.HE_Vertex.key()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a35ed03d87d759d0b39a47b2624189399"></a>
@@ -2057,6 +2190,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a09f9fde39827921c514146f0f0429f1d">wblut.hemesh.HE_Face.getTextureId()</a>.</p>
 
 </div>
 </div>
@@ -2073,6 +2208,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af3ef758a14b3f16fed0e2eade9d70010"></a>
@@ -2087,6 +2224,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a93558b96f0a47aaa238be6dc741a3f97">wblut.hemesh.HE_MeshElement.isVisible()</a>.</p>
 
 </div>
 </div>
@@ -2112,6 +2251,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a9f1198ce562d464a20034830ab830632">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.get()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a023e6184150748c67a28c6eac9f03bb3"></a>
@@ -2136,6 +2277,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>face </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a319e79c64f89f9cf4985ab294c795c8e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getWithKey()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ad3919b8d4d5242a8baa6bf3dc9f99f18"></a>
@@ -2151,6 +2294,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a04cc5f26d4f9077eaad9622249b0208b">wblut.hemesh.HE_MeshStructure.getEulerCharacteristic()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18fb75f851f70902959e0f28d5a92e53">wblut.hemesh.HE_MeshStructure.getNumberOfBoundaryComponents()</a>.</p>
 
 </div>
 </div>
@@ -2187,6 +2332,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a81ce6ab48aeb441ce0a137d2329328a9">wblut.hemesh.HE_Halfedge.getEndVertex()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a3715b5b1d0ae29a926bc8b74e5a1d9df">wblut.hemesh.HE_Vertex.getHalfedgeStar()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a57b8777db5263ab73bc6a86f41e5556c"></a>
@@ -2202,6 +2349,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac590bf1c47f93f178ef428fb31f24a66">wblut.hemesh.HE_MeshStructure.halfedges</a>.</p>
 
 </div>
 </div>
@@ -2219,6 +2368,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Halfedges as array.</p>
 <dl class="section return"><dt>Returns</dt><dd>all halfedges as <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html">HE_Halfedge</a>[] </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a57b8777db5263ab73bc6a86f41e5556c">wblut.hemesh.HE_MeshStructure.getHalfedges()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac590bf1c47f93f178ef428fb31f24a66">wblut.hemesh.HE_MeshStructure.halfedges</a>.</p>
 
 </div>
 </div>
@@ -2244,6 +2395,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a9f1198ce562d464a20034830ab830632">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.get()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aaa1b85d31bff710eecbf3a5d3ef358d5"></a>
@@ -2268,6 +2421,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>halfedge </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a319e79c64f89f9cf4985ab294c795c8e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getWithKey()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a1a105c4d847da31cebbb2bd602c1776a"></a>
@@ -2290,6 +2445,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#aa6a5f9ca7f596da0bfbafca29a0d9c74">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.indexOf()</a>.</p>
 
 </div>
 </div>
@@ -2314,6 +2471,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#aa6a5f9ca7f596da0bfbafca29a0d9c74">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.indexOf()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ad219f496535c1617b71c9e9940c7be84"></a>
@@ -2337,6 +2496,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#aa6a5f9ca7f596da0bfbafca29a0d9c74">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.indexOf()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af0fb880f5aa86f35c785892fb4fe6bc6"></a>
@@ -2353,6 +2514,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Return all edge centers.</p>
 <dl class="section return"><dt>Returns</dt><dd>UnifiedMap of WB_Coordinate. </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>.</p>
 
 </div>
 </div>
@@ -2371,6 +2534,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all edge normals.</p>
 <dl class="section return"><dt>Returns</dt><dd>UnifiedMap of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6f4e996def1410a18b5bf5ec9d783867"></a>
@@ -2387,6 +2552,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Return all face centers.</p>
 <dl class="section return"><dt>Returns</dt><dd>UnifiedMap of WB_Coordinate. </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>.</p>
 
 </div>
 </div>
@@ -2405,6 +2572,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all face normals.</p>
 <dl class="section return"><dt>Returns</dt><dd>UnifiedMap of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a765ae9ca82a18d082495614214dc0c99"></a>
@@ -2421,6 +2590,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Get vertex normals mapped on vertex key</p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -2439,6 +2610,23 @@ Additional Inherited Members</h2></td></tr>
 <p>Get range of vertex coordinates.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of limit values: min x, min y, min z, max x, max y, max z </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a6fb723bad69dd9c0b4591bb16cc356ce">wblut.hemesh.HE_MeshStructure.getVertexWithIndex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#aa715dbc41c2d5549f89dea52d1046005">wblut.hemesh.HE_Vertex.xd()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acc7daf5cecded02b48a92e1d3c2ab8e9">wblut.hemesh.HE_Vertex.yd()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a7db213341be5e62965f93b2d3b064f7d">wblut.hemesh.HE_Vertex.zd()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac3d008083a62bff0ff0f28cc68dd1eec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String wblut.hemesh.HE_MeshStructure.getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a class="anchor" id="a18fb75f851f70902959e0f28d5a92e53"></a>
@@ -2454,6 +2642,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a111d106adf725abb1fd922100b79d873">wblut.hemesh.HE_MeshStructure.getBoundaryLoopHalfedges()</a>.</p>
 
 </div>
 </div>
@@ -2472,6 +2662,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Number of edges.</p>
 <dl class="section return"><dt>Returns</dt><dd>the number of edges </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4c23daf275ef4b99b57271edc8751a4d"></a>
@@ -2488,6 +2680,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Number of faces.</p>
 <dl class="section return"><dt>Returns</dt><dd>the number of faces </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>.</p>
 
 </div>
 </div>
@@ -2506,6 +2700,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Number of halfedges.</p>
 <dl class="section return"><dt>Returns</dt><dd>the number of halfedges </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a63bccd861bf8407dd2afe6047fc03e4d"></a>
@@ -2522,6 +2718,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Number of vertices.</p>
 <dl class="section return"><dt>Returns</dt><dd>the number of vertices </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>.</p>
 
 </div>
 </div>
@@ -2540,6 +2738,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Gets the polygon list.</p>
 <dl class="section return"><dt>Returns</dt><dd>the polygon list </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a3e4e346746622f75de59992c22f492c4">wblut.hemesh.HE_Face.toPolygon()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="afba58b9d4546d63355ac5e75bb91c24b"></a>
@@ -2557,6 +2757,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return the mesh as polygon soup.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_polygon </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4c23daf275ef4b99b57271edc8751a4d">wblut.hemesh.HE_MeshStructure.getNumberOfFaces()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a3e4e346746622f75de59992c22f492c4">wblut.hemesh.HE_Face.toPolygon()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a85eb40da75c846c82aa49bb21f35fbcd"></a>
@@ -2573,6 +2775,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Gets the segments.</p>
 <dl class="section return"><dt>Returns</dt><dd>the segments </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a81ce6ab48aeb441ce0a137d2329328a9">wblut.hemesh.HE_Halfedge.getEndVertex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a18f6948be739323280efbe22f0786f0d">wblut.hemesh.HE_MeshStructure.getNumberOfEdges()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>.</p>
 
 </div>
 </div>
@@ -2608,6 +2812,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a148658cf84036dde44da80991439b256">wblut.hemesh.HE_Vertex.getFaceStar()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="acf06bf42eed3e9fe065e8ef3d59c77aa"></a>
@@ -2625,6 +2831,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Collect all unpaired halfedges.</p>
 <dl class="section return"><dt>Returns</dt><dd>the unpaired halfedges </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac590bf1c47f93f178ef428fb31f24a66">wblut.hemesh.HE_MeshStructure.halfedges</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6bb527e0a55fc114779a013e8f0d1ea4"></a>
@@ -2640,6 +2848,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a90bb018cd013cb88c18f4c2881f4cba7">wblut.hemesh.HE_MeshElement.getColor()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af48e0cfe187791a35e3e2f55152b7fde"></a>
@@ -2654,6 +2864,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -2672,6 +2884,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Vertex key to index.</p>
 <dl class="section return"><dt>Returns</dt><dd>the map </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ae32605025ed3902308eb322d2786ceea"></a>
@@ -2689,6 +2903,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all vertex normals.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_Coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#ad15318351b94f6409204e5216d556164">wblut.hemesh.HE_Vertex.getVertexNormal()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aed9773976d3707b9c31d2feb3e67f5e9"></a>
@@ -2704,6 +2920,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aefec146d45556e013e9e2fdd811f64b2"></a>
@@ -2718,6 +2936,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a93558b96f0a47aaa238be6dc741a3f97">wblut.hemesh.HE_MeshElement.isVisible()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -2743,6 +2963,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a9f1198ce562d464a20034830ab830632">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.get()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#ae45d375d6109bb68a2faa24039594fe3">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.size()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a079b7fa934dd2be4b46c594841551c3e"></a>
@@ -2767,6 +2989,8 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>vertex </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a319e79c64f89f9cf4985ab294c795c8e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getWithKey()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aae476aa321b46ad5b7be59667b9e5dd6"></a>
@@ -2782,6 +3006,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#adb480158952ecb814880e13c264f4d6e">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.getObjects()</a>.</p>
 
 </div>
 </div>
@@ -2800,6 +3026,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Vertices as array.</p>
 <dl class="section return"><dt>Returns</dt><dd>all vertices as <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html">HE_Vertex</a>[] </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aee52ec8236d4a0741f539739f9ebb935">wblut.hemesh.HE_MeshStructure.vertices</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af8c4e303a4d04ca9ed72d535738f6223"></a>
@@ -2816,6 +3044,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Return all vertex positions as an immutable List of immutable WB_Coord.</p>
 <dl class="section return"><dt>Returns</dt><dd>array of WB_Coord. </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#ac4819e1a1bd0a3011bcc165811ba58c8">wblut.hemesh.HE_Vertex.add()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -2834,6 +3064,8 @@ Additional Inherited Members</h2></td></tr>
 <p>Return all vertex positions as an array .</p>
 <dl class="section return"><dt>Returns</dt><dd>2D array of double. First index gives vertex. Second index gives x-,y- or z-coordinate. </dd></dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#aa715dbc41c2d5549f89dea52d1046005">wblut.hemesh.HE_Vertex.xd()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acc7daf5cecded02b48a92e1d3c2ab8e9">wblut.hemesh.HE_Vertex.yd()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a7db213341be5e62965f93b2d3b064f7d">wblut.hemesh.HE_Vertex.zd()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a857eeb5a99da9ab24b5abc94920866d2"></a>
@@ -2850,6 +3082,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Return all vertex positions as an array .</p>
 <dl class="section return"><dt>Returns</dt><dd>2D array of float. First index gives vertex. Second index gives x-,y- or z-coordinate. </dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a9d98baeb7c63744858f8635969c131a3">wblut.hemesh.HE_Vertex.xf()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a6fd4393687d1c3d4fed594ea5fd0d64c">wblut.hemesh.HE_Vertex.yf()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#af82c42f529fc1c2b427fcf811204a3ee">wblut.hemesh.HE_Vertex.zf()</a>.</p>
 
 </div>
 </div>
@@ -2884,6 +3118,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a930f3ed568130a5db59ff4ce1b2fbe47">wblut.hemesh.HE_MeshStructure.setNext()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a90ad584551b1f527e591d057b653fba4"></a>
@@ -2907,6 +3143,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a930f3ed568130a5db59ff4ce1b2fbe47">wblut.hemesh.HE_MeshStructure.setNext()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4c8b01846514ab1ef5bf9b46371cffda"></a>
@@ -2921,6 +3159,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aa0e810f2aae3098877b9b2a26631fd5e">wblut.hemesh.HE_MeshStructure.pairHalfedgesOnePass()</a>.</p>
 
 </div>
 </div>
@@ -2945,6 +3185,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a7cb8e0161ee22d974c7bb0b679c60dad">wblut.hemesh.HE_MeshStructure.setPair()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aa0e810f2aae3098877b9b2a26631fd5e"></a>
@@ -2961,6 +3203,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Try to pair all unpaired halfedges.</p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aa5c87c15dfc90bd49462a0a8eed20f19">wblut.hemesh.HE_Halfedge.getNextInFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#acf06bf42eed3e9fe065e8ef3d59c77aa">wblut.hemesh.HE_MeshStructure.getUnpairedHalfedges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_counter.html#a5a2d3f1b78287f80e75d110e6ced13f0">wblut.core.WB_ProgressReporter.WB_ProgressCounter.increment()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#ae8645a529ca621a11ed4deb23862cd8f">wblut.hemesh.HE_Vertex.key()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#aba86ed831faf8e8980e076a9d009176f">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setCounterStatus()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a7cb8e0161ee22d974c7bb0b679c60dad">wblut.hemesh.HE_MeshStructure.setPair()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#a01054a896c2fd93b502e5c7a8c63d48c">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setStartStatus()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#afa920630eacac71260ef6160c9eba997">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setStopStatus()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a4fa8c30eeeeb0894e7c222a81ea1a2f2">wblut.hemesh.HE_MeshElement.tracker</a>.</p>
 
 </div>
 </div>
@@ -2985,6 +3229,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a76b1014d5f875171c9b6ca2cfd9f1361">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.remove()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="abd109be89396afaf361703e17c5a623e"></a>
@@ -3008,6 +3254,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a76b1014d5f875171c9b6ca2cfd9f1361">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.remove()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a0523b7e6e12a4317e7f9120bb5079cd2"></a>
@@ -3030,6 +3278,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___r_a_s.html#a76b1014d5f875171c9b6ca2cfd9f1361">wblut.hemesh.HE_RAS&lt; E extends HE_Element &gt;.remove()</a>.</p>
 
 </div>
 </div>
@@ -3193,6 +3443,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Reset all edge labels to -1. </p>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6ca606b87cf31e39ef8ab0e140f1cfa8"></a>
@@ -3208,6 +3460,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Reset all edge labels to -1. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>.</p>
 
 </div>
 </div>
@@ -3233,6 +3487,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Reset face labels to -1. </p>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af5d5120f2d66b8796f34c3c6f1a0a9b1"></a>
@@ -3248,6 +3504,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Reset all face labels to -1. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>.</p>
 
 </div>
 </div>
@@ -3273,6 +3531,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Reset all halfedge labels to -1. </p>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac8cf1196d8b94bc55e6ddd7683ac3d6a"></a>
@@ -3288,6 +3548,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Reset all halfedge labels to -1. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>.</p>
 
 </div>
 </div>
@@ -3313,6 +3575,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Reset all internal labels to -1. </p>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a907b6b4416ae06516edfad19944894c9">wblut.hemesh.HE_MeshStructure.resetFaceInternalLabels()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ae127a8368abd940f6b16352922423289">wblut.hemesh.HE_MeshStructure.resetHalfedgeInternalLabels()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac1871dcd8f588459a3b1c0597e7ef1ea">wblut.hemesh.HE_MeshStructure.resetVertexInternalLabels()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2fc1d0bfb16db32ec94e862b30245ede"></a>
@@ -3328,6 +3592,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Reset all labels. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af5d5120f2d66b8796f34c3c6f1a0a9b1">wblut.hemesh.HE_MeshStructure.resetFaceUserLabels()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ac8cf1196d8b94bc55e6ddd7683ac3d6a">wblut.hemesh.HE_MeshStructure.resetHalfedgeUserLabels()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a194c840c4d1e9c698e4cd03da930dc4a">wblut.hemesh.HE_MeshStructure.resetVertexUserLabels()</a>.</p>
 
 </div>
 </div>
@@ -3353,6 +3619,8 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Reset all vertex labels to -1. </p>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a194c840c4d1e9c698e4cd03da930dc4a"></a>
@@ -3368,6 +3636,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Reset all vertex labels to -1. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -3400,6 +3670,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ab4beeb9ee34c8359182b1e18f7bdf69a"></a>
@@ -3422,6 +3694,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a524cac0042300a193615b5e56ff3537f">wblut.hemesh.HE_MeshStructure.eItr()</a>.</p>
 
 </div>
 </div>
@@ -3457,6 +3731,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#ad0af9feb6d7efb15ea4bfd6211ff395a">wblut.hemesh.HE_Halfedge._setFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#aeb3be1fc6985cc0648fa839695e6d857">wblut.hemesh.HE_Halfedge.getPair()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a7cb8e0161ee22d974c7bb0b679c60dad">wblut.hemesh.HE_MeshStructure.setPair()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a52f8cb754d97e1fde7074f6f5011a08b"></a>
@@ -3478,6 +3754,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
 
 </div>
 </div>
@@ -3512,6 +3790,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2f8d3d6e0a567e4d4cacad86b79d907b"></a>
@@ -3544,6 +3824,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
 
 </div>
 </div>
@@ -3578,6 +3860,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="abdc1ab788033a2eb8c50c60b1ad75cd1"></a>
@@ -3611,6 +3895,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a73aa52cf57bf871d5078dbb2c20bb5ad"></a>
@@ -3642,6 +3928,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2f409819d2f7bc89bab0fd23d1d50fee"></a>
@@ -3664,6 +3952,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>.</p>
 
 </div>
 </div>
@@ -3699,6 +3989,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a8539d72ea273ec206138355333ad5b5a">wblut.hemesh.HE_Face._setHalfedge()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a961c572d6b9f28c341c6f8a891e7442e"></a>
@@ -3733,6 +4025,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#a76a40b4a475a7c041f20e20436406197">wblut.hemesh.HE_Vertex._setHalfedge()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a18b778485be1d789f477d37aceae44dc"></a>
@@ -3754,6 +4048,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
 
 </div>
 </div>
@@ -3788,6 +4084,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4b818526cdccaf0ae1bf4accf2a89853"></a>
@@ -3820,6 +4118,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
 
 </div>
 </div>
@@ -3854,6 +4154,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a369a36023a37763898ce30fd2bf91dea"></a>
@@ -3887,6 +4189,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#abbb0ea4bc0a6d9f3e4e4944c1509dee7">wblut.hemesh.HE_HalfedgeIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html#a6e2b28db9839824278224678167cb701">wblut.hemesh.HE_HalfedgeIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a460694dbe68714a426052ebc8a60149a"></a>
@@ -3918,6 +4222,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a93cd6bb8e6a7d49451c4e943cf2fbdab"></a>
@@ -3940,6 +4246,24 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af389c827e0a0fa88beec5ac634aed723">wblut.hemesh.HE_MeshStructure.heItr()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae2567d64e050f45291f78031008402ee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void wblut.hemesh.HE_MeshStructure.setName </td>
+          <td>(</td>
+          <td class="paramtype">final String&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -3975,6 +4299,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a52c7a777576f386441a467ddce39554e">wblut.hemesh.HE_Halfedge._setNext()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a0073e1eb16c40260b608ddfd3a02e73f">wblut.hemesh.HE_Halfedge._setPrev()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a7cb8e0161ee22d974c7bb0b679c60dad"></a>
@@ -4008,6 +4334,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#ab0e26c6557f3cf7666110903280c7a06">wblut.hemesh.HE_Halfedge._setPair()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a4b2320a9dc374b73efbc217f044672f4">wblut.hemesh.HE_MeshStructure.add()</a>.</p>
 
 </div>
 </div>
@@ -4043,6 +4371,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#abb96c29d4d0c06c4d421b58ae31388e2">wblut.hemesh.HE_Halfedge._setVertex()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6fbfa95bf1ffdd6b352896b9baec8345"></a>
@@ -4068,6 +4398,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
 
 </div>
 </div>
@@ -4107,6 +4439,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a19e2e5f29b20d1ccf5fd875ca53ad3a3"></a>
@@ -4139,6 +4473,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a68447200ba8e3492ba2f3f6ed72206cc"></a>
@@ -4160,6 +4496,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4194,6 +4532,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4fa96d4b39975edfb3c6cc7e4dffb919"></a>
@@ -4226,6 +4566,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a79a99ecfc7b95e24f206f280e436c0c4">wblut.hemesh.HE_Element.getInternalLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4260,6 +4602,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a553e58a443db22fcde43d126fb96c2a9"></a>
@@ -4293,6 +4637,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___element.html#a8035c601a484300da6798b26e6b59161">wblut.hemesh.HE_Element.getUserLabel()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a71a1018a3a7f060fb0e529c6b4b49bde">wblut.hemesh.HE_VertexIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex_iterator.html#a642718b778718498137fd46412aae5a9">wblut.hemesh.HE_VertexIterator.next()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a75fad19a4d17e2c386f02e2f953aedab">wblut.hemesh.HE_MeshElement.setColor()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a0f5e0f94c4e85be3b64783a4e46639e4"></a>
@@ -4324,6 +4670,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ac727ac4d19cc8a07687e9f7a425b94bb"></a>
@@ -4346,6 +4694,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4372,6 +4722,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a6fb723bad69dd9c0b4591bb16cc356ce">wblut.hemesh.HE_MeshStructure.getVertexWithIndex()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
 
 </div>
 </div>
@@ -4411,6 +4763,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a6fb723bad69dd9c0b4591bb16cc356ce">wblut.hemesh.HE_MeshStructure.getVertexWithIndex()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a7432c0a409bf918e3cb0992c51a43a0b"></a>
@@ -4443,6 +4797,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a6fb723bad69dd9c0b4591bb16cc356ce">wblut.hemesh.HE_MeshStructure.getVertexWithIndex()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a8402737a7c7fc6eafc24d1fb1aba5fb1"></a>
@@ -4468,6 +4824,8 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a079b7fa934dd2be4b46c594841551c3e">wblut.hemesh.HE_MeshStructure.getVertexWithKey()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
 
 </div>
 </div>
@@ -4507,6 +4865,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a079b7fa934dd2be4b46c594841551c3e">wblut.hemesh.HE_MeshStructure.getVertexWithKey()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2034637112cdaac843cf66a9f7da6e6d"></a>
@@ -4539,6 +4899,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a079b7fa934dd2be4b46c594841551c3e">wblut.hemesh.HE_MeshStructure.getVertexWithKey()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="acdaacf4663738f283161c1fe8d5d21aa"></a>
@@ -4561,6 +4923,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4585,6 +4949,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a1a72602f233f612bce8659fc92372eee"></a>
@@ -4607,6 +4973,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4631,6 +4999,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a6e679adefe232f33ade804d89c85065d"></a>
@@ -4653,6 +5023,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4677,6 +5049,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a08bba2d01e3c00b440d0eb32a85a8505"></a>
@@ -4699,6 +5073,8 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
 
 </div>
 </div>
@@ -4723,6 +5099,8 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a50530c98cea6cd77701a7d58da92447e">wblut.hemesh.HE_MeshStructure.clearPrecomputed()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a63bccd861bf8407dd2afe6047fc03e4d">wblut.hemesh.HE_MeshStructure.getNumberOfVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___vertex.html#acd8f74ae85abe20de271e31eed073b4b">wblut.hemesh.HE_Vertex.set()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a88efbb5bb7115b9586a79122aa5e4b32">wblut.hemesh.HE_MeshStructure.vItr()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a64fe5f524737fc95843fca3ae12d3e7a"></a>
@@ -4738,6 +5116,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Sort all faces and vertices in lexographical order </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#afd35710da5be0ac05dfd562afc6f9245">wblut.hemesh.HE_MeshStructure.addFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a0eeefdd9a19a808f8143e6d00d0ec144">wblut.hemesh.HE_MeshStructure.addVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a9d61366b0c72848f2db8debfe86ce06a">wblut.hemesh.HE_MeshStructure.getFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aae476aa321b46ad5b7be59667b9e5dd6">wblut.hemesh.HE_MeshStructure.getVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a81c105bdc010025f7d55b4766314ce44">wblut.hemesh.HE_Face.sort()</a>.</p>
 
 </div>
 </div>
@@ -4765,6 +5145,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#afd35710da5be0ac05dfd562afc6f9245">wblut.hemesh.HE_MeshStructure.addFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a0eeefdd9a19a808f8143e6d00d0ec144">wblut.hemesh.HE_MeshStructure.addVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ade300363dcc15ac2d1e4beb562bc7778">wblut.hemesh.HE_MeshStructure.fItr()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a9d61366b0c72848f2db8debfe86ce06a">wblut.hemesh.HE_MeshStructure.getFaces()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#aae476aa321b46ad5b7be59667b9e5dd6">wblut.hemesh.HE_MeshStructure.getVertices()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a5a0ffa10b91b0c171a383948c2dd8124">wblut.hemesh.HE_FaceIterator.hasNext()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face_iterator.html#a0beb342ebbc44eb33abcbfff43a2564a">wblut.hemesh.HE_FaceIterator.next()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___face.html#a81c105bdc010025f7d55b4766314ce44">wblut.hemesh.HE_Face.sort()</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="ad5abe80e068ae4c108aa64b5effcd523"></a>
@@ -4780,6 +5162,8 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Uncap halfedges. </p>
+
+<p>References <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#af02249e319437131a4cb510f1a284a13">wblut.hemesh.HE_MeshStructure.clearPair()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a19d73eac07872ceb73cea09dccd232fe">wblut.hemesh.HE_Halfedge.getFace()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a57b8777db5263ab73bc6a86f41e5556c">wblut.hemesh.HE_MeshStructure.getHalfedges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#a7844e9c1c06627c873ddaa207b11b0f9">wblut.hemesh.HE_Halfedge.getNextInVertex()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#a82187f8cb22a3b12a4f8e92d496b6922">wblut.hemesh.HE_MeshStructure.getNumberOfHalfedges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___halfedge.html#addac67613d2dfa1451818768ac9f8e49">wblut.hemesh.HE_Halfedge.getVertex()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_counter.html#a5a2d3f1b78287f80e75d110e6ced13f0">wblut.core.WB_ProgressReporter.WB_ProgressCounter.increment()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ab2b7ccde0609a87fa8619540f664ff4c">wblut.hemesh.HE_MeshStructure.removeHalfedges()</a>, <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html#ab3369fb38c261679c6e4cd943c81a95e">wblut.hemesh.HE_MeshStructure.setHalfedge()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#a01054a896c2fd93b502e5c7a8c63d48c">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setStartStatus()</a>, <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#afa920630eacac71260ef6160c9eba997">wblut.core.WB_ProgressReporter.WB_ProgressTracker.setStopStatus()</a>, and <a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a4fa8c30eeeeb0894e7c222a81ea1a2f2">wblut.hemesh.HE_MeshElement.tracker</a>.</p>
 
 </div>
 </div>
@@ -4930,7 +5314,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacewblut.html">wblut</a></li><li class="navelem"><a class="el" href="namespacewblut_1_1hemesh.html">hemesh</a></li><li class="navelem"><a class="el" href="classwblut_1_1hemesh_1_1_h_e___mesh_structure.html">HE_MeshStructure</a></li>
-    <li class="footer">Generated on Mon Nov 6 2017 22:01:30 for HE_Mesh by
+    <li class="footer">Generated on Sun Dec 3 2017 18:14:32 for HE_Mesh by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
   </ul>

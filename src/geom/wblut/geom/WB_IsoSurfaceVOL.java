@@ -266,9 +266,9 @@ public class WB_IsoSurfaceVOL {
 	 */
 	public WB_IsoSurfaceVOL setValues(final WB_HashGridDouble values) {
 		this.values = new WB_IsoValues3D.HashGrid3D(values);
-		resx = values.getWidth() - 1;
-		resy = values.getHeight() - 1;
-		resz = values.getDepth() - 1;
+		resx = values.getSizeI() - 1;
+		resy = values.getSizeJ() - 1;
+		resz = values.getSizeK() - 1;
 		return this;
 	}
 

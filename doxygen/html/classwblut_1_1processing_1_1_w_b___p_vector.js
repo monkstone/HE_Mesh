@@ -21,5 +21,6 @@ var classwblut_1_1processing_1_1_w_b___p_vector =
     [ "yd", "classwblut_1_1processing_1_1_w_b___p_vector.html#a4694717e44f5a038ddd59fd1f09f60a6", null ],
     [ "yf", "classwblut_1_1processing_1_1_w_b___p_vector.html#a27f6453f13909c9bbbb68db6121d452c", null ],
     [ "zd", "classwblut_1_1processing_1_1_w_b___p_vector.html#a26d903aca0a6bf5362dccee31d8a24cd", null ],
-    [ "zf", "classwblut_1_1processing_1_1_w_b___p_vector.html#ab7d8ba8820031cbec05701c8824f41a9", null ]
+    [ "zf", "classwblut_1_1processing_1_1_w_b___p_vector.html#ab7d8ba8820031cbec05701c8824f41a9", null ],
+    [ "serialVersionUID", "classwblut_1_1processing_1_1_w_b___p_vector.html#aae675f395a0ba313abfe31b4353a5fa0", null ]
 ];

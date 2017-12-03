@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -304,10 +304,10 @@ public class HEC_VoronoiCell extends HEC_Creator {
 			return new HE_Mesh();
 		}
 
-		inner = new HE_Selection(result);
+		inner = HE_Selection.getSelection(result);
 
 		for (int i = 0; i < labels.length; i++) {
-			final HE_Selection sel = HE_Selection.selectFacesWithInternalLabel(result, labels[i]);
+			final HE_Selection sel = result.selectFacesWithInternalLabel(labels[i]);
 			if (sel.getNumberOfFaces() > 0) {
 				final HE_FaceIterator fitr = sel.fItr();
 				while (fitr.hasNext()) {

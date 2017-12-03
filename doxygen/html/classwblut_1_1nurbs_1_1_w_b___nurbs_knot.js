@@ -7,6 +7,7 @@ var classwblut_1_1nurbs_1_1_w_b___nurbs_knot =
     [ "allBasisFunctions", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#a5376a4846ca1c000f6ffcc40bea95aa5", null ],
     [ "basisFunctions", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#a7164717576f85035abf2cbe548f5c75e", null ],
     [ "m", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#ad2fa0dc6f37f9abc98c7e58d7c46954f", null ],
+    [ "merge", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#a07cbc72b735cd06bb8e5e6a2fdff7bb2", null ],
     [ "multiplicity", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#a9cbe395865cd92f9698d1627a1361453", null ],
     [ "multiplicity", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#a3ba85dc8d7e4008cb09e2c1090359d77", null ],
     [ "multVal", "classwblut_1_1nurbs_1_1_w_b___nurbs_knot.html#a0769383026dcb785dacc6971fbe5adbf", null ],

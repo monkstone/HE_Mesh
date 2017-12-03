@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import org.eclipse.collections.impl.map.mutable.primitive.IntDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
+import processing.core.PApplet;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_HashGridDouble;
 import wblut.geom.WB_IsoValues3D;
@@ -312,9 +313,54 @@ public class HEC_IsoSurface extends HEC_Creator {
 	 */
 	public HEC_IsoSurface setValues(final WB_HashGridDouble values) {
 		this.values = new WB_IsoValues3D.HashGrid3D(values);
-		resx = values.getWidth() - 1;
-		resy = values.getHeight() - 1;
-		resz = values.getDepth() - 1;
+		resx = values.getSizeI() - 1;
+		resy = values.getSizeJ() - 1;
+		resz = values.getSizeK() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param images
+	 * @param home
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
+	 * @return
+	 */
+	public HEC_IsoSurface setValues(final String[] images, final PApplet home, final int sizeI, final int sizeJ,
+			final int sizeK) {
+		this.values = new WB_IsoValues3D.ImageStack3D(images, home, sizeI, sizeJ, sizeK);
+		resx = values.getSizeI() - 1;
+		resy = values.getSizeJ() - 1;
+		resz = values.getSizeK() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param images
+	 * @param home
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
+	 * @param mode
+	 * @return
+	 */
+	public HEC_IsoSurface setValues(final String[] images, final PApplet home, final int sizeI, final int sizeJ,
+			final int sizeK, final WB_IsoValues3D.Mode mode) {
+		this.values = new WB_IsoValues3D.ImageStack3D(images, home, sizeI, sizeJ, sizeK, mode);
+		resx = values.getSizeI() - 1;
+		resy = values.getSizeJ() - 1;
+		resz = values.getSizeK() - 1;
+		return this;
+	}
+
+	public HEC_IsoSurface setValues(final WB_IsoValues3D values) {
+		this.values = values;
+		resx = values.getSizeI() - 1;
+		resy = values.getSizeJ() - 1;
+		resz = values.getSizeK() - 1;
 		return this;
 	}
 
@@ -402,21 +448,25 @@ public class HEC_IsoSurface extends HEC_Creator {
 		valueremaps = new IntDoubleHashMap();
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy, cz - 0.5 * resz * dz);
 		if (Double.isNaN(boundary)) {
-			for (int i = 0; i < resx; i++) {
-				// System.out.println("HEC_IsoSurface: " + (i + 1) + " of " +
-				// resx);
-				for (int j = 0; j < resy; j++) {
-					for (int k = 0; k < resz; k++) {
+			for (int k = 0; k < resz; k++) {
+				for (int i = 0; i < resx; i++) {
+					// System.out.println("HEC_IsoSurface: " + (i + 1) + " of "
+					// +
+					// resx);
+					for (int j = 0; j < resy; j++) {
+
 						getPolygons(i, j, k, classifyCell(i, j, k), offset, true);
 					}
 				}
 			}
 		} else {
-			for (int i = -1; i < resx + 1; i++) {
-				// System.out.println("HEC_IsoSurface: " + (i + 1) + " of " +
-				// resx);
-				for (int j = -1; j < resy + 1; j++) {
-					for (int k = -1; k < resz + 1; k++) {
+			for (int k = -1; k < resz + 1; k++) {
+				for (int i = -1; i < resx + 1; i++) {
+					// System.out.println("HEC_IsoSurface: " + (i + 1) + " of "
+					// +
+					// resx);
+					for (int j = -1; j < resy + 1; j++) {
+
 						getPolygons(i, j, k, classifyCell(i, j, k), offset, true);
 					}
 				}
@@ -442,21 +492,25 @@ public class HEC_IsoSurface extends HEC_Creator {
 	private void polygonise() {
 		final WB_Point offset = new WB_Point(cx - 0.5 * resx * dx, cy - 0.5 * resy * dy, cz - 0.5 * resz * dz);
 		if (Double.isNaN(boundary)) {
-			for (int i = 0; i < resx; i++) {
-				// System.out.println("HEC_IsoSurface: " + (i + 1) + " of " +
-				// resx);
-				for (int j = 0; j < resy; j++) {
-					for (int k = 0; k < resz; k++) {
+			for (int k = 0; k < resz; k++) {
+				for (int i = 0; i < resx; i++) {
+					// System.out.println("HEC_IsoSurface: " + (i + 1) + " of "
+					// +
+					// resx);
+					for (int j = 0; j < resy; j++) {
+
 						getPolygons(i, j, k, classifyCell(i, j, k), offset, false);
 					}
 				}
 			}
 		} else {
-			for (int i = -1; i < resx + 1; i++) {
-				// System.out.println("HEC_IsoSurface: " + (i + 1) + " of " +
-				// resx);
-				for (int j = -1; j < resy + 1; j++) {
-					for (int k = -1; k < resz + 1; k++) {
+			for (int k = -1; k < resz + 1; k++) {
+				for (int i = -1; i < resx + 1; i++) {
+					// System.out.println("HEC_IsoSurface: " + (i + 1) + " of "
+					// +
+					// resx);
+					for (int j = -1; j < resy + 1; j++) {
+
 						getPolygons(i, j, k, classifyCell(i, j, k), offset, false);
 					}
 				}

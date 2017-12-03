@@ -28,6 +28,9 @@ var classwblut_1_1geom_1_1_w_b___plane =
     [ "set", "classwblut_1_1geom_1_1_w_b___plane.html#af309487399155c2143ee1bda64304542", null ],
     [ "setAxes", "classwblut_1_1geom_1_1_w_b___plane.html#a6c04a217c798f57d5c0a9ac9f5afc79a", null ],
     [ "toString", "classwblut_1_1geom_1_1_w_b___plane.html#a699a6768b25157dfa436faa07389b2cf", null ],
+    [ "XY", "classwblut_1_1geom_1_1_w_b___plane.html#af5b7dc3da80766edd8c8a0f115c496fc", null ],
+    [ "XZ", "classwblut_1_1geom_1_1_w_b___plane.html#ab138115a42cfc5adb6768b9736a1c60f", null ],
+    [ "YZ", "classwblut_1_1geom_1_1_w_b___plane.html#adf40a74bf53374667f92be83168bdd9f", null ],
     [ "n", "classwblut_1_1geom_1_1_w_b___plane.html#a99910d0ba5eba47fc8ae79243b8c4e46", null ],
     [ "origin", "classwblut_1_1geom_1_1_w_b___plane.html#ab746045bbd6c22718a2ca5ba774085bd", null ],
     [ "u", "classwblut_1_1geom_1_1_w_b___plane.html#a70b177b1e167bab59391759245fab5ea", null ]

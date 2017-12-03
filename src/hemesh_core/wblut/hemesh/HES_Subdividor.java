@@ -21,6 +21,7 @@ abstract public class HES_Subdividor extends HE_Machine {
 	 * Instantiates a new HES_Subdividor.
 	 */
 	public HES_Subdividor() {
+		super();
 	}
 
 	@Override

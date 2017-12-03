@@ -66,6 +66,8 @@ var classwblut_1_1geom_1_1_w_b___a_a_b_b2_d =
     [ "intersects", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#aca11de5f955d2acd501de62771ff2234", null ],
     [ "intersects", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#a3aadcf9bc699a29f2887edf15e72128c", null ],
     [ "intersects", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#a706e1dcc246da914f1edd2fbf7d6bd2e", null ],
+    [ "intersects", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#a75958061ff83503bc232d82935959cc5", null ],
+    [ "intersects", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#a3f09d1c52c9d202c7d78102b37497876", null ],
     [ "isDegenerate", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#a55381965bfebab627dae98dffe88c84f", null ],
     [ "isNull", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#ae50660a14bac4679850819e06ae193be", null ],
     [ "isValid", "classwblut_1_1geom_1_1_w_b___a_a_b_b2_d.html#a2de5cd4180573c24a2841b19a9f61f95", null ],

@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -178,8 +178,8 @@ public class HEM_MultiSlice extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		origFaces = new HE_Selection(mesh);
-		HE_Selection capFaces = new HE_Selection(mesh);
+		origFaces = HE_Selection.getSelection(mesh);
+		HE_Selection capFaces = HE_Selection.getSelection(mesh);
 		if (planes == null) {
 			return mesh;
 		}
@@ -256,7 +256,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 				capFaces.add(f);
 			}
 		}
-		mesh.addSelection("caps", capFaces);
+		mesh.addSelection("caps", this, capFaces);
 		return mesh;
 	}
 

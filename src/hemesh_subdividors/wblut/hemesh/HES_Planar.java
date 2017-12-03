@@ -182,7 +182,7 @@ public class HES_Planar extends HES_Subdividor {
 			}
 		}
 		final int n = mesh.getNumberOfEdges();
-		final HE_Selection orig = new HE_Selection(mesh);
+		final HE_Selection orig = HE_Selection.getSelection(mesh);
 		orig.addVertices(mesh);
 		if (random) {
 			final HE_Halfedge[] origE = mesh.getEdgesAsArray();
@@ -383,7 +383,7 @@ public class HES_Planar extends HES_Subdividor {
 			}
 		}
 		selection.collectEdgesByFace();
-		final HE_Selection newVertices = new HE_Selection(selection.parent);
+		final HE_Selection newVertices = HE_Selection.getSelection(selection.parent);
 		if (random) {
 			final HE_Halfedge[] edges = selection.getEdgesAsArray();
 			final int ne = selection.getNumberOfEdges();

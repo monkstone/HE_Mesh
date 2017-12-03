@@ -18,10 +18,7 @@ void setup() {
   modifier.setWidth(10);// desired width of struts
   modifier.setDepth(10);// depth of struts
   modifier.setThresholdAngle(1.5*HALF_PI);// treat edges sharper than this angle as hard edges
-  
   mesh.modify(modifier);
- 
-
   render=new WB_Render(this);
 }
 

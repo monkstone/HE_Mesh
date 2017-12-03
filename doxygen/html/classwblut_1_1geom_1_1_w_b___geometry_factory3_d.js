@@ -214,6 +214,7 @@ var classwblut_1_1geom_1_1_w_b___geometry_factory3_d =
     [ "createVerticesFromArray", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#aee1bb12ccbfaaf6e4587113be433ec07", null ],
     [ "createZonohedron", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#a2df6c2fd927577e52d71e88d7813bd55", null ],
     [ "getIntersection", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#ab090b1409f4fed8e19a97d0664ccf1eb", null ],
+    [ "instance", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#a707f1a1b62ca16a6fc74a0301c4addba", null ],
     [ "minX", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#af6f787ac80ff1885171d791d8195b0f8", null ],
     [ "minY", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#a028e59099957128345f04fbfac03a492", null ],
     [ "minZ", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html#a89abaa6dc1abd5592d1a7a296530fcbf", null ],

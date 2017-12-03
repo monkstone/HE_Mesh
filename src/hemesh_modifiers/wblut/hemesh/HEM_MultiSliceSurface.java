@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -88,8 +88,8 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		cutFaces = new HE_Selection(mesh);
-		newEdges = new HE_Selection(mesh);
+		cutFaces = HE_Selection.getSelection(mesh);
+		newEdges = HE_Selection.getSelection(mesh);
 		mesh.resetFaceInternalLabels();
 		mesh.resetEdgeInternalLabels();
 		if (planes == null) {
@@ -133,8 +133,8 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 				}
 			}
 		}
-		mesh.addSelection("cuts", cutFaces);
-		mesh.addSelection("edges", newEdges);
+		mesh.addSelection("cuts", this, cutFaces);
+		mesh.addSelection("edges", this, newEdges);
 		return mesh;
 	}
 
@@ -148,8 +148,8 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.parent.resetFaceInternalLabels();
 		selection.parent.resetEdgeInternalLabels();
-		cutFaces = new HE_Selection(selection.parent);
-		newEdges = new HE_Selection(selection.parent);
+		cutFaces = HE_Selection.getSelection(selection.parent);
+		newEdges = HE_Selection.getSelection(selection.parent);
 		if (planes == null) {
 			return selection.parent;
 		}
@@ -191,8 +191,8 @@ public class HEM_MultiSliceSurface extends HEM_Modifier {
 				}
 			}
 		}
-		selection.parent.addSelection("cuts", cutFaces);
-		selection.parent.addSelection("edges", newEdges);
+		selection.parent.addSelection("cuts", this, cutFaces);
+		selection.parent.addSelection("edges", this, newEdges);
 		return selection.parent;
 	}
 }

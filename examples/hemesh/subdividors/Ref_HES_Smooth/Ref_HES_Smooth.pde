@@ -13,7 +13,7 @@ void setup() {
   createMesh();
 
   HES_Smooth subdividor=new HES_Smooth();
-  subdividor.setWeight(5,1);// weight of original and neighboring vertices, default (1.0,1.0)
+  subdividor.setWeight(1,1);// weight of original and neighboring vertices, default (1.0,1.0)
   subdividor.setKeepBoundary(true);// preserve position of vertices on a surface boundary
   subdividor.setKeepEdges(true);// preserve position of vertices on edge of selection (only useful if using subdivideSelected)
   mesh.subdivide(subdividor,3);

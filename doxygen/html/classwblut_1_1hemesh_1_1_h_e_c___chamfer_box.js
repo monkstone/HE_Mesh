@@ -5,6 +5,7 @@ var classwblut_1_1hemesh_1_1_h_e_c___chamfer_box =
     [ "HEC_ChamferBox", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#a5069494af077f74865e1e46f719614a4", null ],
     [ "HEC_ChamferBox", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#ab411be4eaaad045741766038b92b9f44", null ],
     [ "createBase", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#abba7c34855877960c59a67676224b091", null ],
+    [ "main", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#a9c7a52d719606deb3de95f7baa1ff304", null ],
     [ "setChamfer", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#acb1b276fe983a88f3313df4b22b1ab39", null ],
     [ "setChamfer", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#ab65640df1c946be4fde9e94fdf03f5f7", null ],
     [ "setDepth", "classwblut_1_1hemesh_1_1_h_e_c___chamfer_box.html#a25573b0b332acffd19a4364ce6450023", null ],

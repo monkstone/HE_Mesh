@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -108,7 +108,7 @@ public class HES_DooSabin extends HES_Subdividor {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		if (HE_Selection.selectBoundaryEdges(mesh).getNumberOfEdges() > 0) {
+		if (mesh.selectBoundaryEdges().getNumberOfEdges() > 0) {
 			throw new IllegalArgumentException("HES_DooSabin only supports closed meshes at this time.");
 		}
 		Iterator<HE_Face> fItr = mesh.fItr();
@@ -200,9 +200,9 @@ public class HES_DooSabin extends HES_Subdividor {
 		mesh.setNoCopy(fl.create());
 		fItr = mesh.fItr();
 		currentFace = 0;
-		faceFaces = new HE_Selection(mesh);
-		edgeFaces = new HE_Selection(mesh);
-		vertexFaces = new HE_Selection(mesh);
+		faceFaces = HE_Selection.getSelection(mesh);
+		edgeFaces = HE_Selection.getSelection(mesh);
+		vertexFaces = HE_Selection.getSelection(mesh);
 		while (fItr.hasNext()) {
 			f = fItr.next();
 			f.setInternalLabel(labels[currentFace]);

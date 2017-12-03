@@ -1,5 +1,6 @@
 var classwblut_1_1geom_1_1_w_b___octree_double =
 [
+    [ "WB_OctreeDoubleEntry", "classwblut_1_1geom_1_1_w_b___octree_double_1_1_w_b___octree_double_entry.html", "classwblut_1_1geom_1_1_w_b___octree_double_1_1_w_b___octree_double_entry" ],
     [ "WB_OctreeDouble", "classwblut_1_1geom_1_1_w_b___octree_double.html#ac4b03e3d00d5effd516b1feaf10c7697", null ],
     [ "WB_OctreeDouble", "classwblut_1_1geom_1_1_w_b___octree_double.html#af1817331e6291b12a013b97a763daf02", null ],
     [ "addPoint", "classwblut_1_1geom_1_1_w_b___octree_double.html#ab9d72e33b50747a8e27dc16de071bd42", null ],

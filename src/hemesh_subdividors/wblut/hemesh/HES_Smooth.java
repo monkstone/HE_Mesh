@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -90,7 +90,7 @@ public class HES_Smooth extends HES_Subdividor {
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		HET_MeshOp.splitFacesQuad(mesh);
 		final WB_Coord[] newPositions = new WB_Coord[mesh.getNumberOfVertices()];
-		final HE_Selection all = HE_Selection.selectAllFaces(mesh);
+		final HE_Selection all = mesh.selectAllFaces();
 		final List<HE_Vertex> boundary = all.getOuterVertices();
 		final List<HE_Vertex> inner = all.getInnerVertices();
 		HE_Vertex v;

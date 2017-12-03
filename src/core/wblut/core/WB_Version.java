@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -23,7 +23,7 @@ public class WB_Version {
 
 	public static final int MINOR = 0;
 
-	public static final int PATCH = 1;
+	public static final int PATCH = 2;
 
 	private static final String releaseInfo = "Titan";
 

@@ -42,5 +42,6 @@ var classwblut_1_1geom_1_1_w_b___polygon =
     [ "toVertices2D", "classwblut_1_1geom_1_1_w_b___polygon.html#a3a036c576b393b164f853bf1cbb7e3ce", null ],
     [ "trimConvexPolygon", "classwblut_1_1geom_1_1_w_b___polygon.html#a16c75f56c2cae27da65797e2684050e5", null ],
     [ "trimConvexPolygon", "classwblut_1_1geom_1_1_w_b___polygon.html#a2c1fc1f3841291537b27fb2c34d64f88", null ],
-    [ "trimPolygon2D", "classwblut_1_1geom_1_1_w_b___polygon.html#afc759aac6cffa718b0ece4ae527c559f", null ]
+    [ "trimPolygon2D", "classwblut_1_1geom_1_1_w_b___polygon.html#afc759aac6cffa718b0ece4ae527c559f", null ],
+    [ "gf", "classwblut_1_1geom_1_1_w_b___polygon.html#a4fe4dfdbcf859773a0a0be4abaeefd74", null ]
 ];

@@ -21,6 +21,7 @@ abstract public class HES_Simplifier extends HE_Machine {
 	 * Instantiates a new HES_Simplifier.
 	 */
 	public HES_Simplifier() {
+		super();
 	}
 
 	@Override

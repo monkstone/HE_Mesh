@@ -25,6 +25,9 @@ var classwblut_1_1geom_1_1_w_b___line =
     [ "set", "classwblut_1_1geom_1_1_w_b___line.html#abfd3c0f384a05d281ac16f886129938b", null ],
     [ "setFromPoints", "classwblut_1_1geom_1_1_w_b___line.html#a0edeb1e6d0c8b17fdf4821475e30974d", null ],
     [ "toString", "classwblut_1_1geom_1_1_w_b___line.html#a963313811aedc1e75eb7836bcab0a55a", null ],
+    [ "X", "classwblut_1_1geom_1_1_w_b___line.html#acfeac8c33144e921d69d6328fe3ecdb4", null ],
+    [ "Y", "classwblut_1_1geom_1_1_w_b___line.html#a105bf6bc0e6ea72ba74a173dff13b662", null ],
+    [ "Z", "classwblut_1_1geom_1_1_w_b___line.html#a278bc74c019c02ab42d93e58b0db64b7", null ],
     [ "direction", "classwblut_1_1geom_1_1_w_b___line.html#a6a4c15ba41a1757084d53f68d8fb18f7", null ],
     [ "origin", "classwblut_1_1geom_1_1_w_b___line.html#aa544326d6b850a20049ad2bd0798d3af", null ]
 ];

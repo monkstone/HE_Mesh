@@ -14,6 +14,7 @@ var classwblut_1_1nurbs_1_1_w_b___bezier_surface =
     [ "toControlHemesh", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#a27dc44128d9bef5e1ec54c6b859947b8", null ],
     [ "upperu", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#ad55ad790cab17823a8e2a58c2665eb30", null ],
     [ "upperv", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#a5fb3eba0347399fcbdcef2fef3698e29", null ],
+    [ "gf", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#a30f0e2eb941bca4e13f4aea64603ae69", null ],
     [ "m", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#a464db1b0d9217a7fb11721a57a6ddb20", null ],
     [ "n", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#a87483367f937ae825bef2634959cf067", null ],
     [ "points", "classwblut_1_1nurbs_1_1_w_b___bezier_surface.html#a490dbe65e322b43bfe767732c0a0aaef", null ]

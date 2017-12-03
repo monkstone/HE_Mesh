@@ -38,7 +38,7 @@ public class HEM_Triangulate extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		triangles = new HE_Selection(mesh);
+		triangles = HE_Selection.getSelection(mesh);
 		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final HE_Face[] f = mesh.getFacesAsArray();
 		final int n = mesh.getNumberOfFaces();
@@ -70,7 +70,7 @@ public class HEM_Triangulate extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection selection) {
-		triangles = new HE_Selection(selection.parent);
+		triangles = HE_Selection.getSelection(selection.parent);
 		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final HE_Face[] f = selection.getFacesAsArray();
 		final int n = selection.getNumberOfFaces();

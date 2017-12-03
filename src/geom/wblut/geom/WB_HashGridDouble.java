@@ -17,21 +17,21 @@ public class WB_HashGridDouble {
 
 	private final double defaultValue;
 
-	private final int K, L, M, KL;
+	private final int sizeI, sizeJ, sizeK, sizeIJ;
 
 	/**
 	 *
 	 *
-	 * @param K
-	 * @param L
-	 * @param M
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
 	 * @param defaultValue
 	 */
-	public WB_HashGridDouble(final int K, final int L, final int M, final double defaultValue) {
-		this.K = K;
-		this.L = L;
-		this.M = M;
-		KL = K * L;
+	public WB_HashGridDouble(final int sizeI, final int sizeJ, final int sizeK, final double defaultValue) {
+		this.sizeI = sizeI;
+		this.sizeJ = sizeJ;
+		this.sizeK = sizeK;
+		sizeIJ = sizeI * sizeJ;
 		this.defaultValue = defaultValue;
 		values = new LongDoubleHashMap();
 	}
@@ -39,15 +39,15 @@ public class WB_HashGridDouble {
 	/**
 	 *
 	 *
-	 * @param K
-	 * @param L
-	 * @param M
+	 * @param sizeI
+	 * @param sizeJ
+	 * @param sizeK
 	 */
-	public WB_HashGridDouble(final int K, final int L, final int M) {
-		this.K = K;
-		this.L = L;
-		this.M = M;
-		KL = K * L;
+	public WB_HashGridDouble(final int sizeI, final int sizeJ, final int sizeK) {
+		this.sizeI = sizeI;
+		this.sizeJ = sizeJ;
+		this.sizeK = sizeK;
+		sizeIJ = sizeI * sizeJ;
 		defaultValue = 0;
 		values = new LongDoubleHashMap();
 	}
@@ -144,22 +144,22 @@ public class WB_HashGridDouble {
 		if (i < 0) {
 			return -1;
 		}
-		if (i > K - 1) {
+		if (i > sizeI - 1) {
 			return -1;
 		}
 		if (j < 0) {
 			return -1;
 		}
-		if (j > L - 1) {
+		if (j > sizeJ - 1) {
 			return -1;
 		}
 		if (k < 0) {
 			return -1;
 		}
-		if (k > M - 1) {
+		if (k > sizeK - 1) {
 			return -1;
 		}
-		return i + j * K + k * KL;
+		return i + j * sizeI + k * sizeIJ;
 	}
 
 	/**
@@ -167,8 +167,8 @@ public class WB_HashGridDouble {
 	 *
 	 * @return
 	 */
-	public int getWidth() {
-		return K;
+	public int getSizeI() {
+		return sizeI;
 	}
 
 	/**
@@ -176,8 +176,8 @@ public class WB_HashGridDouble {
 	 *
 	 * @return
 	 */
-	public int getHeight() {
-		return L;
+	public int getSizeJ() {
+		return sizeJ;
 	}
 
 	/**
@@ -185,8 +185,8 @@ public class WB_HashGridDouble {
 	 *
 	 * @return
 	 */
-	public int getDepth() {
-		return M;
+	public int getSizeK() {
+		return sizeK;
 	}
 
 	/**

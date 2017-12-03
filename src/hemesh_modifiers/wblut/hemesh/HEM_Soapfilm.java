@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -76,12 +76,13 @@ public class HEM_Soapfilm extends HEM_Modifier {
 		}
 		final LongObjectHashMap<WB_Coord> newPositions = new LongObjectHashMap<WB_Coord>();
 		if (iter < 1) {
+			;
 			iter = 1;
 		}
 		for (int r = 0; r < iter; r++) {
 			Iterator<HE_Vertex> vItr = mesh.vItr();
 			HE_Vertex v;
-			final HE_Selection sel = HE_Selection.selectAllFaces(mesh);
+			final HE_Selection sel = mesh.selectAllFaces();
 			final List<HE_Vertex> outer = sel.getOuterVertices();
 			while (vItr.hasNext()) {
 				v = vItr.next();
@@ -124,7 +125,7 @@ public class HEM_Soapfilm extends HEM_Modifier {
 		for (int r = 0; r < iter; r++) {
 			Iterator<HE_Vertex> vItr = selection.vItr();
 			HE_Vertex v;
-			final HE_Selection sel = HE_Selection.selectAllFaces(selection.parent);
+			final HE_Selection sel = selection.parent.selectAllFaces();
 			final List<HE_Vertex> outer = sel.getOuterVertices();
 			while (vItr.hasNext()) {
 				v = vItr.next();

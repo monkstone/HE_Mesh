@@ -34,5 +34,6 @@ var classwblut_1_1hemesh_1_1_h_e___texture_coordinate =
     [ "yf", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html#aa2cce8fd73c165b752db3f5e2e49b873", null ],
     [ "zd", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html#ab7ff7a6cf4fa1a44c67b3200d5ab1aa5", null ],
     [ "zf", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html#a8878a36fee3d543d91b374a8771e395a", null ],
-    [ "u", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html#a1d6236387ca162c167256708741f057a", null ]
+    [ "u", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html#a1d6236387ca162c167256708741f057a", null ],
+    [ "ZERO", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html#aff83353eef6b1489403be0da3f334d63", null ]
 ];

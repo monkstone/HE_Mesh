@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -12,6 +12,7 @@ package wblut.hemesh;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Plane;
 import wblut.math.WB_Epsilon;
@@ -112,8 +113,8 @@ public class HEM_Mirror extends HEM_Modifier {
 			return mesh;
 		}
 		if (keepLargest) {
-			HE_Selection selF = HE_Selection.selectFrontVertices(mesh, P);
-			HE_Selection selB = HE_Selection.selectBackVertices(mesh, P);
+			HE_Selection selF = mesh.selectFrontVertices(P);
+			HE_Selection selB = mesh.selectBackVertices(P);
 			reverse = selF.getNumberOfVertices() < selB.getNumberOfVertices();
 
 		}

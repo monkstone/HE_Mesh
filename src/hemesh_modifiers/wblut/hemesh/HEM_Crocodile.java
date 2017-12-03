@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
@@ -89,7 +90,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		final HE_Selection selection = HE_Selection.selectAllVertices(mesh);
+		final HE_Selection selection = mesh.selectAllVertices();
 		return apply(selection);
 	}
 
@@ -101,7 +102,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection selection) {
-		HE_Selection spikes = new HE_Selection(selection.parent);
+		HE_Selection spikes = HE_Selection.getSelection(selection.parent);
 		selection.collectVertices();
 		tracker.setStartStatus(this, "Starting HEM_Crocodile.");
 		final Map<Long, WB_Coord> umbrellapoints = new UnifiedMap<Long, WB_Coord>();
@@ -164,7 +165,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 			counter.increment();
 			v.addMulSelf(distance.evaluate(v.xd(), v.yd(), v.zd()), v.getVertexNormal());
 		}
-		selection.parent.addSelection("spikes", spikes);
+		selection.parent.addSelection("spikes", this, spikes);
 		tracker.setStopStatus(this, "Exiting HEM_Crocodile.");
 		return selection.parent;
 	}

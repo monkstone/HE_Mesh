@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -386,7 +386,7 @@ public class HET_Fixer {
 		mesh.triangulate();
 		mesh.resetFaceInternalLabels();
 
-		HE_Selection sifs = new HE_Selection(mesh);
+		HE_Selection sifs = HE_Selection.getSelection(mesh);
 		WB_AABBTree tree = new WB_AABBTree(mesh, 1);
 		List<WB_AABBNode[]> atat = WB_GeometryOp.getIntersection3D(tree, tree);
 		WB_Triangle T0, T1;

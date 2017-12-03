@@ -50,6 +50,7 @@ var classwblut_1_1geom_1_1_w_b___coordinate_system3_d =
     [ "setZY", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#a9af29a57809beacc730f24b8f5b85bed", null ],
     [ "setZY", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#aadd79efe290fa85e5f17e963dc2f020a", null ],
     [ "toString", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#a98ad61dc436f0fdde976df4a5cc9aec4", null ],
+    [ "WORLD", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#a0a1c3d13a3c35aff602c86173f1d1239", null ],
     [ "_isWorld", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#a934c7d8861426acd0f96a105a36a5f67", null ],
     [ "_origin", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#a36a076363fda1d552c28a9a710ebbbd4", null ],
     [ "_parent", "classwblut_1_1geom_1_1_w_b___coordinate_system3_d.html#ab3a702379f523d99d664f2fec4da0f8f", null ],

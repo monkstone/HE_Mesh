@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -19,6 +19,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_AABB;
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_Coord;
@@ -304,8 +305,8 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 			} else if (!intersects) {
 				tracker.setDuringStatus(this, "Creating internal cell " + (i + 1) + " of " + cells.size() + ".");
 				result.add(m);
-				linnersel.add(HE_Selection.selectAllFaces(m));
-				loutersel.add(new HE_Selection(m));
+				linnersel.add(m.selectAllFaces());
+				loutersel.add(HE_Selection.getSelection(m));
 			} else {
 				tracker.setDuringStatus(this, "Qeueing surface cell " + (i + 1) + " of " + cells.size() + ".");
 				int index = m.getInternalLabel();

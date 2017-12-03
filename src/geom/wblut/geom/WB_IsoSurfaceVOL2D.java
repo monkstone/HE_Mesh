@@ -21,9 +21,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
+import processing.core.PApplet;
+import processing.core.PImage;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_ScalarParameter;
 
@@ -262,6 +264,82 @@ public class WB_IsoSurfaceVOL2D {
 		this.values = new WB_IsoValues2D.HashGrid2D(values);
 		resx = values.getWidth() - 1;
 		resy = values.getHeight() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param path
+	 * @param home
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public WB_IsoSurfaceVOL2D setValues(final String path, final PApplet home, final int width, final int height) {
+		this.values = new WB_IsoValues2D.ImageGrid2D(path, home, width, height);
+		resx = values.getWidth() - 1;
+		resy = values.getWidth() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param path
+	 * @param home
+	 * @param width
+	 * @param height
+	 * @param mode
+	 * @return
+	 */
+	public WB_IsoSurfaceVOL2D setValues(final String path, final PApplet home, final int width, final int height,
+			final WB_IsoValues2D.Mode mode) {
+		this.values = new WB_IsoValues2D.ImageGrid2D(path, home, width, height, mode);
+		resx = values.getWidth() - 1;
+		resy = values.getWidth() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param image
+	 * @param home
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public WB_IsoSurfaceVOL2D setValues(final PImage image, final PApplet home, final int width, final int height) {
+		this.values = new WB_IsoValues2D.ImageGrid2D(image, home, width, height);
+		resx = values.getWidth() - 1;
+		resy = values.getWidth() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param image
+	 * @param home
+	 * @param width
+	 * @param height
+	 * @param mode
+	 * @return
+	 */
+	public WB_IsoSurfaceVOL2D setValues(final PImage image, final PApplet home, final int width, final int height,
+			final WB_IsoValues2D.Mode mode) {
+		this.values = new WB_IsoValues2D.ImageGrid2D(image, home, width, height, mode);
+		resx = values.getWidth() - 1;
+		resy = values.getWidth() - 1;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param values
+	 * @return
+	 */
+	public WB_IsoSurfaceVOL2D setValues(final WB_IsoValues2D values) {
+		this.values = values;
+		resx = values.getWidth() - 1;
+		resy = values.getWidth() - 1;
 		return this;
 	}
 

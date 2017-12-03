@@ -354,7 +354,7 @@ public class HEC_DataCylinder extends HEC_Creator {
 		} else {
 			final double[] heights = new double[steps * facets];
 			int id = 0;
-			final HE_Selection sel = new HE_Selection(mesh);
+			final HE_Selection sel = HE_Selection.getSelection(mesh);
 			for (int i = 0; i < steps; i++) {
 				for (int j = 0; j < facets; j++) {
 					final HE_Face currentFace = fItr.next();

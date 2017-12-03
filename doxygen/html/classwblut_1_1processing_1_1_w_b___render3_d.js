@@ -2,6 +2,7 @@ var classwblut_1_1processing_1_1_w_b___render3_d =
 [
     [ "WB_Render3D", "classwblut_1_1processing_1_1_w_b___render3_d.html#aa16e8a84c6a69df3439c4ea90b5a8036", null ],
     [ "WB_Render3D", "classwblut_1_1processing_1_1_w_b___render3_d.html#a9a3f4b58d802fc0dfbbcdc757f4452af", null ],
+    [ "draw", "classwblut_1_1processing_1_1_w_b___render3_d.html#a2114b935fd0200efcdffc07d50c11f46", null ],
     [ "drawAABB", "classwblut_1_1processing_1_1_w_b___render3_d.html#a45fabca4a3cb53cf7fd2b118f6a2f3ce", null ],
     [ "drawAABBLeafNode", "classwblut_1_1processing_1_1_w_b___render3_d.html#a8afa1363fdb80d79cd5e76d321cd5b8f", null ],
     [ "drawAABBLeafNodes", "classwblut_1_1processing_1_1_w_b___render3_d.html#a1283e0d6df18bd2ee233eea631cc8e1b", null ],
@@ -102,6 +103,7 @@ var classwblut_1_1processing_1_1_w_b___render3_d =
     [ "drawMeshFaces", "classwblut_1_1processing_1_1_w_b___render3_d.html#a8375eee5681822dbb154f736e209fb89", null ],
     [ "drawOctagon", "classwblut_1_1processing_1_1_w_b___render3_d.html#a3c39791104cbee3113279533d8a44b49", null ],
     [ "drawOctagon", "classwblut_1_1processing_1_1_w_b___render3_d.html#a8574ca04aaf130a958b1b39ab65f8bea", null ],
+    [ "drawOutline", "classwblut_1_1processing_1_1_w_b___render3_d.html#a3c49c2aacec66ac88df83675230740f3", null ],
     [ "drawPath", "classwblut_1_1processing_1_1_w_b___render3_d.html#ab8ff8ad6a9023741e46b0f741c4b324a", null ],
     [ "drawPentagon", "classwblut_1_1processing_1_1_w_b___render3_d.html#ab322a8116f611d7fcea3c3387a52b639", null ],
     [ "drawPentagon", "classwblut_1_1processing_1_1_w_b___render3_d.html#ac5bb4ae27883a8e0970f1a427176960f", null ],
@@ -255,9 +257,11 @@ var classwblut_1_1processing_1_1_w_b___render3_d =
     [ "drawVertices", "classwblut_1_1processing_1_1_w_b___render3_d.html#a69ababdcb281931894e8807290d8e446", null ],
     [ "drawVerticesWithInternalLabel", "classwblut_1_1processing_1_1_w_b___render3_d.html#a260d4025d76bedbec1b2613b65fc0cf2", null ],
     [ "drawVerticesWithLabel", "classwblut_1_1processing_1_1_w_b___render3_d.html#a03014927fac760a7226db1dd42d5fd76", null ],
+    [ "getColorFromPImage", "classwblut_1_1processing_1_1_w_b___render3_d.html#a60bf30f5325df91d8b8a41d63c0efb56", null ],
     [ "getHome", "classwblut_1_1processing_1_1_w_b___render3_d.html#a533ecbd85f82f8804afa233e940f3f15", null ],
     [ "getPickingRay", "classwblut_1_1processing_1_1_w_b___render3_d.html#a9c257f419eec5ddec0c4e8b500cb9319", null ],
     [ "line", "classwblut_1_1processing_1_1_w_b___render3_d.html#a3af49d55e5f9206eb886cf45dec45510", null ],
+    [ "line", "classwblut_1_1processing_1_1_w_b___render3_d.html#a96389a9907f91bfe93b6f9ab9ef17960", null ],
     [ "normal", "classwblut_1_1processing_1_1_w_b___render3_d.html#a0872f5245183c1f06ccc37d37e2adbda", null ],
     [ "pickClosestFace", "classwblut_1_1processing_1_1_w_b___render3_d.html#a9ff641f693c856536aafe082cd6ee5d9", null ],
     [ "pickClosestFace", "classwblut_1_1processing_1_1_w_b___render3_d.html#aa412cb61dd48c49ed970e63420bc7685", null ],
@@ -274,9 +278,11 @@ var classwblut_1_1processing_1_1_w_b___render3_d =
     [ "setVertexColorFromTexture", "classwblut_1_1processing_1_1_w_b___render3_d.html#a1fd4a108b5d9c45d5e5146523efbe79a", null ],
     [ "translate", "classwblut_1_1processing_1_1_w_b___render3_d.html#aa182bf34b1698ffaaef3d5e4285da144", null ],
     [ "vertex", "classwblut_1_1processing_1_1_w_b___render3_d.html#acac29b026a18d2bb29e8e49969fce1f6", null ],
+    [ "vertex", "classwblut_1_1processing_1_1_w_b___render3_d.html#aa0a073d602b3153cfddc8c2b9ee5a7a6", null ],
     [ "vertexEmbedded2D", "classwblut_1_1processing_1_1_w_b___render3_d.html#ae769dce4048ccb7ec234648d15c88fa6", null ],
     [ "vertexMapped", "classwblut_1_1processing_1_1_w_b___render3_d.html#a6d6abacf10837bc5aa722df9a458e060", null ],
     [ "vertexUnmapped", "classwblut_1_1processing_1_1_w_b___render3_d.html#addc8e826d4ba10fbcb5e05a68fb8cd2b", null ],
     [ "geometryfactory", "classwblut_1_1processing_1_1_w_b___render3_d.html#addd7d3ed9f1f3da6d38e819637af328f", null ],
-    [ "home", "classwblut_1_1processing_1_1_w_b___render3_d.html#a49d8c35794656726d219db67b66fb89c", null ]
+    [ "home", "classwblut_1_1processing_1_1_w_b___render3_d.html#a49d8c35794656726d219db67b66fb89c", null ],
+    [ "tracker", "classwblut_1_1processing_1_1_w_b___render3_d.html#a4eea4f24676ec1d4d76c575fdfa62108", null ]
 ];

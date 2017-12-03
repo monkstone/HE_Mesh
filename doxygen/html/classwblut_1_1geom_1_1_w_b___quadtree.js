@@ -1,5 +1,6 @@
 var classwblut_1_1geom_1_1_w_b___quadtree =
 [
+    [ "WB_QuadtreeEntry", "classwblut_1_1geom_1_1_w_b___quadtree_1_1_w_b___quadtree_entry.html", "classwblut_1_1geom_1_1_w_b___quadtree_1_1_w_b___quadtree_entry" ],
     [ "WB_Quadtree", "classwblut_1_1geom_1_1_w_b___quadtree.html#a3c82766e941d95f6283d2525d131a0fc", null ],
     [ "WB_Quadtree", "classwblut_1_1geom_1_1_w_b___quadtree.html#a38a33bce272da9ad61b67ad0dce3e069", null ],
     [ "addPoint", "classwblut_1_1geom_1_1_w_b___quadtree.html#a9bbdf76d5de7abe17565b83b8d83cb6d", null ],

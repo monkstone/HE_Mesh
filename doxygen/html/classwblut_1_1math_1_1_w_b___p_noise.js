@@ -14,5 +14,8 @@ var classwblut_1_1math_1_1_w_b___p_noise =
     [ "value2D", "classwblut_1_1math_1_1_w_b___p_noise.html#a2e40172f847664d002aa90f860ec8e55", null ],
     [ "value3D", "classwblut_1_1math_1_1_w_b___p_noise.html#a6c353ec82cefcb45f53b61dcbee5b83a", null ],
     [ "value4D", "classwblut_1_1math_1_1_w_b___p_noise.html#a9b772f07252f4eddfcf8c2621cc77e74", null ],
+    [ "cosLUT", "classwblut_1_1math_1_1_w_b___p_noise.html#aa57599d7e024472ebac86e814dfa96f6", null ],
+    [ "SINCOS_LENGTH", "classwblut_1_1math_1_1_w_b___p_noise.html#aef9fc529c7644827bae96ba8c2bb074c", null ],
+    [ "SINCOS_PRECISION", "classwblut_1_1math_1_1_w_b___p_noise.html#a278b70ac4669fda0a2bda9b52e9bc0a1", null ],
     [ "sx", "classwblut_1_1math_1_1_w_b___p_noise.html#ad96568b912d22a800948d508312a8583", null ]
 ];

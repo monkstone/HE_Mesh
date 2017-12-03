@@ -14,6 +14,8 @@ var classwblut_1_1hemesh_1_1_h_e___mesh_element =
     [ "setVisited", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#aa230295986466e9a3fda040155d1282a", null ],
     [ "setVisited", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#aeeaf9aea2032d83b429a1db48b588350", null ],
     [ "color", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#ae282fd7d840674bc6212633e8687e132", null ],
+    [ "gf", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a738958d431825629708b1449ac408ea9", null ],
+    [ "tracker", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a4fa8c30eeeeb0894e7c222a81ea1a2f2", null ],
     [ "visible", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#ab9157b45a0cc43a978498d94a39545b6", null ],
     [ "visited", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html#a6bd72ae7ae541d9408df397a41964d84", null ]
 ];

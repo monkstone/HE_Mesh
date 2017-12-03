@@ -18,7 +18,7 @@ void setup() {
   fullScreen(P3D);
   smooth(8);
   createContainer();
-  numpoints=100;
+  numpoints=800;
   createMesh();
   render=new WB_Render(this);
 }
@@ -57,14 +57,14 @@ void createMesh() {
   numcells=cells.size();
   boolean[] isCellOn=new boolean[numcells];
   for (int i=0; i<numcells; i++) {
-    isCellOn[i]=(random(100)<50);
+    isCellOn[i]=isActive(i);
   }
 
   //build new mesh from active cells
 
   HEC_FromVoronoiCells creator=new HEC_FromVoronoiCells().setCells(cells).setActive(isCellOn);
   fusedcells=new HE_Mesh(creator);
-
+/*
   //clean-up mesh by joining fragmented faces back together. This does not always work
   HE_Mesh tmp=fusedcells.get();
 
@@ -76,9 +76,19 @@ void createMesh() {
     ex.printStackTrace();
     fusedcells=tmp;
   } 
-fusedcells.triangulate(HE_Selection.selectFacesWithOtherInternalLabel(fusedcells, -1));
-  HE_Selection.selectFacesWithOtherInternalLabel(fusedcells, -1).subdivide(new HES_CatmullClark(),2);
-  fusedcells.validate();
+fusedcells.triangulate(fusedcells.selectFacesWithOtherInternalLabel("inner", -1));
+fusedcells.getSelection("inner").subdivide(new HES_CatmullClark(),2);
+*/
+  
+}
+
+boolean isActive(int i){
+  WB_Coord point=points[i];
+  
+  float r2=(float)WB_Point.getSqLength(point);
+  float zcutoff=50+0.0025*r2;
+  
+  return abs(point.zf())<zcutoff;
   
 }
 

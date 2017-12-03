@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -54,7 +54,7 @@ public class HES_QuadSplit extends HES_Subdividor {
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		tracker.setStartStatus(this, "Starting HEM_QuadSplit.");
-		selectionOut = new HE_Selection(mesh);
+		selectionOut = HE_Selection.getSelection(mesh);
 		final int n = mesh.getNumberOfFaces();
 		final WB_Point[] faceCenters = new WB_Point[n];
 		final int[] faceOrders = new int[n];
@@ -70,7 +70,7 @@ public class HES_QuadSplit extends HES_Subdividor {
 			i++;
 			counter.increment();
 		}
-		final HE_Selection orig = HE_Selection.selectAllFaces(mesh);
+		final HE_Selection orig = mesh.selectAllFaces();
 		orig.collectVertices();
 		orig.collectEdgesByFace();
 		selectionOut.addVertices(HET_MeshOp.splitEdges(mesh).getVerticesAsArray());
@@ -164,7 +164,7 @@ public class HES_QuadSplit extends HES_Subdividor {
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection sel) {
 		tracker.setStartStatus(this, "Starting HEM_QuadSplit.");
-		selectionOut = new HE_Selection(sel.parent);
+		selectionOut = HE_Selection.getSelection(sel.parent);
 		final int n = sel.getNumberOfFaces();
 		final WB_Point[] faceCenters = new WB_Point[n];
 		final int[] faceOrders = new int[n];
@@ -181,7 +181,7 @@ public class HES_QuadSplit extends HES_Subdividor {
 			i++;
 			counter.increment();
 		}
-		final HE_Selection orig = new HE_Selection(sel.parent);
+		final HE_Selection orig = HE_Selection.getSelection(sel.parent);
 		orig.addFaces(sel.getFacesAsArray());
 		orig.collectVertices();
 		orig.collectEdgesByFace();

@@ -14,6 +14,7 @@ void setup() {
   smooth(8);
   render=new WB_Render3D(this);
   mesh=new HE_Mesh(new HEC_Beethoven().setScale(10).setZAxis(0,1,0).setZAngle(PI));
+  HET_Export.saveToOBJ(mesh, sketchPath(),"beet");
 }
 
   void draw() {

@@ -2,6 +2,7 @@ var classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh =
 [
     [ "beginSave", "classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh.html#aa493a04da3e10038151d248c12b007d0", null ],
     [ "beginSave", "classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh.html#a9174f3e24171be06b80f95e2980a282d", null ],
+    [ "createDirectories", "classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh.html#afe8a509f01789edfadc88109996c75c0", null ],
     [ "endSave", "classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh.html#a63d8148e910e726e54daef7a933a02a4", null ],
     [ "face", "classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh.html#ae9c3c3f742ae2efc418efffc992a4738", null ],
     [ "halfedge", "classwblut_1_1hemesh_1_1_h_e_t___writer_hemesh.html#a4a57ad676c872127dbc9b8964bbf07d7", null ],

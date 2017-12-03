@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -263,10 +263,10 @@ public class HEM_Extrude extends HEM_Modifier {
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
 		tracker.setStartStatus(this, "Starting HEM_Extrude.");
 		mesh.resetFaceInternalLabels();
-		walls = new HE_Selection(mesh);
-		extruded = new HE_Selection(mesh);
-		peaks = new HE_Selection(mesh);
-		fused = new HE_Selection(mesh);
+		walls = HE_Selection.getSelection(mesh);
+		extruded = HE_Selection.getSelection(mesh);
+		peaks = HE_Selection.getSelection(mesh);
+		fused = HE_Selection.getSelection(mesh);
 		if (chamfer == null && d == null && heights == null) {
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return mesh;
@@ -299,10 +299,10 @@ public class HEM_Extrude extends HEM_Modifier {
 		if (isStraight) {
 			applyStraight(mesh, mesh.getFaces());
 			HET_Texture.cleanUVW(mesh);
-			mesh.addSelection("extruded", extruded);
-			mesh.addSelection("walls", walls);
-			mesh.addSelection("peaks", peaks);
-			mesh.addSelection("fused", fused);
+			mesh.addSelection("extruded", this, extruded);
+			mesh.addSelection("walls", this, walls);
+			mesh.addSelection("peaks", this, peaks);
+			mesh.addSelection("fused", this, fused);
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return mesh;
 		}
@@ -310,10 +310,10 @@ public class HEM_Extrude extends HEM_Modifier {
 		if (isSpiky) {
 			applyPeaked(mesh, facelist);
 			HET_Texture.cleanUVW(mesh);
-			mesh.addSelection("extruded", extruded);
-			mesh.addSelection("walls", walls);
-			mesh.addSelection("peaks", peaks);
-			mesh.addSelection("fused", fused);
+			mesh.addSelection("extruded", this, extruded);
+			mesh.addSelection("walls", this, walls);
+			mesh.addSelection("peaks", this, peaks);
+			mesh.addSelection("fused", this, fused);
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return mesh;
 		}
@@ -367,10 +367,10 @@ public class HEM_Extrude extends HEM_Modifier {
 			}
 		}
 		HET_Texture.cleanUVW(mesh);
-		mesh.addSelection("extruded", extruded);
-		mesh.addSelection("walls", walls);
-		mesh.addSelection("peaks", peaks);
-		mesh.addSelection("fused", fused);
+		mesh.addSelection("extruded", this, extruded);
+		mesh.addSelection("walls", this, walls);
+		mesh.addSelection("peaks", this, peaks);
+		mesh.addSelection("fused", this, fused);
 		tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 		return mesh;
 	}
@@ -384,10 +384,10 @@ public class HEM_Extrude extends HEM_Modifier {
 	protected HE_Mesh applySelf(final HE_Selection selection) {
 		tracker.setStartStatus(this, "Starting HEM_Extrude.");
 		selection.parent.resetFaceInternalLabels();
-		walls = new HE_Selection(selection.parent);
-		extruded = new HE_Selection(selection.parent);
-		peaks = new HE_Selection(selection.parent);
-		fused = new HE_Selection(selection.parent);
+		walls = HE_Selection.getSelection(selection.parent);
+		extruded = HE_Selection.getSelection(selection.parent);
+		peaks = HE_Selection.getSelection(selection.parent);
+		fused = HE_Selection.getSelection(selection.parent);
 		if (selection.getNumberOfFaces() == 0) {
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return selection.parent;
@@ -422,20 +422,20 @@ public class HEM_Extrude extends HEM_Modifier {
 		if (isStraight) {
 			applyStraight(selection.parent, selFaces);
 			HET_Texture.cleanUVW(selection.parent);
-			selection.parent.addSelection("extruded", extruded);
-			selection.parent.addSelection("walls", walls);
-			selection.parent.addSelection("peaks", peaks);
-			selection.parent.addSelection("fused", fused);
+			selection.parent.addSelection("extruded", this, extruded);
+			selection.parent.addSelection("walls", this, walls);
+			selection.parent.addSelection("peaks", this, peaks);
+			selection.parent.addSelection("fused", this, fused);
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return selection.parent;
 		}
 		if (isSpiky) {
 			applyPeaked(selection.parent, selFaces);
 			HET_Texture.cleanUVW(selection.parent);
-			selection.parent.addSelection("extruded", extruded);
-			selection.parent.addSelection("walls", walls);
-			selection.parent.addSelection("peaks", peaks);
-			selection.parent.addSelection("fused", fused);
+			selection.parent.addSelection("extruded", this, extruded);
+			selection.parent.addSelection("walls", this, walls);
+			selection.parent.addSelection("peaks", this, peaks);
+			selection.parent.addSelection("fused", this, fused);
 			tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 			return selection.parent;
 		}
@@ -481,10 +481,10 @@ public class HEM_Extrude extends HEM_Modifier {
 			}
 		}
 		HET_Texture.cleanUVW(selection.parent);
-		selection.parent.addSelection("extruded", extruded);
-		selection.parent.addSelection("walls", walls);
-		selection.parent.addSelection("peaks", peaks);
-		selection.parent.addSelection("fused", fused);
+		selection.parent.addSelection("extruded", this, extruded);
+		selection.parent.addSelection("walls", this, walls);
+		selection.parent.addSelection("peaks", this, peaks);
+		selection.parent.addSelection("fused", this, fused);
 		tracker.setStopStatus(this, "Exiting HEM_Extrude.");
 		return selection.parent;
 	}
@@ -875,7 +875,7 @@ public class HEM_Extrude extends HEM_Modifier {
 	 * @return mesh
 	 */
 	private HE_Mesh applyFlat(final HE_Mesh mesh, final List<HE_Face> faces, final boolean fuse) {
-		final HE_Selection sel = new HE_Selection(mesh);
+		final HE_Selection sel = HE_Selection.getSelection(mesh);
 
 		final int nf = faces.size();
 		WB_ProgressCounter counter = new WB_ProgressCounter(nf, 10);

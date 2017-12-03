@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -52,7 +52,7 @@ public class HEM_Diagrid extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		final HE_Selection sel = HE_Selection.selectAllEdges(mesh);
+		final HE_Selection sel = mesh.selectAllEdges();
 		HET_MeshOp.splitFacesTri(mesh);
 		final HE_EdgeIterator eitr = sel.eItr();
 		HE_Halfedge e;

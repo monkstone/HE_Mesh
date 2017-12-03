@@ -207,7 +207,7 @@ public class HEC_Copy extends HEC_Creator {
 			for (String name : names) {
 
 				HE_Selection source = mesh.getSelection(name);
-				HE_Selection target = new HE_Selection(result);
+				HE_Selection target = HE_Selection.getSelection(result);
 				svItr = source.vItr();
 				while (svItr.hasNext()) {
 					sv = svItr.next();

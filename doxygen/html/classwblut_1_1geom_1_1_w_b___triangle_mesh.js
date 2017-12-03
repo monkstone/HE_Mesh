@@ -30,5 +30,7 @@ var classwblut_1_1geom_1_1_w_b___triangle_mesh =
     [ "updatevfNeighbors", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#ab07276175f5b57435e8a81277015b306", null ],
     [ "updatevvNeighbors", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#a8d02222736c88a5ed47dfc8a1fbc7546", null ],
     [ "vfNeighbors", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#a6f57a9cd9515cfa16771cf1365f1a0e6", null ],
-    [ "geometryfactory", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#ac9d3e2dc06ef500a194c2315723709e5", null ]
+    [ "geometryfactory", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#ac9d3e2dc06ef500a194c2315723709e5", null ],
+    [ "NEXT", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#a4651ca8d5c05ed594f0254a4af11d5cd", null ],
+    [ "PREV", "classwblut_1_1geom_1_1_w_b___triangle_mesh.html#aadc3c1c1b45f418517986742e145c272", null ]
 ];

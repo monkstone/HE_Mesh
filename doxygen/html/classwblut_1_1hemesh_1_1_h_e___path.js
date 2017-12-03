@@ -17,6 +17,7 @@ var classwblut_1_1hemesh_1_1_h_e___path =
     [ "getPathOrder", "classwblut_1_1hemesh_1_1_h_e___path.html#ab44f3ecdd281867daf8227ceb5e4e987", null ],
     [ "getPathOuterFaces", "classwblut_1_1hemesh_1_1_h_e___path.html#ad018c99cffb5272fe2744d1743555e9a", null ],
     [ "getPathVertices", "classwblut_1_1hemesh_1_1_h_e___path.html#ad1d3d1cceb32b1b3a6fff22f9408214d", null ],
+    [ "getShortestPath", "classwblut_1_1hemesh_1_1_h_e___path.html#a7def915951ce6fc862212108de33d939", null ],
     [ "isCut", "classwblut_1_1hemesh_1_1_h_e___path.html#a119aba5116c1a7aeac60e21bf69f01c9", null ],
     [ "isLoop", "classwblut_1_1hemesh_1_1_h_e___path.html#a2a78ee827cbda0ee04d8c970237d50d3", null ],
     [ "key", "classwblut_1_1hemesh_1_1_h_e___path.html#ab9c86a4703454f407f9d5aa2a6abe752", null ],

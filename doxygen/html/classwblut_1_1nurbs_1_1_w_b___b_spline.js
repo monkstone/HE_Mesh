@@ -24,6 +24,7 @@ var classwblut_1_1nurbs_1_1_w_b___b_spline =
     [ "refineKnot", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#a25febb174fb95bc3f496c7af8605169e", null ],
     [ "refineKnotRestricted", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#a5629ee92826d63f70b2cadee7ad78211", null ],
     [ "split", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#a38331b2472aa22cfca2f31542dad0b70", null ],
+    [ "gf", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#a0a5f53e94e93ca616c75b2d0b9a2347a", null ],
     [ "knot", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#acb168a4ed5f1133b7bb717970491916d", null ],
     [ "n", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#a8c5b4c82d360183baf10b9325bb65f26", null ],
     [ "p", "classwblut_1_1nurbs_1_1_w_b___b_spline.html#a45f3c66c115fae871dc6a1aeb4d74bbb", null ],

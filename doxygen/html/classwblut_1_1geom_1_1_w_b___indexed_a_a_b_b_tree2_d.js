@@ -18,8 +18,10 @@ var classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d =
     [ "getClosestPoint", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a72a990ed06d8dab598dc326c04b61652", null ],
     [ "getDepth", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a62427823137d333e30ed2dcbe3d51b23", null ],
     [ "getRoot", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a84592e456a650258538b7e9a146ba6bf", null ],
+    [ "getSAH", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a175266c98a984c0fb65af7d07bfca16d", null ],
     [ "depth", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#afd00a055496cfd39c2b9a93b17d07ae8", null ],
     [ "maxLevel", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a80a7b15c7b2cede14128f99cb2f44138", null ],
     [ "maxNumberOfFaces", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#afd413ad77790a5e9837b1c0f08a20f8d", null ],
-    [ "root", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a2c12450d50b27a98c3b5a900079a50da", null ]
+    [ "root", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a2c12450d50b27a98c3b5a900079a50da", null ],
+    [ "tracker", "classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#a8bbc90c8b77aa8aa5081733bcedda091", null ]
 ];

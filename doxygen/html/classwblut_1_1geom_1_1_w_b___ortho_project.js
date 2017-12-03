@@ -29,5 +29,11 @@ var classwblut_1_1geom_1_1_w_b___ortho_project =
     [ "unmapVector3D", "classwblut_1_1geom_1_1_w_b___ortho_project.html#a2723cd3a93f845d865d50f2fd669798b", null ],
     [ "unmapVector3D", "classwblut_1_1geom_1_1_w_b___ortho_project.html#a03d8df0a41582c50ff304302e61b4929", null ],
     [ "unmapVector3D", "classwblut_1_1geom_1_1_w_b___ortho_project.html#a629b20dd5d6849f541e1d813c3fb02ba", null ],
-    [ "mode", "classwblut_1_1geom_1_1_w_b___ortho_project.html#ab47cf44d6aa4d4111da38837e44176c5", null ]
+    [ "mode", "classwblut_1_1geom_1_1_w_b___ortho_project.html#ab47cf44d6aa4d4111da38837e44176c5", null ],
+    [ "XY", "classwblut_1_1geom_1_1_w_b___ortho_project.html#acaba3a1231cd975c5de75bea67b51eb3", null ],
+    [ "XYrev", "classwblut_1_1geom_1_1_w_b___ortho_project.html#a5e4e0ce0af4e3813be69158f8b07893d", null ],
+    [ "XZ", "classwblut_1_1geom_1_1_w_b___ortho_project.html#a2a5660553ada56ec2009283440e7d66b", null ],
+    [ "XZrev", "classwblut_1_1geom_1_1_w_b___ortho_project.html#acb7c27bf58e1eddd98ab446fa40e9937", null ],
+    [ "YZ", "classwblut_1_1geom_1_1_w_b___ortho_project.html#aceb2d845fe5431868663bd9806849a41", null ],
+    [ "YZrev", "classwblut_1_1geom_1_1_w_b___ortho_project.html#a71371b60be7760866ace61b507a35e21", null ]
 ];

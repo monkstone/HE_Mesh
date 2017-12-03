@@ -160,6 +160,7 @@ var classwblut_1_1geom_1_1_w_b___geometry_factory2_d =
     [ "createVectorFromPolar", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a578ffb8cfa350f7aac67a162fa0d49e5", null ],
     [ "createVectorFromTo2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#ae96b7c889e890a2a64482d5f6bab5656", null ],
     [ "getDirections2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#af98203e70e4eb6f0f7d859f208d1ce6e", null ],
+    [ "instance", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a16fc974e213136c3587cad7ed2a801b1", null ],
     [ "intersectPolygons2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a6c043f90961023aa4fda5d0fe69c2ed3", null ],
     [ "intersectPolygons2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a27972e695c5c2b3c42cd1ed6a5ddea59", null ],
     [ "intersectPolygons2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html#a06be6c6f9dcb313bc079dfa5382ab06e", null ],

@@ -29,6 +29,7 @@ var classwblut_1_1nurbs_1_1_w_b___b_spline_surface =
     [ "upperu", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#a591a3605a8a6b72592bf111c6cbc84dc", null ],
     [ "upperv", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#a9a8b03e0c63c3fadaff236b18b749439", null ],
     [ "vknot", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#af4291c98e80f4047743ab7ca81002783", null ],
+    [ "gf", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#ad067e46f867932bfd31ab8ab9526c9b1", null ],
     [ "m", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#ab9f085d02008ca641fc505699cea2d0c", null ],
     [ "n", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#a77fe639672d1f0ed69194274bfa9898d", null ],
     [ "p", "classwblut_1_1nurbs_1_1_w_b___b_spline_surface.html#a1fbda557770c927729b296fdb2d03b15", null ],

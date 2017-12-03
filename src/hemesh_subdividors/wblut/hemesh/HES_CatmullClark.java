@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryFactory;
@@ -135,7 +136,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 		qs.applySelf(mesh);
 
 		final UnifiedMap<Long, WB_Coord> newPositions = new UnifiedMap<Long, WB_Coord>();
-		final HE_Selection all = HE_Selection.selectAllFaces(mesh);
+		final HE_Selection all = mesh.selectAllFaces();
 		final List<HE_Vertex> boundary = all.getOuterVertices();
 		final List<HE_Vertex> inner = all.getInnerVertices();
 		counter = new WB_ProgressCounter(inner.size(), 10);
