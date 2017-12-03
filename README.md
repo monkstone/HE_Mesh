@@ -18,7 +18,7 @@ You need to add some other external *.jar files to the properties of your Eclips
 
 ## Build-of-the-day HE_Mesh (2017/12/03)
 
-Download a recent built here: http://www.wblut.com/hemesh/hemesh20171106.zip.
+Download a recent built here: http://www.wblut.com/hemesh/hemesh20171203.zip.
 
 ## License
 
