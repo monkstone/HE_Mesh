@@ -38,7 +38,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 	/** Cap holes?. */
 	private boolean capHoles = true;
 	/** The simple cap. */
-	private boolean simpleCap = true;
+
 	private boolean optimizeCap = true;
 
 	private boolean triangulate = false;
@@ -154,18 +154,6 @@ public class HEM_MultiSlice extends HEM_Modifier {
 		return this;
 	}
 
-	/**
-	 * Sets the simple cap.
-	 *
-	 * @param b
-	 *            the b
-	 * @return the hE m_ multi slice
-	 */
-	public HEM_MultiSlice setSimpleCap(final Boolean b) {
-		simpleCap = b;
-		return this;
-	}
-
 	public HEM_MultiSlice setOptimizeCap(final boolean b) {
 		optimizeCap = b;
 		return this;
@@ -192,8 +180,7 @@ public class HEM_MultiSlice extends HEM_Modifier {
 		Iterator<HE_Face> fItr = mesh.fItr();
 		mesh.resetFaceInternalLabels();
 		final HEM_Slice slice = new HEM_Slice();
-		slice.setReverse(reverse).setCap(capHoles).setOffset(offset).setSimpleCap(simpleCap)
-				.setOptimizeCap(optimizeCap);
+		slice.setReverse(reverse).setCap(capHoles).setOffset(offset).setOptimizeCap(optimizeCap);
 		if (center != null) {
 			final double[] r = new double[planes.size()];
 			for (int i = 0; i < planes.size(); i++) {

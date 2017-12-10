@@ -44,7 +44,7 @@ void createMesh(){
   modifier.setThresholdAngle(1.5*HALF_PI);// treat edges sharper than this angle as hard edges
   modifier.setFuse(true);// try to fuse planar adjacent planar faces created by the extrude
   modifier.setFuseAngle(0.1*HALF_PI);// threshold angle to be considered coplanar
-  HE_Selection sel=HE_Selection.selectRandomFaces(mesh,0.4);
+  HE_Selection sel=mesh.selectRandomFaces("random",0.4);
   sel.modify(modifier);
   mesh.smooth(2);
 }

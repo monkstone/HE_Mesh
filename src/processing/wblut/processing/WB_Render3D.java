@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -29,9 +29,6 @@ import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_Curve;
-import wblut.geom.WB_Frame;
-import wblut.geom.WB_Frame.WB_FrameNode;
-import wblut.geom.WB_Frame.WB_FrameStrut;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Hexagon;
@@ -39,6 +36,9 @@ import wblut.geom.WB_Line;
 import wblut.geom.WB_Map;
 import wblut.geom.WB_Map2D;
 import wblut.geom.WB_Mesh;
+import wblut.geom.WB_Network;
+import wblut.geom.WB_Network.Connection;
+import wblut.geom.WB_Network.Node;
 import wblut.geom.WB_Octagon;
 import wblut.geom.WB_OctreeInteger;
 import wblut.geom.WB_Pentagon;
@@ -66,7 +66,6 @@ import wblut.hemesh.HE_FaceIntersection;
 import wblut.hemesh.HE_FaceIterator;
 import wblut.hemesh.HE_FaceVertexCirculator;
 import wblut.hemesh.HE_Halfedge;
-import wblut.hemesh.HE_HalfedgeIterator;
 import wblut.hemesh.HE_Mesh;
 import wblut.hemesh.HE_MeshCollection;
 import wblut.hemesh.HE_MeshIterator;
@@ -258,6 +257,19 @@ public class WB_Render3D extends WB_Render2D {
 					} else if (he.getNextInFace() != null) {
 						line(he.getVertex(), he.getNextInFace().getVertex());
 					}
+				}
+			}
+		}
+	}
+
+	public void drawBoundaryFaces(final HE_MeshStructure mesh) {
+		HE_Face f;
+		final Iterator<HE_Face> fItr = mesh.fItr();
+		while (fItr.hasNext()) {
+			f = fItr.next();
+			if (f.isVisible()) {
+				if (f.isBoundary()) {
+					drawFace(f);
 				}
 			}
 		}
@@ -1014,7 +1026,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param smooth
 	 * @param mesh
 	 */
-	public void drawFace(final Long key, final boolean smooth, final HE_MeshStructure mesh) {
+	public void drawFace(final long key, final boolean smooth, final HE_Mesh mesh) {
 		final HE_Face f = mesh.getFaceWithKey(key);
 		if (f != null) {
 			drawFace(f, smooth);
@@ -1027,7 +1039,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param key
 	 * @param mesh
 	 */
-	public void drawFace(final Long key, final HE_MeshStructure mesh) {
+	public void drawFace(final long key, final HE_Mesh mesh) {
 		final HE_Face f = mesh.getFaceWithKey(key);
 		if (f != null) {
 			drawFace(f, false);
@@ -1349,7 +1361,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 *            the mesh
 	 */
-	public void drawFaceSmooth(final Long key, final HE_MeshStructure mesh) {
+	public void drawFaceSmooth(final long key, final HE_Mesh mesh) {
 
 		final HE_Face f = mesh.getFaceWithKey(key);
 		if (f != null) {
@@ -1373,7 +1385,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param key
 	 * @param mesh
 	 */
-	public void drawFaceSmoothFC(final Long key, final HE_MeshStructure mesh) {
+	public void drawFaceSmoothFC(final long key, final HE_Mesh mesh) {
 
 		final HE_Face f = mesh.getFaceWithKey(key);
 		if (f != null) {
@@ -1397,7 +1409,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param key
 	 * @param mesh
 	 */
-	public void drawFaceSmoothHC(final Long key, final HE_MeshStructure mesh) {
+	public void drawFaceSmoothHC(final long key, final HE_Mesh mesh) {
 
 		final HE_Face f = mesh.getFaceWithKey(key);
 		if (f != null) {
@@ -1421,7 +1433,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param key
 	 * @param mesh
 	 */
-	public void drawFaceSmoothVC(final Long key, final HE_MeshStructure mesh) {
+	public void drawFaceSmoothVC(final long key, final HE_Mesh mesh) {
 
 		final HE_Face f = mesh.getFaceWithKey(key);
 		if (f != null) {
@@ -1831,9 +1843,9 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param frame
 	 */
-	public void drawFrame(final WB_Frame frame) {
-		final ArrayList<WB_FrameStrut> struts = frame.getStruts();
-		for (int i = 0; i < frame.getNumberOfStruts(); i++) {
+	public void drawFrame(final WB_Network frame) {
+		final List<Connection> struts = frame.getConnections();
+		for (int i = 0; i < frame.getNumberOfConnections(); i++) {
 			drawFrameStrut(struts.get(i));
 		}
 	}
@@ -1844,7 +1856,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param node
 	 * @param s
 	 */
-	public void drawFrameNode(final WB_FrameNode node, final double s) {
+	public void drawFrameNode(final Node node, final double s) {
 		home.pushMatrix();
 		translate(node);
 		home.box((float) s);
@@ -1856,12 +1868,12 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param strut
 	 */
-	public void drawFrameStrut(final WB_FrameStrut strut) {
+	public void drawFrameStrut(final Connection strut) {
 		line(strut.start(), strut.end());
 	}
 
 	public void drawHalfedgesWithInternalLabel(final int label, final HE_MeshStructure mesh) {
-		HE_HalfedgeIterator heItr = mesh.heItr();
+		Iterator<HE_Halfedge> heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
 			he = heItr.next();
@@ -1874,7 +1886,7 @@ public class WB_Render3D extends WB_Render2D {
 	}
 
 	public void drawHalfedgesWithLabel(final int label, final HE_MeshStructure mesh) {
-		HE_HalfedgeIterator heItr = mesh.heItr();
+		Iterator<HE_Halfedge> heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
 			he = heItr.next();
@@ -1950,7 +1962,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param s
 	 * @param mesh
 	 */
-	public void drawHalfedge(final Long key, final double d, final double s, final HE_MeshStructure mesh) {
+	public void drawHalfedge(final long key, final double d, final double s, final HE_Mesh mesh) {
 		final HE_Halfedge he = mesh.getHalfedgeWithKey(key);
 		drawHalfedge(he, d, s);
 	}
@@ -2185,8 +2197,8 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param s
 	 *            the s
 	 */
-	public void drawFrameNodes(final WB_Frame frame, final double s) {
-		final ArrayList<WB_FrameNode> nodes = frame.getNodes();
+	public void drawFrameNodes(final WB_Network frame, final double s) {
+		final List<Node> nodes = frame.getNodes();
 		for (int i = 0; i < frame.getNumberOfNodes(); i++) {
 			drawFrameNode(nodes.get(i), s);
 		}
@@ -4164,7 +4176,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawVertex(final Long key, final HE_MeshStructure mesh, final double d) {
+	public void drawVertex(final long key, final HE_Mesh mesh, final double d) {
 		final HE_Vertex v = mesh.getVertexWithKey(key);
 		if (v != null && v.isVisible()) {
 			home.pushMatrix();

@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp;
 import wblut.geom.WB_GeometryOp3D;
@@ -33,10 +34,6 @@ import wblut.math.WB_ScalarParameter;
  * vertex would move more than cutoff*distance, it is displaced along the vertex
  * normal instead. If not specified, the cutoff factor defaults to 4.0,
  * corresponding to the displacement expected in an acute angle of 30°.
- *
- *
- *
- *
  *
  */
 public class HEM_FaceExpand extends HEM_Modifier {

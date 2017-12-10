@@ -30,6 +30,7 @@ var classwblut_1_1hemesh_1_1_h_e___halfedge =
     [ "getFace", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#a19d73eac07872ceb73cea09dccd232fe", null ],
     [ "getHalfedgeArea", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#a7173b66bc9f67adb02c3acc212eb5a62", null ],
     [ "getHalfedgeCenter", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#a054f2827e2ba24a2bfc4cb77f65e5274", null ],
+    [ "getHalfedgeCenter", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#a421d627318c7d56f83f6abc2bce4aa38", null ],
     [ "getHalfedgeDihedralAngle", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#a2640d1f0d7ad2c2005599fa74949e45f", null ],
     [ "getHalfedgeNormal", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#afafe2b3d7171f7d74edae066c3a6f52a", null ],
     [ "getHalfedgeTangent", "classwblut_1_1hemesh_1_1_h_e___halfedge.html#a81bd78dfe5dfb49c7d693f4b830f8aa3", null ],

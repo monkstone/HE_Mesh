@@ -11,7 +11,7 @@ HE_Selection sel;
 
 class XGradient implements WB_ScalarParameter {
   public double evaluate(double...x ) {
-    return map((float)x[0], -400.0, 400.0, 2, 60)*(1.0-0.5*sin(map((float)x[2], -400.0, 400.0, 0, 4*TWO_PI)));
+    return map((float)x[0], -400.0, 400.0, 2, 50)*(1.0-0.5*sin(map((float)x[2], -400.0, 400.0, 0, 4*TWO_PI)));
   }
 }
 
@@ -44,7 +44,7 @@ void createMesh() {
   HEM_Extrude ext=new HEM_Extrude().setDistance(300);
   mesh.modify(ext);
  
-  HE_Selection sel=ext.extruded;
+  HE_Selection sel=mesh.getSelection("extruded");
   mesh.deleteFaces(sel);
   mesh.subdivide(new HES_CatmullClark(), 4);
   

@@ -24,6 +24,8 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 	 */
 	private double c;
 
+	boolean relative;
+
 	/**
 	 *
 	 */
@@ -36,6 +38,7 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 		super();
 		d = 0;
 		c = 0.5;
+		relative = false;
 	}
 
 	/**
@@ -60,6 +63,11 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 		return this;
 	}
 
+	public HEM_CenterSplitHole setRelative(final boolean b) {
+		this.relative = b;
+		return this;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -67,7 +75,7 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
+		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d).setRelative(relative);
 		mesh.modify(ext);
 		mesh.deleteFaces(mesh.getSelection("extruded"));
 		mesh.removeSelection("extruded");
@@ -82,7 +90,7 @@ public class HEM_CenterSplitHole extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Selection selection) {
-		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d);
+		final HEM_Extrude ext = new HEM_Extrude().setChamfer(c).setDistance(d).setRelative(relative);
 		selection.modify(ext);
 		selection.parent.deleteFaces(selection.parent.getSelection("extruded"));
 		selection.parent.removeSelection("extruded");

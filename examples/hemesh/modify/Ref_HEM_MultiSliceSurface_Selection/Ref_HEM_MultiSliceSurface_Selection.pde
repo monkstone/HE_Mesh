@@ -1,5 +1,3 @@
-/*BROKEN IN 6.0.0 */
-
 import wblut.math.*;
 import wblut.processing.*;
 import wblut.core.*;
@@ -24,7 +22,7 @@ void setup() {
   modifier.setPlanes(planes);// Cut plane 
   //planes can also be any Collection<WB_Plane>
   modifier.setOffset(0);// shift cut plane along normal
-  HE_Selection sel=HE_Selection.selectRandomFaces(mesh,0.4);
+  HE_Selection sel=mesh.selectRandomFaces("random",0.4);
   sel.modify(modifier);
  
   render=new WB_Render(this);

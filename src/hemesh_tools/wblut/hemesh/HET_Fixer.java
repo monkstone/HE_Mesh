@@ -35,6 +35,34 @@ public class HET_Fixer {
 	public static final WB_ProgressTracker tracker = WB_ProgressTracker.instance();
 
 	/**
+	 * Iterate through all halfedges and reset the halfedge link to its face to
+	 * itself. f=he.getFace() f.setHalfedge(he)
+	 */
+	public void fixHalfedgeFaceAssignment(final HE_Mesh mesh) {
+		final Iterator<HE_Halfedge> heItr = mesh.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getFace() != null) {
+				mesh.setHalfedge(he.getFace(), he);
+			}
+		}
+	}
+
+	/**
+	 * Iterate through all halfedges and reset the halfedge link to its vertex
+	 * to itself. v=he.getVertex() v.setHalfedge(he)
+	 */
+	public void fixHalfedgeVertexAssignment(final HE_Mesh mesh) {
+		final Iterator<HE_Halfedge> heItr = mesh.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			mesh.setHalfedge(he.getVertex(), he);
+		}
+	}
+
+	/**
 	 *
 	 * @param mesh
 	 * @param f
@@ -187,7 +215,7 @@ public class HET_Fixer {
 		VertexInfo vi;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
 		tracker.setCounterStatus("HET_Fixer", "Classifying halfedges per vertex.", counter);
-		HE_HalfedgeIterator heItr = mesh.heItr();
+		HE_MeshHalfedgeIterator heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
 			he = heItr.next();

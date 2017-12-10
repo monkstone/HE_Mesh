@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -41,6 +41,8 @@ abstract public class HES_Simplifier extends HE_Machine {
 			mesh.setNoCopy(copy);
 			tracker.setStopStatus(this, "Simplifier failed. Resetting mesh.");
 			return mesh;
+		} finally {
+			copy = null;
 		}
 
 	}
@@ -62,6 +64,8 @@ abstract public class HES_Simplifier extends HE_Machine {
 			selection.parent.setNoCopy(copy);
 			tracker.setStopStatus(this, "Simplifier failed. Resetting mesh.");
 			return selection.parent;
+		} finally {
+			copy = null;
 		}
 
 	}

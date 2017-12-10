@@ -110,11 +110,6 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     [ "WB_ExpressionCurve.java", "_w_b___expression_curve_8java.html", [
       [ "WB_ExpressionCurve", "classwblut_1_1geom_1_1_w_b___expression_curve.html", "classwblut_1_1geom_1_1_w_b___expression_curve" ]
     ] ],
-    [ "WB_Frame.java", "_w_b___frame_8java.html", [
-      [ "WB_Frame", "classwblut_1_1geom_1_1_w_b___frame.html", "classwblut_1_1geom_1_1_w_b___frame" ],
-      [ "WB_FrameNode", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node" ],
-      [ "WB_FrameStrut", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_strut.html", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_strut" ]
-    ] ],
     [ "WB_Geodesic.java", "_w_b___geodesic_8java.html", [
       [ "WB_Geodesic", "classwblut_1_1geom_1_1_w_b___geodesic.html", "classwblut_1_1geom_1_1_w_b___geodesic" ]
     ] ],
@@ -211,7 +206,8 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
       [ "GridRaw3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d" ],
       [ "Function3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_function3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_function3_d" ],
       [ "HashGrid3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_hash_grid3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_hash_grid3_d" ],
-      [ "ImageStack3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_image_stack3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_image_stack3_d" ]
+      [ "ImageStack3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_image_stack3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_image_stack3_d" ],
+      [ "SubValues3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_sub_values3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_sub_values3_d" ]
     ] ],
     [ "WB_KDTree.java", "_w_b___k_d_tree_8java.html", [
       [ "WB_KDTree", "classwblut_1_1geom_1_1_w_b___k_d_tree.html", "classwblut_1_1geom_1_1_w_b___k_d_tree" ],
@@ -307,6 +303,11 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     ] ],
     [ "WB_MutableCoordinateTransform4D.java", "_w_b___mutable_coordinate_transform4_d_8java.html", [
       [ "WB_MutableCoordinateTransform4D", "interfacewblut_1_1geom_1_1_w_b___mutable_coordinate_transform4_d.html", "interfacewblut_1_1geom_1_1_w_b___mutable_coordinate_transform4_d" ]
+    ] ],
+    [ "WB_Network.java", "_w_b___network_8java.html", [
+      [ "WB_Network", "classwblut_1_1geom_1_1_w_b___network.html", "classwblut_1_1geom_1_1_w_b___network" ],
+      [ "Node", "classwblut_1_1geom_1_1_w_b___network_1_1_node.html", "classwblut_1_1geom_1_1_w_b___network_1_1_node" ],
+      [ "Connection", "classwblut_1_1geom_1_1_w_b___network_1_1_connection.html", "classwblut_1_1geom_1_1_w_b___network_1_1_connection" ]
     ] ],
     [ "WB_Octagon.java", "_w_b___octagon_8java.html", [
       [ "WB_Octagon", "classwblut_1_1geom_1_1_w_b___octagon.html", "classwblut_1_1geom_1_1_w_b___octagon" ]

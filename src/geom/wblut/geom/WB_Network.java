@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -15,25 +15,26 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.hemesh.HEC_Geodesic;
 import wblut.hemesh.HE_Mesh;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_Math;
 
-public class WB_Frame {
+public class WB_Network {
 
 	private static WB_GeometryFactory gf = new WB_GeometryFactory();
 
-	protected FastList<WB_FrameStrut> struts;
+	private List<Connection> connections;
 
-	protected FastList<WB_FrameNode> nodes;
+	private List<Node> nodes;
 
 	/**
 	 *
 	 */
-	public WB_Frame() {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network() {
+		connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 	}
 
 	/**
@@ -42,14 +43,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final WB_Coord[] points, final WB_IndexedSegment[] connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final WB_Coord[] points, final WB_IndexedSegment[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
 		for (final WB_IndexedSegment connection : connections) {
-			addStrut(connection.i1(), connection.i2());
+			addConnection(connection.i1(), connection.i2());
 		}
 	}
 
@@ -59,14 +60,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final WB_Coord[] points, final Collection<WB_IndexedSegment> connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final WB_Coord[] points, final Collection<WB_IndexedSegment> connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
 		for (final WB_IndexedSegment connection : connections) {
-			addStrut(connection.i1(), connection.i2());
+			addConnection(connection.i1(), connection.i2());
 		}
 	}
 
@@ -77,18 +78,18 @@ public class WB_Frame {
 	 * @param connections
 	 */
 	public void add(final WB_Coord[] points, final Collection<WB_IndexedSegment> connections) {
-		if (struts == null) {
-			struts = new FastList<WB_FrameStrut>();
+		if (connections == null) {
+			this.connections = new FastList<Connection>();
 		}
 		if (nodes == null) {
-			nodes = new FastList<WB_FrameNode>();
+			nodes = new FastList<Node>();
 		}
 		final int nodeoffset = nodes.size();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
 		for (final WB_IndexedSegment connection : connections) {
-			addStrut(connection.i1() + nodeoffset, connection.i2() + nodeoffset);
+			addConnection(connection.i1() + nodeoffset, connection.i2() + nodeoffset);
 		}
 	}
 
@@ -97,19 +98,19 @@ public class WB_Frame {
 	 *
 	 * @param frame
 	 */
-	public void add(final WB_Frame frame) {
-		if (struts == null) {
-			struts = new FastList<WB_FrameStrut>();
+	public void add(final WB_Network frame) {
+		if (connections == null) {
+			this.connections = new FastList<Connection>();
 		}
 		if (nodes == null) {
-			nodes = new FastList<WB_FrameNode>();
+			nodes = new FastList<Node>();
 		}
 		final int nodeoffset = nodes.size();
-		for (final WB_FrameNode node : frame.nodes) {
+		for (final Node node : frame.nodes) {
 			addNode(node, node.getValue());
 		}
 		for (final WB_IndexedSegment connection : frame.getIndexedSegments()) {
-			addStrut(connection.i1() + nodeoffset, connection.i2() + nodeoffset);
+			addConnection(connection.i1() + nodeoffset, connection.i2() + nodeoffset);
 		}
 	}
 
@@ -119,14 +120,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final Collection<? extends WB_Coord> points, final Collection<WB_IndexedSegment> connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final Collection<? extends WB_Coord> points, final Collection<WB_IndexedSegment> connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point, 1);
 		}
 		for (final WB_IndexedSegment connection : connections) {
-			addStrut(connection.i1(), connection.i2());
+			addConnection(connection.i1(), connection.i2());
 		}
 	}
 
@@ -136,14 +137,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final WB_Coord[] points, final int[][] connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final WB_Coord[] points, final int[][] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
 		for (final int[] connection : connections) {
-			addStrut(connection[0], connection[1]);
+			addConnection(connection[0], connection[1]);
 		}
 	}
 
@@ -153,14 +154,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final Collection<? extends WB_Coord> points, final int[][] connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final Collection<? extends WB_Coord> points, final int[][] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
 		for (final int[] connection : connections) {
-			addStrut(connection[0], connection[1]);
+			addConnection(connection[0], connection[1]);
 		}
 	}
 
@@ -170,14 +171,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final double[][] points, final int[][] connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final double[][] points, final int[][] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final double[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
 		for (final int[] connection : connections) {
-			addStrut(connection[0], connection[1]);
+			addConnection(connection[0], connection[1]);
 		}
 	}
 
@@ -187,14 +188,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final float[][] points, final int[][] connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final float[][] points, final int[][] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final float[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
 		for (final int[] connection : connections) {
-			addStrut(connection[0], connection[1]);
+			addConnection(connection[0], connection[1]);
 		}
 	}
 
@@ -204,14 +205,14 @@ public class WB_Frame {
 	 * @param points
 	 * @param connections
 	 */
-	public WB_Frame(final int[][] points, final int[][] connections) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final int[][] points, final int[][] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final int[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
 		for (final int[] connection : connections) {
-			addStrut(connection[0], connection[1]);
+			addConnection(connection[0], connection[1]);
 		}
 	}
 
@@ -220,9 +221,9 @@ public class WB_Frame {
 	 *
 	 * @param points
 	 */
-	public WB_Frame(final WB_Coord[] points) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final WB_Coord[] points) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
@@ -233,9 +234,9 @@ public class WB_Frame {
 	 *
 	 * @param points
 	 */
-	public WB_Frame(final Collection<? extends WB_Coord> points) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final Collection<? extends WB_Coord> points) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
@@ -246,9 +247,9 @@ public class WB_Frame {
 	 *
 	 * @param points
 	 */
-	public WB_Frame(final double[][] points) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final double[][] points) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final double[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -259,9 +260,9 @@ public class WB_Frame {
 	 *
 	 * @param points
 	 */
-	public WB_Frame(final float[][] points) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final float[][] points) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final float[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -272,9 +273,9 @@ public class WB_Frame {
 	 *
 	 * @param points
 	 */
-	public WB_Frame(final int[][] points) {
-		struts = new FastList<WB_FrameStrut>();
-		nodes = new FastList<WB_FrameNode>();
+	public WB_Network(final int[][] points) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
 		for (final int[] point : points) {
 			addNode(point[0], point[1], point[2], 1);
 		}
@@ -291,7 +292,7 @@ public class WB_Frame {
 	 */
 	public int addNode(final double x, final double y, final double z, final double v) {
 		final int n = nodes.size();
-		nodes.add(new WB_FrameNode(new WB_Point(x, y, z), n, v));
+		nodes.add(new Node(new WB_Point(x, y, z), n, v));
 		return n;
 	}
 
@@ -304,7 +305,7 @@ public class WB_Frame {
 	 */
 	public int addNode(final WB_Coord pos, final double v) {
 		final int n = nodes.size();
-		nodes.add(new WB_FrameNode(pos, n, v));
+		nodes.add(new Node(pos, n, v));
 		return n;
 	}
 
@@ -313,9 +314,9 @@ public class WB_Frame {
 	 *
 	 * @param node
 	 */
-	public void removeNode(final WB_FrameNode node) {
-		for (final WB_FrameStrut strut : node.getStruts()) {
-			removeStrut(strut);
+	public void removeNode(final Node node) {
+		for (final Connection connection : node.getConnections()) {
+			removeConnection(connection);
 		}
 		nodes.remove(node);
 	}
@@ -330,7 +331,7 @@ public class WB_Frame {
 		int n = nodes.size();
 		final Iterator<WB_Coord> pItr = pos.iterator();
 		while (pItr.hasNext()) {
-			nodes.add(new WB_FrameNode(pItr.next(), n, 1));
+			nodes.add(new Node(pItr.next(), n, 1));
 			n++;
 		}
 		return n;
@@ -343,27 +344,27 @@ public class WB_Frame {
 	 * @param j
 	 * @return
 	 */
-	public boolean addStrut(final int i, final int j) {
+	public boolean addConnection(final int i, final int j) {
 		if (i == j) {
-			throw new IllegalArgumentException("Strut can't connect a node to itself: " + i + " " + j + ".");
+			throw new IllegalArgumentException("Connection can't connect a node to itself: " + i + " " + j + ".");
 		}
 		final int nn = nodes.size();
 		if (i < 0 || j < 0 || i >= nn || j >= nn) {
-			throw new IllegalArgumentException("Strut indices outside node range.");
+			throw new IllegalArgumentException("Connection indices outside node range.");
 		}
-		final int n = struts.size();
-		WB_FrameStrut strut;
+		final int n = connections.size();
+		Connection connection;
 		if (i <= j) {
-			strut = new WB_FrameStrut(nodes.get(i), nodes.get(j), n);
+			connection = new Connection(nodes.get(i), nodes.get(j), n);
 		} else {
-			strut = new WB_FrameStrut(nodes.get(j), nodes.get(i), n);
+			connection = new Connection(nodes.get(j), nodes.get(i), n);
 		}
-		if (!nodes.get(i).addStrut(strut)) {
+		if (!nodes.get(i).addConnection(connection)) {
 			return false;
-		} else if (!nodes.get(j).addStrut(strut)) {
+		} else if (!nodes.get(j).addConnection(connection)) {
 			return false;
 		} else {
-			struts.add(strut);
+			connections.add(connection);
 		}
 		return true;
 	}
@@ -371,12 +372,12 @@ public class WB_Frame {
 	/**
 	 *
 	 *
-	 * @param strut
+	 * @param connection
 	 */
-	public void removeStrut(final WB_FrameStrut strut) {
-		nodes.get(strut.getStartIndex()).removeStrut(strut);
-		nodes.get(strut.getEndIndex()).removeStrut(strut);
-		struts.remove(strut);
+	public void removeConnection(final Connection connection) {
+		nodes.get(connection.getStartIndex()).removeConnection(connection);
+		nodes.get(connection.getEndIndex()).removeConnection(connection);
+		connections.remove(connection);
 	}
 
 	/**
@@ -384,9 +385,9 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public ArrayList<WB_FrameStrut> getStruts() {
-		final ArrayList<WB_FrameStrut> result = new ArrayList<WB_FrameStrut>();
-		result.addAll(struts);
+	public List<Connection> getConnections() {
+		final List<Connection> result = new ArrayList<Connection>();
+		result.addAll(connections);
 		return result;
 	}
 
@@ -395,10 +396,10 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public ArrayList<WB_Segment> getSegments() {
-		final ArrayList<WB_Segment> result = new ArrayList<WB_Segment>();
-		for (final WB_FrameStrut strut : struts) {
-			result.add(strut.toSegment());
+	public List<WB_Segment> getSegments() {
+		final List<WB_Segment> result = new ArrayList<WB_Segment>();
+		for (final Connection connection : connections) {
+			result.add(connection.toSegment());
 		}
 		return result;
 	}
@@ -408,13 +409,13 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public ArrayList<WB_IndexedSegment> getIndexedSegments() {
-		final ArrayList<WB_Point> apoints = getPoints();
+	public List<WB_IndexedSegment> getIndexedSegments() {
+		final List<WB_Point> apoints = getPoints();
 		WB_Point[] ipoints = new WB_Point[apoints.size()];
 		ipoints = apoints.toArray(ipoints);
-		final ArrayList<WB_IndexedSegment> result = new ArrayList<WB_IndexedSegment>();
-		for (final WB_FrameStrut strut : struts) {
-			result.add(new WB_IndexedSegment(strut.getStartIndex(), strut.getEndIndex(), ipoints));
+		final List<WB_IndexedSegment> result = new ArrayList<WB_IndexedSegment>();
+		for (final Connection connection : connections) {
+			result.add(new WB_IndexedSegment(connection.getStartIndex(), connection.getEndIndex(), ipoints));
 		}
 		return result;
 	}
@@ -424,8 +425,8 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public int getNumberOfStruts() {
-		return struts.size();
+	public int getNumberOfConnections() {
+		return connections.size();
 	}
 
 	/**
@@ -433,8 +434,8 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public ArrayList<WB_FrameNode> getNodes() {
-		final ArrayList<WB_FrameNode> result = new ArrayList<WB_FrameNode>();
+	public List<Node> getNodes() {
+		final List<Node> result = new ArrayList<Node>();
 		result.addAll(nodes);
 		return result;
 	}
@@ -444,8 +445,8 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public ArrayList<WB_Point> getPoints() {
-		final ArrayList<WB_Point> result = new ArrayList<WB_Point>();
+	public List<WB_Point> getPoints() {
+		final List<WB_Point> result = new ArrayList<WB_Point>();
 		result.addAll(nodes);
 		return result;
 	}
@@ -456,9 +457,9 @@ public class WB_Frame {
 	 * @return
 	 */
 	public WB_Point[] getPointsAsArray() {
-		final ArrayList<WB_Point> result = new ArrayList<WB_Point>();
+		final List<WB_Point> result = new ArrayList<WB_Point>();
 		result.addAll(nodes);
-		final ArrayList<WB_Point> apoints = getPoints();
+		final List<WB_Point> apoints = getPoints();
 		final WB_Point[] ipoints = new WB_Point[apoints.size()];
 		return apoints.toArray(ipoints);
 	}
@@ -478,7 +479,7 @@ public class WB_Frame {
 	 * @param i
 	 * @return
 	 */
-	public WB_FrameNode getNode(final int i) {
+	public Node getNode(final int i) {
 		if (i < 0 || i >= nodes.size()) {
 			throw new IllegalArgumentException("Index outside of node range.");
 		}
@@ -491,11 +492,11 @@ public class WB_Frame {
 	 * @param i
 	 * @return
 	 */
-	public WB_FrameStrut getStrut(final int i) {
-		if (i < 0 || i >= struts.size()) {
-			throw new IllegalArgumentException("Index outside of strut range.");
+	public Connection getConnection(final int i) {
+		if (i < 0 || i >= connections.size()) {
+			throw new IllegalArgumentException("Index outside of connection range.");
 		}
-		return struts.get(i);
+		return connections.get(i);
 	}
 
 	/**
@@ -504,11 +505,11 @@ public class WB_Frame {
 	 * @param p
 	 * @return
 	 */
-	public double getDistanceToFrame(final WB_Coord p) {
+	public double getDistanceToConnection(final WB_Coord p) {
 		double d = Double.POSITIVE_INFINITY;
-		for (int i = 0; i < struts.size(); i++) {
-			final WB_FrameStrut strut = struts.get(i);
-			final WB_Segment S = new WB_Segment(strut.start(), strut.end());
+		for (int i = 0; i < connections.size(); i++) {
+			final Connection connection = connections.get(i);
+			final WB_Segment S = new WB_Segment(connection.start(), connection.end());
 			d = Math.min(d, WB_GeometryOp3D.getDistance3D(p, S));
 		}
 		return d;
@@ -520,7 +521,7 @@ public class WB_Frame {
 	 * @param p
 	 * @return
 	 */
-	public int getClosestNodeOnFrame(final WB_Coord p) {
+	public int getClosestNodeOnConnection(final WB_Coord p) {
 		double mind = Double.POSITIVE_INFINITY;
 		int q = -1;
 		for (int i = 0; i < nodes.size(); i++) {
@@ -539,12 +540,12 @@ public class WB_Frame {
 	 * @param p
 	 * @return
 	 */
-	public WB_Coord getClosestPointOnFrame(final WB_Coord p) {
+	public WB_Coord getClosestPointOnConnection(final WB_Coord p) {
 		double mind = Double.POSITIVE_INFINITY;
 		WB_Coord q = new WB_Point(p);
-		for (int i = 0; i < struts.size(); i++) {
-			final WB_FrameStrut strut = struts.get(i);
-			final WB_Segment S = new WB_Segment(strut.start(), strut.end());
+		for (int i = 0; i < connections.size(); i++) {
+			final Connection connection = connections.get(i);
+			final WB_Segment S = new WB_Segment(connection.start(), connection.end());
 			final double d = WB_GeometryOp3D.getDistance3D(p, S);
 			if (d < mind) {
 				mind = d;
@@ -562,11 +563,11 @@ public class WB_Frame {
 	 * @param z
 	 * @return
 	 */
-	public double getDistanceToFrame(final double x, final double y, final double z) {
+	public double getDistanceToConnection(final double x, final double y, final double z) {
 		double d = Double.POSITIVE_INFINITY;
-		for (int i = 0; i < struts.size(); i++) {
-			final WB_FrameStrut strut = struts.get(i);
-			final WB_Segment S = new WB_Segment(strut.start(), strut.end());
+		for (int i = 0; i < connections.size(); i++) {
+			final Connection connection = connections.get(i);
+			final WB_Segment S = new WB_Segment(connection.start(), connection.end());
 			d = Math.min(d, WB_GeometryOp3D.getDistance3D(new WB_Point(x, y, z), S));
 		}
 		return d;
@@ -580,12 +581,12 @@ public class WB_Frame {
 	 * @param z
 	 * @return
 	 */
-	public WB_Coord getClosestPointOnFrame(final double x, final double y, final double z) {
+	public WB_Coord getClosestPointOnConnection(final double x, final double y, final double z) {
 		double mind = Double.POSITIVE_INFINITY;
 		WB_Coord q = new WB_Point(x, y, z);
-		for (int i = 0; i < struts.size(); i++) {
-			final WB_FrameStrut strut = struts.get(i);
-			final WB_Segment S = new WB_Segment(strut.start(), strut.end());
+		for (int i = 0; i < connections.size(); i++) {
+			final Connection connection = connections.get(i);
+			final WB_Segment S = new WB_Segment(connection.start(), connection.end());
 			final double d = WB_GeometryOp3D.getDistance3D(new WB_Point(x, y, z), S);
 			if (d < mind) {
 				mind = d;
@@ -600,10 +601,10 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public WB_Frame smoothBiNodes() {
+	public WB_Network smoothBiNodes() {
 		final WB_Point[] newPos = new WB_Point[nodes.size()];
 		int id = 0;
-		for (final WB_FrameNode node : nodes) {
+		for (final Node node : nodes) {
 			if (node.getOrder() == 2) {
 				newPos[id] = node.getNeighbor(0).add(node.getNeighbor(1));
 				newPos[id].mulSelf(0.5);
@@ -613,7 +614,7 @@ public class WB_Frame {
 			id++;
 		}
 		id = 0;
-		for (final WB_FrameNode node : nodes) {
+		for (final Node node : nodes) {
 			if (node.getOrder() == 2) {
 				node.set(newPos[id]);
 			}
@@ -622,7 +623,7 @@ public class WB_Frame {
 		return this;
 	}
 
-	public WB_Frame smoothBiNodes(final int r) {
+	public WB_Network smoothBiNodes(final int r) {
 		for (int i = 0; i < r; i++) {
 			smoothBiNodes();
 		}
@@ -634,14 +635,14 @@ public class WB_Frame {
 	 *
 	 * @return
 	 */
-	public WB_Frame smoothNodes() {
+	public WB_Network smoothNodes() {
 		final WB_Point[] newPos = new WB_Point[nodes.size()];
 		int id = 0;
-		for (final WB_FrameNode node : nodes) {
+		for (final Node node : nodes) {
 			if (node.getOrder() > 1) {
 				newPos[id] = new WB_Point();
-				final List<WB_FrameNode> ns = node.getNeighbors();
-				for (final WB_FrameNode n : ns) {
+				final List<Node> ns = node.getNeighbors();
+				for (final Node n : ns) {
 					newPos[id].addSelf(n);
 				}
 				newPos[id].mulSelf(1.0 / ns.size());
@@ -651,7 +652,7 @@ public class WB_Frame {
 			}
 		}
 		id = 0;
-		for (final WB_FrameNode node : nodes) {
+		for (final Node node : nodes) {
 			if (node.getOrder() > 1) {
 				node.set(newPos[id]);
 				id++;
@@ -660,15 +661,15 @@ public class WB_Frame {
 		return this;
 	}
 
-	public WB_Frame smoothNodes(final int r) {
+	public WB_Network smoothNodes(final int r) {
 		for (int i = 0; i < r; i++) {
 			smoothNodes();
 		}
 		return this;
 	}
 
-	public WB_Frame refine(final double threshold) {
-		WB_Frame result = refineOnePass(threshold);
+	public WB_Network refine(final double threshold) {
+		WB_Network result = refineOnePass(threshold);
 		if (result.getNumberOfNodes() == this.getNumberOfNodes()) {
 			return result;
 		}
@@ -687,33 +688,33 @@ public class WB_Frame {
 	 * @param threshold
 	 * @return
 	 */
-	public WB_Frame refineOnePass(final double threshold) {
+	public WB_Network refineOnePass(final double threshold) {
 
-		final WB_Frame result = new WB_Frame();
-		for (final WB_FrameNode node : nodes) {
+		final WB_Network result = new WB_Network();
+		for (final Node node : nodes) {
 			result.addNode(node, node.getValue());
 		}
-		for (final WB_FrameStrut strut : struts) {
-			if (strut.getLength() > threshold) {
-				final WB_Point start = strut.start();
-				final WB_Point end = strut.end();
+		for (final Connection connection : connections) {
+			if (connection.getLength() > threshold) {
+				final WB_Point start = connection.start();
+				final WB_Point end = connection.end();
 				final WB_Point mid = gf.createInterpolatedPoint(start, end, 0.5);
-				result.addNode(mid, 0.5 * (strut.start().getValue() + strut.end().getValue()));
+				result.addNode(mid, 0.5 * (connection.start().getValue() + connection.end().getValue()));
 			}
 		}
 		final int n = getNumberOfNodes();
 		int id = 0;
-		for (final WB_FrameStrut strut : struts) {
-			if (strut.getLength() > threshold) {
-				final int start = strut.getStartIndex();
-				final int end = strut.getEndIndex();
-				result.addStrut(start, n + id);
-				result.addStrut(n + id, end);
+		for (final Connection connection : connections) {
+			if (connection.getLength() > threshold) {
+				final int start = connection.getStartIndex();
+				final int end = connection.getEndIndex();
+				result.addConnection(start, n + id);
+				result.addConnection(n + id, end);
 				id++;
 			} else {
-				final int start = strut.getStartIndex();
-				final int end = strut.getEndIndex();
-				result.addStrut(start, end);
+				final int start = connection.getStartIndex();
+				final int end = connection.getEndIndex();
+				result.addConnection(start, end);
 			}
 		}
 		return result;
@@ -740,19 +741,19 @@ public class WB_Frame {
 		WB_Point p;
 		final WB_RandomOnSphere rnd = new WB_RandomOnSphere();
 		final double da = 2.0 * Math.PI / n;
-		for (final WB_FrameStrut strut : struts) {
-			sl = strut.getLength() - 2 * rr;
+		for (final Connection connection : connections) {
+			sl = connection.getLength() - 2 * rr;
 			if (sl > 0) {
 				divs = (int) WB_Math.max(1, Math.round(sl / d));
 				dsl = sl / divs;
-				P = strut.toPlane();
+				P = connection.toPlane();
 				u = P.getU().mul(r);
-				v = strut.toNormVector().copy();
-				strut.start().addMul(rr, v);
+				v = connection.toNormVector().copy();
+				connection.start().addMul(rr, v);
 				v.mulSelf(dsl);
 				for (int i = 0; i <= divs; i++) {
 					for (int j = 0; j < n; j++) {
-						p = strut.start().addMul(i, v);
+						p = connection.start().addMul(i, v);
 						localu = u.copy();
 						localu.rotateAboutAxisSelf(j * da, new WB_Point(), P.getNormal());
 						p.addSelf(localu);
@@ -762,7 +763,7 @@ public class WB_Frame {
 				}
 			}
 		}
-		for (final WB_FrameNode node : nodes) {
+		for (final Node node : nodes) {
 			final HE_Mesh ball = new HE_Mesh(new HEC_Geodesic().setRadius(rr).setB(l).setC(0).setCenter(node));
 			for (final WB_Coord q : ball.getVerticesAsCoord()) {
 				points.add(new WB_Point(q).addSelf(rnd.nextVector().mulSelf(dr)));
@@ -771,9 +772,9 @@ public class WB_Frame {
 		return points;
 	}
 
-	public class WB_FrameNode extends WB_Point {
+	public class Node extends WB_Point {
 
-		private final FastList<WB_FrameStrut> struts;
+		private final List<Connection> connections;
 
 		protected final int index;
 
@@ -786,43 +787,43 @@ public class WB_Frame {
 		 * @param id
 		 * @param v
 		 */
-		public WB_FrameNode(final WB_Coord pos, final int id, final double v) {
+		public Node(final WB_Coord pos, final int id, final double v) {
 			super(pos);
 			index = id;
-			struts = new FastList<WB_FrameStrut>();
+			connections = new FastList<Connection>();
 			value = v == 0 ? 10 * WB_Epsilon.EPSILON : v;
 		}
 
 		/**
 		 *
 		 *
-		 * @param strut
+		 * @param connection
 		 * @return
 		 */
-		public boolean addStrut(final WB_FrameStrut strut) {
-			if (strut.start() != this && strut.end() != this) {
+		public boolean addConnection(final Connection connection) {
+			if (connection.start() != this && connection.end() != this) {
 				return false;
 			}
-			for (int i = 0; i < struts.size(); i++) {
-				if (struts.get(i).start() == strut.start() && struts.get(i).end() == strut.end()) {
+			for (int i = 0; i < connections.size(); i++) {
+				if (connections.get(i).start() == connection.start() && connections.get(i).end() == connection.end()) {
 					return false;
 				}
 			}
-			struts.add(strut);
+			connections.add(connection);
 			return true;
 		}
 
 		/**
 		 *
 		 *
-		 * @param strut
+		 * @param connection
 		 * @return
 		 */
-		public boolean removeStrut(final WB_FrameStrut strut) {
-			if (strut.start() != this && strut.end() != this) {
+		public boolean removeConnection(final Connection connection) {
+			if (connection.start() != this && connection.end() != this) {
 				return false;
 			}
-			struts.remove(strut);
+			connections.remove(connection);
 			return true;
 		}
 
@@ -831,9 +832,9 @@ public class WB_Frame {
 		 *
 		 * @return
 		 */
-		public ArrayList<WB_FrameStrut> getStruts() {
-			final ArrayList<WB_FrameStrut> result = new ArrayList<WB_FrameStrut>();
-			result.addAll(struts);
+		public List<Connection> getConnections() {
+			final List<Connection> result = new ArrayList<Connection>();
+			result.addAll(connections);
 			return result;
 		}
 
@@ -842,13 +843,13 @@ public class WB_Frame {
 		 *
 		 * @return
 		 */
-		public ArrayList<WB_FrameNode> getNeighbors() {
-			final ArrayList<WB_FrameNode> result = new ArrayList<WB_FrameNode>();
-			for (int i = 0; i < struts.size(); i++) {
-				if (struts.get(i).start() == this) {
-					result.add(struts.get(i).end());
+		public List<Node> getNeighbors() {
+			final List<Node> result = new ArrayList<Node>();
+			for (int i = 0; i < connections.size(); i++) {
+				if (connections.get(i).start() == this) {
+					result.add(connections.get(i).end());
 				} else {
-					result.add(struts.get(i).start());
+					result.add(connections.get(i).start());
 				}
 			}
 			return result;
@@ -871,7 +872,7 @@ public class WB_Frame {
 		public double findSmallestSpan() {
 			double minAngle = Double.MAX_VALUE;
 			for (int i = 0; i < getOrder(); i++) {
-				minAngle = Math.min(minAngle, findSmallestSpanAroundStrut(i));
+				minAngle = Math.min(minAngle, findSmallestSpanAroundConnection(i));
 			}
 			return minAngle;
 		}
@@ -879,11 +880,11 @@ public class WB_Frame {
 		/**
 		 *
 		 *
-		 * @param strut
+		 * @param connection
 		 * @return
 		 */
-		public double findSmallestSpanAroundStrut(final WB_FrameStrut strut) {
-			return findSmallestSpanAroundStrut(struts.indexOf(strut));
+		public double findSmallestSpanAroundConnection(final Connection connection) {
+			return findSmallestSpanAroundConnection(connections.indexOf(connection));
 		}
 
 		/**
@@ -892,12 +893,12 @@ public class WB_Frame {
 		 * @param i
 		 * @return
 		 */
-		public double findSmallestSpanAroundStrut(final int i) {
-			final int n = struts.size();
+		public double findSmallestSpanAroundConnection(final int i) {
+			final int n = connections.size();
 			if (i < 0 || i >= n) {
-				throw new IllegalArgumentException("Index beyond strut range.");
+				throw new IllegalArgumentException("Index beyond connection range.");
 			}
-			final ArrayList<WB_FrameNode> nnodes = getNeighbors();
+			final List<Node> nnodes = getNeighbors();
 			if (n == 1) {
 				return 2 * Math.PI;
 			} else if (n == 2) {
@@ -932,10 +933,10 @@ public class WB_Frame {
 		 *
 		 * @return
 		 */
-		public double findShortestStrut() {
+		public double findShortestConnection() {
 			double minLength = Double.MAX_VALUE;
-			for (int i = 0; i < struts.size(); i++) {
-				minLength = Math.min(minLength, struts.get(i).getSqLength());
+			for (int i = 0; i < connections.size(); i++) {
+				minLength = Math.min(minLength, connections.get(i).getSqLength());
 			}
 			return Math.sqrt(minLength);
 		}
@@ -946,7 +947,7 @@ public class WB_Frame {
 		 * @return
 		 */
 		public int getOrder() {
-			return struts.size();
+			return connections.size();
 		}
 
 		/**
@@ -973,11 +974,11 @@ public class WB_Frame {
 		 * @param index
 		 * @return
 		 */
-		public WB_FrameStrut getStrut(final int index) {
-			if (index < 0 || index >= struts.size()) {
-				throw new IllegalArgumentException("Index outside of strut range.");
+		public Connection getConnection(final int index) {
+			if (index < 0 || index >= connections.size()) {
+				throw new IllegalArgumentException("Index outside of connection range.");
 			}
-			return struts.get(index);
+			return connections.get(index);
 		}
 
 		/**
@@ -985,11 +986,11 @@ public class WB_Frame {
 		 *
 		 * @param index
 		 */
-		public void removeStrut(final int index) {
-			if (index < 0 || index >= struts.size()) {
-				throw new IllegalArgumentException("Index outside of strut range.");
+		public void removeConnection(final int index) {
+			if (index < 0 || index >= connections.size()) {
+				throw new IllegalArgumentException("Index outside of connection range.");
 			}
-			struts.remove(index);
+			connections.remove(index);
 		}
 
 		/**
@@ -998,14 +999,14 @@ public class WB_Frame {
 		 * @param index
 		 * @return
 		 */
-		public WB_FrameNode getNeighbor(final int index) {
-			if (index < 0 || index >= struts.size()) {
-				throw new IllegalArgumentException("Index outside of strut range.");
+		public Node getNeighbor(final int index) {
+			if (index < 0 || index >= connections.size()) {
+				throw new IllegalArgumentException("Index outside of connection range.");
 			}
-			if (struts.get(index).start() == this) {
-				return struts.get(index).end();
+			if (connections.get(index).start() == this) {
+				return connections.get(index).end();
 			}
-			return struts.get(index).start();
+			return connections.get(index).start();
 		}
 
 		/**
@@ -1018,11 +1019,11 @@ public class WB_Frame {
 		}
 	}
 
-	public class WB_FrameStrut {
+	public class Connection {
 
-		private final WB_FrameNode start;
+		private final Node start;
 
-		private final WB_FrameNode end;
+		private final Node end;
 
 		private final int index;
 
@@ -1041,7 +1042,7 @@ public class WB_Frame {
 		 * @param e
 		 * @param id
 		 */
-		public WB_FrameStrut(final WB_FrameNode s, final WB_FrameNode e, final int id) {
+		public Connection(final Node s, final Node e, final int id) {
 			start = s;
 			end = e;
 			index = id;
@@ -1055,7 +1056,7 @@ public class WB_Frame {
 		 * @param id
 		 * @param r
 		 */
-		public WB_FrameStrut(final WB_FrameNode s, final WB_FrameNode e, final int id, final double r) {
+		public Connection(final Node s, final Node e, final int id, final double r) {
 			start = s;
 			end = e;
 			index = id;
@@ -1071,8 +1072,7 @@ public class WB_Frame {
 		 * @param rs
 		 * @param re
 		 */
-		public WB_FrameStrut(final WB_FrameNode s, final WB_FrameNode e, final int id, final double rs,
-				final double re) {
+		public Connection(final Node s, final Node e, final int id, final double rs, final double re) {
 			start = s;
 			end = e;
 			index = id;
@@ -1085,7 +1085,7 @@ public class WB_Frame {
 		 *
 		 * @return
 		 */
-		public WB_FrameNode start() {
+		public Node start() {
 			return start;
 		}
 
@@ -1094,7 +1094,7 @@ public class WB_Frame {
 		 *
 		 * @return
 		 */
-		public WB_FrameNode end() {
+		public Node end() {
 			return end;
 		}
 

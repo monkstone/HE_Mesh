@@ -21,6 +21,7 @@ import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_Point;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_Halfedge;
+import wblut.hemesh.HE_Mesh;
 import wblut.hemesh.HE_MeshStructure;
 import wblut.hemesh.HE_Vertex;
 
@@ -254,7 +255,7 @@ public class WB_DebugRender3D {
 	 * @param s
 	 * @param mesh
 	 */
-	public void drawHalfedge(final Long key, final double d, final double s, final HE_MeshStructure mesh) {
+	public void drawHalfedge(final Long key, final double d, final double s, final HE_Mesh mesh) {
 		final HE_Halfedge he = mesh.getHalfedgeWithKey(key);
 		drawHalfedge(he, d, s);
 	}

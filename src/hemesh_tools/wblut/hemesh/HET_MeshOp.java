@@ -1742,7 +1742,7 @@ public class HET_MeshOp {
 	public static HE_RAS<HE_Face> selectAllFacesConnectedToUnpairedHalfedge(final HE_Mesh mesh,
 			final HE_Halfedge unpairedHalfedge) {
 
-		final HE_RAS<HE_Face> faces = new HE_RAS.HE_RASEC<HE_Face>();
+		final HE_RAS<HE_Face> faces = new HE_RAS<HE_Face>();
 		HE_Face face = unpairedHalfedge.getFace();
 		if (face == null) {
 			return faces;
@@ -1751,13 +1751,13 @@ public class HET_MeshOp {
 		while (fitr.hasNext()) {
 			fitr.next().clearVisited();
 		}
-		final HE_RAS<HE_Face> facesToCheck = new HE_RAS.HE_RASEC<HE_Face>();
+		final HE_RAS<HE_Face> facesToCheck = new HE_RAS<HE_Face>();
 		facesToCheck.add(face);
 		face.setVisited();
 		HE_Halfedge he;
 		HE_Face neighbor;
 		do {
-			face = facesToCheck.get(0);
+			face = facesToCheck.getWithIndex(0);
 			facesToCheck.remove(face);
 			faces.add(face);
 			final HE_FaceHalfedgeInnerCirculator heitr = new HE_FaceHalfedgeInnerCirculator(face);
@@ -2098,7 +2098,7 @@ public class HET_MeshOp {
 			return;
 		}
 		HE_Selection sel = HE_Selection.getSelection(mesh);
-		sel.addFaces(triangles.faces);
+		sel.addFaces(triangles.getFaces());
 		int flip;
 		do {
 			sel.clearEdges();
@@ -2125,9 +2125,9 @@ public class HET_MeshOp {
 	 * @param mesh
 	 * @return self
 	 */
-	public static HE_MeshStructure cleanUnusedElementsByFace(final HE_MeshStructure mesh) {
-		final HE_RAS<HE_Vertex> cleanedVertices = new HE_RAS.HE_RASEC<HE_Vertex>();
-		final HE_RAS<HE_Halfedge> cleanedHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
+	public static HE_Mesh cleanUnusedElementsByFace(final HE_Mesh mesh) {
+		final HE_RAS<HE_Vertex> cleanedVertices = new HE_RAS<HE_Vertex>();
+		final HE_RAS<HE_Halfedge> cleanedHalfedges = new HE_RAS<HE_Halfedge>();
 		tracker.setStartStatusStr("HET_MeshOp", "Cleaning unused elements.");
 		HE_Halfedge he;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfFaces(), 10);
@@ -2154,7 +2154,7 @@ public class HET_MeshOp {
 		tracker.setCounterStatusStr("HET_MeshOp", "Processing halfedges.", counter);
 		final int n = cleanedHalfedges.size();
 		for (int i = 0; i < n; i++) {
-			he = cleanedHalfedges.get(i);
+			he = cleanedHalfedges.getWithIndex(i);
 			if (!cleanedHalfedges.contains(he.getPair())) {
 				mesh.clearPair(he);
 				mesh.setHalfedge(he.getVertex(), he);
@@ -2162,13 +2162,13 @@ public class HET_MeshOp {
 			counter.increment();
 		}
 		List<HE_Vertex> removev = new FastList<HE_Vertex>();
-		for (HE_Vertex v : mesh.vertices) {
+		for (HE_Vertex v : mesh.getVertices()) {
 			if (!cleanedVertices.contains(v)) {
 				removev.add(v);
 			}
 		}
 		mesh.removeVertices(removev);
-		HE_HalfedgeIterator heItr = mesh.heItr();
+		HE_MeshHalfedgeIterator heItr = mesh.heItr();
 		List<HE_Halfedge> remove = new FastList<HE_Halfedge>();
 		while (heItr.hasNext()) {
 			he = heItr.next();

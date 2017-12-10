@@ -156,11 +156,15 @@ public class HEC_IsoSurface extends HEC_Creator {
 	 */
 	private boolean invert;
 
+	WB_ScalarParameter valueFactor;
+	WB_ScalarParameter valueShift;
+
 	/**
 	 *
 	 */
 	public HEC_IsoSurface() {
 		super();
+
 		String line = "";
 		final String cvsSplitBy = " ";
 		BufferedReader br = null;
@@ -199,6 +203,8 @@ public class HEC_IsoSurface extends HEC_Creator {
 		gamma = 0.3;
 		override = true;
 		boundary = Double.NaN;
+		valueFactor = WB_ScalarParameter.ONE;
+		valueShift = WB_ScalarParameter.ZERO;
 	}
 
 	/**
@@ -254,6 +260,16 @@ public class HEC_IsoSurface extends HEC_Creator {
 	 */
 	public HEC_IsoSurface setIsolevel(final double v) {
 		isolevel = v;
+		return this;
+	}
+
+	public HEC_IsoSurface setValueFactor(final WB_ScalarParameter v) {
+		valueFactor = v;
+		return this;
+	}
+
+	public HEC_IsoSurface setValueShift(final WB_ScalarParameter v) {
+		valueShift = v;
 		return this;
 	}
 
@@ -1143,12 +1159,12 @@ public class HEC_IsoSurface extends HEC_Creator {
 		}
 		if (Double.isNaN(boundary)) { // if no boundary is set i,j,k should
 			// always be between o and resx,rey,resz
-			return values.value(i, j, k);
+			return values.getValue(i, j, k) * valueFactor.evaluate(i, j, k) + valueShift.evaluate(i, j, k);
 		}
 		if (i < 0 || j < 0 || k < 0 || i > resx || j > resy || k > resz) {
 			return invert ? -boundary : boundary;
 		}
-		return values.value(i, j, k);
+		return values.getValue(i, j, k) * valueFactor.evaluate(i, j, k) + valueShift.evaluate(i, j, k);
 	}
 
 	/**

@@ -27,8 +27,8 @@ var hierarchy =
               ] ],
               [ "wblut.geom.WB_Vector", "classwblut_1_1geom_1_1_w_b___vector.html", [
                 [ "wblut.geom.WB_Point", "classwblut_1_1geom_1_1_w_b___point.html", [
-                  [ "wblut.geom.WB_Frame.WB_FrameNode", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_node.html", null ],
-                  [ "wblut.geom.WB_IndexedPoint", "classwblut_1_1geom_1_1_w_b___indexed_point.html", null ]
+                  [ "wblut.geom.WB_IndexedPoint", "classwblut_1_1geom_1_1_w_b___indexed_point.html", null ],
+                  [ "wblut.geom.WB_Network.Node", "classwblut_1_1geom_1_1_w_b___network_1_1_node.html", null ]
                 ] ]
               ] ]
             ] ],
@@ -49,10 +49,12 @@ var hierarchy =
         ] ]
       ] ],
       [ "wblut.geom.WB_MeshGraph.WB_GraphVertex", "classwblut_1_1geom_1_1_w_b___mesh_graph_1_1_w_b___graph_vertex.html", null ],
+      [ "wblut.hemesh.HE_Boundary", "classwblut_1_1hemesh_1_1_h_e___boundary.html", null ],
       [ "wblut.hemesh.HE_Face", "classwblut_1_1hemesh_1_1_h_e___face.html", null ],
       [ "wblut.hemesh.HE_Halfedge", "classwblut_1_1hemesh_1_1_h_e___halfedge.html", null ],
       [ "wblut.math.WB_DoubleDouble", "classwblut_1_1math_1_1_w_b___double_double.html", null ]
     ] ],
+    [ "wblut.geom.WB_Network.Connection", "classwblut_1_1geom_1_1_w_b___network_1_1_connection.html", null ],
     [ "wblut.math.WB_Ease.Ease", "interfacewblut_1_1math_1_1_w_b___ease_1_1_ease.html", null ],
     [ "wblut.math.WB_Ease.EaseBack", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_back.html", null ],
     [ "wblut.math.WB_Ease.EaseBounce", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_bounce.html", null ],
@@ -77,14 +79,13 @@ var hierarchy =
     [ "wblut.math.WB_SNoise.Grad", "classwblut_1_1math_1_1_w_b___s_noise_1_1_grad.html", null ],
     [ "wblut.hemesh.HE_Element", "classwblut_1_1hemesh_1_1_h_e___element.html", [
       [ "wblut.hemesh.HE_MeshElement", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html", [
+        [ "wblut.hemesh.HE_Boundary", "classwblut_1_1hemesh_1_1_h_e___boundary.html", null ],
         [ "wblut.hemesh.HE_Face", "classwblut_1_1hemesh_1_1_h_e___face.html", null ],
         [ "wblut.hemesh.HE_Halfedge", "classwblut_1_1hemesh_1_1_h_e___halfedge.html", null ],
-        [ "wblut.hemesh.HE_MeshStructure", "classwblut_1_1hemesh_1_1_h_e___mesh_structure.html", [
-          [ "wblut.hemesh.HE_Mesh", "classwblut_1_1hemesh_1_1_h_e___mesh.html", null ],
-          [ "wblut.hemesh.HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html", null ]
-        ] ],
+        [ "wblut.hemesh.HE_Mesh", "classwblut_1_1hemesh_1_1_h_e___mesh.html", null ],
         [ "wblut.hemesh.HE_Path", "classwblut_1_1hemesh_1_1_h_e___path.html", null ],
         [ "wblut.hemesh.HE_PathHalfedge", "classwblut_1_1hemesh_1_1_h_e___path_halfedge.html", null ],
+        [ "wblut.hemesh.HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html", null ],
         [ "wblut.hemesh.HE_Vertex", "classwblut_1_1hemesh_1_1_h_e___vertex.html", null ]
       ] ]
     ] ],
@@ -114,8 +115,8 @@ var hierarchy =
         [ "wblut.hemesh.HEC_FromFacelist", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html", [
           [ "wblut.hemesh.HEC_UVParametric", "classwblut_1_1hemesh_1_1_h_e_c___u_v_parametric.html", null ]
         ] ],
-        [ "wblut.hemesh.HEC_FromFrame", "classwblut_1_1hemesh_1_1_h_e_c___from_frame.html", null ],
         [ "wblut.hemesh.HEC_FromHemeshFile", "classwblut_1_1hemesh_1_1_h_e_c___from_hemesh_file.html", null ],
+        [ "wblut.hemesh.HEC_FromNetwork", "classwblut_1_1hemesh_1_1_h_e_c___from_network.html", null ],
         [ "wblut.hemesh.HEC_FromOBJFile", "classwblut_1_1hemesh_1_1_h_e_c___from_o_b_j_file.html", null ],
         [ "wblut.hemesh.HEC_FromOBJFileNoCheck", "classwblut_1_1hemesh_1_1_h_e_c___from_o_b_j_file_no_check.html", null ],
         [ "wblut.hemesh.HEC_FromPolygons", "classwblut_1_1hemesh_1_1_h_e_c___from_polygons.html", null ],
@@ -182,6 +183,7 @@ var hierarchy =
         [ "wblut.hemesh.HEM_Noise", "classwblut_1_1hemesh_1_1_h_e_m___noise.html", null ],
         [ "wblut.hemesh.HEM_PolyLineInversion", "classwblut_1_1hemesh_1_1_h_e_m___poly_line_inversion.html", null ],
         [ "wblut.hemesh.HEM_PunchHoles", "classwblut_1_1hemesh_1_1_h_e_m___punch_holes.html", null ],
+        [ "wblut.hemesh.HEM_RadialNoise", "classwblut_1_1hemesh_1_1_h_e_m___radial_noise.html", null ],
         [ "wblut.hemesh.HEM_RemoveParts", "classwblut_1_1hemesh_1_1_h_e_m___remove_parts.html", null ],
         [ "wblut.hemesh.HEM_Shell", "classwblut_1_1hemesh_1_1_h_e_m___shell.html", null ],
         [ "wblut.hemesh.HEM_Skew", "classwblut_1_1hemesh_1_1_h_e_m___skew.html", null ],
@@ -228,9 +230,11 @@ var hierarchy =
         [ "wblut.hemesh.HES_Smooth", "classwblut_1_1hemesh_1_1_h_e_s___smooth.html", null ]
       ] ]
     ] ],
-    [ "wblut.hemesh.HE_RAS< E >", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", [
-      [ "wblut.hemesh.HE_RAS< E extends HE_Element >.HE_RASEC< E extends HE_Element >", "classwblut_1_1hemesh_1_1_h_e___r_a_s_1_1_h_e___r_a_s_e_c.html", null ]
+    [ "wblut.hemesh.HE_MeshStructure", "interfacewblut_1_1hemesh_1_1_h_e___mesh_structure.html", [
+      [ "wblut.hemesh.HE_Mesh", "classwblut_1_1hemesh_1_1_h_e___mesh.html", null ],
+      [ "wblut.hemesh.HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html", null ]
     ] ],
+    [ "wblut.hemesh.HE_RAS< wblut.hemesh.HE_Boundary >", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", null ],
     [ "wblut.hemesh.HE_RAS< wblut.hemesh.HE_Face >", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", null ],
     [ "wblut.hemesh.HE_RAS< wblut.hemesh.HE_Halfedge >", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", null ],
     [ "wblut.hemesh.HE_RAS< wblut.hemesh.HE_Vertex >", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", null ],
@@ -293,8 +297,8 @@ var hierarchy =
     [ "wblut.geom.WB_KDTreeDouble< T extends WB_Coord >.QueryResultDouble< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_query_result_double.html", null ],
     [ "wblut.geom.WB_KDTreeInteger< T extends WB_Coord >.QueryResultInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer_1_1_query_result_integer.html", null ],
     [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.QueryResultInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_query_result_integer.html", null ],
-    [ "wblut.hemesh.HET_PlanarPathTriangulator.RingNode", "classwblut_1_1hemesh_1_1_h_e_t___planar_path_triangulator_1_1_ring_node.html", null ],
     [ "wblut.geom.WB_ShapeReader.RingNode", "classwblut_1_1geom_1_1_w_b___shape_reader_1_1_ring_node.html", null ],
+    [ "wblut.hemesh.HET_PlanarPathTriangulator.RingNode", "classwblut_1_1hemesh_1_1_h_e_t___planar_path_triangulator_1_1_ring_node.html", null ],
     [ "wblut.hemesh.HET_PlanarPathTriangulator.RingTree", "classwblut_1_1hemesh_1_1_h_e_t___planar_path_triangulator_1_1_ring_tree.html", null ],
     [ "wblut.geom.WB_ShapeReader.RingTree", "classwblut_1_1geom_1_1_w_b___shape_reader_1_1_ring_tree.html", null ],
     [ "RuntimeException", null, [
@@ -414,8 +418,6 @@ var hierarchy =
     [ "wblut.geom.WB_Earcut", "classwblut_1_1geom_1_1_w_b___earcut.html", null ],
     [ "wblut.math.WB_Ease", "classwblut_1_1math_1_1_w_b___ease.html", null ],
     [ "wblut.math.WB_Epsilon", "classwblut_1_1math_1_1_w_b___epsilon.html", null ],
-    [ "wblut.geom.WB_Frame", "classwblut_1_1geom_1_1_w_b___frame.html", null ],
-    [ "wblut.geom.WB_Frame.WB_FrameStrut", "classwblut_1_1geom_1_1_w_b___frame_1_1_w_b___frame_strut.html", null ],
     [ "wblut.geom.WB_GeometryFactory2D", "classwblut_1_1geom_1_1_w_b___geometry_factory2_d.html", [
       [ "wblut.geom.WB_GeometryFactory3D", "classwblut_1_1geom_1_1_w_b___geometry_factory3_d.html", [
         [ "wblut.geom.WB_GeometryFactory", "classwblut_1_1geom_1_1_w_b___geometry_factory.html", null ]
@@ -471,30 +473,31 @@ var hierarchy =
       [ "wblut.geom.WB_IsoValues3D.Grid3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid3_d.html", null ],
       [ "wblut.geom.WB_IsoValues3D.GridRaw3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html", null ],
       [ "wblut.geom.WB_IsoValues3D.HashGrid3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_hash_grid3_d.html", null ],
-      [ "wblut.geom.WB_IsoValues3D.ImageStack3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_image_stack3_d.html", null ]
+      [ "wblut.geom.WB_IsoValues3D.ImageStack3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_image_stack3_d.html", null ],
+      [ "wblut.geom.WB_IsoValues3D.SubValues3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_sub_values3_d.html", null ]
     ] ],
-    [ "wblut.geom.WB_KDTree2D< T extends WB_Coord, V >.WB_KDEntry< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree2_d_1_1_w_b___k_d_entry.html", null ],
     [ "wblut.geom.WB_KDTree< T extends WB_Coord, V >.WB_KDEntry< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree_1_1_w_b___k_d_entry.html", null ],
+    [ "wblut.geom.WB_KDTree2D< T extends WB_Coord, V >.WB_KDEntry< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree2_d_1_1_w_b___k_d_entry.html", null ],
     [ "wblut.geom.WB_KDTree< T extends WB_Coord, V >.WB_KDEntry< T, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree_1_1_w_b___k_d_entry.html", null ],
     [ "wblut.geom.WB_KDTree2D< T extends WB_Coord, V >.WB_KDEntry< T, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree2_d_1_1_w_b___k_d_entry.html", null ],
-    [ "wblut.geom.WB_KDTreeDouble2D< T extends WB_Coord >.WB_KDEntryDouble< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_entry_double.html", null ],
     [ "wblut.geom.WB_KDTreeDouble< T extends WB_Coord >.WB_KDEntryDouble< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_entry_double.html", null ],
+    [ "wblut.geom.WB_KDTreeDouble2D< T extends WB_Coord >.WB_KDEntryDouble< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_entry_double.html", null ],
     [ "wblut.geom.WB_KDTreeDouble< T extends WB_Coord >.WB_KDEntryDouble< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_entry_double.html", null ],
     [ "wblut.geom.WB_KDTreeDouble2D< T extends WB_Coord >.WB_KDEntryDouble< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_entry_double.html", null ],
     [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.WB_KDEntryInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_w_b___k_d_entry_integer.html", null ],
     [ "wblut.geom.WB_KDTreeInteger< T extends WB_Coord >.WB_KDEntryInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer_1_1_w_b___k_d_entry_integer.html", null ],
-    [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.WB_KDEntryInteger< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_w_b___k_d_entry_integer.html", null ],
     [ "wblut.geom.WB_KDTreeInteger< T extends WB_Coord >.WB_KDEntryInteger< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer_1_1_w_b___k_d_entry_integer.html", null ],
-    [ "wblut.geom.WB_KDTree< T extends WB_Coord, V >.WB_KDNode< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree_1_1_w_b___k_d_node.html", null ],
+    [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.WB_KDEntryInteger< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_w_b___k_d_entry_integer.html", null ],
     [ "wblut.geom.WB_KDTree2D< T extends WB_Coord, V >.WB_KDNode< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree2_d_1_1_w_b___k_d_node.html", null ],
+    [ "wblut.geom.WB_KDTree< T extends WB_Coord, V >.WB_KDNode< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree_1_1_w_b___k_d_node.html", null ],
     [ "wblut.geom.WB_KDTree< T extends WB_Coord, V >.WB_KDNode< T, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree_1_1_w_b___k_d_node.html", null ],
     [ "wblut.geom.WB_KDTree2D< T extends WB_Coord, V >.WB_KDNode< T, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree2_d_1_1_w_b___k_d_node.html", null ],
     [ "wblut.geom.WB_KDTreeDouble2D< T extends WB_Coord >.WB_KDNodeDouble< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_node_double.html", null ],
     [ "wblut.geom.WB_KDTreeDouble< T extends WB_Coord >.WB_KDNodeDouble< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html", null ],
     [ "wblut.geom.WB_KDTreeDouble< T extends WB_Coord >.WB_KDNodeDouble< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double_1_1_w_b___k_d_node_double.html", null ],
     [ "wblut.geom.WB_KDTreeDouble2D< T extends WB_Coord >.WB_KDNodeDouble< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_double2_d_1_1_w_b___k_d_node_double.html", null ],
-    [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.WB_KDNodeInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_w_b___k_d_node_integer.html", null ],
     [ "wblut.geom.WB_KDTreeInteger< T extends WB_Coord >.WB_KDNodeInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer_1_1_w_b___k_d_node_integer.html", null ],
+    [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.WB_KDNodeInteger< T extends WB_Coord >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_w_b___k_d_node_integer.html", null ],
     [ "wblut.geom.WB_KDTreeInteger< T extends WB_Coord >.WB_KDNodeInteger< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer_1_1_w_b___k_d_node_integer.html", null ],
     [ "wblut.geom.WB_KDTreeInteger2D< T extends WB_Coord >.WB_KDNodeInteger< T >", "classwblut_1_1geom_1_1_w_b___k_d_tree_integer2_d_1_1_w_b___k_d_node_integer.html", null ],
     [ "wblut.geom.WB_KDTree< T extends WB_Coord, V >", "classwblut_1_1geom_1_1_w_b___k_d_tree.html", null ],
@@ -523,6 +526,7 @@ var hierarchy =
     [ "wblut.geom.WB_MutableCoordinateTransform4D", "interfacewblut_1_1geom_1_1_w_b___mutable_coordinate_transform4_d.html", [
       [ "wblut.geom.WB_MutableCoordinateFull4D", "interfacewblut_1_1geom_1_1_w_b___mutable_coordinate_full4_d.html", null ]
     ] ],
+    [ "wblut.geom.WB_Network", "classwblut_1_1geom_1_1_w_b___network.html", null ],
     [ "wblut.math.WB_Noise", "interfacewblut_1_1math_1_1_w_b___noise.html", [
       [ "wblut.math.WB_OSNoise", "classwblut_1_1math_1_1_w_b___o_s_noise.html", null ],
       [ "wblut.math.WB_PNoise", "classwblut_1_1math_1_1_w_b___p_noise.html", null ],
@@ -772,6 +776,17 @@ var hierarchy =
       ] ]
     ] ],
     [ "Iterator", null, [
+      [ "wblut.hemesh.HE_BoundaryEdgeCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_edge_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryEdgeRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_edge_rev_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryFaceCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_face_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryFaceRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_face_rev_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryHalfedgeInnerCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_inner_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryHalfedgeInnerRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_inner_rev_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryHalfedgeOuterCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_outer_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryHalfedgeOuterRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_outer_rev_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryIterator", "classwblut_1_1hemesh_1_1_h_e___boundary_iterator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryVertexCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_vertex_circulator.html", null ],
+      [ "wblut.hemesh.HE_BoundaryVertexRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_vertex_rev_circulator.html", null ],
       [ "wblut.hemesh.HE_EdgeIterator", "classwblut_1_1hemesh_1_1_h_e___edge_iterator.html", null ],
       [ "wblut.hemesh.HE_FaceEdgeCirculator", "classwblut_1_1hemesh_1_1_h_e___face_edge_circulator.html", null ],
       [ "wblut.hemesh.HE_FaceEdgeRevCirculator", "classwblut_1_1hemesh_1_1_h_e___face_edge_rev_circulator.html", null ],
@@ -784,7 +799,6 @@ var hierarchy =
       [ "wblut.hemesh.HE_FaceIterator", "classwblut_1_1hemesh_1_1_h_e___face_iterator.html", null ],
       [ "wblut.hemesh.HE_FaceVertexCirculator", "classwblut_1_1hemesh_1_1_h_e___face_vertex_circulator.html", null ],
       [ "wblut.hemesh.HE_FaceVertexRevCirculator", "classwblut_1_1hemesh_1_1_h_e___face_vertex_rev_circulator.html", null ],
-      [ "wblut.hemesh.HE_HalfedgeIterator", "classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html", null ],
       [ "wblut.hemesh.HE_MeshIterator", "classwblut_1_1hemesh_1_1_h_e___mesh_iterator.html", null ],
       [ "wblut.hemesh.HE_PathEdgeIterator", "classwblut_1_1hemesh_1_1_h_e___path_edge_iterator.html", null ],
       [ "wblut.hemesh.HE_PathFaceInnerIterator", "classwblut_1_1hemesh_1_1_h_e___path_face_inner_iterator.html", null ],

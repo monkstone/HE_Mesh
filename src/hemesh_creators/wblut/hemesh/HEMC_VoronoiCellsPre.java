@@ -51,8 +51,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 	private List<WB_Coord> points;
 	/** Container. */
 	private HE_Mesh container;
-	/** The simple cap. */
-	private boolean simpleCap;
+
 	/**
 	 *
 	 */
@@ -68,7 +67,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 	 */
 	public HEMC_VoronoiCellsPre() {
 		super();
-		simpleCap = true;
+
 		offset = WB_ScalarParameter.ZERO;
 	}
 
@@ -191,18 +190,6 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 	}
 
 	/**
-	 * Sets simple cap option.
-	 *
-	 * @param b
-	 *
-	 * @return self
-	 */
-	public HEMC_VoronoiCellsPre setSimpleCap(final boolean b) {
-		simpleCap = b;
-		return this;
-	}
-
-	/**
 	 *
 	 *
 	 * @param b
@@ -246,8 +233,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 		public VorResult call() {
 
 			final HEC_VoronoiCell cvc = new HEC_VoronoiCell();
-			cvc.setPoints(points).setContainer(container).setOffset(offset).setSimpleCap(simpleCap)
-					.setLimitPoints(true);
+			cvc.setPoints(points).setContainer(container).setOffset(offset).setLimitPoints(true);
 			cvc.setCellIndex(index);
 			cvc.setPointsToUse(indices);
 			return new VorResult(cvc.createBase(), cvc.inner, cvc.outer);
@@ -276,7 +262,7 @@ public class HEMC_VoronoiCellsPre extends HEMC_MultiCreator {
 		HE_MeshCollection cells = multiCreator.create();
 		int[][] indices = WB_Voronoi.getVoronoi3DNeighbors(points);
 		final HEC_VoronoiCell cvc = new HEC_VoronoiCell();
-		cvc.setPoints(points).setContainer(container).setOffset(offset).setSimpleCap(simpleCap).setLimitPoints(true);
+		cvc.setPoints(points).setContainer(container).setOffset(offset).setLimitPoints(true);
 		WB_AABBTree tree = new WB_AABBTree(container, 1);
 		final ArrayList<HE_Selection> linnersel = new ArrayList<HE_Selection>();
 		final ArrayList<HE_Selection> loutersel = new ArrayList<HE_Selection>();

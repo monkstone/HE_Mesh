@@ -6,16 +6,16 @@ import wblut.geom.*;
 
 HE_Mesh mesh, invertedMesh;
 WB_Render render;
-
+HEM_SphericalInversion modifier;
 void setup() {
-  size(1000, 1000, P3D);
+  fullScreen(P3D);
   smooth(8);
+  noCursor();
   createMesh();
 
-  HEM_SphericalInversion modifier=new HEM_SphericalInversion();
+  modifier=new HEM_SphericalInversion();
   modifier.setRadius(170);
-  modifier.setCenter(0, 0, 0);
-  //also accepts a WB_Point
+  modifier.setCenter(30, 0, 0);
   modifier.setCutoff(1000);// maximum distance outside the inversion sphere
   modifier.setLinear(false);// if true, mirrors a point across the sphere surface instead of a true spherical inversion
   invertedMesh=mesh.get();
@@ -35,9 +35,16 @@ void draw() {
   noStroke();
   render.drawFaces(invertedMesh);
   stroke(0);
+  strokeWeight(1.0);
   render.drawEdges(invertedMesh);
-  stroke(255,0,0);
+  strokeWeight(0.5);
+  stroke(0);
   render.drawEdges(mesh);
+  strokeWeight(1.0);
+  stroke(255,0,0);
+  translate(30,0,0);
+  noFill();
+  sphere(170);
 }
 
 
@@ -56,7 +63,7 @@ void createMesh() {
   mesh.getSelection("extruded").modify(ext);
   mesh.getSelection("extruded").modify(ext);
   mesh.getSelection("extruded").modify(ext);
-//  mesh.modify(new HEM_Lattice().setWidth(15).setDepth(15));
+
   mesh.subdivide(new HES_Planar());
   mesh.smooth(2);
 }

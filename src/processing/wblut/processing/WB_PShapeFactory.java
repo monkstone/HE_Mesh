@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -21,7 +21,6 @@ import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_Mesh;
 import wblut.geom.WB_Vector;
-import wblut.hemesh.HE_EdgeIterator;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_Halfedge;
 import wblut.hemesh.HE_Mesh;
@@ -577,7 +576,7 @@ public class WB_PShapeFactory {
 		if (mesh instanceof HE_Selection) {
 			((HE_Selection) mesh).collectEdgesByFace();
 		}
-		final HE_EdgeIterator eItr = mesh.eItr();
+		Iterator<HE_Halfedge> eItr = mesh.eItr();
 		HE_Halfedge e;
 		HE_Vertex v;
 		retained.beginShape(PConstants.LINES);

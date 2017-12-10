@@ -1097,12 +1097,12 @@ public class WB_IsoSurface {
 
 		if (Double.isNaN(boundary)) { // if no boundary is set i,j,k should
 			// always be between o and resx,rey,resz
-			return values.value(i, j, k);
+			return values.getValue(i, j, k);
 		}
 		if (i < 0 || j < 0 || k < 0 || i > resx || j > resy || k > resz) {
 			return invert ? -boundary : boundary;
 		}
-		return values.value(i, j, k);
+		return values.getValue(i, j, k);
 	}
 
 	/**

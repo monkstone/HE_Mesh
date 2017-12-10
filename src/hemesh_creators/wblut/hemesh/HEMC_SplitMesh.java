@@ -26,7 +26,6 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 	private boolean cap = true;;
 	/** The offset. */
 	private double offset;
-	private boolean simpleCap = true;
 
 	/**
 	 * Set offset.
@@ -84,11 +83,6 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		return this;
 	}
 
-	public HEMC_SplitMesh setSimpleCap(final Boolean b) {
-		simpleCap = b;
-		return this;
-	}
-
 	@Override
 	void create(final HE_MeshCollection result) {
 
@@ -103,7 +97,7 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		}
 		final HEM_Slice sm = new HEM_Slice();
 		HE_Mesh tmp = mesh.copy();
-		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset).setSimpleCap(simpleCap);
+		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset);
 		sm.applySelf(tmp);
 		tmp.resetFaceInternalLabels();
 		HE_FaceIterator fItr = tmp.getSelection("caps").fItr();
@@ -112,7 +106,7 @@ public class HEMC_SplitMesh extends HEMC_MultiCreator {
 		}
 		result.add(tmp);
 		P.flipNormal();
-		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset).setSimpleCap(simpleCap);
+		sm.setPlane(P).setReverse(false).setCap(cap).setOffset(offset);
 		tmp = mesh.copy();
 		sm.applySelf(tmp);
 		tmp.resetFaceInternalLabels();

@@ -4,18 +4,22 @@ import wblut.hemesh.*;
 import wblut.geom.*;
 
 HE_Mesh mesh;
+WB_AABBTree tree;
 WB_Render3D render;
 
 void setup() {
   size(1000, 1000, P3D);
   smooth(8);
-  HEC_Dodecahedron creator=new HEC_Dodecahedron();creator.setCenter(50,0,10);
+  HEC_Dodecahedron creator=new HEC_Dodecahedron();
+  creator.setCenter(50, 0, 10);
   creator.setEdge(200); 
   mesh=new HE_Mesh(creator); 
-  
+
   HET_MeshOp.splitFacesCenter(mesh);
- HET_MeshOp.splitFacesTri(mesh,40);
+  HET_MeshOp.splitFacesTri(mesh, 40);
   mesh.smooth();
+  mesh.getNewSelection("picked");
+  tree=new WB_AABBTree(mesh, 4);
   render=new WB_Render3D(this);
 }
 
@@ -30,7 +34,31 @@ void draw() {
   fill(255);
   noStroke();
   render.drawFaces(mesh);
+
+
   fill(255, 0, 0);
-  HE_Face f=render.pickClosestFace(mesh,mouseX,mouseY);
-  if(f!=null) render.drawFace(f);
+  render.drawFaces(mesh.getSelection("picked"));
+  fill(0, 255, 0);
+  HE_Face f=render.pickClosestFace(tree, mouseX, mouseY);
+  if (f!=null) {
+    render.drawFace(f);
+  }
+}
+
+
+void mousePressed() {
+  HE_Face f=render.pickClosestFace(tree, mouseX, mouseY);
+  if (f!=null) {
+    HE_Selection sel=mesh.getSelection("picked");
+    if (sel.contains(f)) {
+      sel.remove(f);
+    } else {
+      sel.add(f);
+    }
+  }
+}
+
+void keyPressed() {
+  HE_Selection sel=mesh.getSelection("picked");
+  sel.surround();
 }

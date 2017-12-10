@@ -15,11 +15,11 @@ void setup() {
   createMesh();
 
   HEM_Wireframe modifier=new HEM_Wireframe();
-  modifier.setStrutRadius(6);// strut radius
-  modifier.setStrutFacets(6);// number of faces in the struts, min 3, max whatever blows up the CPU
-  // modifier.setMaximumStrutOffset(20);// limit the joint radius by decreasing the strut radius where necessary. Joint offset is added after this limitation.
-  modifier.setAngleOffset(0.5);// rotate the struts by a fraction of a facet. 0 is no rotation, 1 is a rotation over a full facet. More noticeable for low number of facets.
-  modifier.setTaper(false);// allow struts to have different radii at each end?
+  modifier.setConnectionRadius(6);// Connection radius
+  modifier.setConnectionFacets(6);// number of faces in the Connections, min 3, max whatever blows up the CPU
+  // modifier.setMaximumConnectionOffset(20);// limit the joint radius by decreasing the Connection radius where necessary. Joint offset is added after this limitation.
+  modifier.setAngleOffset(0.5);// rotate the Connections by a fraction of a facet. 0 is no rotation, 1 is a rotation over a full facet. More noticeable for low number of facets.
+  modifier.setTaper(false);// allow Connections to have different radii at each end?
   mesh.modify(modifier);
 
   mesh.modify(new HEM_Slice().setPlane(0, 0, -50, 0, 0, 1));
@@ -48,6 +48,6 @@ void draw() {
 void createMesh() {
   HEC_SuperDuper sd=new HEC_SuperDuper();
   sd.setU(48).setV(8).setRadius(100);
-  sd.setDonutParameters(0, 10, 10, 10, 3, 6, 12, 12, 3, 4);
+  sd.setDonutParameters(0, 10, 10, 10, 3, 6, 12, 12, 3, 5);
   mesh=new HE_Mesh(sd);
 }

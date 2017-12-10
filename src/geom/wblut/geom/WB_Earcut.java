@@ -182,7 +182,7 @@ public final class WB_Earcut {
 
 			/*
 			 * Calculate the BoundingBoxSize. (MinX, MinY and Size are used to
-			 * tansform co-ordinates into integers for the Z-Order calculation.
+			 * transform co-ordinates into integers for the Z-Order calculation.
 			 */
 			lBoundingBoxSize = Math.max(lMaximumX - lMinimumX, lMaximumY - lMinimumY);
 		}

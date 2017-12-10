@@ -179,7 +179,7 @@ public class HET_Diagnosis {
 			System.out.println("Checking half edge (" + mesh.getNumberOfHalfedges() + ") properties");
 		}
 		HE_Halfedge he;
-		HE_HalfedgeIterator heItr = mesh.heItr();
+		HE_MeshHalfedgeIterator heItr = mesh.heItr();
 		while (heItr.hasNext()) {
 			he = heItr.next();
 			if (he.getNextInFace() == null) {
@@ -459,17 +459,7 @@ public class HET_Diagnosis {
 
 	public static void checkHalfedges(final HE_MeshStructure mesh) {
 		int i = 0;
-		for (HE_Halfedge he : mesh.halfedges) {
-			if (!mesh.contains(he.getVertex())) {
-				i++;
-			}
-		}
-		for (HE_Halfedge he : mesh.edges) {
-			if (!mesh.contains(he.getVertex())) {
-				i++;
-			}
-		}
-		for (HE_Halfedge he : mesh.unpairedHalfedges) {
+		for (HE_Halfedge he : mesh.getHalfedges()) {
 			if (!mesh.contains(he.getVertex())) {
 				i++;
 			}

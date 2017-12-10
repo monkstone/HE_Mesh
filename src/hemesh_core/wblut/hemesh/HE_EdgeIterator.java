@@ -9,6 +9,7 @@
 
 package wblut.hemesh;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -26,13 +27,13 @@ public class HE_EdgeIterator implements Iterator<HE_Halfedge> {
 	 *
 	 * @param edges
 	 */
-	HE_EdgeIterator(final HE_RAS<HE_Halfedge> edges) {
+	HE_EdgeIterator(final Collection<HE_Halfedge> edges) {
 		_itr = edges.iterator();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.util.Iterator#hasNext()
 	 */
 	@Override
@@ -42,7 +43,7 @@ public class HE_EdgeIterator implements Iterator<HE_Halfedge> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.util.Iterator#next()
 	 */
 	@Override
@@ -52,7 +53,7 @@ public class HE_EdgeIterator implements Iterator<HE_Halfedge> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.util.Iterator#remove()
 	 */
 	@Override

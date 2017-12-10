@@ -24,12 +24,16 @@ void setup() {
   modifier.setPlanes(planes);// Cut plane 
   //planes can also be any Collection<WB_Plane>
   modifier.setOffset(0);// shift cut plane along normal
-  modifier.setSimpleCap(false);
   modifier.setOptimizeCap(true);
   slicedMesh.modify(modifier);
   slicedMesh.validate();
   slicedMesh.getSelection("caps").collectEdgesByFace();
-
+    slicedMesh.modify(new HEM_HideEdges());
+ for (int i=-1; i<numPlanes; i++) {
+   
+    slicedMesh.selectFacesWithInternalLabel("slice"+i, i);
+    //Multislice internally labels all faces with the index of the corresponding cutplane, -1 for part of an original face
+  }
   render=new WB_Render(this);
 }
 
@@ -42,10 +46,10 @@ void draw() {
   rotateX(mouseY*1.0f/height*TWO_PI);
   fill(255);
   noStroke();
-  for (int i=-1; i<numPlanes; i++) {
+  render.drawFaces(slicedMesh);
+  for (int i=0; i<numPlanes; i++) {
     fill(255-(i+1)*25, 255, (i+1)*40);
-    HE_Selection faces=HE_Selection.selectFacesWithInternalLabel(slicedMesh, i);
-    render.drawFaces(faces);//Multislice internally labels all faces with the index of the corresponding cutplane, -1 for part of an original face
+    render.drawFaces(slicedMesh.getSelection("slice"+i));
   }
 
   noFill();

@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -12,9 +12,9 @@ package wblut.hemesh;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.LongDoubleHashMap;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.geom.WB_Plane;
 import wblut.geom.WB_Triangle;
@@ -220,7 +220,7 @@ public class HES_TriDecLimit extends HES_Simplifier {
 	 *
 	 * @param sel
 	 */
-	private void buildHeap(final HE_MeshStructure sel) {
+	private void buildHeap(final HE_Mesh sel) {
 		WB_ProgressCounter pcounter = new WB_ProgressCounter(sel.getNumberOfVertices(), 10);
 		tracker.setCounterStatus(this, "Building vertex removal heap.", pcounter);
 		counter = 0;
@@ -279,7 +279,7 @@ public class HES_TriDecLimit extends HES_Simplifier {
 	 * @param vertices
 	 * @param selection
 	 */
-	private void updateHeap(final List<HE_Vertex> vertices, final HE_MeshStructure selection) {
+	private void updateHeap(final List<HE_Vertex> vertices, final HE_Mesh selection) {
 		double min;
 		double c;
 		HE_Halfedge minhe;

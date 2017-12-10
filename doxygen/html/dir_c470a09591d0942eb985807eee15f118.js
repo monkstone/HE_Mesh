@@ -67,11 +67,11 @@ var dir_c470a09591d0942eb985807eee15f118 =
     [ "HEC_FromFacelist.java", "_h_e_c___from_facelist_8java.html", [
       [ "HEC_FromFacelist", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist.html", "classwblut_1_1hemesh_1_1_h_e_c___from_facelist" ]
     ] ],
-    [ "HEC_FromFrame.java", "_h_e_c___from_frame_8java.html", [
-      [ "HEC_FromFrame", "classwblut_1_1hemesh_1_1_h_e_c___from_frame.html", "classwblut_1_1hemesh_1_1_h_e_c___from_frame" ]
-    ] ],
     [ "HEC_FromHemeshFile.java", "_h_e_c___from_hemesh_file_8java.html", [
       [ "HEC_FromHemeshFile", "classwblut_1_1hemesh_1_1_h_e_c___from_hemesh_file.html", "classwblut_1_1hemesh_1_1_h_e_c___from_hemesh_file" ]
+    ] ],
+    [ "HEC_FromNetwork.java", "_h_e_c___from_network_8java.html", [
+      [ "HEC_FromNetwork", "classwblut_1_1hemesh_1_1_h_e_c___from_network.html", "classwblut_1_1hemesh_1_1_h_e_c___from_network" ]
     ] ],
     [ "HEC_FromOBJFile.java", "_h_e_c___from_o_b_j_file_8java.html", [
       [ "HEC_FromOBJFile", "classwblut_1_1hemesh_1_1_h_e_c___from_o_b_j_file.html", "classwblut_1_1hemesh_1_1_h_e_c___from_o_b_j_file" ]

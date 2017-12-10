@@ -1,13 +1,15 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
+
+import java.util.Iterator;
 
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 
@@ -46,7 +48,7 @@ public class HEM_FlipFaces extends HEM_Modifier {
 		prevHe = new HE_Halfedge[mesh.getNumberOfHalfedges()];
 		nextHeUVW = new HE_TextureCoordinate[mesh.getNumberOfHalfedges()];
 		int i = 0;
-		HE_HalfedgeIterator heItr = mesh.heItr();
+		HE_MeshHalfedgeIterator heItr = mesh.heItr();
 		counter = new WB_ProgressCounter(2 * mesh.getNumberOfHalfedges(), 10);
 		tracker.setCounterStatusStr("HEM_FlipFacesMeshOp", "Reordering halfedges.", counter);
 		while (heItr.hasNext()) {
@@ -113,7 +115,7 @@ public class HEM_FlipFaces extends HEM_Modifier {
 		prevHe = new HE_Halfedge[selection.getNumberOfHalfedges()];
 		nextHeUVW = new HE_TextureCoordinate[selection.getNumberOfHalfedges()];
 		int i = 0;
-		HE_HalfedgeIterator heItr = selection.heItr();
+		Iterator<HE_Halfedge> heItr = selection.heItr();
 		counter = new WB_ProgressCounter(2 * selection.getNumberOfHalfedges(), 10);
 		tracker.setCounterStatusStr("HEM_FlipFacesMeshOp", "Reordering halfedges.", counter);
 		while (heItr.hasNext()) {
@@ -127,7 +129,7 @@ public class HEM_FlipFaces extends HEM_Modifier {
 		heItr = selection.heItr();
 		while (heItr.hasNext()) {
 			he = heItr.next();
-			selection.setNext(he, prevHe[i]);
+			selection.parent.setNext(he, prevHe[i]);
 			if (nextHeUVW[i] == null) {
 				he.clearUVW();
 			} else {

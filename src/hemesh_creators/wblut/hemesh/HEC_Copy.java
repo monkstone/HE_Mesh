@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.collections.impl.map.mutable.primitive.LongLongHashMap;
 
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
-import wblut.hemesh.HE_RAS.HE_RASEC;
 
 /**
  * Axis Aligned Box.
@@ -75,10 +74,10 @@ public class HEC_Copy extends HEC_Creator {
 			tracker.setStopStatus(this, "No source mesh. Exiting HEC_Copy.");
 			return result;
 		}
-		result.copyProperties(source);
 
 		if (source instanceof HE_Mesh) {
 			final HE_Mesh mesh = (HE_Mesh) source;
+			result.copyProperties(mesh);
 			vertexCorrelation = new LongLongHashMap();
 			faceCorrelation = new LongLongHashMap();
 			halfedgeCorrelation = new LongLongHashMap();
@@ -114,7 +113,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Halfedge he;
 			counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
 			tracker.setCounterStatus(this, "Creating halfedges.", counter);
-			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
+			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RAS<HE_Halfedge>();
 			final Iterator<HE_Halfedge> heItr = mesh.getHalfedges().iterator();
 			while (heItr.hasNext()) {
 				he = heItr.next();
@@ -233,7 +232,7 @@ public class HEC_Copy extends HEC_Creator {
 			tracker.setStopStatus(this, "Exiting HEC_Copy.");
 		} else if (source instanceof HE_Selection) {
 			final HE_Selection sel = ((HE_Selection) source).get();
-
+			result.copyProperties(sel);
 			sel.completeFromFaces();
 
 			vertexCorrelation = new LongLongHashMap();
@@ -268,7 +267,7 @@ public class HEC_Copy extends HEC_Creator {
 			HE_Halfedge rhe;
 			HE_Halfedge he;
 			counter = new WB_ProgressCounter(sel.getNumberOfHalfedges(), 10);
-			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RASEC<HE_Halfedge>();
+			HE_RAS<HE_Halfedge> copyHalfedges = new HE_RAS<HE_Halfedge>();
 			tracker.setCounterStatus(this, "Creating halfedges.", counter);
 			final Iterator<HE_Halfedge> heItr = sel.heItr();
 			while (heItr.hasNext()) {

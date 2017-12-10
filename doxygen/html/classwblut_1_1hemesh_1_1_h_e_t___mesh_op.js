@@ -6,7 +6,7 @@ var classwblut_1_1hemesh_1_1_h_e_t___mesh_op =
     [ "classifyEdgeToPlane3D", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#a7f785f521912e970c9ece91416d697da", null ],
     [ "classifyFaceToPlane3D", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#a164d37b51604f6ae8e4d771be240bd64", null ],
     [ "classifyVertexToPlane3D", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#a2a65231ff3c2c87ba727edf51dca5c84", null ],
-    [ "cleanUnusedElementsByFace", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#afdda3865cd4eaa515230d842fbab5cb4", null ],
+    [ "cleanUnusedElementsByFace", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#ab180d724155f2f0249bc50480fe3d1ab", null ],
     [ "collapseEdge", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#ad7e6fa8257c902c524be53f9f20fa269", null ],
     [ "collapseEdgeBoundaryPreserving", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#a89264a98295cc13f58effb046c891b86", null ],
     [ "collapseHalfedge", "classwblut_1_1hemesh_1_1_h_e_t___mesh_op.html#a0b8a0072031027325fdef0c18a99c133", null ],

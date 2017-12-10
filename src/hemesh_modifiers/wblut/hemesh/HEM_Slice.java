@@ -36,8 +36,6 @@ public class HEM_Slice extends HEM_Modifier {
 	 * self-intersection...
 	 */
 	private boolean capHoles = true;
-	/** The simple cap. */
-	private boolean simpleCap = true;
 
 	private boolean optimizeCap = false;
 
@@ -126,18 +124,6 @@ public class HEM_Slice extends HEM_Modifier {
 		return this;
 	}
 
-	/**
-	 * Sets the simple cap.
-	 *
-	 * @param b
-	 *            the b
-	 * @return the hE m_ slice
-	 */
-	public HEM_Slice setSimpleCap(final Boolean b) {
-		simpleCap = b;
-		return this;
-	}
-
 	public HEM_Slice setOptimizeCap(final boolean b) {
 		optimizeCap = b;
 		return this;
@@ -192,59 +178,55 @@ public class HEM_Slice extends HEM_Modifier {
 			counter.increment();
 		}
 
-		mesh.removeFaces(facesToRemove.faces);
+		mesh.removeFaces(facesToRemove.getFaces());
 
 		mesh.cleanUnusedElementsByFace();
 
 		if (capHoles) {
 			tracker.setDuringStatus(this, "Capping holes.");
-			if (simpleCap) {
+
+			final List<HE_Path> cutpaths = ss.getPaths();
+			if (cutpaths.size() == 1) {
 				HEM_CapHoles ch = new HEM_CapHoles();
 				mesh.modify(ch);
 
 			} else {
-				final List<HE_Path> cutpaths = ss.getPaths();
-				if (cutpaths.size() == 1) {
-					HEM_CapHoles ch = new HEM_CapHoles();
-					mesh.modify(ch);
-
-				} else {
-					tracker.setDuringStatus(this, "Triangulating cut paths.");
-					HE_Selection caps = HE_Selection.getSelection(mesh);
-					final long[] triKeys = HET_PlanarPathTriangulator.getTriangleKeys(cutpaths, lP);
-					HE_Face tri = null;
-					HE_Vertex v0, v1, v2;
-					HE_Halfedge he0, he1, he2;
-					for (int i = 0; i < triKeys.length; i += 3) {
-						tri = new HE_Face();
-						v0 = mesh.getVertexWithKey(triKeys[i]);
-						v1 = mesh.getVertexWithKey(triKeys[i + 1]);
-						v2 = mesh.getVertexWithKey(triKeys[i + 2]);
-						he0 = new HE_Halfedge();
-						he1 = new HE_Halfedge();
-						he2 = new HE_Halfedge();
-						mesh.setHalfedge(tri, he0);
-						mesh.setVertex(he0, v0);
-						mesh.setVertex(he1, v1);
-						mesh.setVertex(he2, v2);
-						mesh.setNext(he0, he1);
-						mesh.setNext(he1, he2);
-						mesh.setNext(he2, he0);
-						mesh.setFace(he0, tri);
-						mesh.setFace(he1, tri);
-						mesh.setFace(he2, tri);
-						mesh.add(tri);
-						mesh.add(he0);
-						mesh.add(he1);
-						mesh.add(he2);
-						caps.add(tri);
-						caps.addEdge(he0);
-						caps.addEdge(he1);
-						caps.addEdge(he2);
-					}
-					mesh.addSelection("caps", this, caps);
+				tracker.setDuringStatus(this, "Triangulating cut paths.");
+				HE_Selection caps = HE_Selection.getSelection(mesh);
+				final long[] triKeys = HET_PlanarPathTriangulator.getTriangleKeys(cutpaths, lP);
+				HE_Face tri = null;
+				HE_Vertex v0, v1, v2;
+				HE_Halfedge he0, he1, he2;
+				for (int i = 0; i < triKeys.length; i += 3) {
+					tri = new HE_Face();
+					v0 = mesh.getVertexWithKey(triKeys[i]);
+					v1 = mesh.getVertexWithKey(triKeys[i + 1]);
+					v2 = mesh.getVertexWithKey(triKeys[i + 2]);
+					he0 = new HE_Halfedge();
+					he1 = new HE_Halfedge();
+					he2 = new HE_Halfedge();
+					mesh.setHalfedge(tri, he0);
+					mesh.setVertex(he0, v0);
+					mesh.setVertex(he1, v1);
+					mesh.setVertex(he2, v2);
+					mesh.setNext(he0, he1);
+					mesh.setNext(he1, he2);
+					mesh.setNext(he2, he0);
+					mesh.setFace(he0, tri);
+					mesh.setFace(he1, tri);
+					mesh.setFace(he2, tri);
+					mesh.add(tri);
+					mesh.add(he0);
+					mesh.add(he1);
+					mesh.add(he2);
+					caps.add(tri);
+					caps.addEdge(he0);
+					caps.addEdge(he1);
+					caps.addEdge(he2);
 				}
+				mesh.addSelection("caps", this, caps);
 			}
+
 		}
 
 		mesh.pairHalfedges();
@@ -283,7 +265,7 @@ public class HEM_Slice extends HEM_Modifier {
 		modifier.setCap(true);
 
 		modifier.setReverse(false);
-		modifier.setSimpleCap(false);
+
 		mesh.modify(modifier);
 
 	}

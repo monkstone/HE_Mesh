@@ -207,11 +207,14 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <li>MAX_PRINT_DIGITS
 : <a class="el" href="classwblut_1_1math_1_1_w_b___double_double.html#a4079aadcbda497ab30e4cbd29e4a0c9e">wblut.math.WB_DoubleDouble</a>
 </li>
-<li>maximumStrutLength
-: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_frame.html#a04e30b7c4da1deaaaec87edaee3822b6">wblut.hemesh.HEC_FromFrame</a>
+<li>maxConnectionOffset
+: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_m___wireframe.html#af4f97bd1ae12a012031a5c5ae7de86a9">wblut.hemesh.HEM_Wireframe</a>
 </li>
-<li>maximumStrutOffset
-: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_frame.html#a22fa37f2dd519416294d0cbdfe16d01e">wblut.hemesh.HEC_FromFrame</a>
+<li>maximumConnectionLength
+: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_network.html#a2a4ab17c623a540b7d9eec8bd5a817b9">wblut.hemesh.HEC_FromNetwork</a>
+</li>
+<li>maximumConnectionOffset
+: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_network.html#a4bced9fb04e20d6301807c26062aa759">wblut.hemesh.HEC_FromNetwork</a>
 </li>
 <li>maxLevel
 : <a class="el" href="classwblut_1_1core_1_1_w_b___progress_reporter_1_1_w_b___progress_tracker.html#a249501702021972fe780975f34784287">wblut.core.WB_ProgressReporter.WB_ProgressTracker</a>
@@ -224,9 +227,6 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 , <a class="el" href="classwblut_1_1geom_1_1_w_b___a_a_b_b_tree2_d.html#aa6ab757075ae365cdf078e6115cd89a0">wblut.geom.WB_AABBTree2D</a>
 , <a class="el" href="classwblut_1_1geom_1_1_w_b___indexed_a_a_b_b_tree2_d.html#afd413ad77790a5e9837b1c0f08a20f8d">wblut.geom.WB_IndexedAABBTree2D</a>
 </li>
-<li>maxStrutOffset
-: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_m___wireframe.html#a491399c7bf8f4c1235064317b16d552a">wblut.hemesh.HEM_Wireframe</a>
-</li>
 <li>mDecode
 : <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from3ds_file_1_1_scene3ds.html#a6134369af2361b3da75d6a9d6c4dc515">wblut.hemesh.HEC_From3dsFile.Scene3ds</a>
 </li>
@@ -238,7 +238,7 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 </li>
 <li>mesh
 : <a class="el" href="classwblut_1_1geom_1_1_w_b___geodesic.html#a900816495479d68917447fc474e49714">wblut.geom.WB_Geodesic</a>
-, <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_frame.html#a3df75834600335d9db4909e6fd5afbbb">wblut.hemesh.HEC_FromFrame</a>
+, <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_network.html#ab803a68b4253628eccb821b7b31591ea">wblut.hemesh.HEC_FromNetwork</a>
 , <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___iso_surface_v_o_l2_d.html#a31e1dd21cb8d05136330534bb1ea4b9b">wblut.hemesh.HEC_IsoSurfaceVOL2D</a>
 , <a class="el" href="classwblut_1_1hemesh_1_1_h_e_m_c___explode.html#af198a5d6356631b7fd1d1b894edc6367">wblut.hemesh.HEMC_Explode</a>
 , <a class="el" href="classwblut_1_1hemesh_1_1_h_e_m_c___panelizer.html#a691300c24f7fe2202cef879c09136c59">wblut.hemesh.HEMC_Panelizer</a>
@@ -272,7 +272,7 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 , <a class="el" href="classwblut_1_1geom_1_1_w_b___quadtree_integer.html#ac93a65ec88d5a347cc8d94efdf805630">wblut.geom.WB_QuadtreeInteger</a>
 </li>
 <li>minimumBalljointAngle
-: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_frame.html#a13afebde1c7465a45aaeed3175de74e5">wblut.hemesh.HEC_FromFrame</a>
+: <a class="el" href="classwblut_1_1hemesh_1_1_h_e_c___from_network.html#aa4100838b4c8d1b5ed611d1edbbae03e">wblut.hemesh.HEC_FromNetwork</a>
 </li>
 <li>minNodeSize
 : <a class="el" href="classwblut_1_1geom_1_1_w_b___octree.html#a889576571e8c824b66d2cf9918615e8c">wblut.geom.WB_Octree&lt; V &gt;</a>
@@ -312,7 +312,7 @@ $(document).ready(function(){initNavTree('functions_vars_m.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Dec 3 2017 18:14:54 for HE_Mesh by
+    <li class="footer">Generated on Sun Dec 10 2017 15:01:07 for HE_Mesh by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
   </ul>

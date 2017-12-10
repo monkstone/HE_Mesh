@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -19,11 +19,11 @@ public class HEM_Wireframe extends HEM_Modifier {
 	/**
 	 *
 	 */
-	private WB_ScalarParameter strutR;
+	private WB_ScalarParameter connectionRadius;
 	/**
 	 *
 	 */
-	private WB_ScalarParameter maxStrutOffset;
+	private WB_ScalarParameter maxConnectionOffset;
 	/**
 	 *
 	 */
@@ -57,7 +57,7 @@ public class HEM_Wireframe extends HEM_Modifier {
 		angleFactor = new WB_ConstantScalarParameter(0.5);
 		fidget = 1.0001;
 		fillFactor = 0.99;
-		maxStrutOffset = new WB_ConstantScalarParameter(Double.MAX_VALUE);
+		maxConnectionOffset = new WB_ConstantScalarParameter(Double.MAX_VALUE);
 		cap = true;
 		taper = false;
 	}
@@ -68,8 +68,8 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * @param r
 	 * @return
 	 */
-	public HEM_Wireframe setStrutRadius(final double r) {
-		strutR = new WB_ConstantScalarParameter(r);
+	public HEM_Wireframe setConnectionRadius(final double r) {
+		connectionRadius = new WB_ConstantScalarParameter(r);
 		return this;
 	}
 
@@ -79,8 +79,8 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * @param r
 	 * @return
 	 */
-	public HEM_Wireframe setStrutRadius(final WB_ScalarParameter r) {
-		strutR = r;
+	public HEM_Wireframe setConnectionRadius(final WB_ScalarParameter r) {
+		connectionRadius = r;
 		return this;
 	}
 
@@ -90,8 +90,8 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * @param r
 	 * @return
 	 */
-	public HEM_Wireframe setMaximumStrutOffset(final double r) {
-		maxStrutOffset = new WB_ConstantScalarParameter(r);
+	public HEM_Wireframe setMaximumConnectionOffset(final double r) {
+		maxConnectionOffset = new WB_ConstantScalarParameter(r);
 		return this;
 	}
 
@@ -101,8 +101,8 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * @param r
 	 * @return
 	 */
-	public HEM_Wireframe setMaximumStrutOffset(final WB_ScalarParameter r) {
-		maxStrutOffset = r;
+	public HEM_Wireframe setMaximumConnectionOffset(final WB_ScalarParameter r) {
+		maxConnectionOffset = r;
 		return this;
 	}
 
@@ -112,7 +112,7 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 * @param N
 	 * @return
 	 */
-	public HEM_Wireframe setStrutFacets(final int N) {
+	public HEM_Wireframe setConnectionFacets(final int N) {
 		facetN = N;
 		return this;
 	}
@@ -190,19 +190,19 @@ public class HEM_Wireframe extends HEM_Modifier {
 	 */
 	@Override
 	protected HE_Mesh applySelf(final HE_Mesh mesh) {
-		if (strutR == null || facetN < 3) {
+		if (connectionRadius == null || facetN < 3) {
 			return mesh;
 		}
-		final HEC_FromFrame ff = new HEC_FromFrame();
-		ff.setFrame(mesh);
+		final HEC_FromNetwork ff = new HEC_FromNetwork();
+		ff.setNetwork(mesh);
 		ff.setAngleOffset(angleFactor);
 		ff.setCap(cap);
-		ff.setStrutFacets(facetN);
+		ff.setConnectionFacets(facetN);
 		ff.setFidget(fidget);
 		ff.setFillFactor(fillFactor);
 		ff.setTaper(taper);
-		ff.setStrutRadius(strutR);
-		ff.setMaximumStrutOffset(maxStrutOffset);
+		ff.setConnectionRadius(connectionRadius);
+		ff.setMaximumConnectionOffset(maxConnectionOffset);
 		HE_Mesh frame = ff.create();
 		mesh.setNoCopy(frame);
 		return mesh;

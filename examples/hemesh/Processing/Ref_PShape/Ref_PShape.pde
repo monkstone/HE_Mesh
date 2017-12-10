@@ -16,7 +16,7 @@ void setup() {
    render=new WB_Render(this);
   textureMode(NORMAL);
   create();
-  img=loadImage("sky.png");//texture.jpg");
+  img=loadImage("sky.png");
   shape1=WB_PShapeFactory.createSmoothPShape(meshes.getMesh(0),img,this);
   shape2=WB_PShapeFactory.createSmoothPShape(meshes.getMesh(1),img,this); 
 }

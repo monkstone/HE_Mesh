@@ -16,7 +16,6 @@ void setup() {
   modifier=new HEM_Slice();
   P=new WB_Plane(0,0, 0, 0,0.25, 1); 
   modifier.setPlane(P);
-  modifier.setSimpleCap(false);
   mesh.modify(modifier);
   render=new WB_Render(this);
 }
@@ -32,7 +31,7 @@ void draw() {
   fill(255);
   render.drawFaces(mesh);
   fill(255,0,0);
-  render.drawFaces(modifier.capFaces);
+  render.drawFaces(mesh.getSelection("caps"));
   noFill();
   strokeWeight(1);
   stroke(255, 0, 0,128);

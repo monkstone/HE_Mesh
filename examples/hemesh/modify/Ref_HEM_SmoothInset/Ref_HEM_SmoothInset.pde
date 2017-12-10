@@ -15,6 +15,7 @@ void setup() {
   modifier.setLevel(2);// level of recursive division
   modifier.setOffset(10);// distance between inset face and original faces (should be > 0)
   mesh.modify(modifier);
+  mesh.getSelection("inset").modify(new HEM_Extrude().setDistance(-10));
   render=new WB_Render(this);
 }
 
@@ -27,9 +28,9 @@ void draw() {
   rotateX(mouseY*1.0f/height*TWO_PI);
    fill(255,0,0);
   noStroke();
-  render.drawFacesWithInternalLabel(1,mesh);//HEM_SmoothInset sets all inset faces to label 1
+  render.drawFaces(mesh.getSelection("inset"));
   fill(255,150);
- render.drawFacesWithInternalLabel(2,mesh);//HEM_SmoothInset sets all "wall" faces to label 2
+ render.drawFaces(mesh.getSelection("walls"));
   
   stroke(0);
   render.drawEdges(mesh);

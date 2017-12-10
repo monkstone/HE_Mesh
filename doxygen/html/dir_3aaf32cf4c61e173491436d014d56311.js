@@ -1,5 +1,41 @@
 var dir_3aaf32cf4c61e173491436d014d56311 =
 [
+    [ "HE_Boundary.java", "_h_e___boundary_8java.html", [
+      [ "HE_Boundary", "classwblut_1_1hemesh_1_1_h_e___boundary.html", "classwblut_1_1hemesh_1_1_h_e___boundary" ]
+    ] ],
+    [ "HE_BoundaryEdgeCirculator.java", "_h_e___boundary_edge_circulator_8java.html", [
+      [ "HE_BoundaryEdgeCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_edge_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_edge_circulator" ]
+    ] ],
+    [ "HE_BoundaryEdgeRevCirculator.java", "_h_e___boundary_edge_rev_circulator_8java.html", [
+      [ "HE_BoundaryEdgeRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_edge_rev_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_edge_rev_circulator" ]
+    ] ],
+    [ "HE_BoundaryFaceCirculator.java", "_h_e___boundary_face_circulator_8java.html", [
+      [ "HE_BoundaryFaceCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_face_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_face_circulator" ]
+    ] ],
+    [ "HE_BoundaryFaceRevCirculator.java", "_h_e___boundary_face_rev_circulator_8java.html", [
+      [ "HE_BoundaryFaceRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_face_rev_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_face_rev_circulator" ]
+    ] ],
+    [ "HE_BoundaryHalfedgeInnerCirculator.java", "_h_e___boundary_halfedge_inner_circulator_8java.html", [
+      [ "HE_BoundaryHalfedgeInnerCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_inner_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_inner_circulator" ]
+    ] ],
+    [ "HE_BoundaryHalfedgeInnerRevCirculator.java", "_h_e___boundary_halfedge_inner_rev_circulator_8java.html", [
+      [ "HE_BoundaryHalfedgeInnerRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_inner_rev_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_inner_rev_circulator" ]
+    ] ],
+    [ "HE_BoundaryHalfedgeOuterCirculator.java", "_h_e___boundary_halfedge_outer_circulator_8java.html", [
+      [ "HE_BoundaryHalfedgeOuterCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_outer_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_outer_circulator" ]
+    ] ],
+    [ "HE_BoundaryHalfedgeOuterRevCirculator.java", "_h_e___boundary_halfedge_outer_rev_circulator_8java.html", [
+      [ "HE_BoundaryHalfedgeOuterRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_outer_rev_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_halfedge_outer_rev_circulator" ]
+    ] ],
+    [ "HE_BoundaryIterator.java", "_h_e___boundary_iterator_8java.html", [
+      [ "HE_BoundaryIterator", "classwblut_1_1hemesh_1_1_h_e___boundary_iterator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_iterator" ]
+    ] ],
+    [ "HE_BoundaryVertexCirculator.java", "_h_e___boundary_vertex_circulator_8java.html", [
+      [ "HE_BoundaryVertexCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_vertex_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_vertex_circulator" ]
+    ] ],
+    [ "HE_BoundaryVertexRevCirculator.java", "_h_e___boundary_vertex_rev_circulator_8java.html", [
+      [ "HE_BoundaryVertexRevCirculator", "classwblut_1_1hemesh_1_1_h_e___boundary_vertex_rev_circulator.html", "classwblut_1_1hemesh_1_1_h_e___boundary_vertex_rev_circulator" ]
+    ] ],
     [ "HE_EdgeIterator.java", "_h_e___edge_iterator_8java.html", [
       [ "HE_EdgeIterator", "classwblut_1_1hemesh_1_1_h_e___edge_iterator.html", "classwblut_1_1hemesh_1_1_h_e___edge_iterator" ]
     ] ],
@@ -60,9 +96,7 @@ var dir_3aaf32cf4c61e173491436d014d56311 =
     [ "HE_Halfedge.java", "_h_e___halfedge_8java.html", [
       [ "HE_Halfedge", "classwblut_1_1hemesh_1_1_h_e___halfedge.html", "classwblut_1_1hemesh_1_1_h_e___halfedge" ]
     ] ],
-    [ "HE_HalfedgeIterator.java", "_h_e___halfedge_iterator_8java.html", [
-      [ "HE_HalfedgeIterator", "classwblut_1_1hemesh_1_1_h_e___halfedge_iterator.html", "classwblut_1_1hemesh_1_1_h_e___halfedge_iterator" ]
-    ] ],
+    [ "HE_HalfedgeIterator.java", "_h_e___halfedge_iterator_8java.html", null ],
     [ "HE_Machine.java", "_h_e___machine_8java.html", [
       [ "HE_Machine", "classwblut_1_1hemesh_1_1_h_e___machine.html", "classwblut_1_1hemesh_1_1_h_e___machine" ]
     ] ],
@@ -75,11 +109,12 @@ var dir_3aaf32cf4c61e173491436d014d56311 =
     [ "HE_MeshElement.java", "_h_e___mesh_element_8java.html", [
       [ "HE_MeshElement", "classwblut_1_1hemesh_1_1_h_e___mesh_element.html", "classwblut_1_1hemesh_1_1_h_e___mesh_element" ]
     ] ],
+    [ "HE_MeshHalfedgeIterator.java", "_h_e___mesh_halfedge_iterator_8java.html", null ],
     [ "HE_MeshIterator.java", "_h_e___mesh_iterator_8java.html", [
       [ "HE_MeshIterator", "classwblut_1_1hemesh_1_1_h_e___mesh_iterator.html", "classwblut_1_1hemesh_1_1_h_e___mesh_iterator" ]
     ] ],
     [ "HE_MeshStructure.java", "_h_e___mesh_structure_8java.html", [
-      [ "HE_MeshStructure", "classwblut_1_1hemesh_1_1_h_e___mesh_structure.html", "classwblut_1_1hemesh_1_1_h_e___mesh_structure" ]
+      [ "HE_MeshStructure", "interfacewblut_1_1hemesh_1_1_h_e___mesh_structure.html", "interfacewblut_1_1hemesh_1_1_h_e___mesh_structure" ]
     ] ],
     [ "HE_Path.java", "_h_e___path_8java.html", [
       [ "HE_Path", "classwblut_1_1hemesh_1_1_h_e___path.html", "classwblut_1_1hemesh_1_1_h_e___path" ]
@@ -106,12 +141,12 @@ var dir_3aaf32cf4c61e173491436d014d56311 =
       [ "HE_PathVertexIterator", "classwblut_1_1hemesh_1_1_h_e___path_vertex_iterator.html", "classwblut_1_1hemesh_1_1_h_e___path_vertex_iterator" ]
     ] ],
     [ "HE_RAS.java", "_h_e___r_a_s_8java.html", [
-      [ "HE_RAS", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", "classwblut_1_1hemesh_1_1_h_e___r_a_s" ],
-      [ "HE_RASEC", "classwblut_1_1hemesh_1_1_h_e___r_a_s_1_1_h_e___r_a_s_e_c.html", "classwblut_1_1hemesh_1_1_h_e___r_a_s_1_1_h_e___r_a_s_e_c" ]
+      [ "HE_RAS", "classwblut_1_1hemesh_1_1_h_e___r_a_s.html", "classwblut_1_1hemesh_1_1_h_e___r_a_s" ]
     ] ],
     [ "HE_Selection.java", "_h_e___selection_8java.html", [
       [ "HE_Selection", "classwblut_1_1hemesh_1_1_h_e___selection.html", "classwblut_1_1hemesh_1_1_h_e___selection" ]
     ] ],
+    [ "HE_SelectionHalfedgeIterator.java", "_h_e___selection_halfedge_iterator_8java.html", null ],
     [ "HE_TextureCoordinate.java", "_h_e___texture_coordinate_8java.html", [
       [ "HE_TextureCoordinate", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate.html", "classwblut_1_1hemesh_1_1_h_e___texture_coordinate" ]
     ] ],

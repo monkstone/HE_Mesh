@@ -74,7 +74,7 @@ public class HEM_Diagrid extends HEM_Modifier {
 	protected HE_Mesh applySelf(final HE_Selection selection) {
 		selection.collectEdgesByFace();
 		HET_MeshOp.splitFacesTri(selection);
-		final HE_RAS<HE_Halfedge> border = new HE_RAS.HE_RASEC<HE_Halfedge>();
+		final HE_RAS<HE_Halfedge> border = new HE_RAS<HE_Halfedge>();
 		border.addAll(selection.getOuterEdges());
 		final HE_EdgeIterator eitr = selection.eItr();
 		HE_Halfedge e;

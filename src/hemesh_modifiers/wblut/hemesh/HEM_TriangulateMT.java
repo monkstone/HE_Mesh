@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -50,7 +50,7 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final int n = mesh.getNumberOfFaces();
 
-		List<HE_Face> faces = mesh.faces.getObjects();
+		List<HE_Face> faces = mesh.getFaces();
 		List<int[]> trisPerFace = triangulate(faces);
 
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
@@ -78,7 +78,7 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 		triangles = HE_Selection.getSelection(selection.parent);
 		tracker.setStartStatus(this, "Starting HEM_Triangulate.");
 		final int n = selection.getNumberOfFaces();
-		List<HE_Face> faces = selection.faces.getObjects();
+		List<HE_Face> faces = selection.getFaces();
 		List<int[]> trisPerFace = triangulate(faces);
 		WB_ProgressCounter counter = new WB_ProgressCounter(n, 10);
 		tracker.setCounterStatus(this, "Triangulating faces.", counter);

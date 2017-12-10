@@ -4,7 +4,7 @@ var classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d =
     [ "getSizeI", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#aa244945799c8ce37ede90fe0cb1844f0", null ],
     [ "getSizeJ", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#ac33c25de73e58c7379157d4fb39ce298", null ],
     [ "getSizeK", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#a431ddc2faab4064f851cdf0651ef475e", null ],
-    [ "value", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#a4cb7542f7da78aa4ff50034e75437d84", null ],
+    [ "getValue", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#a064411cc047a8f057c12efb8324eb4ac", null ],
     [ "sizeI", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#a5551b2d57599a1010c7012a8fcd42cde", null ],
     [ "values", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html#af7df45f94af22e7deb457434d32945ed", null ]
 ];

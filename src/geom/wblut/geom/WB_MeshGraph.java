@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.hemesh.HEMC_Explode;
 import wblut.hemesh.HE_Mesh;
 import wblut.hemesh.HE_MeshCollection;
@@ -307,8 +308,8 @@ public class WB_MeshGraph {
 	 * @param i
 	 * @return
 	 */
-	public WB_Frame getFrame(final int i) {
-		final WB_Frame frame = new WB_Frame();
+	public WB_Network getFrame(final int i) {
+		final WB_Network frame = new WB_Network();
 		computePathsToVertex(i);
 		for (final WB_GraphVertex v : vertices) {
 			frame.addNode(v.x, v.y, v.z, 0);
@@ -316,10 +317,10 @@ public class WB_MeshGraph {
 		for (final WB_GraphVertex v : vertices) {
 			final int[] path = getShortestPathBetweenVertices(i, v.index);
 			for (int j = 0; j < path.length - 1; j++) {
-				frame.nodes.get(path[j]).value = Math.max(frame.nodes.get(path[j]).value, 1.0 - j * 1.0 / path.length);
-				frame.addStrut(path[j], path[j + 1]);
+				frame.getNode(path[j]).value = Math.max(frame.getNode(path[j]).value, 1.0 - j * 1.0 / path.length);
+				frame.addConnection(path[j], path[j + 1]);
 			}
-			frame.nodes.get(path[path.length - 1]).value = Math.max(frame.nodes.get(path[path.length - 1]).value,
+			frame.getNode(path[path.length - 1]).value = Math.max(frame.getNode(path[path.length - 1]).value,
 					1.0 / path.length);
 		}
 		return frame;
@@ -332,8 +333,8 @@ public class WB_MeshGraph {
 	 * @param maxnodes
 	 * @return
 	 */
-	public WB_Frame getFrame(final int i, final int maxnodes) {
-		final WB_Frame frame = new WB_Frame();
+	public WB_Network getFrame(final int i, final int maxnodes) {
+		final WB_Network frame = new WB_Network();
 		computePathsToVertex(i);
 		for (final WB_GraphVertex v : vertices) {
 			frame.addNode(v.x, v.y, v.z, 0);
@@ -342,16 +343,16 @@ public class WB_MeshGraph {
 			final int[] path = getShortestPathBetweenVertices(i, v.index);
 			final int nodes = Math.min(maxnodes, path.length);
 			for (int j = 0; j < nodes - 1; j++) {
-				frame.nodes.get(path[j]).value = Math.max(frame.nodes.get(path[j]).value, 1.0 - j * 1.0 / nodes);
-				frame.addStrut(path[j], path[j + 1]);
+				frame.getNode(path[j]).value = Math.max(frame.getNode(path[j]).value, 1.0 - j * 1.0 / nodes);
+				frame.addConnection(path[j], path[j + 1]);
 			}
-			frame.nodes.get(path[nodes - 1]).value = Math.max(frame.nodes.get(path[nodes - 1]).value, 1.0 / nodes);
+			frame.getNode(path[nodes - 1]).value = Math.max(frame.getNode(path[nodes - 1]).value, 1.0 / nodes);
 		}
 		return frame;
 	}
 
-	public WB_Frame getFrame(final int i, final int maxnodes, final double offset) {
-		final WB_Frame frame = new WB_Frame();
+	public WB_Network getFrame(final int i, final int maxnodes, final double offset) {
+		final WB_Network frame = new WB_Network();
 		computePathsToVertex(i);
 		for (final WB_GraphVertex v : vertices) {
 			frame.addNode(v.x, v.y, v.z, 0);
@@ -360,12 +361,10 @@ public class WB_MeshGraph {
 			final int[] path = getShortestPathBetweenVertices(i, v.index);
 			final int nodes = Math.min(maxnodes, path.length);
 			for (int j = 0; j < nodes - 1; j++) {
-				frame.nodes.get(path[j]).value = Math.max(frame.nodes.get(path[j]).value,
-						1.0 - j * 1.0 / nodes + offset);
-				frame.addStrut(path[j], path[j + 1]);
+				frame.getNode(path[j]).value = Math.max(frame.getNode(path[j]).value, 1.0 - j * 1.0 / nodes + offset);
+				frame.addConnection(path[j], path[j + 1]);
 			}
-			frame.nodes.get(path[nodes - 1]).value = Math.max(frame.nodes.get(path[nodes - 1]).value,
-					1.0 / nodes + offset);
+			frame.getNode(path[nodes - 1]).value = Math.max(frame.getNode(path[nodes - 1]).value, 1.0 / nodes + offset);
 		}
 		return frame;
 	}
@@ -378,8 +377,8 @@ public class WB_MeshGraph {
 	 * @param cuttail
 	 * @return
 	 */
-	public WB_Frame getFrame(final int i, final int maxnodes, final int cuttail) {
-		final WB_Frame frame = new WB_Frame();
+	public WB_Network getFrame(final int i, final int maxnodes, final int cuttail) {
+		final WB_Network frame = new WB_Network();
 		computePathsToVertex(i);
 		for (final WB_GraphVertex v : vertices) {
 			frame.addNode(v.x, v.y, v.z, 0);
@@ -391,10 +390,10 @@ public class WB_MeshGraph {
 				continue;
 			}
 			for (int j = 0; j < nodes - 1; j++) {
-				frame.nodes.get(path[j]).value = Math.max(frame.nodes.get(path[j]).value, 1.0 - j * 1.0 / nodes);
-				frame.addStrut(path[j], path[j + 1]);
+				frame.getNode(path[j]).value = Math.max(frame.getNode(path[j]).value, 1.0 - j * 1.0 / nodes);
+				frame.addConnection(path[j], path[j + 1]);
 			}
-			frame.nodes.get(path[nodes - 1]).value = Math.max(frame.nodes.get(path[nodes - 1]).value, 1.0 / nodes);
+			frame.getNode(path[nodes - 1]).value = Math.max(frame.getNode(path[nodes - 1]).value, 1.0 / nodes);
 		}
 		return frame;
 	}

@@ -11,7 +11,6 @@ var classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells =
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#aef4416e03395259d1354a76839149b9e", null ],
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a4831156987ea072c3a6686b09f134f70", null ],
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a8c7974888adf8c81dbff64f470163359", null ],
-    [ "setSimpleCap", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a6c168890a3ab7361d20637b00979aaed", null ],
     [ "setSurface", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a4f89bb2b1f095c82f394cf0a43647890", null ],
     [ "bruteForce", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#aec95a12887efc00393975ee536d2ff7c", null ],
     [ "container", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a50a6d6c457fcdebec5a9e3de761b92a5", null ],
@@ -21,6 +20,5 @@ var classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells =
     [ "offset", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a7241855a2e168673df74b159d4693f68", null ],
     [ "outer", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#abb3031099a64e016ef64dbacbb21d57d", null ],
     [ "points", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a2df252aa77da287c1a441a4baf5851f1", null ],
-    [ "simpleCap", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a4d4529e2e2dc7c32d1369ffe1bd44c5c", null ],
     [ "surface", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells.html#a6a6ca3dbc0dfc93539e13d37890db880", null ]
 ];

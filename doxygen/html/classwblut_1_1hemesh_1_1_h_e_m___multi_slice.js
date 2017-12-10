@@ -11,7 +11,6 @@ var classwblut_1_1hemesh_1_1_h_e_m___multi_slice =
     [ "setPlanes", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a9358334cd428235b94a27759be42358d", null ],
     [ "setPlanes", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#af2ad313a7802adac035a72c8bf32ae70", null ],
     [ "setReverse", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a153dbf3ba45dba1ace83bed1c1a2ea6f", null ],
-    [ "setSimpleCap", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a9740876e25c3550e31d44af0c0f1e971", null ],
     [ "setTriangulate", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#ac1a9055b7d752ad5d159f4ffff5aee68", null ],
     [ "capHoles", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a61e716c40fc55219e3b5dceab61f7adb", null ],
     [ "center", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#aaefa345614924f858faa518fee4073ab", null ],
@@ -21,6 +20,5 @@ var classwblut_1_1hemesh_1_1_h_e_m___multi_slice =
     [ "origFaces", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#ae6707d9f6c8c8c48535f5783295a2343", null ],
     [ "planes", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#afea4b179c29617d90f33905f606160a1", null ],
     [ "reverse", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a7b4cdfc659222b03803d8c17493e31b0", null ],
-    [ "simpleCap", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a2e833f79c08d575ebc902dc8e3f7fb3a", null ],
     [ "triangulate", "classwblut_1_1hemesh_1_1_h_e_m___multi_slice.html#a0ae3cfffa435f8f9d919ef9b8cb90184", null ]
 ];

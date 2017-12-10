@@ -18,7 +18,7 @@ void setup() {
   modifier.setPlane(P);// Cut plane 
   //you can also pass directly as origin and normal:  modifier.setPlane(0,0,-200,0,0,1)
   modifier.setOffset(0);// shift cut plane along normal
-  HE_Selection sel=HE_Selection.selectRandomFaces(mesh, 0.4);
+  HE_Selection sel=mesh.selectRandomFaces("random", 0.4);
   sel.modify(modifier);
 
 

@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_KDTreeInteger;
@@ -217,7 +218,7 @@ public class HEC_VoronoiSphere extends HEC_Creator {
 				}
 			}
 			final HEM_MultiSlice msm = new HEM_MultiSlice();
-			msm.setPlanes(cutPlanes).setSimpleCap(true).setCenter(new WB_Point(points.get(cellIndex)));
+			msm.setPlanes(cutPlanes).setCenter(new WB_Point(points.get(cellIndex)));
 			result.modify(msm);
 		}
 		return result;

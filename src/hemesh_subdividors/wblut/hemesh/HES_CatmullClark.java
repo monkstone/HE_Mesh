@@ -45,7 +45,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 	private WB_ScalarParameter blendFactor;
 
 	/**
-	
+
 	 */
 	public HES_CatmullClark() {
 		super();
@@ -258,7 +258,7 @@ public class HES_CatmullClark extends HES_Subdividor {
 
 		final UnifiedMap<Long, WB_Coord> newPositions = new UnifiedMap<Long, WB_Coord>();
 		selection.collectVertices();
-		final List<HE_Vertex> boundary = selection.getBoundaryVertices();
+		final List<HE_Vertex> boundary = selection.getAllBoundaryVertices();
 		final List<HE_Vertex> outer = selection.getOuterVertices();
 		final List<HE_Vertex> inner = selection.getInnerVertices();
 		List<HE_Face> sharedFaces;

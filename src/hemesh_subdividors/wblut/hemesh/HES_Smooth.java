@@ -160,7 +160,7 @@ public class HES_Smooth extends HES_Subdividor {
 	protected HE_Mesh applySelf(final HE_Selection selection) {
 		HET_MeshOp.splitFacesQuad(selection);
 		final List<WB_Coord> newPositions = new ArrayList<WB_Coord>();
-		final List<HE_Vertex> boundary = selection.getBoundaryVertices();
+		final List<HE_Vertex> boundary = selection.getAllBoundaryVertices();
 		final List<HE_Vertex> inner = selection.getInnerVertices();
 		final List<HE_Vertex> outer = selection.getOuterVertices();
 		List<HE_Face> sharedFaces;

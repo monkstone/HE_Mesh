@@ -10,12 +10,10 @@ var classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre =
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a669a34797505b635ec4e453b59b84b47", null ],
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#ace5b3edb379a83321c44caef58cb98d6", null ],
     [ "setPoints", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a59a8de86afd173c2d1b46af581b42fd1", null ],
-    [ "setSimpleCap", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#ac5def3f2bbd2b1cf6395c4c479ccc9b9", null ],
     [ "bruteForce", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#ab14f87cb27402aabe7eb66fb4dd9f945", null ],
     [ "container", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a06724473c508e745261827b3d7925527", null ],
     [ "inner", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a2e0d3aad86496aca2d2b94273fdf39b5", null ],
     [ "offset", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#aeafcefb29fd3d360304fa1d2113b273b", null ],
     [ "outer", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a8368edbaef2209066d24e056535cd2fc", null ],
-    [ "points", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a4439139b8afcfa38524d6c60489feca9", null ],
-    [ "simpleCap", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a12669d21979636b415aecfaf495e9ecc", null ]
+    [ "points", "classwblut_1_1hemesh_1_1_h_e_m_c___voronoi_cells_pre.html#a4439139b8afcfa38524d6c60489feca9", null ]
 ];

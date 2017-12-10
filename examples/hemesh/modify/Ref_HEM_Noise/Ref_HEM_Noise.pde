@@ -28,9 +28,9 @@ void draw() {
   HEM_Noise modifier=new HEM_Noise();
   copymesh=mesh.get();
   modifier.setDistance(mouseY/20);
+  //modifier.setSeed(125);
   copymesh.modify(modifier);
   
-  //rotateX(mouseY*1.0f/height*TWO_PI);
   fill(255);
   noStroke();
   render.drawFaces(copymesh);

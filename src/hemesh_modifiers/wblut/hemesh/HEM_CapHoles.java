@@ -50,7 +50,7 @@ public class HEM_CapHoles extends HEM_Modifier {
 		tracker.setCounterStatus(this, "Finding loops and closing holes.", counter);
 		while (unpairedEdges.size() > 0) {
 			boolean abort = false;
-			loopedHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
+			loopedHalfedges = new HE_RAS<HE_Halfedge>();
 			start = unpairedEdges.get(0);
 			loopedHalfedges.add(start);
 			he = start;
@@ -76,22 +76,22 @@ public class HEM_CapHoles extends HEM_Modifier {
 
 			if (!abort) {
 				nf = new HE_Face();
-				boolean noLoopFound = start.getVertex() != loopedHalfedges.get(loopedHalfedges.size() - 1)
+				boolean noLoopFound = start.getVertex() != loopedHalfedges.getWithIndex(loopedHalfedges.size() - 1)
 						.getNextInFace().getVertex();
 				int ii = 0;
 				StringBuilder sb = new StringBuilder(100);
 				if (noLoopFound) {
 					sb.append("Polyline found: ");
 					for (ii = 0; ii < loopedHalfedges.size() - 1; ii++) {
-						sb.append(unpairedEdges.indexOf(loopedHalfedges.get(ii)) + "-> ");
+						sb.append(unpairedEdges.indexOf(loopedHalfedges.getWithIndex(ii)) + "-> ");
 					}
-					sb.append(unpairedEdges.indexOf(loopedHalfedges.get(ii)));
+					sb.append(unpairedEdges.indexOf(loopedHalfedges.getWithIndex(ii)));
 				} else {
 					sb.append("Cycle found: ");
 					for (ii = 0; ii < loopedHalfedges.size(); ii++) {
-						sb.append(unpairedEdges.indexOf(loopedHalfedges.get(ii)) + "-> ");
+						sb.append(unpairedEdges.indexOf(loopedHalfedges.getWithIndex(ii)) + "-> ");
 					}
-					sb.append(unpairedEdges.indexOf(loopedHalfedges.get(0)));
+					sb.append(unpairedEdges.indexOf(loopedHalfedges.getWithIndex(0)));
 				}
 				tracker.setDuringStatus(this, sb.toString());
 				unpairedEdges.removeAll(loopedHalfedges);
@@ -99,9 +99,9 @@ public class HEM_CapHoles extends HEM_Modifier {
 					mesh.add(nf);
 					caps.add(nf);
 				}
-				newHalfedges = new HE_RAS.HE_RASEC<HE_Halfedge>();
+				newHalfedges = new HE_RAS<HE_Halfedge>();
 				for (int i = 0; i < loopedHalfedges.size(); i++) {
-					phe = loopedHalfedges.get(i);
+					phe = loopedHalfedges.getWithIndex(i);
 					nhe = new HE_Halfedge();
 					newHalfedges.add(nhe);
 					mesh.setVertex(nhe, phe.getNextInFace().getVertex());
@@ -115,12 +115,9 @@ public class HEM_CapHoles extends HEM_Modifier {
 						}
 					}
 				}
-				if (!noLoopFound) {
-					mesh.cycleHalfedgesReverse(newHalfedges.getObjects());
-				} else {
-					mesh.orderHalfedgesReverse(newHalfedges.getObjects());
 
-				}
+				mesh.orderHalfedgesReverse(newHalfedges.getObjects(), !noLoopFound);
+
 				counter.increment(newHalfedges.size());
 			}
 		}

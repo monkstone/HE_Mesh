@@ -38,8 +38,16 @@ void setup() {
   multiCreator.setPoints(points);
   multiCreator.setContainer(container);
   multiCreator.setOffset(10);
-  multiCreator.setSimpleCap(false);
+
   cells=multiCreator.create();
+
+  HE_MeshIterator mItr=cells.mItr();
+  HE_Mesh mesh;
+  while (mItr.hasNext()) {
+    mesh=mItr.next();
+    mesh.modify(new HEM_HideEdges());
+  }
+
 
   render=new WB_Render(this);
 }

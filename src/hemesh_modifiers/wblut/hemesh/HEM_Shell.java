@@ -91,13 +91,15 @@ public class HEM_Shell extends HEM_Modifier {
 			final HEM_FaceExpand expm = new HEM_FaceExpand().setDistance(new WB_FactorScalarParameter(-1.0, d));
 			innerMesh.modify(expm);
 		}
-
+		mesh.selectAllFaces("outer");
 		HET_MeshOp.flipFaces(innerMesh);
+		innerMesh.selectAllFaces("inner");
 		mesh.add(innerMesh);
 		HE_Halfedge he1, he2, heio, heoi;
 		HE_Face fNew;
 		long[] keys = heCorrelation.keySet().toArray();
 		long[] values = heCorrelation.values().toArray();
+		HE_Selection sel = mesh.getNewSelection("walls");
 		for (int i = 0; i < keys.length; i++) {
 
 			he1 = mesh.getHalfedgeWithKey(keys[i]);
@@ -116,6 +118,7 @@ public class HEM_Shell extends HEM_Modifier {
 				fNew = new HE_Face();
 				fNew.setInternalLabel(1);
 				mesh.add(fNew);
+				sel.add(fNew);
 				mesh.setHalfedge(fNew, he1);
 				mesh.setFace(he1, fNew);
 				mesh.setFace(he2, fNew);

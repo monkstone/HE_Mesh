@@ -8,24 +8,29 @@ import wblut.geom.*;
 HE_Mesh mesh;
 WB_Render render;
 HE_Selection sel;
+HEM_Soapfilm modifier;
 double A;
 double f;
 void setup() {
-  size(1000,1000,P3D);
+  size(1000, 1000, P3D);
   smooth(8);
-  HEC_Creator creator=new HEC_Cube(200,1,1,1);
-
-  mesh=new HE_Mesh(creator); 
-
- HEM_Extrude ext=new HEM_Extrude().setDistance(300);
- mesh.modify(ext);
-
-sel=ext.extruded;
-mesh.deleteFaces(sel);
- mesh.subdivide(new HES_Planar(),4);
-f=0;
-A=mesh.getArea();
+  createMesh();
+  mesh.selectBoundaryVertices("boundary");
+  modifier=new HEM_Soapfilm().setIterations(10).setFixed(mesh.getSelection("boundary"));
+  f=0;
+  A=mesh.getArea();
   render=new WB_Render(this);
+}
+
+void createMesh() {
+  HEC_Creator creator=new HEC_Dodecahedron().setRadius(200);
+  mesh=new HE_Mesh(creator); 
+  mesh.modify(new HEM_Extrude().setDistance(100));
+  mesh.getSelection("extruded").modify(new HEM_Extrude().setDistance(0).setChamfer(0.5));
+  mesh.getSelection("extruded").modify(new HEM_Extrude().setDistance(100));
+  mesh.getSelection("extruded").modify(new HEM_Extrude().setDistance(0).setChamfer(-0.5));
+  mesh.deleteFaces(mesh.getSelection("extruded"));
+  mesh.subdivide(new HES_Planar(), 2);
 }
 
 void draw() {
@@ -39,14 +44,13 @@ void draw() {
   render.drawEdges(mesh);
   noStroke();
   render.drawFaces(mesh);
-  if(f<0.9999) update();
+  if (f<0.9999) update();
 }
 
-void update(){
- 
- mesh.modify(new HEM_Soapfilm().setIterations(1)); 
- double nA=mesh.getArea();
- f=nA/A;
- println(f);
- A=nA;
+void update() {
+  mesh.modify(modifier); 
+  double nA=mesh.getArea();
+  f=nA/A;
+  println(f);
+  A=nA;
 }

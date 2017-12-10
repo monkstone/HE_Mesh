@@ -16,7 +16,7 @@ public interface WB_IsoValues3D {
 		RED, GREEN, BLUE, HUE, SAT, BRI, ALPHA
 	};
 
-	public double value(int i, int j, int k);
+	public double getValue(int i, int j, int k);
 
 	public int getSizeI();
 
@@ -64,7 +64,7 @@ public interface WB_IsoValues3D {
 		 * @see wblut.geom.WB_IsoValues2D#value(int, int, int)
 		 */
 		@Override
-		public double value(final int i, final int j, final int k) {
+		public double getValue(final int i, final int j, final int k) {
 			return values[i][j][k];
 		}
 
@@ -117,7 +117,7 @@ public interface WB_IsoValues3D {
 		 * @see wblut.geom.WB_IsoValues3D#value(int, int, int)
 		 */
 		@Override
-		public double value(final int i, final int j, final int k) {
+		public double getValue(final int i, final int j, final int k) {
 			return values[i][j][k];
 		}
 
@@ -175,7 +175,7 @@ public interface WB_IsoValues3D {
 		 * @see wblut.geom.WB_IsoValues3D#value(int, int)
 		 */
 		@Override
-		public double value(final int i, final int j, final int k) {
+		public double getValue(final int i, final int j, final int k) {
 			return function.evaluate(fxi + i * dfx, fyi + j * dfy, fzi + k * dfz);
 		}
 
@@ -186,7 +186,7 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeI() {
-			return 0;
+			return -1;
 		}
 
 		/*
@@ -196,7 +196,7 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeJ() {
-			return 0;
+			return -1;
 		}
 
 		/*
@@ -206,7 +206,7 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeK() {
-			return 0;
+			return -1;
 		}
 	}
 
@@ -223,7 +223,7 @@ public interface WB_IsoValues3D {
 		 * @see wblut.geom.WB_IsoValues2D#value(int, int, int)
 		 */
 		@Override
-		public double value(final int i, final int j, final int k) {
+		public double getValue(final int i, final int j, final int k) {
 			return values.getValue(i, j, k);
 		}
 
@@ -304,7 +304,7 @@ public interface WB_IsoValues3D {
 		 * @see wblut.geom.WB_IsoValues2D#value(int, int, int)
 		 */
 		@Override
-		public double value(final int i, final int j, final int k) {
+		public double getValue(final int i, final int j, final int k) {
 			if (k == currentK) {
 				return sliceK[i][j];
 			} else if (k == currentKpo) {
@@ -328,7 +328,7 @@ public interface WB_IsoValues3D {
 		}
 
 		private void fillSlice(final int k, final double[][] values) {
-			if (sizeK == images.length) {
+			if (sizeK == images.length && k >= 0 && k < images.length) {
 				slice = home.loadImage(images[k]);
 				slice.resize(sizeI, sizeJ);
 				for (int i = 0; i < sizeI; i++) {
@@ -450,6 +450,75 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeK() {
+			return sizeK;
+		}
+
+	}
+
+	public class SubValues3D implements WB_IsoValues3D {
+		int di, dj, dk;
+		int sizeI, sizeJ, sizeK;
+		WB_IsoValues3D parent;
+
+		public SubValues3D(final WB_IsoValues3D parent, final int i, final int j, final int k, final int sizeI,
+				final int sizeJ, final int sizeK) {
+			this.parent = parent;
+			int pi = parent.getSizeI();
+			if (pi == -1) {
+				throw new IllegalArgumentException("SubGrid3D cannot have a FunctionGrid3D as a parent.");
+			}
+			int pj = parent.getSizeJ();
+			int pk = parent.getSizeK();
+			this.di = Math.min(Math.max(0, i), pi - 1);
+			this.dj = Math.min(Math.max(0, j), pj - 1);
+			this.dk = Math.min(Math.max(0, k), pk - 1);
+			this.sizeI = Math.max(0, Math.min(sizeI, pi - di));
+			this.sizeJ = Math.max(0, Math.min(sizeJ, pj - dj));
+			this.sizeK = Math.max(0, Math.min(sizeK, pk - dk));
+
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see wblut.geom.WB_IsoValues3D#value(int, int, int)
+		 */
+		@Override
+		public double getValue(final int i, final int j, final int k) {
+
+			return parent.getValue(i + di, j + dj, k + dk);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see wblut.geom.WB_IsoValues3D#getSizeI()
+		 */
+		@Override
+		public int getSizeI() {
+
+			return sizeI;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see wblut.geom.WB_IsoValues3D#getSizeJ()
+		 */
+		@Override
+		public int getSizeJ() {
+
+			return sizeJ;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see wblut.geom.WB_IsoValues3D#getSizeK()
+		 */
+		@Override
+		public int getSizeK() {
+
 			return sizeK;
 		}
 

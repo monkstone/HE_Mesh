@@ -9,6 +9,7 @@
 
 package wblut.hemesh;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -26,13 +27,13 @@ public class HE_FaceIterator implements Iterator<HE_Face> {
 	 *
 	 * @param faces
 	 */
-	HE_FaceIterator(final HE_RAS<HE_Face> faces) {
+	HE_FaceIterator(final Collection<HE_Face> faces) {
 		_itr = faces.iterator();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.util.Iterator#hasNext()
 	 */
 	@Override
@@ -42,7 +43,7 @@ public class HE_FaceIterator implements Iterator<HE_Face> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.util.Iterator#next()
 	 */
 	@Override
@@ -52,7 +53,7 @@ public class HE_FaceIterator implements Iterator<HE_Face> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.util.Iterator#remove()
 	 */
 	@Override

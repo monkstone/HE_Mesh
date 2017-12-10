@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_Point;
 import wblut.geom.WB_Voronoi;
@@ -35,8 +36,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 	private HE_Mesh container;
 	/** Treat container as surface?. */
 	private boolean surface;
-	/** The simple cap. */
-	private boolean simpleCap;
+
 	/**
 	 *
 	 */
@@ -56,7 +56,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 	 */
 	public HEMC_VoronoiCells() {
 		super();
-		simpleCap = true;
+
 		offset = WB_ScalarParameter.ZERO;
 	}
 
@@ -191,18 +191,6 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 	}
 
 	/**
-	 * Sets simple cap option.
-	 *
-	 * @param b
-	 *            true, false
-	 * @return self
-	 */
-	public HEMC_VoronoiCells setSimpleCap(final boolean b) {
-		simpleCap = b;
-		return this;
-	}
-
-	/**
 	 * Create skin mesh?.
 	 *
 	 * @param b
@@ -245,7 +233,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 		final ArrayList<HE_Selection> loutersel = new ArrayList<HE_Selection>();
 		final HEC_VoronoiCell cvc = new HEC_VoronoiCell();
 		if (bruteForce || numberOfPoints < 10) {
-			cvc.setPoints(points).setContainer(container).setSurface(surface).setOffset(offset).setSimpleCap(simpleCap);
+			cvc.setPoints(points).setContainer(container).setSurface(surface).setOffset(offset);
 			for (int i = 0; i < numberOfPoints; i++) {
 				tracker.setDuringStatus(this,
 						"Creating cell " + (i + 1) + " of " + numberOfPoints + " (" + numberOfPoints + " slices).");
@@ -258,8 +246,7 @@ public class HEMC_VoronoiCells extends HEMC_MultiCreator {
 		} else {
 
 			final int[][] voronoiIndices = WB_Voronoi.getVoronoi3DNeighbors(points);
-			cvc.setPoints(points).setContainer(container).setSurface(surface).setOffset(offset).setSimpleCap(simpleCap)
-					.setLimitPoints(true);
+			cvc.setPoints(points).setContainer(container).setSurface(surface).setOffset(offset).setLimitPoints(true);
 			for (int i = 0; i < numberOfPoints; i++) {
 				tracker.setDuringStatus(this, "Creating cell " + (i + 1) + " of " + numberOfPoints + " ("
 						+ voronoiIndices[i].length + " slices).");

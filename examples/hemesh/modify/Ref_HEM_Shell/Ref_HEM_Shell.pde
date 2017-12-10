@@ -31,11 +31,11 @@ void draw() {
 }
 
 void createMesh() {
-  HEC_Creator creator=new HEC_Cube(200, 1, 1, 1);
+  HEC_Creator creator=new HEC_Dodecahedron().setRadius(200);
   mesh=new HE_Mesh(creator); 
   HEM_Extrude ext=new HEM_Extrude().setDistance(200);
   mesh.modify(ext);
-  HE_Selection sel=ext.extruded;
+  HE_Selection sel=mesh.getSelection("extruded");
   mesh.deleteFaces(sel);
   mesh.subdivide(new HES_CatmullClark(), 4);
 }

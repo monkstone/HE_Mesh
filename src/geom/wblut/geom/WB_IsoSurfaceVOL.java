@@ -317,7 +317,7 @@ public class WB_IsoSurfaceVOL {
 	 */
 	private double value(final int i, final int j, final int k) {
 
-		return values.value(i, j, k);
+		return values.getValue(i, j, k);
 
 	}
 

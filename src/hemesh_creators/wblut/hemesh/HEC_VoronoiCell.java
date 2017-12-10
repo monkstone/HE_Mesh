@@ -39,8 +39,7 @@ public class HEC_VoronoiCell extends HEC_Creator {
 	private HE_Mesh container;
 	/** Treat container as surface?. */
 	private boolean surface;
-	/** The simple cap. */
-	private boolean simpleCap;
+
 	/** Offset. */
 	private WB_ScalarParameter offset;
 	/** Faces fully interior to cell. */
@@ -214,18 +213,6 @@ public class HEC_VoronoiCell extends HEC_Creator {
 		return this;
 	}
 
-	/**
-	 * Sets the simple cap.
-	 *
-	 * @param b
-	 *            the b
-	 * @return the hE c_ voronoi cell
-	 */
-	public HEC_VoronoiCell setSimpleCap(final Boolean b) {
-		simpleCap = b;
-		return this;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -294,8 +281,7 @@ public class HEC_VoronoiCell extends HEC_Creator {
 			}
 		}
 		final HEM_MultiSlice msm = new HEM_MultiSlice();
-		msm.setPlanes(cutPlanes).setCenter(new WB_Point(points[cellIndex])).setCap(!surface).setLabels(labels)
-				.setSimpleCap(simpleCap);
+		msm.setPlanes(cutPlanes).setCenter(new WB_Point(points[cellIndex])).setCap(!surface).setLabels(labels);
 
 		try {
 			msm.applySelf(result);

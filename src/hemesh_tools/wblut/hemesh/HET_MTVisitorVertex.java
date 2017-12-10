@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -43,7 +43,7 @@ public class HET_MTVisitorVertex<E extends Object> {
 	 * @return
 	 */
 	public List<E> getVertexInfo(final HE_MeshStructure mesh) {
-		return visit(mesh.vertices.getObjects());
+		return visit(mesh.getVertices());
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class HET_MTVisitorVertex<E extends Object> {
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.util.concurrent.Callable#call()
 		 */
 		@Override

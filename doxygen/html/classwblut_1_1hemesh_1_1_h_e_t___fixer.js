@@ -11,6 +11,8 @@ var classwblut_1_1hemesh_1_1_h_e_t___fixer =
     [ "deleteTwoEdgeVertex", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a98f6e6824230911f5d89ae40c359075b", null ],
     [ "deleteTwoEdgeVertices", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a99b0091ed8942be9b5f74e729eab1ccb", null ],
     [ "fixDegenerateTriangles", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a41d870969dd82f7fa605c50ce4db7bb8", null ],
+    [ "fixHalfedgeFaceAssignment", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a47f5cdfb48df25a669a309ffb07140f7", null ],
+    [ "fixHalfedgeVertexAssignment", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#ae5b750fc69d3c7b3b3a9d846776cbc53", null ],
     [ "fixLoops", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a23da07c909f29b472a2f6fe264b62c13", null ],
     [ "fixNonManifoldVertices", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a41cbbf32f427dba515407fb4ac2bda66", null ],
     [ "fixNonManifoldVerticesOnePass", "classwblut_1_1hemesh_1_1_h_e_t___fixer.html#a535335340176368d2a2576176ccd52bf", null ],

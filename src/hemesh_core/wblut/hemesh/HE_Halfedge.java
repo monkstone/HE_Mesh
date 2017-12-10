@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -34,6 +34,7 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	private HE_Halfedge _prev;
 	/** Associated face. */
 	private HE_Face _face;
+	/** Associated edge. */
 
 	private HE_TextureCoordinate uvw;
 
@@ -48,6 +49,7 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 		_next = null;
 		_prev = null;
 		_face = null;
+
 	}
 
 	/**
@@ -270,6 +272,19 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	}
 
 	/**
+	 * Get offset center of halfedge.
+	 *
+	 * @param f
+	 * @return center
+	 */
+	public WB_Coord getHalfedgeCenter(final double f) {
+		if (_next != null && _vertex != null && _next.getVertex() != null) {
+			return gf.createMidpoint(_next.getVertex(), _vertex).addMulSelf(f, getHalfedgeNormal());
+		}
+		return null;
+	}
+
+	/**
 	 *
 	 *
 	 * @return
@@ -344,10 +359,10 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	}
 
 	/**
-	 * Sets the vertex.
+	 * Sets vertex.
 	 *
 	 * @param vertex
-	 *            the new vertex
+	 *            vertex
 	 */
 	protected void _setVertex(final HE_Vertex vertex) {
 		_vertex = vertex;

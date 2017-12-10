@@ -73,7 +73,7 @@ public class HEM_ChamferEdges extends HEM_Modifier {
 			}
 		}
 		final HEM_MultiSlice msm = new HEM_MultiSlice();
-		msm.setPlanes(cutPlanes).setSimpleCap(true);
+		msm.setPlanes(cutPlanes);
 		mesh.modify(msm);
 		mesh.renameSelection("caps", "chamfer");
 		return mesh;
@@ -107,7 +107,7 @@ public class HEM_ChamferEdges extends HEM_Modifier {
 			}
 		}
 		final HEM_MultiSlice msm = new HEM_MultiSlice();
-		msm.setPlanes(cutPlanes).setSimpleCap(true);
+		msm.setPlanes(cutPlanes);
 		selection.parent.modify(msm);
 		selection.parent.renameSelection("caps", "chamfer");
 		return selection.parent;

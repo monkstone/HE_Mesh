@@ -21,9 +21,9 @@ public class WB_Version {
 
 	public static final int MAJOR = 6;
 
-	public static final int MINOR = 0;
+	public static final int MINOR = 1;
 
-	public static final int PATCH = 2;
+	public static final int PATCH = 0;
 
 	private static final String releaseInfo = "Titan";
 
