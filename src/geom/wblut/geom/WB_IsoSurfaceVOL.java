@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 package wblut.geom;
@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_ScalarParameter;
 
@@ -253,9 +253,12 @@ public class WB_IsoSurfaceVOL {
 	 * @return
 	 */
 	public WB_IsoSurfaceVOL setValues(final WB_ScalarParameter function, final double xi, final double yi,
-			final double zi, final double dx, final double dy, final double dz) {
-		this.values = new WB_IsoValues3D.Function3D(function, xi, yi, zi, dx, dy, dz);
-
+			final double zi, final double dx, final double dy, final double dz, final int sizeI, final int sizeJ,
+			final int sizeK) {
+		this.values = new WB_IsoValues3D.Function3D(function, xi, yi, zi, dx, dy, dz, sizeI, sizeJ, sizeK);
+		resx = sizeI - 1;
+		resy = sizeJ - 1;
+		resz = sizeK - 1;
 		return this;
 	}
 

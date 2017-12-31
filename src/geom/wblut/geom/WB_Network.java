@@ -148,6 +148,17 @@ public class WB_Network {
 		}
 	}
 
+	public WB_Network(final WB_Coord[] points, final int[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		for (final WB_Coord point : points) {
+			addNode(point.xd(), point.yd(), point.zd(), 1);
+		}
+		for (int i = 0; i < connections.length; i += 2) {
+			addConnection(connections[i], connections[i + 1]);
+		}
+	}
+
 	/**
 	 *
 	 *
@@ -158,6 +169,43 @@ public class WB_Network {
 		this.connections = new FastList<Connection>();
 		nodes = new FastList<Node>();
 		for (final WB_Coord point : points) {
+			addNode(point.xd(), point.yd(), point.zd(), 1);
+		}
+		for (final int[] connection : connections) {
+			addConnection(connection[0], connection[1]);
+		}
+	}
+
+	public WB_Network(final Collection<? extends WB_Coord> points, final int[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		for (final WB_Coord point : points) {
+			addNode(point.xd(), point.yd(), point.zd(), 1);
+		}
+		for (int i = 0; i < connections.length; i += 2) {
+			addConnection(connections[i], connections[i + 1]);
+		}
+	}
+
+	public WB_Network(final WB_CoordCollection points, final int[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		WB_Coord point;
+		for (int i = 0; i < points.size(); i++) {
+			point = points.get(i);
+			addNode(point.xd(), point.yd(), point.zd(), 1);
+		}
+		for (int i = 0; i < connections.length; i += 2) {
+			addConnection(connections[i], connections[i + 1]);
+		}
+	}
+
+	public WB_Network(final WB_CoordCollection points, final int[][] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		WB_Coord point;
+		for (int i = 0; i < points.size(); i++) {
+			point = points.get(i);
 			addNode(point.xd(), point.yd(), point.zd(), 1);
 		}
 		for (final int[] connection : connections) {
@@ -180,6 +228,19 @@ public class WB_Network {
 		for (final int[] connection : connections) {
 			addConnection(connection[0], connection[1]);
 		}
+
+	}
+
+	public WB_Network(final double[][] points, final int[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		for (final double[] point : points) {
+			addNode(point[0], point[1], point[2], 1);
+		}
+
+		for (int i = 0; i < connections.length; i += 2) {
+			addConnection(connections[i], connections[i + 1]);
+		}
 	}
 
 	/**
@@ -197,6 +258,19 @@ public class WB_Network {
 		for (final int[] connection : connections) {
 			addConnection(connection[0], connection[1]);
 		}
+
+	}
+
+	public WB_Network(final float[][] points, final int[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		for (final float[] point : points) {
+			addNode(point[0], point[1], point[2], 1);
+		}
+
+		for (int i = 0; i < connections.length; i += 2) {
+			addConnection(connections[i], connections[i + 1]);
+		}
 	}
 
 	/**
@@ -213,6 +287,19 @@ public class WB_Network {
 		}
 		for (final int[] connection : connections) {
 			addConnection(connection[0], connection[1]);
+		}
+
+	}
+
+	public WB_Network(final int[][] points, final int[] connections) {
+		this.connections = new FastList<Connection>();
+		nodes = new FastList<Node>();
+		for (final int[] point : points) {
+			addNode(point[0], point[1], point[2], 1);
+		}
+
+		for (int i = 0; i < connections.length; i += 2) {
+			addConnection(connections[i], connections[i + 1]);
 		}
 	}
 

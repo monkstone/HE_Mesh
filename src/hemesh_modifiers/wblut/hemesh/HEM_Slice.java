@@ -186,11 +186,13 @@ public class HEM_Slice extends HEM_Modifier {
 			tracker.setDuringStatus(this, "Capping holes.");
 
 			final List<HE_Path> cutpaths = ss.getPaths();
+
 			if (cutpaths.size() == 1) {
 				HEM_CapHoles ch = new HEM_CapHoles();
 				mesh.modify(ch);
 
 			} else {
+
 				tracker.setDuringStatus(this, "Triangulating cut paths.");
 				HE_Selection caps = HE_Selection.getSelection(mesh);
 				final long[] triKeys = HET_PlanarPathTriangulator.getTriangleKeys(cutpaths, lP);
@@ -231,9 +233,7 @@ public class HEM_Slice extends HEM_Modifier {
 
 		mesh.pairHalfedges();
 		mesh.capHalfedges();
-		// HE_Selection edges = HE_Selection.getSelection(mesh);
-		// edges.addHalfedges(mesh.getSelection("caps").getOuterEdges());
-		// mesh.addSelection("edges", edges);
+
 		if (optimizeCap) {
 			HET_MeshOp.improveTriangulation(mesh, mesh.getSelection("caps"));
 

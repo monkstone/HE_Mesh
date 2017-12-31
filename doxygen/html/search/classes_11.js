@@ -18,5 +18,6 @@ var searchData=
   ['triangleintersection',['TriangleIntersection',['../classwblut_1_1geom_1_1_w_b___geometry_op3_d_1_1_triangle_intersection.html',1,'wblut::geom::WB_GeometryOp3D']]],
   ['triple',['Triple',['../classwblut_1_1geom_1_1_w_b___alpha_triangulation3_d_1_1_triple.html',1,'wblut::geom::WB_AlphaTriangulation3D']]],
   ['tuple',['Tuple',['../classwblut_1_1geom_1_1_w_b___alpha_triangulation2_d_1_1_tuple.html',1,'wblut::geom::WB_AlphaTriangulation2D']]],
+  ['type',['Type',['../enumwblut_1_1geom_1_1_w_b___geodesic_1_1_type.html',1,'wblut::geom::WB_Geodesic']]],
   ['type',['Type',['../enumwblut_1_1geom_1_1_w_b___danzer_1_1_type.html',1,'wblut::geom::WB_Danzer']]]
 ];

@@ -27,7 +27,7 @@ import wblut.geom.WB_Sphere;
  * @author Frederik Vanhoutte (W:Blut)
  *
  */
-public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
+public class HE_Selection extends HE_MeshElement implements HE_HalfedgeStructure {
 	/**
 	 *
 	 */
@@ -54,7 +54,7 @@ public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
 	 *
 	 * @param parent
 	 */
-	private HE_Selection(final HE_Mesh parent) {
+	public HE_Selection(final HE_Mesh parent) {
 		this();
 		this.parent = parent;
 	}
@@ -339,7 +339,7 @@ public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
 	 * @param source
 	 */
 	@Override
-	public final void addFaces(final HE_MeshStructure source) {
+	public final void addFaces(final HE_HalfedgeStructure source) {
 		faces.addAll(source.getFaces());
 	}
 
@@ -375,7 +375,7 @@ public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
 	 * @param source
 	 */
 	@Override
-	public final void addHalfedges(final HE_MeshStructure source) {
+	public final void addHalfedges(final HE_HalfedgeStructure source) {
 		for (HE_Halfedge he : source.getHalfedges()) {
 			add(he);
 		}
@@ -414,7 +414,7 @@ public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
 	 * @param source
 	 */
 
-	public final void addEdges(final HE_MeshStructure source) {
+	public final void addEdges(final HE_HalfedgeStructure source) {
 
 		edges.addAll(source.getEdges());
 
@@ -439,7 +439,7 @@ public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
 	 * @param source
 	 */
 	@Override
-	public final void addVertices(final HE_MeshStructure source) {
+	public final void addVertices(final HE_HalfedgeStructure source) {
 		vertices.addAll(source.getVertices());
 	}
 
@@ -989,7 +989,7 @@ public class HE_Selection extends HE_MeshElement implements HE_MeshStructure {
 	@Override
 	public HE_HalfedgeIterator heItr() {
 		List<HE_Halfedge> hes = new FastList<HE_Halfedge>(getHalfedges());
-		return new HE_HalfedgeIterator(hes);
+		return HE_HalfedgeIterator.getIterator(hes);
 	}
 
 	/**

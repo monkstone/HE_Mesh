@@ -316,9 +316,12 @@ public class HEC_IsoSurface extends HEC_Creator {
 	 * @return
 	 */
 	public HEC_IsoSurface setValues(final WB_ScalarParameter function, final double xi, final double yi,
-			final double zi, final double dx, final double dy, final double dz) {
-		this.values = new WB_IsoValues3D.Function3D(function, xi, yi, zi, dx, dy, dz);
-
+			final double zi, final double dx, final double dy, final double dz, final int sizeI, final int sizeJ,
+			final int sizeK) {
+		this.values = new WB_IsoValues3D.Function3D(function, xi, yi, zi, dx, dy, dz, sizeI, sizeJ, sizeK);
+		resx = sizeI - 1;
+		resy = sizeJ - 1;
+		resz = sizeK - 1;
 		return this;
 	}
 
@@ -912,7 +915,7 @@ public class HEC_IsoSurface extends HEC_Creator {
 			return xedge;
 		}
 		xedge = new HE_Vertex(interp(isolevel, p0, p1, val0, val1));
-		xedge.addSelf(offset);
+		xedge.getPosition().addSelf(offset);
 		if (!dummyrun) {
 			mesh.add(xedge);
 		}
@@ -997,7 +1000,7 @@ public class HEC_IsoSurface extends HEC_Creator {
 			return null;
 		}
 		yedge = new HE_Vertex(interp(isolevel, p0, p1, val0, val1));
-		yedge.addSelf(offset);
+		yedge.getPosition().addSelf(offset);
 		if (!dummyrun) {
 			mesh.add(yedge);
 		}
@@ -1082,7 +1085,7 @@ public class HEC_IsoSurface extends HEC_Creator {
 			return null;
 		}
 		zedge = new HE_Vertex(interp(isolevel, p0, p1, val0, val1));
-		zedge.addSelf(offset);
+		zedge.getPosition().addSelf(offset);
 		if (!dummyrun) {
 			mesh.add(zedge);
 		}

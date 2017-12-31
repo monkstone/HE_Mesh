@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -11,17 +11,9 @@ package wblut.geom;
 
 import java.security.InvalidParameterException;
 
+import wblut.geom.WB_Geodesic.Type;
+
 class WB_GeodesicII {
-
-	public static final int TETRAHEDRON = 0;
-
-	public static final int OCTAHEDRON = 1;
-
-	public static final int CUBE = 2;
-
-	public static final int DODECAHEDRON = 3;
-
-	public static final int ICOSAHEDRON = 4;
 
 	private final double[][] centralanglesabc;
 
@@ -47,7 +39,7 @@ class WB_GeodesicII {
 
 	private final double radius;
 
-	private final int type;
+	private final Type type;
 
 	private int vertexoffset;
 
@@ -60,7 +52,7 @@ class WB_GeodesicII {
 	 * @param v
 	 */
 	public WB_GeodesicII(final double radius, final int v) {
-		this(radius, v, ICOSAHEDRON);
+		this(radius, v, Type.ICOSAHEDRON);
 	}
 
 	/**
@@ -70,14 +62,11 @@ class WB_GeodesicII {
 	 * @param v
 	 * @param type
 	 */
-	public WB_GeodesicII(final double radius, final int v, final int type) {
+	public WB_GeodesicII(final double radius, final int v, final Type type) {
 		if (v <= 0) {
 			throw new InvalidParameterException("v should be 1 or larger.");
 		}
-		if (type < 0 || type > 5) {
-			throw new InvalidParameterException(
-					"Type should be one of TETRAHEDRON (0), OCTAHEDRON (1), CUBE (2), DODECAHEDRON (3) or ICOSAHEDRON (4).");
-		}
+
 		this.type = type;
 		this.radius = radius;
 		this.v = v / 2 * 2;
@@ -128,18 +117,18 @@ class WB_GeodesicII {
 		LCDPoints = new WB_Point[hv + 1][hv + 1];
 		final double[][] subtrianglesabc = new double[hv][3];
 		final double[][] subtrianglesABC = new double[hv][3];
-		subtrianglesabc[0] = centralanglesabc[type];
-		subtrianglesABC[0] = surfaceanglesABC[type];
+		subtrianglesabc[0] = centralanglesabc[type.getIndex()];
+		subtrianglesABC[0] = surfaceanglesABC[type.getIndex()];
 		final double[] a = new double[hv + 1];
 		final double[] b = new double[hv + 1];
 		a[0] = 0;
 		b[0] = 0;
-		a[hv] = centralanglesabc[type][0];
-		b[hv] = centralanglesabc[type][1];
+		a[hv] = centralanglesabc[type.getIndex()][0];
+		b[hv] = centralanglesabc[type.getIndex()][1];
 		for (int i = 1; i < hv; i++) {
-			a[i] = i * centralanglesabc[type][0] / hv;
-			subtrianglesABC[i][1] = surfaceanglesABC[type][1];
-			subtrianglesABC[i][2] = surfaceanglesABC[type][2];
+			a[i] = i * centralanglesabc[type.getIndex()][0] / hv;
+			subtrianglesABC[i][1] = surfaceanglesABC[type.getIndex()][1];
+			subtrianglesABC[i][2] = surfaceanglesABC[type.getIndex()][2];
 			subtrianglesABC[i][0] = Math.acos(Math.cos(a[i]) * Math.sin(subtrianglesABC[i][1])); // cos
 																									// A
 																									// =
@@ -382,9 +371,9 @@ class WB_GeodesicII {
 			addTransformedFaces(new WB_Transform().addRotateY(Math.PI / 180.0 * 31.7175)
 					.addRotateZ(-Math.PI / 180.0 * 198.0).addRotateX(-Math.PI / 180.0 * 58.28255).addRotateY(Math.PI));
 		}
-		final WB_Transform T = new WB_Transform().addRotateY(-centralanglesabc[type][0]);
-		if (type == OCTAHEDRON || type == DODECAHEDRON) {
-			T.addRotateZ(surfaceanglesABC[type][1]);
+		final WB_Transform T = new WB_Transform().addRotateY(-centralanglesabc[type.getIndex()][0]);
+		if (type == Type.OCTAHEDRON || type == Type.DODECAHEDRON) {
+			T.addRotateZ(surfaceanglesABC[type.getIndex()][1]);
 		}
 		for (final WB_Point p : points) {
 			p.applyAsPointSelf(T);

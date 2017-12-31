@@ -111,7 +111,8 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
       [ "WB_ExpressionCurve", "classwblut_1_1geom_1_1_w_b___expression_curve.html", "classwblut_1_1geom_1_1_w_b___expression_curve" ]
     ] ],
     [ "WB_Geodesic.java", "_w_b___geodesic_8java.html", [
-      [ "WB_Geodesic", "classwblut_1_1geom_1_1_w_b___geodesic.html", "classwblut_1_1geom_1_1_w_b___geodesic" ]
+      [ "WB_Geodesic", "classwblut_1_1geom_1_1_w_b___geodesic.html", "classwblut_1_1geom_1_1_w_b___geodesic" ],
+      [ "Type", "enumwblut_1_1geom_1_1_w_b___geodesic_1_1_type.html", "enumwblut_1_1geom_1_1_w_b___geodesic_1_1_type" ]
     ] ],
     [ "WB_GeodesicI.java", "_w_b___geodesic_i_8java.html", [
       [ "WB_GreatCircleIntersection", "classwblut_1_1geom_1_1_w_b___geodesic_i_1_1_w_b___great_circle_intersection.html", "classwblut_1_1geom_1_1_w_b___geodesic_i_1_1_w_b___great_circle_intersection" ]
@@ -191,7 +192,7 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
       [ "WB_IsoSurfaceVOL2D", "classwblut_1_1geom_1_1_w_b___iso_surface_v_o_l2_d.html", "classwblut_1_1geom_1_1_w_b___iso_surface_v_o_l2_d" ]
     ] ],
     [ "WB_IsoValues2D.java", "_w_b___iso_values2_d_8java.html", [
-      [ "WB_IsoValues2D", "interfacewblut_1_1geom_1_1_w_b___iso_values2_d.html", "interfacewblut_1_1geom_1_1_w_b___iso_values2_d" ],
+      [ "WB_IsoValues2D", "classwblut_1_1geom_1_1_w_b___iso_values2_d.html", "classwblut_1_1geom_1_1_w_b___iso_values2_d" ],
       [ "Mode", "enumwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_mode.html", "enumwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_mode" ],
       [ "Grid2D", "classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_grid2_d.html", "classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_grid2_d" ],
       [ "GridRaw2D", "classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_grid_raw2_d.html", "classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_grid_raw2_d" ],
@@ -200,7 +201,7 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
       [ "ImageGrid2D", "classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_image_grid2_d.html", "classwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_image_grid2_d" ]
     ] ],
     [ "WB_IsoValues3D.java", "_w_b___iso_values3_d_8java.html", [
-      [ "WB_IsoValues3D", "interfacewblut_1_1geom_1_1_w_b___iso_values3_d.html", "interfacewblut_1_1geom_1_1_w_b___iso_values3_d" ],
+      [ "WB_IsoValues3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d" ],
       [ "Mode", "enumwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_mode.html", "enumwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_mode" ],
       [ "Grid3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid3_d" ],
       [ "GridRaw3D", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d.html", "classwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_grid_raw3_d" ],
@@ -259,11 +260,6 @@ var dir_f78523ae0426caa5c66821e8fc2afc74 =
     ] ],
     [ "WB_MeshCreator.java", "_w_b___mesh_creator_8java.html", [
       [ "WB_MeshCreator", "interfacewblut_1_1geom_1_1_w_b___mesh_creator.html", "interfacewblut_1_1geom_1_1_w_b___mesh_creator" ]
-    ] ],
-    [ "WB_MeshGraph.java", "_w_b___mesh_graph_8java.html", [
-      [ "WB_MeshGraph", "classwblut_1_1geom_1_1_w_b___mesh_graph.html", "classwblut_1_1geom_1_1_w_b___mesh_graph" ],
-      [ "WB_GraphVertex", "classwblut_1_1geom_1_1_w_b___mesh_graph_1_1_w_b___graph_vertex.html", "classwblut_1_1geom_1_1_w_b___mesh_graph_1_1_w_b___graph_vertex" ],
-      [ "WB_GraphEdge", "classwblut_1_1geom_1_1_w_b___mesh_graph_1_1_w_b___graph_edge.html", "classwblut_1_1geom_1_1_w_b___mesh_graph_1_1_w_b___graph_edge" ]
     ] ],
     [ "WB_MutableCoord.java", "_w_b___mutable_coord_8java.html", [
       [ "WB_MutableCoord", "interfacewblut_1_1geom_1_1_w_b___mutable_coord.html", "interfacewblut_1_1geom_1_1_w_b___mutable_coord" ]

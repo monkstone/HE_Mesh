@@ -11,20 +11,36 @@ import wblut.math.WB_ScalarParameter;
  * @author FVH
  *
  */
-public interface WB_IsoValues3D {
-	public enum Mode {
+public abstract class WB_IsoValues3D {
+	public static enum Mode {
 		RED, GREEN, BLUE, HUE, SAT, BRI, ALPHA
 	};
 
-	public double getValue(int i, int j, int k);
+	public abstract double getValue(int i, int j, int k);
 
-	public int getSizeI();
+	public abstract int getSizeI();
 
-	public int getSizeJ();
+	public abstract int getSizeJ();
 
-	public int getSizeK();
+	public abstract int getSizeK();
 
-	public class Grid3D implements WB_IsoValues3D {
+	public WB_BinaryGrid3D getBinaryGrid3D(final int sizeX, final int sizeY, final int sizeZ, final double threshold) {
+		WB_BinaryGrid3D grid = WB_BinaryGrid3D.createGrid(new WB_Point(), sizeX, 1.0, sizeY, 1.0, sizeZ, 1.0);
+		for (int k = 0; k < sizeZ; k++) {
+			for (int i = 0; i < sizeX; i++) {
+				for (int j = 0; j < sizeY; j++) {
+					if (getValue(i, j, k) >= threshold) {
+						grid.set(i, j, k);
+					}
+				}
+			}
+
+		}
+		return grid;
+
+	}
+
+	public static class Grid3D extends WB_IsoValues3D {
 		private double[][][] values;
 		private int sizeI, sizeJ, sizeK;
 
@@ -100,7 +116,7 @@ public interface WB_IsoValues3D {
 
 	}
 
-	public class GridRaw3D implements WB_IsoValues3D {
+	public static class GridRaw3D extends WB_IsoValues3D {
 		private double[][][] values;
 		private int sizeI, sizeJ, sizeK;
 
@@ -153,12 +169,13 @@ public interface WB_IsoValues3D {
 
 	}
 
-	public class Function3D implements WB_IsoValues3D {
+	public static class Function3D extends WB_IsoValues3D {
 		private double fxi, fyi, fzi, dfx, dfy, dfz;
 		private WB_ScalarParameter function;
+		private int sizeI, sizeJ, sizeK;
 
 		public Function3D(final WB_ScalarParameter function, final double xi, final double yi, final double zi,
-				final double dx, final double dy, final double dz) {
+				final double dx, final double dy, final double dz, final int sizeI, final int sizeJ, final int sizeK) {
 			this.function = function;
 			fxi = xi;
 			fyi = yi;
@@ -186,7 +203,7 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeI() {
-			return -1;
+			return sizeI;
 		}
 
 		/*
@@ -196,7 +213,7 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeJ() {
-			return -1;
+			return sizeJ;
 		}
 
 		/*
@@ -206,11 +223,11 @@ public interface WB_IsoValues3D {
 		 */
 		@Override
 		public int getSizeK() {
-			return -1;
+			return sizeK;
 		}
 	}
 
-	public class HashGrid3D implements WB_IsoValues3D {
+	public static class HashGrid3D extends WB_IsoValues3D {
 		private WB_HashGridDouble values;
 
 		public HashGrid3D(final WB_HashGridDouble values) {
@@ -259,7 +276,7 @@ public interface WB_IsoValues3D {
 
 	}
 
-	public class ImageStack3D implements WB_IsoValues3D {
+	public static class ImageStack3D extends WB_IsoValues3D {
 		private String[] images;
 		private double[][] sliceK, sliceKpo;
 		private int currentK, currentKpo;
@@ -455,7 +472,7 @@ public interface WB_IsoValues3D {
 
 	}
 
-	public class SubValues3D implements WB_IsoValues3D {
+	public static class SubValues3D extends WB_IsoValues3D {
 		int di, dj, dk;
 		int sizeI, sizeJ, sizeK;
 		WB_IsoValues3D parent;

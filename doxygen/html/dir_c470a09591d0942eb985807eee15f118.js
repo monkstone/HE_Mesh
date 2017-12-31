@@ -115,6 +115,12 @@ var dir_c470a09591d0942eb985807eee15f118 =
     [ "HEC_Icosahedron.java", "_h_e_c___icosahedron_8java.html", [
       [ "HEC_Icosahedron", "classwblut_1_1hemesh_1_1_h_e_c___icosahedron.html", "classwblut_1_1hemesh_1_1_h_e_c___icosahedron" ]
     ] ],
+    [ "HEC_IsoSkin.java", "_h_e_c___iso_skin_8java.html", [
+      [ "HEC_IsoSkin", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin.html", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin" ],
+      [ "Substrate", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin_1_1_substrate.html", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin_1_1_substrate" ],
+      [ "VertexRemap", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin_1_1_substrate_1_1_vertex_remap.html", null ],
+      [ "Cell", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin_1_1_cell.html", "classwblut_1_1hemesh_1_1_h_e_c___iso_skin_1_1_cell" ]
+    ] ],
     [ "HEC_IsoSurface.java", "_h_e_c___iso_surface_8java.html", [
       [ "HEC_IsoSurface", "classwblut_1_1hemesh_1_1_h_e_c___iso_surface.html", "classwblut_1_1hemesh_1_1_h_e_c___iso_surface" ]
     ] ],
@@ -153,6 +159,9 @@ var dir_c470a09591d0942eb985807eee15f118 =
     ] ],
     [ "HEC_Sphere.java", "_h_e_c___sphere_8java.html", [
       [ "HEC_Sphere", "classwblut_1_1hemesh_1_1_h_e_c___sphere.html", "classwblut_1_1hemesh_1_1_h_e_c___sphere" ]
+    ] ],
+    [ "HEC_StepGrid.java", "_h_e_c___step_grid_8java.html", [
+      [ "HEC_StepGrid", "classwblut_1_1hemesh_1_1_h_e_c___step_grid.html", "classwblut_1_1hemesh_1_1_h_e_c___step_grid" ]
     ] ],
     [ "HEC_SuperDuper.java", "_h_e_c___super_duper_8java.html", [
       [ "HEC_SuperDuper", "classwblut_1_1hemesh_1_1_h_e_c___super_duper.html", "classwblut_1_1hemesh_1_1_h_e_c___super_duper" ]

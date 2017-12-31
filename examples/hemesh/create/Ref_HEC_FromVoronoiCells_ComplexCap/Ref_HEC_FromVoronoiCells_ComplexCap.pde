@@ -24,19 +24,15 @@ void setup() {
 
 void createContainer() {
   container=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(300)); 
-  container.add(new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(220)));
-  HE_Mesh inner=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(280));
+  container.add(new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(200)));
+  HE_Mesh inner=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(240));
   HET_MeshOp.flipFaces(inner);
   container.add(inner);
-  inner=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(200));
+  inner=new HE_Mesh(new HEC_Geodesic().setB(2).setC(0).setRadius(140));
   HET_MeshOp.flipFaces(inner);
   container.add(inner);
+
   
-  //container.modify(new HEM_Extrude().setDistance(150).setChamfer(0.5));
-  HE_FaceIterator fitr=container.fItr();
-  while (fitr.hasNext()) {
-    fitr.next().setColor(color(0, 200, 50));
-  }
 }
 
 void createMesh() {  
@@ -48,18 +44,8 @@ void createMesh() {
   }
 
   // generate voronoi cells
-  HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells().setPoints(points).setContainer(container).setOffset(0).setSimpleCap(false);
+  HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells().setPoints(points).setContainer(container).setOffset(0);
   cells=multiCreator.create();
-
-  //color the cells
-  int counter=0;
-  HE_MeshIterator mItr=cells.mItr();
-  HE_Mesh m;
-  while (mItr.hasNext()) {
-    m= mItr.next();
-    m.setFaceColorWithOtherInternalLabel(color(255-2*counter, 220, 2*counter), -1);
-    counter++;
-  }
 
   numcells=cells.size();
   boolean[] isCellOn=new boolean[numcells];
@@ -71,12 +57,9 @@ void createMesh() {
 
   HEC_FromVoronoiCells creator=new HEC_FromVoronoiCells().setCells(cells).setActive(isCellOn);
   fusedcells=new HE_Mesh(creator);
+  fusedcells.modify(new HEM_HideEdges());
 
-  
-  //fusedcells.triangulate(HE_Selection.selectFacesWithOtherInternalLabel(fusedcells, -1));
-  HE_Selection.selectFacesWithInternalLabel(fusedcells, -1).subdivide(new HES_CatmullClark(),2);
-  //fusedcells.modify(new HEM_KeepLargestParts(1));
-  //fusedcells.validate();
+  fusedcells.validate();
 }
 
 void draw() {
@@ -89,8 +72,10 @@ void draw() {
   strokeWeight(1);
   stroke(0);
   render.drawEdges(fusedcells);
+  stroke(255,0,0);
+   render.drawBoundaryEdges(fusedcells);
   noStroke();
-  render.drawFacesFC(fusedcells);
+  render.drawFaces(fusedcells);
 }
 
 void mousePressed() {

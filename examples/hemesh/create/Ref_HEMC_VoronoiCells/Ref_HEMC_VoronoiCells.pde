@@ -38,7 +38,7 @@ HEC_Cube creator=new HEC_Cube();
   pointMaker.setRadius(20);
   pointMaker.setB(B+1);
   pointMaker.setC(C);
-  pointMaker.setType(HEC_Geodesic.ICOSAHEDRON);
+  
   HE_Mesh thisMesh = new HE_Mesh(pointMaker); 
 WB_CoordCollection thesePoints = thisMesh.getPoints();
   // generate voronoi cells
@@ -47,7 +47,6 @@ WB_CoordCollection thesePoints = thisMesh.getPoints();
   multiCreator.setContainer(container);// cutoff mesh for the voronoi cells, complex meshes increase the generation time
   multiCreator.setOffset(10);// offset of the bisector cutting planes, sides of the voronoi cells will be separated by twice this distance
   multiCreator.setSurface(false);// is container mesh a volume (false) or a surface (true)
-  multiCreator.setSimpleCap(false);
   ASYNC=true;
 
   if (ASYNC) {

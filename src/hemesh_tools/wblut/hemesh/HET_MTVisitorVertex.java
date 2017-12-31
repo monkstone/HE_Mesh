@@ -42,7 +42,7 @@ public class HET_MTVisitorVertex<E extends Object> {
 	 * @param mesh
 	 * @return
 	 */
-	public List<E> getVertexInfo(final HE_MeshStructure mesh) {
+	public List<E> getVertexInfo(final HE_HalfedgeStructure mesh) {
 		return visit(mesh.getVertices());
 	}
 

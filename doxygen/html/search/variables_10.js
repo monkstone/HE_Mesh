@@ -40,10 +40,11 @@ var searchData=
   ['polygon',['polygon',['../classwblut_1_1hemesh_1_1_h_e_c___polygon.html#a97fedcaf4bb820c916fa603fd3ed789c',1,'wblut.hemesh.HEC_Polygon.polygon()'],['../classwblut_1_1hemesh_1_1_h_e_c___revolve_polygon.html#a19b630c7efd90e77efbaadd02aa86364',1,'wblut.hemesh.HEC_RevolvePolygon.polygon()']]],
   ['polygons',['polygons',['../classwblut_1_1hemesh_1_1_h_e_c___from_polygons.html#abdacca74b9d342404869cfe50d14726f',1,'wblut::hemesh::HEC_FromPolygons']]],
   ['polyline',['polyLine',['../classwblut_1_1hemesh_1_1_h_e_m___poly_line_inversion.html#a6299a2e678e55b7bc3144c29099dc615',1,'wblut::hemesh::HEM_PolyLineInversion']]],
+  ['pos',['pos',['../classwblut_1_1hemesh_1_1_h_e___vertex.html#a2cf8ec79674187b29361761caddc4983',1,'wblut::hemesh::HE_Vertex']]],
   ['posonly',['posOnly',['../classwblut_1_1hemesh_1_1_h_e_m___bend.html#ae27ddaa0e60a182d643dc3fd8fc1b1ea',1,'wblut.hemesh.HEM_Bend.posOnly()'],['../classwblut_1_1hemesh_1_1_h_e_m___skew.html#a217c74600ed3a57b5e756b56c0b8cb62',1,'wblut.hemesh.HEM_Skew.posOnly()'],['../classwblut_1_1hemesh_1_1_h_e_m___stretch.html#a9bf8883fac2faa028c73d73266dc5340',1,'wblut.hemesh.HEM_Stretch.posOnly()']]],
   ['povwriter',['povWriter',['../classwblut_1_1hemesh_1_1_h_e_t___writer_p_o_v.html#aa76397bff491cc9c114df2bba77ad8e7',1,'wblut::hemesh::HET_WriterPOV']]],
   ['prev',['PREV',['../classwblut_1_1geom_1_1_w_b___triangle_mesh.html#aadc3c1c1b45f418517986742e145c272',1,'wblut::geom::WB_TriangleMesh']]],
-  ['previous',['previous',['../classwblut_1_1geom_1_1_w_b___mesh_graph_1_1_w_b___graph_vertex.html#aee57f56f443f8e5727750a1b336019de',1,'wblut::geom::WB_MeshGraph::WB_GraphVertex']]],
+  ['previous',['previous',['../classwblut_1_1hemesh_1_1_h_e_t___mesh_graph_1_1_node.html#a74e52efec05b442ae4953a75e123c463',1,'wblut::hemesh::HET_MeshGraph::Node']]],
   ['profile',['profile',['../classwblut_1_1hemesh_1_1_h_e_c___cone.html#a30ec80a51035551030e6753fbe1675a4',1,'wblut.hemesh.HEC_Cone.profile()'],['../classwblut_1_1hemesh_1_1_h_e_c___cylinder.html#a01cd8e8b5c01daf757f2fa1718dccfa9',1,'wblut.hemesh.HEC_Cylinder.profile()']]],
   ['psubs',['PSubs',['../classwblut_1_1geom_1_1_w_b___subdivision.html#ab54d0cef571455e909bfed18a33a160e',1,'wblut::geom::WB_Subdivision']]]
 ];

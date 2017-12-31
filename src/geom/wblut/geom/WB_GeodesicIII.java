@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -13,15 +13,17 @@ import java.security.InvalidParameterException;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
+import wblut.geom.WB_Geodesic.Type;
 import wblut.math.WB_Epsilon;
 
 class WB_GeodesicIII {
 
-	public static final int TETRAHEDRON = 0;
+	public static final int TETRAHEDRO = 0;
 
-	public static final int OCTAHEDRON = 1;
+	public static final int OCTAHEDRO = 1;
 
-	public static final int ICOSAHEDRON = 2;
+	public static final int ICOSAHEDRO = 2;
 
 	private final double[][] centralanglesabc;
 
@@ -36,7 +38,7 @@ class WB_GeodesicIII {
 
 	private final double radius;
 
-	private final int type;
+	private final Type type;
 
 	private WB_Mesh mesh;
 
@@ -56,14 +58,14 @@ class WB_GeodesicIII {
 	 * @param c
 	 * @param type
 	 */
-	public WB_GeodesicIII(final double radius, final int b, final int c, final int type) {
+	public WB_GeodesicIII(final double radius, final int b, final int c, final Type type) {
 		if (b <= 0 || c <= 0 || b == c) {
 			throw new InvalidParameterException("Invalid values for b and c.");
 		}
-		if (type < 0 || type > 2) {
-			throw new InvalidParameterException(
-					"Type should be one of TETRAHEDRON (0), OCTAHEDRON (1) or ICOSAHEDRON (2).");
+		if (type != Type.TETRAHEDRON && type != Type.OCTAHEDRON && type != Type.ICOSAHEDRON) {
+			throw new InvalidParameterException("Type should be one of TETRAHEDRON , OCTAHEDRON or ICOSAHEDRON.");
 		}
+
 		this.type = type;
 		this.radius = radius;
 		this.b = b;
@@ -152,7 +154,7 @@ class WB_GeodesicIII {
 		final double angle = Math.PI / 6.0 - p1.getHeading2D();
 		final WB_Point center = gf.createMidpoint(p0, p1, p2).mulSelf(-1);
 		WB_Transform T = new WB_Transform().addTranslate(center).addRotateZ(angle).addTranslate(zshift)
-				.addRotateY(centralanglesabc[type][2]);
+				.addRotateY(centralanglesabc[type == Type.TETRAHEDRON ? 0 : type == Type.OCTAHEDRON ? 1 : 2][2]);
 		for (int i = 0; i < PPT.size(); i++) {
 			p = T.applyAsPoint(PPT.get(i));
 			p.normalizeSelf();

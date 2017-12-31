@@ -24,6 +24,7 @@ var namespacewblut_1_1math =
     [ "WB_MTRandom", "classwblut_1_1math_1_1_w_b___m_t_random.html", "classwblut_1_1math_1_1_w_b___m_t_random" ],
     [ "WB_Noise", "interfacewblut_1_1math_1_1_w_b___noise.html", "interfacewblut_1_1math_1_1_w_b___noise" ],
     [ "WB_OSNoise", "classwblut_1_1math_1_1_w_b___o_s_noise.html", "classwblut_1_1math_1_1_w_b___o_s_noise" ],
+    [ "WB_Peak", "classwblut_1_1math_1_1_w_b___peak.html", "classwblut_1_1math_1_1_w_b___peak" ],
     [ "WB_PNoise", "classwblut_1_1math_1_1_w_b___p_noise.html", "classwblut_1_1math_1_1_w_b___p_noise" ],
     [ "WB_ScalarParameter", "interfacewblut_1_1math_1_1_w_b___scalar_parameter.html", "interfacewblut_1_1math_1_1_w_b___scalar_parameter" ],
     [ "WB_SDF", "classwblut_1_1math_1_1_w_b___s_d_f.html", "classwblut_1_1math_1_1_w_b___s_d_f" ],

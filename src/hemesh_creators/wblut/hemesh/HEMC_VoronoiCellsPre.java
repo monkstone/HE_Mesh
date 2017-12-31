@@ -32,7 +32,7 @@ import wblut.math.WB_ScalarParameter;
 /**
  * Creates the Voronoi cells of a collection of points, constrained by a mesh.
  * This creator tries to optimize by first creating the Voronoi cells of the
- * enclosing box. If the cell crosses the container boundary, it is regenrated
+ * enclosing box. If the cell crosses the container boundary, it is regenerated
  * using the full container.
  *
  * Limitations:

@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -214,7 +214,7 @@ public class HEC_Cone extends HEC_Creator {
 		return this;
 	}
 
-	public HEC_Cone setTaper(final WB_Ease.Ease E, final WB_Ease.EaseType type) {
+	public HEC_Cone setTaper(final WB_Ease E, final WB_Ease.EaseType type) {
 		taper = new WB_EaseScalarParameter(0, 1, 0, 1, true, E, type);
 		return this;
 	}
@@ -229,7 +229,7 @@ public class HEC_Cone extends HEC_Creator {
 		return this;
 	}
 
-	public HEC_Cone setHeigthTaper(final WB_Ease.Ease E, final WB_Ease.EaseType type) {
+	public HEC_Cone setHeigthTaper(final WB_Ease E, final WB_Ease.EaseType type) {
 		heightTaper = new WB_EaseScalarParameter(0, 1, 0, 1, true, E, type);
 		return this;
 	}

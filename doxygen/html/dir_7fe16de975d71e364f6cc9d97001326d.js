@@ -20,19 +20,7 @@ var dir_7fe16de975d71e364f6cc9d97001326d =
     ] ],
     [ "WB_Ease.java", "_w_b___ease_8java.html", [
       [ "WB_Ease", "classwblut_1_1math_1_1_w_b___ease.html", "classwblut_1_1math_1_1_w_b___ease" ],
-      [ "EaseType", "enumwblut_1_1math_1_1_w_b___ease_1_1_ease_type.html", "enumwblut_1_1math_1_1_w_b___ease_1_1_ease_type" ],
-      [ "Ease", "interfacewblut_1_1math_1_1_w_b___ease_1_1_ease.html", "interfacewblut_1_1math_1_1_w_b___ease_1_1_ease" ],
-      [ "EaseLinear", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_linear.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_linear" ],
-      [ "EaseQuad", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_quad.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_quad" ],
-      [ "EaseCubic", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_cubic.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_cubic" ],
-      [ "EaseQuart", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_quart.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_quart" ],
-      [ "EaseQuint", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_quint.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_quint" ],
-      [ "EaseSine", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_sine.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_sine" ],
-      [ "EaseExpo", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_expo.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_expo" ],
-      [ "EaseCirc", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_circ.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_circ" ],
-      [ "EaseBack", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_back.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_back" ],
-      [ "EaseBounce", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_bounce.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_bounce" ],
-      [ "EaseElastic", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_elastic.html", "classwblut_1_1math_1_1_w_b___ease_1_1_ease_elastic" ]
+      [ "EaseType", "enumwblut_1_1math_1_1_w_b___ease_1_1_ease_type.html", "enumwblut_1_1math_1_1_w_b___ease_1_1_ease_type" ]
     ] ],
     [ "WB_EaseScalarParameter.java", "_w_b___ease_scalar_parameter_8java.html", [
       [ "WB_EaseScalarParameter", "classwblut_1_1math_1_1_w_b___ease_scalar_parameter.html", "classwblut_1_1math_1_1_w_b___ease_scalar_parameter" ]
@@ -84,6 +72,9 @@ var dir_7fe16de975d71e364f6cc9d97001326d =
     ] ],
     [ "WB_OSNoise.java", "_w_b___o_s_noise_8java.html", [
       [ "WB_OSNoise", "classwblut_1_1math_1_1_w_b___o_s_noise.html", "classwblut_1_1math_1_1_w_b___o_s_noise" ]
+    ] ],
+    [ "WB_Peak.java", "_w_b___peak_8java.html", [
+      [ "WB_Peak", "classwblut_1_1math_1_1_w_b___peak.html", "classwblut_1_1math_1_1_w_b___peak" ]
     ] ],
     [ "WB_PNoise.java", "_w_b___p_noise_8java.html", [
       [ "WB_PNoise", "classwblut_1_1math_1_1_w_b___p_noise.html", "classwblut_1_1math_1_1_w_b___p_noise" ]

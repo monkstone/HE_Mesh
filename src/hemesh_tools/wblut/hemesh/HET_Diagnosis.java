@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -179,7 +179,7 @@ public class HET_Diagnosis {
 			System.out.println("Checking half edge (" + mesh.getNumberOfHalfedges() + ") properties");
 		}
 		HE_Halfedge he;
-		HE_MeshHalfedgeIterator heItr = mesh.heItr();
+		HE_HalfedgeIterator heItr = mesh.heItr();
 		while (heItr.hasNext()) {
 			he = heItr.next();
 			if (he.getNextInFace() == null) {
@@ -457,7 +457,7 @@ public class HET_Diagnosis {
 		System.out.println();
 	}
 
-	public static void checkHalfedges(final HE_MeshStructure mesh) {
+	public static void checkHalfedges(final HE_HalfedgeStructure mesh) {
 		int i = 0;
 		for (HE_Halfedge he : mesh.getHalfedges()) {
 			if (!mesh.contains(he.getVertex())) {

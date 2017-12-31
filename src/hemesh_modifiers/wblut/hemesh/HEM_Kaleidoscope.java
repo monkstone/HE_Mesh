@@ -108,7 +108,9 @@ public class HEM_Kaleidoscope extends HEM_Modifier {
 		HEM_Mirror mm = new HEM_Mirror().setPlane(P2);
 		mesh.modify(mm);
 		HE_Vertex[] boundaryPairs = mm.boundaryPairs;
-
+		if (mesh.getNumberOfVertices() == 0) {
+			return new HE_Mesh();
+		}
 		WB_Point[][] origboundary = new WB_Point[boundaryPairs.length / 2][n];
 
 		for (int i = 0; i < n; i++) {

@@ -1,41 +1,23 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
 package wblut.hemesh;
 
 import wblut.geom.WB_Geodesic;
+import wblut.geom.WB_Geodesic.Type;
 import wblut.geom.WB_Sphere;
 
 /**
  *
  */
 public class HEC_Geodesic extends HEC_Creator {
-	/**
-	 *
-	 */
-	public static final int TETRAHEDRON = 0;
-	/**
-	 *
-	 */
-	public static final int OCTAHEDRON = 1;
-	/**
-	 *
-	 */
-	public static final int CUBE = 2;
-	/**
-	 *
-	 */
-	public static final int DODECAHEDRON = 3;
-	/**
-	 *
-	 */
-	public static final int ICOSAHEDRON = 4;
+
 	/**
 	 *
 	 */
@@ -43,7 +25,7 @@ public class HEC_Geodesic extends HEC_Creator {
 	/**
 	 *
 	 */
-	private int type;
+	private Type type;
 	/**
 	 *
 	 */
@@ -59,7 +41,7 @@ public class HEC_Geodesic extends HEC_Creator {
 	public HEC_Geodesic() {
 		super();
 		rx = ry = rz = 100;
-		type = 4;
+		type = Type.ICOSAHEDRON;
 		b = c = 4;
 	}
 
@@ -134,7 +116,7 @@ public class HEC_Geodesic extends HEC_Creator {
 	 * @param t
 	 * @return
 	 */
-	public HEC_Geodesic setType(final int t) {
+	public HEC_Geodesic setType(final Type t) {
 		type = t;
 		return this;
 	}

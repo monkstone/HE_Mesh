@@ -234,6 +234,7 @@ public class HEC_VoronoiCell extends HEC_Creator {
 		final HE_Mesh result = container.copy();
 		result.setInternalLabel(cellIndex);
 		result.setUserLabel(cellIndex);
+		result.resetFaceInternalLabels();
 		final ArrayList<WB_Plane> cutPlanes = new ArrayList<WB_Plane>();
 		int id = 0;
 		final WB_Point O = new WB_Point();

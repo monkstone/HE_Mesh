@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -18,6 +18,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
 import com.vividsolutions.jts.operation.valid.IsValidOp;
 
 import wblut.geom.WB_AABB;
@@ -297,9 +298,9 @@ public class HE_Face extends HE_MeshElement implements Comparable<HE_Face>, WB_T
 		}
 		HE_Halfedge he = _halfedge;
 		do {
-			if (!fv.contains(he.getVertex())) {
-				fv.add(he.getUVW());
-			}
+
+			fv.add(he.getUVW());
+
 			he = he.getNextInFace();
 		} while (he != _halfedge);
 		return fv.asUnmodifiable();
@@ -460,7 +461,7 @@ public class HE_Face extends HE_MeshElement implements Comparable<HE_Face>, WB_T
 	public void push(final WB_Coord c) {
 		HE_Halfedge he = _halfedge;
 		do {
-			he.getVertex().addSelf(c);
+			he.getVertex().getPosition().addSelf(c);
 			he = he.getNextInFace();
 		} while (he != _halfedge);
 	}
@@ -830,7 +831,8 @@ public class HE_Face extends HE_MeshElement implements Comparable<HE_Face>, WB_T
 		context.mapPoint3D(he.getVertex(), point);
 		coords[i] = new Coordinate(point.xd(), point.yd(), i);
 		he = he.getNextInFace();
-		final Polygon inputPolygon = new GeometryFactory().createPolygon(coords);
+		final Polygon inputPolygon = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL))
+				.createPolygon(coords);
 		final IsValidOp isValidOp = new IsValidOp(inputPolygon);
 		if (!IsValidOp.isValid(inputPolygon)) {
 			System.out.println(this);
@@ -925,7 +927,7 @@ public class HE_Face extends HE_MeshElement implements Comparable<HE_Face>, WB_T
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.geom.WB_TriangleGenerator#getPoints()
 	 */
 	@Override

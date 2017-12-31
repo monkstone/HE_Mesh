@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -13,15 +13,10 @@ import java.security.InvalidParameterException;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.math.WB_Epsilon;
+
+import wblut.geom.WB_Geodesic.Type;
 
 class WB_GeodesicI {
-
-	public static final int TETRAHEDRON = 0;
-
-	public static final int OCTAHEDRON = 1;
-
-	public static final int ICOSAHEDRON = 2;
 
 	public static final int EQUALCHORD = 0;
 
@@ -50,7 +45,7 @@ class WB_GeodesicI {
 
 	private final double radius;
 
-	private final int type;
+	private final WB_Geodesic.Type type;
 
 	private final int div;
 
@@ -61,7 +56,7 @@ class WB_GeodesicI {
 	 * @param v
 	 */
 	public WB_GeodesicI(final double radius, final int v) {
-		this(radius, v, ICOSAHEDRON, EQUALARC);
+		this(radius, v, WB_Geodesic.Type.ICOSAHEDRON, EQUALARC);
 	}
 
 	/**
@@ -72,13 +67,12 @@ class WB_GeodesicI {
 	 * @param type
 	 * @param div
 	 */
-	public WB_GeodesicI(final double radius, final int v, final int type, final int div) {
+	public WB_GeodesicI(final double radius, final int v, final Type type, final int div) {
 		if (v <= 0) {
 			throw new InvalidParameterException("v should be 1 or larger.");
 		}
-		if (type < 0 || type > 2) {
-			throw new InvalidParameterException(
-					"Type should be one of TETRAHEDRON (0), OCTAHEDRON (1) or ICOSAHEDRON (2).");
+		if (type != Type.TETRAHEDRON && type != Type.OCTAHEDRON && type != Type.ICOSAHEDRON) {
+			throw new InvalidParameterException("Type should be one of TETRAHEDRON , OCTAHEDRON or ICOSAHEDRON.");
 		}
 		this.type = type;
 		this.radius = radius;
@@ -106,20 +100,17 @@ class WB_GeodesicI {
 		apices[0] = gf.createPoint(0, 0, 1);
 		switch (type) {
 		case TETRAHEDRON:
-			apices[2] = gf.createPoint(deltahedron[TETRAHEDRON]);
-			apices[1] = gf.createPoint(deltahedron[TETRAHEDRON][0], -deltahedron[TETRAHEDRON][1],
-					deltahedron[TETRAHEDRON][2]);
+			apices[2] = gf.createPoint(deltahedron[0]);
+			apices[1] = gf.createPoint(deltahedron[0][0], -deltahedron[0][1], deltahedron[0][2]);
 			break;
 		case OCTAHEDRON:
-			apices[2] = gf.createPoint(deltahedron[OCTAHEDRON]);
-			apices[1] = gf.createPoint(deltahedron[OCTAHEDRON][0], -deltahedron[OCTAHEDRON][1],
-					deltahedron[OCTAHEDRON][2]);
+			apices[2] = gf.createPoint(deltahedron[1]);
+			apices[1] = gf.createPoint(deltahedron[1][0], -deltahedron[1][1], deltahedron[1][2]);
 			break;
 		case ICOSAHEDRON:
 		default:
-			apices[2] = gf.createPoint(deltahedron[ICOSAHEDRON]);
-			apices[1] = gf.createPoint(deltahedron[ICOSAHEDRON][0], -deltahedron[ICOSAHEDRON][1],
-					deltahedron[ICOSAHEDRON][2]);
+			apices[2] = gf.createPoint(deltahedron[2]);
+			apices[1] = gf.createPoint(deltahedron[2][0], -deltahedron[2][1], deltahedron[2][2]);
 		}
 		P = new WB_Plane(apices[0], apices[1], apices[2]);
 		final double iv = 1.0 / v;
@@ -137,9 +128,11 @@ class WB_GeodesicI {
 		} else {
 			refpoints = new WB_Point[3 * (v - 1)];
 			for (int i = 1; i < v; i++) {
-				refpoints[i - 1 + 2 * (v - 1)] = gf.createPoint(getPointOnGreatCircle(apices[0], apices[1], i * iv));
-				refpoints[i - 1 + v - 1] = gf.createPoint(getPointOnGreatCircle(apices[0], apices[2], i * iv));
-				refpoints[i - 1] = gf.createPoint(getPointOnGreatCircle(apices[1], apices[2], i * iv));
+				refpoints[i - 1 + 2 * (v - 1)] = gf
+						.createPoint(WB_Geodesic.getPointOnGreatCircle(apices[0], apices[1], i * iv));
+				refpoints[i - 1 + v - 1] = gf
+						.createPoint(WB_Geodesic.getPointOnGreatCircle(apices[0], apices[2], i * iv));
+				refpoints[i - 1] = gf.createPoint(WB_Geodesic.getPointOnGreatCircle(apices[1], apices[2], i * iv));
 			}
 		}
 		if (div == EQUALCHORD || div == EQUALARC2GC) {
@@ -153,7 +146,7 @@ class WB_GeodesicI {
 					p6 = refpoints[v - 1 - i + j];
 					p5 = refpoints[i - j - 1 + 2 * (v - 1)];
 					p4 = refpoints[j + v - 1];
-					gci = getGreatCircleIntersection(p5, p6, p3, p4);
+					gci = WB_Geodesic.getGreatCircleIntersection(p5, p6, p3, p4);
 					PPTpoints[id] = selectPoint(gci, apices, type);
 					PPTpoints[id].normalizeSelf();
 					id++;
@@ -188,11 +181,11 @@ class WB_GeodesicI {
 					p6 = refpoints[v - 1 - i + j];
 					p5 = refpoints[i - j - 1 + 2 * (v - 1)];
 					p4 = refpoints[j + v - 1];
-					gci = getGreatCircleIntersection(p1, p2, p3, p4);
+					gci = WB_Geodesic.getGreatCircleIntersection(p1, p2, p3, p4);
 					i0 = selectPoint(gci, apices, type);
-					gci = getGreatCircleIntersection(p1, p2, p5, p6);
+					gci = WB_Geodesic.getGreatCircleIntersection(p1, p2, p5, p6);
 					i1 = selectPoint(gci, apices, type);
-					gci = getGreatCircleIntersection(p3, p4, p5, p6);
+					gci = WB_Geodesic.getGreatCircleIntersection(p3, p4, p5, p6);
 					i2 = selectPoint(gci, apices, type);
 					PPTpoints[id] = i0.add(i1).addSelf(i2);
 					PPTpoints[id].normalizeSelf();
@@ -358,8 +351,8 @@ class WB_GeodesicI {
 	 * @param type
 	 * @return
 	 */
-	private WB_Point selectPoint(final WB_GreatCircleIntersection gci, final WB_Point[] apices, final int type) {
-		if (type == TETRAHEDRON) {
+	private WB_Point selectPoint(final WB_GreatCircleIntersection gci, final WB_Point[] apices, final Type type) {
+		if (type == Type.TETRAHEDRON) {
 			return Math.abs(WB_GeometryOp3D.getDistance3D(gci.p0, P)) < Math
 					.abs(WB_GeometryOp3D.getDistance3D(gci.p1, P)) ? gf.createPoint(gci.p0) : gf.createPoint(gci.p1);
 		}
@@ -436,80 +429,6 @@ class WB_GeodesicI {
 			this.p1 = p1;
 			this.dihedral = dihedral;
 		}
-	}
-
-	/**
-	 *
-	 *
-	 * @param v1
-	 * @param v2
-	 * @param v3
-	 * @param v4
-	 * @return
-	 */
-	public static WB_GreatCircleIntersection getGreatCircleIntersection(final WB_Coord v1, final WB_Coord v2,
-			final WB_Coord v3, final WB_Coord v4) {
-		final WB_Point origin = gf.createPoint(0, 0, 0);
-		final WB_Vector r1 = vnor(v1, origin, v2);
-		final WB_Vector r2 = vnor(v3, origin, v4);
-		final WB_Vector r3 = vnor(r1, origin, r2);
-		if (WB_Epsilon.isZeroSq(r3.getSqLength())) {
-			return null;
-		}
-		r3.normalizeSelf();
-		final WB_Point p0 = gf.createPoint(r3);
-		final WB_Point p1 = p0.mul(-1);
-		final double dihedral = Math.acos(Math.abs(r1.dot(r2)) / (r1.getLength() * r2.getLength()));
-		p0.addSelf(origin);
-		p1.addSelf(origin);
-		return new WB_GreatCircleIntersection(p0.coords(), p1.coords(), dihedral);
-	}
-
-	/**
-	 *
-	 *
-	 * @param v1
-	 * @param v2
-	 * @param f
-	 * @return
-	 */
-	public static double[] getPointOnGreatCircle(final WB_Coord v1, final WB_Coord v2, final double f) {
-		final WB_Point origin = gf.createPoint(0, 0, 0);
-		final double angle = Math.acos(vcos(v1, origin, v2));
-		final double isa = 1.0 / Math.sin(angle);
-		final double alpha = Math.sin((1.0 - f) * angle) * isa;
-		final double beta = Math.sin(f * angle) * isa;
-		final WB_Point r0 = new WB_Point(v1).mul(alpha);
-		final WB_Point r1 = new WB_Point(v2).mul(beta);
-		return r0.add(r1).coords();
-	}
-
-	/**
-	 *
-	 *
-	 * @param v1
-	 * @param v2
-	 * @param v3
-	 * @return
-	 */
-	private static WB_Vector vnor(final WB_Coord v1, final WB_Coord v2, final WB_Coord v3) {
-		final WB_Vector r0 = new WB_Vector(v2, v1);
-		final WB_Vector r1 = new WB_Vector(v2, v3);
-		return r1.cross(r0);
-	}
-
-	/**
-	 *
-	 *
-	 * @param v1
-	 * @param v2
-	 * @param v3
-	 * @return
-	 */
-	private static double vcos(final WB_Coord v1, final WB_Coord v2, final WB_Coord v3) {
-		final WB_Vector r0 = new WB_Vector(v2, v1);
-		final WB_Vector r1 = new WB_Vector(v2, v3);
-		return r0.dot(r1) / (r0.getLength() * r1.getLength());
 	}
 
 }

@@ -16,7 +16,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 
 import wblut.math.WB_MTRandom;
 
-public class WB_Danzer implements WB_TriangleGenerator {
+public class WB_Danzer2D implements WB_TriangleGenerator {
 
 	private WB_GeometryFactory geometryfactory = new WB_GeometryFactory();
 
@@ -24,7 +24,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 		A, B, C
 	}
 
-	static class WB_DanzerTile {
+	static class WB_DanzerTile2D {
 		public int p1, p2, p3;
 		public Type type;
 		public int generation;
@@ -35,7 +35,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 		 * @param t
 		 * @param g
 		 */
-		public WB_DanzerTile(final Type t, final int g) {
+		public WB_DanzerTile2D(final Type t, final int g) {
 			type = t;
 			p1 = p2 = p3 = -1;
 			generation = g;
@@ -64,7 +64,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	protected double a, b, c, r1, r2, r3;
 	protected Type type;
 	protected List<WB_Point> points;
-	protected List<WB_DanzerTile> tiles;
+	protected List<WB_DanzerTile2D> tiles;
 	protected WB_MTRandom rnd;
 
 	/**
@@ -73,7 +73,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param sc
 	 * @param t
 	 */
-	public WB_Danzer(final double sc, final Type t) {
+	public WB_Danzer2D(final double sc, final Type t) {
 		this(sc, t, 0.0, new WB_Point(), new WB_PlanarMap());
 	}
 
@@ -84,7 +84,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param t
 	 * @param offset
 	 */
-	public WB_Danzer(final double sc, final Type t, final WB_Coord offset) {
+	public WB_Danzer2D(final double sc, final Type t, final WB_Coord offset) {
 		this(sc, t, 0.0, offset, new WB_PlanarMap());
 	}
 
@@ -95,7 +95,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param t
 	 * @param angle
 	 */
-	public WB_Danzer(final double sc, final Type t, final double angle) {
+	public WB_Danzer2D(final double sc, final Type t, final double angle) {
 		this(sc, t, angle, new WB_Point(), new WB_PlanarMap());
 	}
 
@@ -107,7 +107,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param angle
 	 * @param offset
 	 */
-	public WB_Danzer(final double sc, final Type t, final double angle, final WB_Coord offset) {
+	public WB_Danzer2D(final double sc, final Type t, final double angle, final WB_Coord offset) {
 		this(sc, t, angle, offset, new WB_PlanarMap());
 	}
 
@@ -118,7 +118,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param t
 	 * @param context
 	 */
-	public WB_Danzer(final double sc, final Type t, final WB_Map2D context) {
+	public WB_Danzer2D(final double sc, final Type t, final WB_Map2D context) {
 		this(sc, t, 0.0, new WB_Point(), context);
 	}
 
@@ -131,7 +131,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param offset
 	 * @param context
 	 */
-	public WB_Danzer(final double sc, final Type t, final double angle, final WB_Coord offset, final WB_Map2D context) {
+	public WB_Danzer2D(final double sc, final Type t, final double angle, final WB_Coord offset, final WB_Map2D context) {
 		rnd = new WB_MTRandom();
 		c = sc;
 		b = c / sinbeta * sintheta;
@@ -140,9 +140,9 @@ public class WB_Danzer implements WB_TriangleGenerator {
 		r2 = c / (a + b + c);
 		r3 = b / (a + b + c);
 		points = new FastList<WB_Point>();
-		tiles = new FastList<WB_DanzerTile>();
+		tiles = new FastList<WB_DanzerTile2D>();
 		type = t;
-		final WB_DanzerTile T = new WB_DanzerTile(type, 0);
+		final WB_DanzerTile2D T = new WB_DanzerTile2D(type, 0);
 		WB_Point q;
 		WB_Transform ROT = new WB_Transform().addRotateZ(angle);
 		switch (type) {
@@ -227,7 +227,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 *
 	 */
 	public void inflate() {
-		final List<WB_DanzerTile> newTiles = new FastList<WB_DanzerTile>();
+		final List<WB_DanzerTile2D> newTiles = new FastList<WB_DanzerTile2D>();
 		for (int i = 0; i < tiles.size(); i++) {
 			newTiles.addAll(inflateTileInt(tiles.get(i), 2.0));
 		}
@@ -249,7 +249,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 *
 	 */
 	public void inflate(final double probability) {
-		final List<WB_DanzerTile> newTiles = new FastList<WB_DanzerTile>();
+		final List<WB_DanzerTile2D> newTiles = new FastList<WB_DanzerTile2D>();
 		for (int i = 0; i < tiles.size(); i++) {
 			newTiles.addAll(inflateTileInt(tiles.get(i), probability));
 		}
@@ -273,8 +273,8 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param probability
 	 * @return
 	 */
-	protected List<WB_DanzerTile> inflateTileInt(final WB_DanzerTile T, final double probability) {
-		final List<WB_DanzerTile> newTiles = new FastList<WB_DanzerTile>();
+	protected List<WB_DanzerTile2D> inflateTileInt(final WB_DanzerTile2D T, final double probability) {
+		final List<WB_DanzerTile2D> newTiles = new FastList<WB_DanzerTile2D>();
 
 		if (rnd.nextDouble() >= probability) {
 			newTiles.add(T);
@@ -295,42 +295,42 @@ public class WB_Danzer implements WB_TriangleGenerator {
 				final WB_Point q2 = geometryfactory.createInterpolatedPoint(p2, p3, a / (a + b));
 				points.add(q2);
 				points.add(geometryfactory.createInterpolatedPoint(q1, q2, c / (a + c)));
-				WB_DanzerTile nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				WB_DanzerTile2D nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p1;
 				nT.p2 = cnp;
 				nT.p3 = cnp + 1;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = cnp + 5;
 				nT.p2 = cnp;
 				nT.p3 = cnp + 1;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p2;
 				nT.p2 = cnp + 2;
 				nT.p3 = cnp + 5;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p3;
 				nT.p2 = cnp + 3;
 				nT.p3 = cnp + 5;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp;
 				nT.p2 = cnp + 2;
 				nT.p3 = cnp + 5;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 1;
 				nT.p2 = cnp + 3;
 				nT.p3 = cnp + 5;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 5;
 				nT.p2 = cnp + 4;
 				nT.p3 = T.p3;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.C, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.C, T.generation + 1);
 				nT.p1 = cnp + 4;
 				nT.p2 = T.p2;
 				nT.p3 = cnp + 5;
@@ -342,32 +342,32 @@ public class WB_Danzer implements WB_TriangleGenerator {
 				points.add(geometryfactory.createInterpolatedPoint(p2, p1, r3));
 				points.add(geometryfactory.createInterpolatedPoint(p3, p1, r1));
 				points.add(geometryfactory.createInterpolatedPoint(p2, p3, a / (a + b)));
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p1;
 				nT.p2 = cnp + 1;
 				nT.p3 = cnp;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 3;
 				nT.p2 = cnp + 1;
 				nT.p3 = cnp;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.C, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.C, T.generation + 1);
 				nT.p1 = cnp + 2;
 				nT.p2 = cnp;
 				nT.p3 = cnp + 3;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 3;
 				nT.p2 = cnp + 2;
 				nT.p3 = T.p2;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.C, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.C, T.generation + 1);
 				nT.p1 = cnp + 4;
 				nT.p3 = cnp + 3;
 				nT.p2 = T.p2;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 3;
 				nT.p2 = cnp + 4;
 				nT.p3 = T.p3;
@@ -383,57 +383,57 @@ public class WB_Danzer implements WB_TriangleGenerator {
 				points.add(geometryfactory.createInterpolatedPoint(p3, p2, r1));
 				points.add(geometryfactory.createInterpolatedPoint(q1, p3, r3));
 				points.add(geometryfactory.createInterpolatedPoint(p3, q1, r2));
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p3;
 				nT.p3 = cnp + 3;
 				nT.p2 = cnp + 7;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 6;
 				nT.p2 = cnp + 7;
 				nT.p3 = cnp + 3;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.C, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.C, T.generation + 1);
 				nT.p1 = cnp + 1;
 				nT.p3 = cnp + 6;
 				nT.p2 = cnp + 3;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 6;
 				nT.p2 = cnp + 1;
 				nT.p3 = T.p1;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p1;
 				nT.p3 = cnp;
 				nT.p2 = cnp + 6;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.A, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.A, T.generation + 1);
 				nT.p1 = T.p3;
 				nT.p2 = cnp + 5;
 				nT.p3 = cnp + 7;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 4;
 				nT.p2 = cnp + 5;
 				nT.p3 = cnp + 7;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.C, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.C, T.generation + 1);
 				nT.p1 = cnp + 6;
 				nT.p2 = cnp + 7;
 				nT.p3 = cnp + 4;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 4;
 				nT.p2 = cnp + 6;
 				nT.p3 = cnp;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.C, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.C, T.generation + 1);
 				nT.p1 = cnp + 2;
 				nT.p3 = cnp + 4;
 				nT.p2 = cnp;
 				newTiles.add(nT);
-				nT = new WB_DanzerTile(Type.B, T.generation + 1);
+				nT = new WB_DanzerTile2D(Type.B, T.generation + 1);
 				nT.p1 = cnp + 4;
 				nT.p2 = cnp + 2;
 				nT.p3 = T.p2;
@@ -450,7 +450,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 * @param i
 	 * @return
 	 */
-	public WB_DanzerTile tile(final int i) {
+	public WB_DanzerTile2D tile(final int i) {
 		return tiles.get(i);
 	}
 
@@ -461,7 +461,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 */
 	public int oldest() {
 		int result = Integer.MAX_VALUE;
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			result = Math.min(T.generation, result);
 			if (result == 0) {
 				return 0;
@@ -477,7 +477,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 */
 	public int youngest() {
 		int result = -1;
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			result = Math.max(T.generation, result);
 		}
 		return result;
@@ -508,7 +508,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	public void inflateOldest(final int r) {
 		final int age = oldest();
 		Collections.shuffle(tiles);
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			if (T.generation <= age + r) {
 				tiles.addAll(inflateTileInt(T, 2.0));
 				tiles.remove(T);
@@ -540,7 +540,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	 *
 	 * @return
 	 */
-	public int numberOfPoints() {
+	public int getNumberOfPoints() {
 		return points.size();
 	}
 
@@ -571,7 +571,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	public List<WB_Polygon> getTiles() {
 		final List<WB_Polygon> faces = new FastList<WB_Polygon>();
 		clean();
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			faces.add(geometryfactory.createSimplePolygon(points.get(T.p1), points.get(T.p2), points.get(T.p3)));
 		}
 		return faces;
@@ -588,7 +588,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 		clean();
 		int[] triangles = new int[3 * tiles.size()];
 		int id = 0;
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			triangles[id++] = T.p1;
 			triangles[id++] = T.p2;
 			triangles[id++] = T.p3;
@@ -609,7 +609,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 		clean();
 		final int[] indices = new int[tiles.size() * 3];
 		int i = 0;
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			indices[i++] = T.p1;
 			indices[i++] = T.p2;
 			indices[i++] = T.p3;
@@ -623,7 +623,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 	private void clean() {
 		final boolean[] used = new boolean[points.size()];
 		final int[] newindices = new int[points.size()];
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			used[T.p1] = true;
 			used[T.p2] = true;
 			used[T.p3] = true;
@@ -636,7 +636,7 @@ public class WB_Danzer implements WB_TriangleGenerator {
 				newpoints.add(points.get(i));
 			}
 		}
-		for (final WB_DanzerTile T : tiles) {
+		for (final WB_DanzerTile2D T : tiles) {
 			T.p1 = newindices[T.p1];
 			T.p2 = newindices[T.p2];
 			T.p3 = newindices[T.p3];

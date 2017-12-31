@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -18,10 +18,11 @@ package wblut.math;
  */
 public class WB_Epsilon {
 	/** General precision. */
-	static public double EPSILON = 1e-12;
+	static public double EPSILON = 1e-6;
 	/** General precision when square is used > EPSILON*EPSILON. */
-	static public double SQEPSILON = EPSILON * EPSILON;
+	static public double SQEPSILON = 1e-12;
 	static public double EPSILONANGLE = 1e-5 * Math.PI / 180.0;
+	static public int PRECISIONMODEL = 1000000;
 
 	/**
 	 * Clamp value to range with error margin.

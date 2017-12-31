@@ -27,7 +27,7 @@ import wblut.geom.WB_Sphere;
  * @author Frederik Vanhoutte (W:Blut)
  *
  */
-public interface HE_MeshStructure {
+public interface HE_HalfedgeStructure {
 
 	void add(HE_Element el);
 
@@ -84,7 +84,7 @@ public interface HE_MeshStructure {
 	 *
 	 * @param source
 	 */
-	void addFaces(HE_MeshStructure source);
+	void addFaces(HE_HalfedgeStructure source);
 
 	/**
 	 * Adds halfedges.
@@ -107,7 +107,7 @@ public interface HE_MeshStructure {
 	 *
 	 * @param source
 	 */
-	void addHalfedges(HE_MeshStructure source);
+	void addHalfedges(HE_HalfedgeStructure source);
 
 	/**
 	 * Adds vertices.
@@ -122,7 +122,7 @@ public interface HE_MeshStructure {
 	 *
 	 * @param source
 	 */
-	void addVertices(HE_MeshStructure source);
+	void addVertices(HE_HalfedgeStructure source);
 
 	/**
 	 * Adds vertices.
@@ -326,7 +326,7 @@ public interface HE_MeshStructure {
 	 *
 	 * @return halfedge iterator
 	 */
-	Iterator<HE_Halfedge> heItr();
+	HE_HalfedgeIterator heItr();
 
 	/**
 	 * Modify the mesh.

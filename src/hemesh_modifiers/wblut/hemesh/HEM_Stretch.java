@@ -139,13 +139,13 @@ public class HEM_Stretch extends HEM_Modifier {
 				final double d = WB_GeometryOp3D.getDistance3D(v, groundPlane);
 				if (!posOnly || d > WB_Epsilon.EPSILON) {
 					p = WB_GeometryOp3D.getClosestPoint3D(v, groundPlane);
-					v.subSelf(p);
-					v.mulSelf(stretchFactor);
-					v.addSelf(p);
+					v.getPosition().subSelf(p);
+					v.getPosition().mulSelf(stretchFactor);
+					v.getPosition().addSelf(p);
 					p = WB_GeometryOp3D.getClosestPoint3D(v, L);
-					v.subSelf(p);
-					v.mulSelf(1 / compressionFactor);
-					v.addSelf(p);
+					v.getPosition().subSelf(p);
+					v.getPosition().mulSelf(1 / compressionFactor);
+					v.getPosition().addSelf(p);
 				}
 			}
 		}
@@ -173,13 +173,13 @@ public class HEM_Stretch extends HEM_Modifier {
 				final double d = WB_GeometryOp3D.getDistance3D(v, groundPlane);
 				if (!posOnly || d > WB_Epsilon.EPSILON) {
 					p = WB_GeometryOp3D.getClosestPoint3D(v, groundPlane);
-					v.subSelf(p);
-					v.mulSelf(stretchFactor);
-					v.addSelf(p);
+					v.getPosition().subSelf(p);
+					v.getPosition().mulSelf(stretchFactor);
+					v.getPosition().addSelf(p);
 					p = WB_GeometryOp3D.getClosestPoint3D(v, L);
-					v.subSelf(p);
-					v.mulSelf(1 / compressionFactor);
-					v.addSelf(p);
+					v.getPosition().subSelf(p);
+					v.getPosition().mulSelf(1 / compressionFactor);
+					v.getPosition().addSelf(p);
 				}
 			}
 		}

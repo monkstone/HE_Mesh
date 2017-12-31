@@ -29,6 +29,8 @@ import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_Curve;
+import wblut.geom.WB_Danzer3D;
+import wblut.geom.WB_Danzer3D.WB_DanzerTile3D;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Hexagon;
@@ -66,10 +68,10 @@ import wblut.hemesh.HE_FaceIntersection;
 import wblut.hemesh.HE_FaceIterator;
 import wblut.hemesh.HE_FaceVertexCirculator;
 import wblut.hemesh.HE_Halfedge;
+import wblut.hemesh.HE_HalfedgeStructure;
 import wblut.hemesh.HE_Mesh;
 import wblut.hemesh.HE_MeshCollection;
 import wblut.hemesh.HE_MeshIterator;
-import wblut.hemesh.HE_MeshStructure;
 import wblut.hemesh.HE_Path;
 import wblut.hemesh.HE_Selection;
 import wblut.hemesh.HE_TextureCoordinate;
@@ -213,7 +215,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawBezierEdges(final HE_MeshStructure mesh) {
+	public void drawBezierEdges(final HE_HalfedgeStructure mesh) {
 		HE_Halfedge he;
 		WB_Coord p0;
 		WB_Coord p1;
@@ -245,7 +247,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawBoundaryEdges(final HE_MeshStructure mesh) {
+	public void drawBoundaryEdges(final HE_HalfedgeStructure mesh) {
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
 		while (heItr.hasNext()) {
@@ -262,7 +264,33 @@ public class WB_Render3D extends WB_Render2D {
 		}
 	}
 
-	public void drawBoundaryFaces(final HE_MeshStructure mesh) {
+	public void drawBoundaryVertices(final HE_HalfedgeStructure mesh) {
+		HE_Vertex v;
+		final Iterator<HE_Vertex> vItr = mesh.vItr();
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v.isVisible()) {
+				if (v.isBoundary()) {
+					drawPoint(v);
+				}
+			}
+		}
+	}
+
+	public void drawBoundaryVertices(final HE_HalfedgeStructure mesh, final double r) {
+		HE_Vertex v;
+		final Iterator<HE_Vertex> vItr = mesh.vItr();
+		while (vItr.hasNext()) {
+			v = vItr.next();
+			if (v.isVisible()) {
+				if (v.isBoundary()) {
+					drawVertex(v, r);
+				}
+			}
+		}
+	}
+
+	public void drawBoundaryFaces(final HE_HalfedgeStructure mesh) {
 		HE_Face f;
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		while (fItr.hasNext()) {
@@ -280,7 +308,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawBoundaryHalfedges(final HE_MeshStructure mesh) {
+	public void drawBoundaryHalfedges(final HE_HalfedgeStructure mesh) {
 		drawBoundaryEdges(mesh);
 	}
 
@@ -408,15 +436,15 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param meshes
 	 *            the meshes
 	 */
-	public void drawEdges(final Collection<? extends HE_MeshStructure> meshes) {
-		final Iterator<? extends HE_MeshStructure> mItr = meshes.iterator();
+	public void drawEdges(final Collection<? extends HE_HalfedgeStructure> meshes) {
+		final Iterator<? extends HE_HalfedgeStructure> mItr = meshes.iterator();
 		while (mItr.hasNext()) {
 			drawEdges(mItr.next());
 		}
 	}
 
 	public void drawEdges(final HE_MeshCollection meshes) {
-		final Iterator<? extends HE_MeshStructure> mItr = meshes.mItr();
+		final Iterator<? extends HE_HalfedgeStructure> mItr = meshes.mItr();
 		while (mItr.hasNext()) {
 			drawEdges(mItr.next());
 		}
@@ -443,7 +471,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 *            the mesh
 	 */
-	public void drawEdges(final HE_MeshStructure mesh) {
+	public void drawEdges(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -467,12 +495,14 @@ public class WB_Render3D extends WB_Render2D {
 		if (selection == null) {
 			return;
 		}
-		final Iterator<HE_Halfedge> eItr = selection.eItr();
-		HE_Halfedge e;
-		while (eItr.hasNext()) {
-			e = eItr.next();
-			if (e.isVisible()) {
-				line(e.getVertex(), e.getEndVertex());
+		final Iterator<HE_Halfedge> heItr = selection.heItr();
+		HE_Halfedge he;
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.isEdge() || !selection.contains(he.getPair())) {
+				if (he.isVisible()) {
+					line(he.getVertex(), he.getEndVertex());
+				}
 			}
 		}
 		/*
@@ -491,7 +521,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param label
 	 * @param mesh
 	 */
-	public void drawEdgesWithInternalLabel(final int label, final HE_MeshStructure mesh) {
+	public void drawEdgesWithInternalLabel(final int label, final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -515,7 +545,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 *            the mesh
 	 */
-	public void drawEdgesWithLabel(final int label, final HE_MeshStructure mesh) {
+	public void drawEdgesWithLabel(final int label, final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1286,7 +1316,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawFaceNormals(final HE_MeshStructure mesh, final double d) {
+	public void drawFaceNormals(final HE_HalfedgeStructure mesh, final double d) {
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		WB_Coord fc;
 		WB_Coord fn;
@@ -1559,8 +1589,8 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param meshes
 	 */
-	public void drawFaces(final Collection<? extends HE_MeshStructure> meshes) {
-		final Iterator<? extends HE_MeshStructure> mItr = meshes.iterator();
+	public void drawFaces(final Collection<? extends HE_HalfedgeStructure> meshes) {
+		final Iterator<? extends HE_HalfedgeStructure> mItr = meshes.iterator();
 		while (mItr.hasNext()) {
 			drawFaces(mItr.next());
 		}
@@ -1585,7 +1615,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 *            the mesh
 	 */
-	public void drawFaces(final HE_MeshStructure mesh) {
+	public void drawFaces(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1603,7 +1633,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param texture
 	 */
-	public void drawFaces(final HE_MeshStructure mesh, final PImage texture) {
+	public void drawFaces(final HE_HalfedgeStructure mesh, final PImage texture) {
 		if (mesh == null) {
 			return;
 		}
@@ -1621,7 +1651,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param textures
 	 */
-	public void drawFaces(final HE_MeshStructure mesh, final PImage[] textures) {
+	public void drawFaces(final HE_HalfedgeStructure mesh, final PImage[] textures) {
 		if (mesh == null) {
 			return;
 		}
@@ -1638,7 +1668,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFacesFC(final HE_MeshStructure mesh) {
+	public void drawFacesFC(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1659,7 +1689,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFacesHC(final HE_MeshStructure mesh) {
+	public void drawFacesHC(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1677,7 +1707,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 *            the mesh
 	 */
-	public void drawFacesSmooth(final HE_MeshStructure mesh) {
+	public void drawFacesSmooth(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1695,7 +1725,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param texture
 	 */
-	public void drawFacesSmooth(final HE_MeshStructure mesh, final PImage texture) {
+	public void drawFacesSmooth(final HE_HalfedgeStructure mesh, final PImage texture) {
 		if (mesh == null) {
 			return;
 		}
@@ -1713,7 +1743,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param textures
 	 */
-	public void drawFacesSmooth(final HE_MeshStructure mesh, final PImage[] textures) {
+	public void drawFacesSmooth(final HE_HalfedgeStructure mesh, final PImage[] textures) {
 		if (mesh == null) {
 			return;
 		}
@@ -1729,7 +1759,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFacesSmoothFC(final HE_MeshStructure mesh) {
+	public void drawFacesSmoothFC(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1746,7 +1776,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFacesSmoothHC(final HE_MeshStructure mesh) {
+	public void drawFacesSmoothHC(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1763,7 +1793,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFacesSmoothVC(final HE_MeshStructure mesh) {
+	public void drawFacesSmoothVC(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1780,7 +1810,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFacesVC(final HE_MeshStructure mesh) {
+	public void drawFacesVC(final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1798,7 +1828,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param label
 	 * @param mesh
 	 */
-	public void drawFacesWithInternalLabel(final int label, final HE_MeshStructure mesh) {
+	public void drawFacesWithInternalLabel(final int label, final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1822,7 +1852,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 *            the mesh
 	 */
-	public void drawFacesWithLabel(final int label, final HE_MeshStructure mesh) {
+	public void drawFacesWithLabel(final int label, final HE_HalfedgeStructure mesh) {
 		if (mesh == null) {
 			return;
 		}
@@ -1843,10 +1873,10 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param frame
 	 */
-	public void drawFrame(final WB_Network frame) {
-		final List<Connection> struts = frame.getConnections();
-		for (int i = 0; i < frame.getNumberOfConnections(); i++) {
-			drawFrameStrut(struts.get(i));
+	public void drawNetwork(final WB_Network network) {
+		final List<Connection> connections = network.getConnections();
+		for (int i = 0; i < network.getNumberOfConnections(); i++) {
+			drawNetworkConnection(connections.get(i));
 		}
 	}
 
@@ -1856,7 +1886,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param node
 	 * @param s
 	 */
-	public void drawFrameNode(final Node node, final double s) {
+	public void drawNetworkNode(final Node node, final double s) {
 		home.pushMatrix();
 		translate(node);
 		home.box((float) s);
@@ -1868,11 +1898,11 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param strut
 	 */
-	public void drawFrameStrut(final Connection strut) {
-		line(strut.start(), strut.end());
+	public void drawNetworkConnection(final Connection connection) {
+		line(connection.start(), connection.end());
 	}
 
-	public void drawHalfedgesWithInternalLabel(final int label, final HE_MeshStructure mesh) {
+	public void drawHalfedgesWithInternalLabel(final int label, final HE_HalfedgeStructure mesh) {
 		Iterator<HE_Halfedge> heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
@@ -1885,14 +1915,14 @@ public class WB_Render3D extends WB_Render2D {
 		}
 	}
 
-	public void drawHalfedgesWithLabel(final int label, final HE_MeshStructure mesh) {
+	public void drawHalfedgesWithLabel(final int label, final HE_HalfedgeStructure mesh) {
 		Iterator<HE_Halfedge> heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
 			he = heItr.next();
 			if (he.isVisible()) {
 				if (he.getUserLabel() == label) {
-					line(he.getVertex(), he.getEndVertex().mulAddMul(0.8, 0.2, he.getVertex()));
+					line(he.getVertex(), he.getEndVertex().getPosition().mulAddMul(0.8, 0.2, he.getVertex()));
 				}
 			}
 		}
@@ -1973,7 +2003,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawHalfedges(final HE_MeshStructure mesh, final double d) {
+	public void drawHalfedges(final HE_HalfedgeStructure mesh, final double d) {
 		WB_Point c;
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
@@ -2023,7 +2053,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param d
 	 * @param f
 	 */
-	public void drawHalfedges(final HE_MeshStructure mesh, final double d, final double f) {
+	public void drawHalfedges(final HE_HalfedgeStructure mesh, final double d, final double f) {
 		WB_Point c;
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
@@ -2192,15 +2222,15 @@ public class WB_Render3D extends WB_Render2D {
 	/**
 	 * Draw nodes.
 	 *
-	 * @param frame
+	 * @param network
 	 *            the frame
 	 * @param s
 	 *            the s
 	 */
-	public void drawFrameNodes(final WB_Network frame, final double s) {
-		final List<Node> nodes = frame.getNodes();
-		for (int i = 0; i < frame.getNumberOfNodes(); i++) {
-			drawFrameNode(nodes.get(i), s);
+	public void drawNetworkNodes(final WB_Network network, final double s) {
+		final List<Node> nodes = network.getNodes();
+		for (int i = 0; i < network.getNumberOfNodes(); i++) {
+			drawNetworkNode(nodes.get(i), s);
 		}
 	}
 
@@ -2287,6 +2317,18 @@ public class WB_Render3D extends WB_Render2D {
 	public void drawPoint(final Collection<? extends WB_Coord> points) {
 		for (final WB_Coord v : points) {
 			drawPoint(v);
+		}
+	}
+
+	public void drawPoint(final WB_CoordCollection points) {
+		for (int i = 0; i < points.size(); i++) {
+			drawPoint(points.get(i));
+		}
+	}
+
+	public void drawPoint(final WB_CoordCollection points, final double r) {
+		for (int i = 0; i < points.size(); i++) {
+			drawPoint(points.get(i), r);
 		}
 	}
 
@@ -4202,7 +4244,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawVertexNormals(final HE_MeshStructure mesh, final double d) {
+	public void drawVertexNormals(final HE_HalfedgeStructure mesh, final double d) {
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		WB_Coord vn;
 		HE_Vertex v;
@@ -4218,7 +4260,7 @@ public class WB_Render3D extends WB_Render2D {
 	 *
 	 * @param mesh
 	 */
-	public void drawVertices(final HE_MeshStructure mesh) {
+	public void drawVertices(final HE_HalfedgeStructure mesh) {
 		HE_Vertex v;
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		while (vItr.hasNext()) {
@@ -4236,7 +4278,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawVertices(final HE_MeshStructure mesh, final double d) {
+	public void drawVertices(final HE_HalfedgeStructure mesh, final double d) {
 		HE_Vertex v;
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		while (vItr.hasNext()) {
@@ -4524,7 +4566,7 @@ public class WB_Render3D extends WB_Render2D {
 		double d2min = Double.MAX_VALUE;
 		while (fvc.hasNext()) {
 			trial = fvc.next();
-			d2 = trial.getSqDistance(p.point);
+			d2 = trial.getPosition().getSqDistance(p.point);
 			if (d2 < d2min) {
 				d2min = d2;
 				closest = trial;
@@ -4555,7 +4597,7 @@ public class WB_Render3D extends WB_Render2D {
 		double d2min = Double.MAX_VALUE;
 		while (fvc.hasNext()) {
 			trial = fvc.next();
-			d2 = trial.getSqDistance(p.point);
+			d2 = trial.getPosition().getSqDistance(p.point);
 			if (d2 < d2min) {
 				d2min = d2;
 				closest = trial;
@@ -4725,7 +4767,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawVerticesWithInternalLabel(final int label, final HE_MeshStructure mesh, final double d) {
+	public void drawVerticesWithInternalLabel(final int label, final HE_HalfedgeStructure mesh, final double d) {
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		while (vItr.hasNext()) {
@@ -4742,7 +4784,7 @@ public class WB_Render3D extends WB_Render2D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawVerticesWithLabel(final int label, final HE_MeshStructure mesh, final double d) {
+	public void drawVerticesWithLabel(final int label, final HE_HalfedgeStructure mesh, final double d) {
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		HE_Vertex v;
 		while (vItr.hasNext()) {
@@ -5024,6 +5066,28 @@ public class WB_Render3D extends WB_Render2D {
 				}
 			}
 		}
+	}
+
+	public void drawDanzer3D(final WB_Danzer3D danzer) {
+		for (WB_DanzerTile3D tile : danzer.getTiles()) {
+			drawTetrahedron(tile);
+		}
+	}
+
+	public void drawUnpairedHalfedges(final HE_HalfedgeStructure mesh) {
+		HE_Halfedge he;
+		final Iterator<HE_Halfedge> heItr = mesh.heItr();
+		home.pushStyle();
+		while (heItr.hasNext()) {
+			he = heItr.next();
+			if (he.getPair() == null) {
+				home.stroke(255, 0, 0);
+				home.line(he.getVertex().xf(), he.getVertex().yf(), he.getVertex().zf(),
+						he.getNextInFace().getVertex().xf(), he.getNextInFace().getVertex().yf(),
+						he.getNextInFace().getVertex().zf());
+			}
+		}
+		home.popStyle();
 	}
 
 }

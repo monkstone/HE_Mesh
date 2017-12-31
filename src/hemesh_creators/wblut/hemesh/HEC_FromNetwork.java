@@ -726,7 +726,7 @@ public class HEC_FromNetwork extends HEC_Creator {
 							v.mulSelf(connectionNodeConnections[offset].offset
 									- connectionNodeConnections[offset].maxoffset);
 							for (int k = 0; k < connectionFacets; k++) {
-								connectionNodeConnections[offset].vertices.get(k).addSelf(v);
+								connectionNodeConnections[offset].vertices.get(k).getPosition().addSelf(v);
 							}
 						}
 						final Iterator<HE_Halfedge> tmpheItr = tmp.heItr();

@@ -14,12 +14,11 @@ void setup() {
 
 
   HEC_IsoSurface creator=new HEC_IsoSurface();
-  creator.setResolution(64, 64,64);
   creator.setSize(8, 8,8);
   //3D grids of values can take up a lot of memory, using a function
   //can decrease the memory use, allow larger grids. The resulting number
   //of triangles can still be a limiting factor for Processing though.
-  creator.setValues(new ScalarField(),0.0,0.0,0.0,.1,.1,.1);//scalar field function, origin, stepsize
+  creator.setValues(new ScalarField(),0.0,0.0,0.0,.1,.1,.1,64, 64,64);//scalar field function, origin, stepsize, resolution
 
   creator.setIsolevel(.36);
   creator.setInvert(false);

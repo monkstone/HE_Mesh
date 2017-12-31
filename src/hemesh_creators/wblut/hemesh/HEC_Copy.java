@@ -26,7 +26,7 @@ public class HEC_Copy extends HEC_Creator {
 	/**
 	 *
 	 */
-	HE_MeshStructure source;
+	HE_HalfedgeStructure source;
 	public LongLongHashMap vertexCorrelation;
 	public LongLongHashMap faceCorrelation;
 	public LongLongHashMap halfedgeCorrelation;
@@ -44,7 +44,7 @@ public class HEC_Copy extends HEC_Creator {
 	 *
 	 * @param source
 	 */
-	public HEC_Copy(final HE_MeshStructure source) {
+	public HEC_Copy(final HE_HalfedgeStructure source) {
 		super();
 		setMesh(source);
 		override = true;
@@ -56,7 +56,7 @@ public class HEC_Copy extends HEC_Creator {
 	 * @param source
 	 * @return
 	 */
-	public HEC_Copy setMesh(final HE_MeshStructure source) {
+	public HEC_Copy setMesh(final HE_HalfedgeStructure source) {
 		this.source = source;
 		return this;
 	}

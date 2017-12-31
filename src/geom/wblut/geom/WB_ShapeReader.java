@@ -48,6 +48,9 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
+
+import wblut.math.WB_Epsilon;
 
 /**
  * Converts a Java2D shape or the more general PathIterator into a List of
@@ -75,7 +78,7 @@ class WB_ShapeReader {
 	/**
 	 *
 	 */
-	private static GeometryFactory JTSgf = new GeometryFactory();
+	private static GeometryFactory JTSgf = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL));
 
 	/**
 	 *

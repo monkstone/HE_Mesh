@@ -143,7 +143,7 @@ public class HEM_Skew extends HEM_Modifier {
 				v = vItr.next();
 				final double d = WB_GeometryOp3D.getDistance3D(v, groundPlane);
 				if (!posOnly || d > 0) {
-					v.addSelf(skewDirection.mul(d * skewFactor));
+					v.getPosition().addSelf(skewDirection.mul(d * skewFactor));
 				}
 			}
 		}
@@ -167,7 +167,7 @@ public class HEM_Skew extends HEM_Modifier {
 				v = vItr.next();
 				final double d = WB_GeometryOp3D.getDistance3D(v, groundPlane);
 				if (!posOnly || d > 0) {
-					v.addSelf(skewDirection.mul(d * skewFactor));
+					v.getPosition().addSelf(skewDirection.mul(d * skewFactor));
 				}
 			}
 		}

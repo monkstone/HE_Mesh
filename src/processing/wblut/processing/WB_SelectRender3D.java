@@ -18,7 +18,7 @@ import processing.core.PConstants;
 import processing.opengl.PGraphics3D;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_Halfedge;
-import wblut.hemesh.HE_MeshStructure;
+import wblut.hemesh.HE_HalfedgeStructure;
 import wblut.hemesh.HE_Vertex;
 
 /**
@@ -107,7 +107,7 @@ public class WB_SelectRender3D {
 	 *            the mesh
 	 * @return key of face at mouse position
 	 */
-	public void drawFaces(final HE_MeshStructure mesh) {
+	public void drawFaces(final HE_HalfedgeStructure mesh) {
 		selector.beginDraw();
 		selector.setMatrix(home.getMatrix());
 		selector.scale((float) scale);
@@ -131,7 +131,7 @@ public class WB_SelectRender3D {
 	 * @param d
 	 * @return key of edge at mouse position
 	 */
-	public void drawEdges(final HE_MeshStructure mesh, final double d) {
+	public void drawEdges(final HE_HalfedgeStructure mesh, final double d) {
 		selector.beginDraw();
 		selector.setMatrix(home.getMatrix());
 		selector.scale((float) scale);
@@ -157,7 +157,7 @@ public class WB_SelectRender3D {
 	 *            size of box
 	 * @return key of vertex at mouse position
 	 */
-	public void drawVertices(final HE_MeshStructure mesh, final double d) {
+	public void drawVertices(final HE_HalfedgeStructure mesh, final double d) {
 		selector.beginDraw();
 		selector.setMatrix(home.getMatrix());
 		selector.scale((float) scale);

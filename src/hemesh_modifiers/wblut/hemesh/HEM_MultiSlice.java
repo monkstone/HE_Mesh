@@ -218,7 +218,9 @@ public class HEM_MultiSlice extends HEM_Modifier {
 			if (unique) {
 				slice.setPlane(Pi);
 				slice.applySelf(mesh);
-
+				if (mesh.getNumberOfVertices() == 0) {
+					return mesh;
+				}
 				fItr = mesh.getSelection("caps").fItr();
 				HE_Face f;
 				while (fItr.hasNext()) {

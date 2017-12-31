@@ -12,6 +12,7 @@ package wblut.hemesh;
 import java.util.Iterator;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_Coord;
 import wblut.math.WB_ConstantScalarParameter;
 import wblut.math.WB_ScalarParameter;
@@ -72,7 +73,7 @@ public class HEM_VertexExpand extends HEM_Modifier {
 		while (vItr.hasNext()) {
 			v = vItr.next();
 			n = vnItr.next();
-			v.addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
+			v.getPosition().addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
 		}
 		return mesh;
 	}
@@ -100,7 +101,7 @@ public class HEM_VertexExpand extends HEM_Modifier {
 		while (vItr.hasNext()) {
 			v = vItr.next();
 			n = vnItr.next();
-			v.addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
+			v.getPosition().addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
 		}
 		return selection.parent;
 	}

@@ -10,9 +10,6 @@ package wblut.geom;
 
 /**
  *
- * WB_OrthoProject projects coordinates from world space to the X, Y or Z-plane.
- * Since a projection is not reversible, the 2D-to-3D functions always return a
- * point on the X-,Y- or Z-plane, unless the w-coordinate is explicitly given.
  *
  */
 public class WB_DefaultMap2D implements WB_Map2D {

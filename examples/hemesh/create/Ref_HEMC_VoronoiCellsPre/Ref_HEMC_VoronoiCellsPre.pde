@@ -30,7 +30,6 @@ void setup() {
   multiCreator.setPoints(points);
   multiCreator.setContainer(container);
   multiCreator.setOffset(new Gradient());// offset of the bisector cutting planes, sides of the voronoi cells will be separated by twice this distance
-  multiCreator.setSimpleCap(false);
   cells=new HE_MeshCollection();
   cells.createThreaded(multiCreator);
   render=new WB_Render(this);

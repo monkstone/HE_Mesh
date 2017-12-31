@@ -57,7 +57,7 @@ import wblut.math.WB_MTRandom;
  * @author Frederik Vanhoutte (W:Blut)
  *
  */
-public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_MeshStructure {
+public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_HalfedgeStructure {
 
 	/**
 	 *
@@ -469,7 +469,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param source
 	 */
 	@Override
-	public void addFaces(final HE_MeshStructure source) {
+	public void addFaces(final HE_HalfedgeStructure source) {
 		faces.addAll(source.getFaces());
 	}
 
@@ -505,7 +505,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param source
 	 */
 	@Override
-	public void addHalfedges(final HE_MeshStructure source) {
+	public void addHalfedges(final HE_HalfedgeStructure source) {
 		for (HE_Halfedge he : source.getHalfedges()) {
 			add(he);
 		}
@@ -601,7 +601,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param source
 	 */
 	@Override
-	public void addVertices(final HE_MeshStructure source) {
+	public void addVertices(final HE_HalfedgeStructure source) {
 		vertices.addAll(source.getVertices());
 	}
 
@@ -863,7 +863,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	}
 
 	public void clearPrecomputedHalfedges() {
-		HE_MeshHalfedgeIterator heItr = heItr();
+		HE_HalfedgeIterator heItr = heItr();
 		while (heItr.hasNext()) {
 			heItr.next().clearPrecomputed();
 
@@ -940,7 +940,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 		while (vitr.hasNext()) {
 			vitr.next().clearVisited();
 		}
-		final HE_MeshHalfedgeIterator heitr = heItr();
+		final HE_HalfedgeIterator heitr = heItr();
 		while (heitr.hasNext()) {
 			heitr.next().clearVisited();
 		}
@@ -2696,9 +2696,9 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @return halfedge iterator
 	 */
 	@Override
-	public HE_MeshHalfedgeIterator heItr() {
+	public HE_HalfedgeIterator heItr() {
 
-		return new HE_MeshHalfedgeIterator(edges, halfedges, unpairedHalfedges);
+		return HE_HalfedgeIterator.getIterator(edges, halfedges, unpairedHalfedges);
 	}
 
 	public boolean isFinished() {
@@ -2780,7 +2780,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 		HE_Mesh result = copy();
 		final Iterator<HE_Vertex> vItr = result.vItr();
 		while (vItr.hasNext()) {
-			vItr.next().addSelf(x, y, z);
+			vItr.next().getPosition().addSelf(x, y, z);
 		}
 		result.clearPrecomputed();
 		return result;
@@ -2812,7 +2812,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 
 		final Iterator<HE_Vertex> vItr = vItr();
 		while (vItr.hasNext()) {
-			vItr.next().addSelf(x, y, z);
+			vItr.next().getPosition().addSelf(x, y, z);
 		}
 		clearPrecomputed();
 		return this;
@@ -2846,7 +2846,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 		WB_Point center = result.getCenter();
 		final Iterator<HE_Vertex> vItr = result.vItr();
 		while (vItr.hasNext()) {
-			vItr.next().addSelf(x - center.xd(), y - center.yd(), z - center.zd());
+			vItr.next().getPosition().addSelf(x - center.xd(), y - center.yd(), z - center.zd());
 		}
 		result.clearPrecomputed();
 		return result;
@@ -2879,7 +2879,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 		WB_Point center = getCenter();
 		final Iterator<HE_Vertex> vItr = vItr();
 		while (vItr.hasNext()) {
-			vItr.next().addSelf(x - center.xd(), y - center.yd(), z - center.zd());
+			vItr.next().getPosition().addSelf(x - center.xd(), y - center.yd(), z - center.zd());
 		}
 		clearPrecomputed();
 		return this;
@@ -3320,7 +3320,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 */
 	private void replaceHalfedges(final HE_Mesh mesh) {
 		clearHalfedges();
-		HE_MeshHalfedgeIterator heItr = mesh.heItr();
+		HE_HalfedgeIterator heItr = mesh.heItr();
 		while (heItr.hasNext()) {
 			add(heItr.next());
 
@@ -5830,7 +5830,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param color
 	 */
 	public void setHalfedgeColor(final int color) {
-		final HE_MeshHalfedgeIterator heitr = heItr();
+		final HE_HalfedgeIterator heitr = heItr();
 		while (heitr.hasNext()) {
 			heitr.next().setColor(color);
 		}
@@ -5843,7 +5843,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param i
 	 */
 	public void setHalfedgeColorWithInternalLabel(final int color, final int i) {
-		final HE_MeshHalfedgeIterator fitr = heItr();
+		final HE_HalfedgeIterator fitr = heItr();
 		HE_Halfedge f;
 		while (fitr.hasNext()) {
 			f = fitr.next();
@@ -5860,7 +5860,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param i
 	 */
 	public void setHalfedgeColorWithOtherInternalLabel(final int color, final int i) {
-		final HE_MeshHalfedgeIterator heitr = heItr();
+		final HE_HalfedgeIterator heitr = heItr();
 
 		HE_Halfedge f;
 		while (heitr.hasNext()) {
@@ -5878,7 +5878,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param i
 	 */
 	public void setHalfedgeColorWithOtherUserLabel(final int color, final int i) {
-		final HE_MeshHalfedgeIterator heitr = heItr();
+		final HE_HalfedgeIterator heitr = heItr();
 		HE_Halfedge he;
 		while (heitr.hasNext()) {
 			he = heitr.next();
@@ -5895,7 +5895,7 @@ public class HE_Mesh extends HE_MeshElement implements WB_TriangleGenerator, HE_
 	 * @param i
 	 */
 	public void setHalfedgeColorWithUserLabel(final int color, final int i) {
-		final HE_MeshHalfedgeIterator fitr = heItr();
+		final HE_HalfedgeIterator fitr = heItr();
 		HE_Halfedge f;
 		while (fitr.hasNext()) {
 			f = fitr.next();

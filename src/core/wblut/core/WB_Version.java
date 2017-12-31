@@ -23,7 +23,7 @@ public class WB_Version {
 
 	public static final int MINOR = 1;
 
-	public static final int PATCH = 0;
+	public static final int PATCH = 1;
 
 	private static final String releaseInfo = "Titan";
 

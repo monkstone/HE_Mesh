@@ -14,12 +14,11 @@ void setup() {
 
 
   WB_IsoSurface creator=new WB_IsoSurface();
-  creator.setResolution(256, 128,128);
-  creator.setSize(4, 4,4);
+  creator.setSize(8, 8,8);
   //3D grids of values can take up a lot of memory, using a function
-  //can decrease the memory use, allow larger grids. The resulting number
+  //can decrease the memory use and allow larger grids. The resulting number
   //of triangles can still be a limiting factor for Processing though.
-  creator.setValues(new ScalarField(),0.0,0.0,0.0,.1,.1,.1);
+  creator.setValues(new ScalarField(),0.0,0.0,0.0,.1,.1,.1,128, 64,64);
 
   creator.setIsolevel(.6);
   creator.setInvert(false);

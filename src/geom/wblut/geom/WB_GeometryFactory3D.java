@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap;
 
 import com.vividsolutions.jts.algorithm.ConvexHull;
@@ -26,11 +27,11 @@ import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
 import com.vividsolutions.jts.operation.buffer.BufferOp;
 import com.vividsolutions.jts.operation.buffer.BufferParameters;
 import com.vividsolutions.jts.simplify.TopologyPreservingSimplifier;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.data.WB_JohnsonPolyhedraData01;
 import wblut.data.WB_JohnsonPolyhedraData02;
 import wblut.data.WB_JohnsonPolyhedraData03;
@@ -54,7 +55,7 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 	/**
 	 *
 	 */
-	private final GeometryFactory JTSgf = new GeometryFactory();
+	private final GeometryFactory JTSgf = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL));
 	/**
 	 *
 	 */
@@ -5512,6 +5513,27 @@ public class WB_GeometryFactory3D extends WB_GeometryFactory2D {
 		uniqueVertices.add(v);
 		int nuv = 1;
 		double threshold2 = threshold * threshold;
+		for (int i = 1; i < points.size(); i++) {
+			v = points.get(i);
+			neighbor = kdtree.getNearestNeighbor(v);
+			if (neighbor.d2 > threshold2) {
+				kdtree.add(v, nuv);
+				uniqueVertices.add(v);
+			}
+		}
+
+		return uniqueVertices;
+	}
+
+	public List<WB_Coord> createUniquePoints(final List<WB_Coord> points) {
+		final List<WB_Coord> uniqueVertices = new FastList<WB_Coord>();
+		final WB_KDTreeInteger<WB_Coord> kdtree = new WB_KDTreeInteger<WB_Coord>();
+		WB_KDTreeInteger.WB_KDEntryInteger<WB_Coord> neighbor;
+		WB_Coord v = points.get(0);
+		kdtree.add(v, 0);
+		uniqueVertices.add(v);
+		int nuv = 1;
+		double threshold2 = WB_Epsilon.SQEPSILON;
 		for (int i = 1; i < points.size(); i++) {
 			v = points.get(i);
 			neighbor = kdtree.getNearestNeighbor(v);

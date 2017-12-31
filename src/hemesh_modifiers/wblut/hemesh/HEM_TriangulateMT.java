@@ -107,7 +107,7 @@ public class HEM_TriangulateMT extends HEM_Modifier {
 	 * @param tris
 	 */
 	private void triangulateNoPairing(final HE_Face face, final HE_Mesh mesh, final int[] tris) {
-
+		System.out.println(tris.length);
 		if (tris.length == 3) {
 			triangles.add(face);
 		} else if (tris.length > 3) {

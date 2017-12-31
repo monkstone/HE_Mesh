@@ -22,6 +22,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
 import com.vividsolutions.jts.triangulate.ConformingDelaunayTriangulationBuilder;
 import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 import com.vividsolutions.jts.triangulate.quadedge.QuadEdgeSubdivision;
@@ -126,7 +127,8 @@ class WB_Triangulate2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qesd = dtb.getSubdivision();
-		final GeometryCollection tris = (GeometryCollection) qesd.getTriangles(new GeometryFactory());
+		final GeometryCollection tris = (GeometryCollection) qesd
+				.getTriangles(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int ntris = tris.getNumGeometries();
 		List<int[]> result = new FastList<int[]>();
 		for (int i = 0; i < ntris; i++) {
@@ -144,7 +146,8 @@ class WB_Triangulate2D {
 			T[3 * i + 1] = result.get(i)[1];
 			T[3 * i + 2] = result.get(i)[2];
 		}
-		final MultiLineString edges = (MultiLineString) qesd.getEdges(new GeometryFactory());
+		final MultiLineString edges = (MultiLineString) qesd
+				.getEdges(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int nedges = edges.getNumGeometries();
 		result = new FastList<int[]>();
 		for (int i = 0; i < nedges; i++) {
@@ -559,7 +562,7 @@ class WB_Triangulate2D {
 	private static WB_Triangulation2DWithPoints getConformingTriangles2D(final Coordinate[] coords,
 			final int[] constraints, final double tol) {
 		final int m = constraints.length;
-		final GeometryFactory geomFact = new GeometryFactory();
+		final GeometryFactory geomFact = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL));
 		final LineString[] constraintlines = new LineString[m / 2];
 		for (int i = 0; i < m; i += 2) {
 			final Coordinate[] pair = { coords[constraints[i]], coords[constraints[i + 1]] };
@@ -570,7 +573,8 @@ class WB_Triangulate2D {
 		dtb.setSites(geomFact.createMultiPoint(coords));
 		dtb.setConstraints(geomFact.createMultiLineString(constraintlines));
 		final QuadEdgeSubdivision qesd = dtb.getSubdivision();
-		final GeometryCollection tris = (GeometryCollection) qesd.getTriangles(new GeometryFactory());
+		final GeometryCollection tris = (GeometryCollection) qesd
+				.getTriangles(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final Coordinate[] newcoords = tris.getCoordinates();
 		final List<WB_Coord> uniquePoints = new FastList<WB_Coord>();
 		final WB_KDTreeInteger<WB_Point> tree = new WB_KDTreeInteger<WB_Point>();
@@ -600,7 +604,8 @@ class WB_Triangulate2D {
 			T[3 * i + 1] = result.get(i)[1];
 			T[3 * i + 2] = result.get(i)[2];
 		}
-		final MultiLineString edges = (MultiLineString) qesd.getEdges(new GeometryFactory());
+		final MultiLineString edges = (MultiLineString) qesd
+				.getEdges(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int nedges = edges.getNumGeometries();
 		result = new FastList<int[]>();
 		for (int i = 0; i < nedges; i++) {

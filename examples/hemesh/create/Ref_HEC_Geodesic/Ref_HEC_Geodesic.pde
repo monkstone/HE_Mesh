@@ -24,7 +24,7 @@ void setup() {
 
   // class I, II and III: TETRAHEDRON,OCTAHEDRON,ICOSAHEDRON
   // class II only: CUBE, DODECAHEDRON
-  creator.setType(HEC_Geodesic.ICOSAHEDRON);
+  creator.setType(WB_Geodesic.Type.ICOSAHEDRON);
   mesh=new HE_Mesh(creator); 
   render=new WB_Render(this);
 }
@@ -55,6 +55,6 @@ void mousePressed() {
   creator.setRadius(200); 
   creator.setB(B+1);
   creator.setC(C);
-  creator.setType(HEC_Geodesic.ICOSAHEDRON);
+  creator.setType(WB_Geodesic.Type.ICOSAHEDRON);
   mesh=new HE_Mesh(creator);
 }

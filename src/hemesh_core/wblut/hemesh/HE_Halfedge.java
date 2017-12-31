@@ -13,6 +13,7 @@ import wblut.geom.WB_Classification;
 import wblut.geom.WB_Coord;
 import wblut.geom.WB_GeometryOp;
 import wblut.geom.WB_GeometryOp3D;
+import wblut.geom.WB_Point;
 import wblut.geom.WB_Vector;
 import wblut.math.WB_Epsilon;
 import wblut.math.WB_HashCode;
@@ -349,6 +350,10 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 		return _vertex;
 	}
 
+	public WB_Point getPosition() {
+		return _vertex.getPosition();
+	}
+
 	/**
 	 *
 	 *
@@ -356,6 +361,10 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 	 */
 	public HE_Vertex getStartVertex() {
 		return _vertex;
+	}
+
+	public WB_Point getStartPosition() {
+		return _vertex.getPosition();
 	}
 
 	/**
@@ -379,6 +388,21 @@ public class HE_Halfedge extends HE_MeshElement implements Comparable<HE_Halfedg
 		}
 		if (_next != null) {
 			return _next._vertex;
+		}
+		return null;
+	}
+
+	/**
+	 * Get end position of halfedge.
+	 *
+	 * @return vertex
+	 */
+	public WB_Point getEndPosition() {
+		if (_pair != null) {
+			return _pair._vertex.getPosition();
+		}
+		if (_next != null) {
+			return _next._vertex.getPosition();
 		}
 		return null;
 	}

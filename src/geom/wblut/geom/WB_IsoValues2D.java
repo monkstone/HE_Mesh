@@ -16,18 +16,33 @@ import wblut.math.WB_ScalarParameter;
  * @author FVH
  *
  */
-public interface WB_IsoValues2D {
-	public enum Mode {
+public abstract class WB_IsoValues2D {
+	public static enum Mode {
 		RED, GREEN, BLUE, HUE, SAT, BRI, ALPHA
 	};
 
-	public double value(int i, int j);
+	public abstract double value(int i, int j);
 
-	public int getWidth();
+	public abstract int getWidth();
 
-	public int getHeight();
+	public abstract int getHeight();
 
-	public class Grid2D implements WB_IsoValues2D {
+	public WB_BinaryGrid2D getBinaryGrid2D(final double threshold) {
+		WB_BinaryGrid2D grid = WB_BinaryGrid2D.createGrid(new WB_Point(), getWidth(), 1.0, getHeight(), 1.0);
+
+		for (int i = 0; i < getWidth(); i++) {
+			for (int j = 0; j < getHeight(); j++) {
+				if (value(i, j) >= threshold) {
+					grid.set(i, j);
+				}
+			}
+		}
+
+		return grid;
+
+	}
+
+	public static class Grid2D extends WB_IsoValues2D {
 		private double[][] values;
 		private int width, height;
 
@@ -87,7 +102,7 @@ public interface WB_IsoValues2D {
 
 	}
 
-	public class GridRaw2D implements WB_IsoValues2D {
+	public static class GridRaw2D extends WB_IsoValues2D {
 		private double[][] values;
 		private int width, height;
 
@@ -132,18 +147,21 @@ public interface WB_IsoValues2D {
 
 	}
 
-	public class Function2D implements WB_IsoValues2D {
+	public static class Function2D extends WB_IsoValues2D {
 		private double fxi, fyi, dfx, dfy;
+		private int width, height;
 		private WB_ScalarParameter function;
 
 		public Function2D(final WB_ScalarParameter function, final double xi, final double yi, final double dx,
-				final double dy) {
+				final double dy, final int width, final int height) {
 			this.function = function;
 			fxi = xi;
 			fyi = yi;
 			dfx = dx;
 			dfy = dy;
 			this.function = function;
+			this.width = width;
+			this.height = height;
 		}
 
 		/*
@@ -164,7 +182,7 @@ public interface WB_IsoValues2D {
 		@Override
 		public int getWidth() {
 
-			return 0;
+			return width;
 		}
 
 		/*
@@ -175,11 +193,11 @@ public interface WB_IsoValues2D {
 		@Override
 		public int getHeight() {
 
-			return 0;
+			return height;
 		}
 	}
 
-	public class HashGrid2D implements WB_IsoValues2D {
+	public static class HashGrid2D extends WB_IsoValues2D {
 		private WB_HashGridDouble2D values;
 		private int width, height;
 
@@ -223,7 +241,7 @@ public interface WB_IsoValues2D {
 
 	}
 
-	public class ImageGrid2D implements WB_IsoValues2D {
+	public static class ImageGrid2D extends WB_IsoValues2D {
 		private PImage image;
 		private Mode mode;
 		private PApplet home;

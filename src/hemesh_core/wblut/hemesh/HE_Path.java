@@ -12,7 +12,6 @@ package wblut.hemesh;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
-import wblut.geom.WB_MeshGraph;
 
 /**
  * A HE_Path is a sequence of edges, or rather halfedges, in a mesh. It can be a
@@ -94,7 +93,7 @@ public class HE_Path extends HE_MeshElement {
 
 			return null;
 		}
-		WB_MeshGraph graph = new WB_MeshGraph(mesh);
+		HET_MeshGraph graph = new HET_MeshGraph(mesh);
 		int[] shortestpath = graph.getShortestPathBetweenVertices(mesh.getIndex(v0), mesh.getIndex(v1));
 		return mesh.createPathFromIndices(shortestpath, false);
 

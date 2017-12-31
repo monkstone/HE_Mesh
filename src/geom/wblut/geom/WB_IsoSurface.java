@@ -283,9 +283,11 @@ public class WB_IsoSurface {
 	 * @return
 	 */
 	public WB_IsoSurface setValues(final WB_ScalarParameter function, final double xi, final double yi, final double zi,
-			final double dx, final double dy, final double dz) {
-		this.values = new WB_IsoValues3D.Function3D(function, xi, yi, zi, dx, dy, dz);
-
+			final double dx, final double dy, final double dz, final int sizeI, final int sizeJ, final int sizeK) {
+		this.values = new WB_IsoValues3D.Function3D(function, xi, yi, zi, dx, dy, dz, sizeI, sizeJ, sizeK);
+		resx = sizeI - 1;
+		resy = sizeJ - 1;
+		resz = sizeK - 1;
 		return this;
 	}
 

@@ -22,7 +22,7 @@ import wblut.geom.WB_Point;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_Halfedge;
 import wblut.hemesh.HE_Mesh;
-import wblut.hemesh.HE_MeshStructure;
+import wblut.hemesh.HE_HalfedgeStructure;
 import wblut.hemesh.HE_Vertex;
 
 /**
@@ -69,7 +69,7 @@ public class WB_DebugRender3D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawBadVertices(final HE_MeshStructure mesh, final double d) {
+	public void drawBadVertices(final HE_HalfedgeStructure mesh, final double d) {
 		HE_Vertex v;
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		while (vItr.hasNext()) {
@@ -88,7 +88,7 @@ public class WB_DebugRender3D {
 	 *
 	 * @param mesh
 	 */
-	public void drawBoundaryEdges(final HE_MeshStructure mesh) {
+	public void drawBoundaryEdges(final HE_HalfedgeStructure mesh) {
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
 		while (heItr.hasNext()) {
@@ -106,7 +106,7 @@ public class WB_DebugRender3D {
 	 *
 	 * @param mesh
 	 */
-	public void drawBoundaryHalfedges(final HE_MeshStructure mesh) {
+	public void drawBoundaryHalfedges(final HE_HalfedgeStructure mesh) {
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
 		home.pushStyle();
@@ -127,7 +127,7 @@ public class WB_DebugRender3D {
 	 *
 	 * @param mesh
 	 */
-	public void drawUnpairedHalfedges(final HE_MeshStructure mesh) {
+	public void drawUnpairedHalfedges(final HE_HalfedgeStructure mesh) {
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
 		home.pushStyle();
@@ -161,7 +161,7 @@ public class WB_DebugRender3D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawFaceNormals(final HE_MeshStructure mesh, final double d) {
+	public void drawFaceNormals(final HE_HalfedgeStructure mesh, final double d) {
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		WB_Coord fc;
 		WB_Coord fn;
@@ -180,7 +180,7 @@ public class WB_DebugRender3D {
 	 *
 	 * @param mesh
 	 */
-	public void drawFaceTypes(final HE_MeshStructure mesh) {
+	public void drawFaceTypes(final HE_HalfedgeStructure mesh) {
 		final Iterator<HE_Face> fItr = mesh.fItr();
 		HE_Face f;
 		while (fItr.hasNext()) {
@@ -267,7 +267,7 @@ public class WB_DebugRender3D {
 	 * @param d
 	 * @param f
 	 */
-	public void drawHalfedges(final HE_MeshStructure mesh, final double d, final double f) {
+	public void drawHalfedges(final HE_HalfedgeStructure mesh, final double d, final double f) {
 		WB_Point c;
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
@@ -314,7 +314,7 @@ public class WB_DebugRender3D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawHalfedges(final HE_MeshStructure mesh, final double d) {
+	public void drawHalfedges(final HE_HalfedgeStructure mesh, final double d) {
 		WB_Point c;
 		HE_Halfedge he;
 		final Iterator<HE_Halfedge> heItr = mesh.heItr();
@@ -378,7 +378,7 @@ public class WB_DebugRender3D {
 	 * @param mesh
 	 * @param d
 	 */
-	public void drawVertexNormals(final HE_MeshStructure mesh, final double d) {
+	public void drawVertexNormals(final HE_HalfedgeStructure mesh, final double d) {
 		final Iterator<HE_Vertex> vItr = mesh.vItr();
 		WB_Coord vn;
 		HE_Vertex v;

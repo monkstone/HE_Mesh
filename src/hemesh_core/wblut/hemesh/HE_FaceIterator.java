@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -29,6 +29,10 @@ public class HE_FaceIterator implements Iterator<HE_Face> {
 	 */
 	HE_FaceIterator(final Collection<HE_Face> faces) {
 		_itr = faces.iterator();
+	}
+
+	HE_FaceIterator(final HE_HalfedgeStructure mesh) {
+		_itr = mesh.fItr();
 	}
 
 	/*

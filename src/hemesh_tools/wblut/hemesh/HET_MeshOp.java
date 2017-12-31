@@ -232,8 +232,56 @@ public class HET_MeshOp {
 		final HE_Halfedge he1new = new HE_Halfedge();
 		final HE_Halfedge he0n = he0.getNextInFace();
 		final HE_Halfedge he1n = he1.getNextInFace();
-		final double d0 = he0.getVertex().getDistance(v);
-		final double d1 = he1.getVertex().getDistance(v);
+		final double d0 = he0.getVertex().getPosition().getDistance(v);
+		final double d1 = he1.getVertex().getPosition().getDistance(v);
+		final double f0 = d1 / (d0 + d1);
+		final double f1 = d0 / (d0 + d1);
+		mesh.setVertex(he0new, vNew);
+		mesh.setVertex(he1new, vNew);
+		mesh.setHalfedge(vNew, he0new);
+		mesh.setNext(he0new, he0n);
+		he0new.copyProperties(he0);
+		mesh.setNext(he1new, he1n);
+		he1new.copyProperties(he1);
+		if (he0.hasUVW() && he0n.hasUVW()) {
+			he0new.setUVW(new HE_TextureCoordinate(f0, he0.getUVW(), he0n.getUVW()));
+		}
+		if (he1.hasUVW() && he1n.hasUVW()) {
+			he1new.setUVW(new HE_TextureCoordinate(f1, he1.getUVW(), he1n.getUVW()));
+		}
+		mesh.setNext(he0, he0new);
+		mesh.setNext(he1, he1new);
+		mesh.setPair(he0, he1new);
+		mesh.setPair(he0new, he1);
+
+		if (he0.getFace() != null) {
+			mesh.setFace(he0new, he0.getFace());
+		}
+		if (he1.getFace() != null) {
+			mesh.setFace(he1new, he1.getFace());
+		}
+		vNew.setInternalLabel(1);
+		mesh.addDerivedElement(vNew, edge);
+		mesh.addDerivedElement(he0new, edge);
+		mesh.addDerivedElement(he1new, edge);
+
+		out.addEdge(he0new.isEdge() ? he0new : he1new);
+		out.addEdge(he0.isEdge() ? he0 : he1);
+		out.add(vNew);
+		return out;
+	}
+
+	static HE_Selection splitEdge(final HE_Mesh mesh, final HE_Halfedge edge, final HE_Vertex v) {
+		final HE_Selection out = HE_Selection.getSelection(mesh);
+		final HE_Halfedge he0 = edge.isEdge() ? edge : edge.getPair();
+		final HE_Halfedge he1 = he0.getPair();
+		final HE_Vertex vNew = v;
+		final HE_Halfedge he0new = new HE_Halfedge();
+		final HE_Halfedge he1new = new HE_Halfedge();
+		final HE_Halfedge he0n = he0.getNextInFace();
+		final HE_Halfedge he1n = he1.getNextInFace();
+		final double d0 = he0.getVertex().getPosition().getDistance(v);
+		final double d1 = he1.getVertex().getPosition().getDistance(v);
 		final double f0 = d1 / (d0 + d1);
 		final double f1 = d0 / (d0 + d1);
 		mesh.setVertex(he0new, vNew);
@@ -495,7 +543,7 @@ public class HET_MeshOp {
 		final HE_Halfedge hej = vj.getHalfedge(face);
 		final HE_TextureCoordinate ti = hei.hasUVW() ? hei.getUVW() : null;
 		final HE_TextureCoordinate tj = hej.hasUVW() ? hej.getUVW() : null;
-		final double d = vi.getDistance(vj);
+		final double d = vi.getPosition().getDistance(vj);
 		boolean degenerate = false;
 		if (WB_Epsilon.isZero(d)) {// happens when a collinear (part of a) face
 			// is cut. Do not add a new edge connecting
@@ -1952,7 +2000,7 @@ public class HET_MeshOp {
 
 		// Don't flip if the new triangle edge is equal or longer than the
 		// current one.
-		if (he1t1.getSqLength() <= he2t1.getEndVertex().getSqDistance(he2t2.getEndVertex())) {
+		if (he1t1.getSqLength() <= he2t1.getEndVertex().getPosition().getSqDistance(he2t2.getEndVertex())) {
 			return false;
 		}
 
@@ -2044,7 +2092,7 @@ public class HET_MeshOp {
 
 		// Don't flip if the new triangle edge is equal or longer than the
 		// current one.
-		if (he1t1.getSqLength() <= he2t1.getEndVertex().getSqDistance(he2t2.getEndVertex())) {
+		if (he1t1.getSqLength() <= he2t1.getEndVertex().getPosition().getSqDistance(he2t2.getEndVertex())) {
 			return false;
 		}
 
@@ -2168,7 +2216,7 @@ public class HET_MeshOp {
 			}
 		}
 		mesh.removeVertices(removev);
-		HE_MeshHalfedgeIterator heItr = mesh.heItr();
+		HE_HalfedgeIterator heItr = mesh.heItr();
 		List<HE_Halfedge> remove = new FastList<HE_Halfedge>();
 		while (heItr.hasNext()) {
 			he = heItr.next();
@@ -3714,7 +3762,7 @@ public class HET_MeshOp {
 			final HE_Face fp = hePair.getFace();
 			final HE_Vertex v = he.getVertex();
 			final HE_Vertex vp = hePair.getVertex();
-			vp.addSelf(v).mulSelf(0.5);
+			vp.getPosition().addSelf(v).mulSelf(0.5);
 			final List<HE_Halfedge> tmp = v.getHalfedgeStar();
 			for (int i = 0; i < tmp.size(); i++) {
 				mesh.setVertex(tmp.get(i), vp);
@@ -3775,13 +3823,13 @@ public class HET_MeshOp {
 					if (!he.isInnerBoundary() || strict) {
 						return false;
 					}
-					vp.addSelf(v).mulSelf(0.5);
+					vp.getPosition().addSelf(v).mulSelf(0.5);
 				} else {
 					vp.set(v);
 				}
 			} else {
 				if (!vp.isBoundary()) {
-					vp.addSelf(v).mulSelf(0.5);
+					vp.getPosition().addSelf(v).mulSelf(0.5);
 				}
 			}
 			final List<HE_Halfedge> tmp = v.getHalfedgeStar();
@@ -3920,11 +3968,11 @@ public class HET_MeshOp {
 		List<HE_Vertex> vertices = f.getFaceVertices();
 		double sgnvol = 0;
 		for (int i = 0; i < triangles.length; i += 3) {
-			WB_Coord p1 = vertices.get(triangles[i]).sub(center);
+			WB_Coord p1 = vertices.get(triangles[i]).getPosition().sub(center);
 
-			WB_Coord p2 = vertices.get(triangles[i + 1]).sub(center);
+			WB_Coord p2 = vertices.get(triangles[i + 1]).getPosition().sub(center);
 
-			WB_Coord p3 = vertices.get(triangles[i + 2]).sub(center);
+			WB_Coord p3 = vertices.get(triangles[i + 2]).getPosition().sub(center);
 
 			sgnvol += 1.0 / 6.0
 					* (-p3.xd() * p2.yd() * p1.zd() + p2.xd() * p3.yd() * p1.zd() + p3.xd() * p1.yd() * p2.zd()
@@ -4032,7 +4080,7 @@ public class HET_MeshOp {
 		i = 0;
 		while (vItr.hasNext()) {
 			v = vItr.next();
-			v.addSelf(displacement[i++]);
+			v.getPosition().addSelf(displacement[i++]);
 		}
 
 	}

@@ -7,7 +7,7 @@ import wblut.processing.*;
 
 
 WB_Render3D render;
-WB_Danzer danzerA, danzerB, danzerC;
+WB_Danzer2D danzerA, danzerB, danzerC;
 
 float scale;
 
@@ -20,11 +20,11 @@ void setup() {
   println(WB_Version.version());
   println(WB_Disclaimer.disclaimer());
   scale=550;
-  danzerA=new WB_Danzer(scale, WB_Danzer.Type.A,new WB_Point(-250,0,0));
+  danzerA=new WB_Danzer2D(scale, WB_Danzer2D.Type.A,new WB_Point(-250,0,0));
   danzerA.inflate(3);
-  danzerB=new WB_Danzer(scale, WB_Danzer.Type.B);
+  danzerB=new WB_Danzer2D(scale, WB_Danzer2D.Type.B);
   danzerB.inflate(3);
-  danzerC=new WB_Danzer(scale, WB_Danzer.Type.C,new WB_Point(250,0,0));
+  danzerC=new WB_Danzer2D(scale, WB_Danzer2D.Type.C,new WB_Point(250,0,0));
   danzerC.inflate(3);
 
 }

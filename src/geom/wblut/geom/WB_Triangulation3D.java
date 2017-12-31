@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -23,6 +23,8 @@ public class WB_Triangulation3D {
 	private int[] _tetrahedra;
 
 	private int[] _triangles;
+
+	private WB_CoordCollection _points;
 
 	/**
 	 *
@@ -46,18 +48,19 @@ public class WB_Triangulation3D {
 	 * @param triangles
 	 * @param edges
 	 */
-	public WB_Triangulation3D(final int[] tetra, final int[] triangles, final int[] edges) {
+	public WB_Triangulation3D(final WB_CoordCollection points, final int[] tetra, final int[] triangles,
+			final int[] edges) {
+		_points = points;
 		_tetrahedra = tetra;
 		_triangles = triangles;
 		_edges = edges;
 		extractNeighbors(_edges);
 	}
 
-	/**
-	 *
-	 *
-	 * @return
-	 */
+	public WB_CoordCollection getPoints() {
+		return _points;
+	}
+
 	public int[] getTetrahedra() {
 		return _tetrahedra;
 	}
@@ -102,6 +105,11 @@ public class WB_Triangulation3D {
 				neighbors[i][j] = (Integer) nn[i].get(j);
 			}
 		}
+
+	}
+
+	public WB_Network getNetwork() {
+		return new WB_Network(getPoints(), getEdges());
 
 	}
 

@@ -42,7 +42,7 @@ public class HET_MTVisitorFace<E extends Object> {
 	 * @param mesh
 	 * @return
 	 */
-	public List<E> getFaceInfo(final HE_MeshStructure mesh) {
+	public List<E> getFaceInfo(final HE_HalfedgeStructure mesh) {
 		return visit(mesh.getFaces());
 	}
 

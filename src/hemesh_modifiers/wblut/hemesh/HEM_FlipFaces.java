@@ -48,7 +48,7 @@ public class HEM_FlipFaces extends HEM_Modifier {
 		prevHe = new HE_Halfedge[mesh.getNumberOfHalfedges()];
 		nextHeUVW = new HE_TextureCoordinate[mesh.getNumberOfHalfedges()];
 		int i = 0;
-		HE_MeshHalfedgeIterator heItr = mesh.heItr();
+		HE_HalfedgeIterator heItr = mesh.heItr();
 		counter = new WB_ProgressCounter(2 * mesh.getNumberOfHalfedges(), 10);
 		tracker.setCounterStatusStr("HEM_FlipFacesMeshOp", "Reordering halfedges.", counter);
 		while (heItr.hasNext()) {

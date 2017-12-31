@@ -12,9 +12,8 @@ void setup() {
   smooth(8);
 
   WB_IsoSurface2D creator=new WB_IsoSurface2D();
-  creator.setResolution(1024, 512);
   creator.setSize(1, 1);
-  creator.setValues(new ScalarField(),0,0,0.1,0.1);
+  creator.setValues(new ScalarField(),0,0,0.1,0.1,1024, 512);
   creator.setIsolevel(0.2);
   creator.setBoundary(-200);// value outside grid
   // use creator.clearBoundary() to rest boundary values to "no value".

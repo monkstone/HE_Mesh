@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -49,7 +49,7 @@ package wblut.math;
  *
  *
  */
-public class WB_Ease {
+public abstract class WB_Ease {
 
 	private static final double pmn = 1.70158; // Penner’s Magic Number.
 
@@ -57,69 +57,111 @@ public class WB_Ease {
 		IN, OUT, INOUT
 	};// 0= in, 1=out, 2=inout
 
-	public static interface Ease {
-		public double ease(EaseType type, double t, double... parameters);
+	public abstract double easeIn(double t, double... parameters);
 
-		public double easeIn(double t, double... parameters);
+	public abstract double easeOut(double t, double... parameters);
 
-		public double easeOut(double t, double... parameters);
+	public abstract double easeInOut(double t, double... parameters);
 
-		public double easeInOut(double t, double... parameters);
+	public abstract double easeIn(double t);
 
-		public double ease(EaseType type, double t);
+	public abstract double easeOut(double t);
 
-		public double easeIn(double t);
+	public abstract double easeInOut(double t);
 
-		public double easeOut(double t);
+	public static WB_Ease linear = new EaseLinear();
+	public static WB_Ease quad = new EaseQuad();
+	public static WB_Ease cubic = new EaseCubic();
+	public static WB_Ease quart = new EaseQuart();
+	public static WB_Ease quint = new EaseQuint();
+	public static WB_Ease sine = new EaseSine();
+	public static WB_Ease expo = new EaseExpo();
+	public static WB_Ease circ = new EaseCirc();
+	public static WB_Ease back = new EaseBack();
+	public static WB_Ease bounce = new EaseBounce();
+	public static WB_Ease elastic = new EaseElastic();
 
-		public double easeInOut(double t);
-	}
-
-	public static Ease linear = new EaseLinear();
-	public static Ease quad = new EaseQuad();
-	public static Ease cubic = new EaseCubic();
-	public static Ease quart = new EaseQuart();
-	public static Ease quint = new EaseQuint();
-	public static Ease sine = new EaseSine();
-	public static Ease expo = new EaseExpo();
-	public static Ease circ = new EaseCirc();
-	public static Ease back = new EaseBack();
-	public static Ease bounce = new EaseBounce();
-	public static Ease elastic = new EaseElastic();
-
-	// simple linear tweening - no easing, no acceleration
-
-	static abstract class EaseAbstract implements Ease {
-
-		@Override
-		public double ease(final EaseType type, final double t, final double... params) {
-			switch (type) {
-			case IN:
-				return easeIn(t, params);
-			case OUT:
-				return easeOut(t, params);
-			default:
-				return easeInOut(t, params);
-
-			}
-		};
-
-		@Override
-		public double ease(final EaseType type, final double t) {
-			switch (type) {
-			case IN:
-				return easeIn(t);
-			case OUT:
-				return easeOut(t);
-			default:
-				return easeInOut(t);
-
-			}
-		};
+	private WB_Ease() {
 
 	}
 
-	public static class EaseLinear extends EaseAbstract {
+	public double ease(final EaseType type, final double t, final double... params) {
+		switch (type) {
+		case IN:
+			return easeIn(t, params);
+		case OUT:
+			return easeOut(t, params);
+		default:
+			return easeInOut(t, params);
+
+		}
+	};
+
+	public double ease(final EaseType type, final double t) {
+		switch (type) {
+		case IN:
+			return easeIn(t);
+		case OUT:
+			return easeOut(t);
+		default:
+			return easeInOut(t);
+
+		}
+	};
+
+	public static WB_Ease getLinear() {
+		return new EaseLinear();
+	}
+
+	public static WB_Ease getQuad() {
+		return new EaseQuad();
+	}
+
+	public static WB_Ease getCubic() {
+		return new EaseCubic();
+	}
+
+	public static WB_Ease getQuart() {
+		return new EaseQuart();
+	}
+
+	public static WB_Ease getQuint() {
+		return new EaseQuint();
+	}
+
+	public static WB_Ease getSine() {
+		return new EaseSine();
+	}
+
+	public static WB_Ease getExpo() {
+		return new EaseExpo();
+	}
+
+	public static WB_Ease getCirc() {
+		return new EaseCirc();
+	}
+
+	public static WB_Ease getBack() {
+		return new EaseBack();
+	}
+
+	public static WB_Ease getBack(final double s) {
+		return new EaseBack(s);
+	}
+
+	public static WB_Ease getBounce() {
+		return new EaseBounce();
+	}
+
+	public static WB_Ease getElastic() {
+		return new EaseElastic();
+	}
+
+	public static WB_Ease getElastic(final double a, final double p) {
+		return new EaseElastic(a, p);
+	}
+
+	static class EaseLinear extends WB_Ease {
 
 		@Override
 		public double easeIn(final double t, final double... params) {
@@ -152,7 +194,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseQuad extends EaseAbstract {
+	static class EaseQuad extends WB_Ease {
 		@Override
 		public double easeIn(double t, final double... params) {
 			t /= params[2];
@@ -202,7 +244,7 @@ public class WB_Ease {
 
 	}
 
-	public static class EaseCubic extends EaseAbstract {
+	static class EaseCubic extends WB_Ease {
 		@Override
 		public double easeIn(double t, final double... params) {
 			t /= params[2];
@@ -252,7 +294,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseQuart extends EaseAbstract {
+	static class EaseQuart extends WB_Ease {
 
 		@Override
 		public double easeIn(double t, final double... params) {
@@ -299,7 +341,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseQuint extends EaseAbstract {
+	static class EaseQuint extends WB_Ease {
 
 		@Override
 		public double easeIn(double t, final double... params) {
@@ -346,7 +388,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseSine extends EaseAbstract {
+	static class EaseSine extends WB_Ease {
 
 		@Override
 		public double easeIn(final double t, final double... params) {
@@ -379,7 +421,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseExpo extends EaseAbstract {
+	static class EaseExpo extends WB_Ease {
 
 		@Override
 		public double easeIn(final double t, final double... params) {
@@ -422,7 +464,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseCirc extends EaseAbstract {
+	static class EaseCirc extends WB_Ease {
 
 		@Override
 		public double easeIn(double t, final double... params) {
@@ -469,7 +511,7 @@ public class WB_Ease {
 		};
 	}
 
-	public static class EaseBack extends EaseAbstract {
+	static class EaseBack extends WB_Ease {
 		double s;
 
 		public EaseBack() {
@@ -527,7 +569,7 @@ public class WB_Ease {
 
 	}
 
-	public static class EaseBounce extends EaseAbstract {
+	static class EaseBounce extends WB_Ease {
 
 		@Override
 		public double easeIn(final double t, final double... params) {
@@ -588,7 +630,7 @@ public class WB_Ease {
 		}
 	}
 
-	public static class EaseElastic extends EaseAbstract {
+	static class EaseElastic extends WB_Ease {
 
 		double a;
 		double p;

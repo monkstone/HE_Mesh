@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -127,6 +127,10 @@ public class HE_MeshCollection implements Iterable<HE_Mesh> {
 	 */
 	public HE_Mesh getMesh(final int i) {
 		return meshes.get(i);
+	}
+
+	public List<HE_Mesh> toList() {
+		return meshes;
 	}
 
 	/**

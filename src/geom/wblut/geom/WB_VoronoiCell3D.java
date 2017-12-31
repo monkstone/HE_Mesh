@@ -161,7 +161,7 @@ public class WB_VoronoiCell3D {
 	 *
 	 * @param planes
 	 */
-	void constrain(final Collection<? extends WB_Plane> planes) {
+	public void constrain(final Collection<? extends WB_Plane> planes) {
 		for (final WB_Plane P : planes) {
 			if (cell != null) {
 				slice(P);

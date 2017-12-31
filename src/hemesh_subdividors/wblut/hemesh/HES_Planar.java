@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -148,11 +148,11 @@ public class HES_Planar extends HES_Subdividor {
 						final WB_Point tmp = new WB_Point(he.getVertex());
 						final double t = 0.5 + (randomGen.nextDouble() - 0.5) * range;
 						tmp.mulSelf(t);
-						fv.addSelf(tmp);
+						fv.getPosition().addSelf(tmp);
 						c += t;
 						he = he.getNextInFace();
 					} while (he != face.getHalfedge());
-					fv.divSelf(c);
+					fv.getPosition().divSelf(c);
 					trial++;
 
 				} while (!HET_MeshOp.pointIsStrictlyInFace(fv, face) && trial < 10);
@@ -350,11 +350,11 @@ public class HES_Planar extends HES_Subdividor {
 						final WB_Point tmp = new WB_Point(he.getVertex());
 						final double t = 0.5 + (randomGen.nextDouble() - 0.5) * range;
 						tmp.mulSelf(t);
-						fv.addSelf(tmp);
+						fv.getPosition().addSelf(tmp);
 						c += t;
 						he = he.getNextInFace();
 					} while (he != face.getHalfedge());
-					fv.divSelf(c);
+					fv.getPosition().divSelf(c);
 					trial++;
 				} while (!HET_MeshOp.pointIsStrictlyInFace(fv, face) && trial < 10);
 				if (trial == 10) {

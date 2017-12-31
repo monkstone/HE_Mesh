@@ -191,7 +191,7 @@ public class HEC_Cylinder extends HEC_Creator {
 		return this;
 	}
 
-	public HEC_Cylinder setTaper(final WB_Ease.Ease E, final WB_Ease.EaseType type) {
+	public HEC_Cylinder setTaper(final WB_Ease E, final WB_Ease.EaseType type) {
 		taper = new WB_EaseScalarParameter(0, 1, 0, 1, true, E, type);
 		return this;
 	}
@@ -206,7 +206,7 @@ public class HEC_Cylinder extends HEC_Creator {
 		return this;
 	}
 
-	public HEC_Cylinder setHeightTaper(final WB_Ease.Ease E, final WB_Ease.EaseType type) {
+	public HEC_Cylinder setHeightTaper(final WB_Ease E, final WB_Ease.EaseType type) {
 		heightTaper = new WB_EaseScalarParameter(0, 1, 0, 1, true, E, type);
 		return this;
 	}

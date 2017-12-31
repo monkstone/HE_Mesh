@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -610,6 +610,160 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 		final double d2 = d.getSqLength();
 		final double radiusSum = S1.getRadius() + S2.getRadius();
 		return d2 <= radiusSum * radiusSum;
+	}
+
+	public static WB_IntersectionResult getIntersection3D(final WB_Sphere S1, final WB_Sphere S2) {
+		final WB_Vector d = WB_Vector.sub(S2.getCenter(), S1.getCenter());
+		final double dist = d.normalizeSelf();
+		double R = S1.getRadius();
+		double r = S2.getRadius();
+		double disc = dist * dist - r * r + R * R;
+		disc *= disc;
+		disc = 4 * dist * dist * R * R - disc;
+		if (disc < 0) {
+			return NOINTERSECTION();
+		}
+		double x = (dist * dist - r * r + R * R) / (2.0 * dist);
+		if (WB_Epsilon.isZero(disc)) {
+			final WB_IntersectionResult i = new WB_IntersectionResult();
+			i.intersection = true;
+			i.t1 = x;
+			i.t2 = dist - x;
+			i.object = new WB_Point(S1.getCenter()).addMulSelf(x, d);
+			i.dimension = 0;
+			i.sqDist = 0;
+			return i;
+		} else {
+			double a = Math.sqrt(disc) / (2.0 * dist);
+			final WB_IntersectionResult i = new WB_IntersectionResult();
+			i.intersection = true;
+			i.t1 = x;
+			i.t2 = dist - x;
+			i.object = new WB_Circle(new WB_Point(S1.getCenter()).addMulSelf(x, d), d, a);
+			i.dimension = 2;
+			i.sqDist = 0;
+			return i;
+		}
+	}
+
+	public static WB_IntersectionResult getIntersection3D(final WB_Sphere S, final WB_Plane P) {
+		double d = WB_GeometryOp.getDistance3D(S.getCenter(), P);
+		double radius = S.getRadius();
+		if (d > radius) {
+			return NOINTERSECTION();
+		}
+
+		if (WB_Epsilon.isZero(d - radius)) {
+			final WB_IntersectionResult i = new WB_IntersectionResult();
+			i.intersection = true;
+			i.t1 = radius;
+			i.t2 = 0;
+			i.object = WB_GeometryOp.getClosestPoint3D(S.getCenter(), P);
+			i.dimension = 0;
+			i.sqDist = 0;
+			return i;
+		} else {
+			double a = Math.sqrt(radius * radius - d * d);
+			final WB_IntersectionResult i = new WB_IntersectionResult();
+			WB_Point p = WB_GeometryOp.getClosestPoint3D(S.getCenter(), P);
+			i.intersection = true;
+			i.t1 = d;
+			i.t2 = 0;
+			i.object = new WB_Circle(p, P.getNormal(), a);
+			i.dimension = 2;
+			i.sqDist = 0;
+			return i;
+		}
+	}
+
+	public static WB_IntersectionResult getIntersection3DPlanar(final WB_Circle C1, final WB_Circle C2) {
+		final WB_Vector d = WB_Vector.sub(C2.getCenter(), C1.getCenter());
+		final double dist = d.normalizeSelf();
+		double R = C1.getRadius();
+		double r = C2.getRadius();
+		double disc = dist * dist - r * r + R * R;
+		disc *= disc;
+		disc = 4 * dist * dist * R * R - disc;
+		if (disc < 0) {
+			return NOINTERSECTION();
+		}
+		double x = (dist * dist - r * r + R * R) / (2.0 * dist);
+		if (WB_Epsilon.isZero(disc)) {
+			final WB_IntersectionResult i = new WB_IntersectionResult();
+			i.intersection = true;
+			i.t1 = x;
+			i.t2 = dist - x;
+			i.object = new WB_Point(C1.getCenter()).addMulSelf(x, d);
+			i.dimension = 0;
+			i.sqDist = 0;
+			return i;
+		} else {
+			double a = Math.sqrt(disc) / (2.0 * dist);
+			WB_Point p = new WB_Point(C1.getCenter()).addMulSelf(x, d);
+			WB_Vector v = d.cross(C1.getNormal());
+			final WB_IntersectionResult i = new WB_IntersectionResult();
+			i.intersection = true;
+			i.t1 = x;
+			i.t2 = dist - x;
+			i.object = new WB_Segment(p.addMul(a, v), p.addMul(-a, v));
+			i.dimension = 1;
+			i.sqDist = 0;
+			return i;
+		}
+	}
+
+	public static WB_IntersectionResult getIntersection3D(final WB_Sphere S, final WB_Circle C) {
+		WB_Plane P = C.getPlane();
+		WB_IntersectionResult is = getIntersection3D(S, P);
+		if (!is.intersection) {
+			return NOINTERSECTION();
+		}
+		if (is.dimension == 0) {
+			WB_Point p = (WB_Point) is.object;
+			if (WB_Epsilon.isZero(S.getRadius() - p.getDistance3D(S.getCenter()))) {
+				final WB_IntersectionResult i = new WB_IntersectionResult();
+				i.intersection = true;
+				i.t1 = S.getRadius();
+				i.t2 = 0;
+				i.object = p;
+				i.dimension = 0;
+				i.sqDist = 0;
+				return i;
+			} else {
+				return NOINTERSECTION();
+			}
+		} else {
+			WB_Circle C2 = (WB_Circle) is.object;
+			return getIntersection3DPlanar(C, C2);
+
+		}
+	}
+
+	public static WB_IntersectionResult getIntersection3D(final WB_Sphere S1, final WB_Sphere S2, final WB_Sphere S3) {
+
+		WB_IntersectionResult is = getIntersection3D(S1, S2);
+		if (!is.intersection) {
+			return NOINTERSECTION();
+		}
+		if (is.dimension == 0) {
+			WB_Point p = (WB_Point) is.object;
+			if (WB_Epsilon.isZero(S3.getRadius() - p.getDistance3D(S3.getCenter()))) {
+				final WB_IntersectionResult i = new WB_IntersectionResult();
+				i.intersection = true;
+				i.t1 = S3.getRadius();
+				i.t2 = 0;
+				i.object = p;
+				i.dimension = 0;
+				i.sqDist = 0;
+				return i;
+			} else {
+				return NOINTERSECTION();
+			}
+		} else {
+			WB_Circle C = (WB_Circle) is.object;
+			return getIntersection3D(S3, C);
+
+		}
 	}
 
 	// RAY-SPHERE
@@ -2859,6 +3013,34 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 	}
 
 	/**
+	 * Given three vertices and three distances, return the possible fourth
+	 * points of a tetrahedron
+	 *
+	 * @param p1
+	 * @param d1
+	 * @param p2
+	 * @param d2
+	 * @param p3
+	 * @param d3
+	 * @return
+	 */
+	public static WB_Coord[] getFourthPoint(final WB_Coord p1, final double d1, final WB_Coord p2, final double d2,
+			final WB_Coord p3, final double d3) {
+		WB_Sphere S1 = new WB_Sphere(p1, d1);
+		WB_Sphere S2 = new WB_Sphere(p2, d2);
+		WB_Sphere S3 = new WB_Sphere(p3, d3);
+		WB_IntersectionResult is = getIntersection3D(S1, S2, S3);
+
+		if (!is.intersection) {
+			return new WB_Point[0];
+		} else if (is.dimension == 0) {
+			return new WB_Point[] { (WB_Point) is.object };
+		} else {
+			return new WB_Coord[] { ((WB_Segment) is.object).getOrigin(), ((WB_Segment) is.object).getEndpoint() };
+		}
+	}
+
+	/**
 	 *
 	 *
 	 * @param p
@@ -4894,39 +5076,43 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 			return new double[] { px + t * (qx - px), py + t * (qy - py), pz + t * (qz - pz) };
 		}
 
-		public static double[] interpolateEaseIn(final double px, final double py, final double pz, final double qx,
-				final double qy, final double qz, final double t, final WB_Ease.Ease ease) {
-			double et = ease.easeIn(t);
+		public static double[] interpolateEase(final double px, final double py, final double pz, final double qx,
+				final double qy, final double qz, final double t, final WB_Ease ease, final WB_Ease.EaseType type) {
+			double et;
+			switch (type) {
+			case IN:
+				et = ease.easeIn(t);
+				break;
+			case INOUT:
+				et = ease.easeInOut(t);
+				break;
+			case OUT:
+				et = ease.easeOut(t);
+				break;
+			default:
+				et = ease.easeIn(t);
+				break;
+			}
 			return new double[] { px + et * (qx - px), py + et * (qy - py), pz + et * (qz - pz) };
 		}
 
-		public static double[] interpolateEaseIn(final double px, final double py, final double qx, final double qy,
-				final double t, final WB_Ease.Ease ease) {
-			double et = ease.easeIn(t);
-			return new double[] { px + et * (qx - px), py + et * (qy - py) };
-		}
-
-		public static double[] interpolateEaseInOut(final double px, final double py, final double pz, final double qx,
-				final double qy, final double qz, final double t, final WB_Ease.Ease ease) {
-			double et = ease.easeInOut(t);
-			return new double[] { px + et * (qx - px), py + et * (qy - py), pz + et * (qz - pz) };
-		}
-
-		public static double[] interpolateEaseInOut(final double px, final double py, final double qx, final double qy,
-				final double t, final WB_Ease.Ease ease) {
-			double et = ease.easeInOut(t);
-			return new double[] { px + et * (qx - px), py + et * (qy - py) };
-		}
-
-		public static double[] interpolateEaseOut(final double px, final double py, final double pz, final double qx,
-				final double qy, final double qz, final double t, final WB_Ease.Ease ease) {
-			double et = ease.easeOut(t);
-			return new double[] { px + et * (qx - px), py + et * (qy - py), pz + et * (qz - pz) };
-		}
-
-		public static double[] interpolateEaseOut(final double px, final double py, final double qx, final double qy,
-				final double t, final WB_Ease.Ease ease) {
-			double et = ease.easeOut(t);
+		public static double[] interpolateEase(final double px, final double py, final double qx, final double qy,
+				final double t, final WB_Ease ease, final WB_Ease.EaseType type) {
+			double et;
+			switch (type) {
+			case IN:
+				et = ease.easeIn(t);
+				break;
+			case INOUT:
+				et = ease.easeInOut(t);
+				break;
+			case OUT:
+				et = ease.easeOut(t);
+				break;
+			default:
+				et = ease.easeIn(t);
+				break;
+			}
 			return new double[] { px + et * (qx - px), py + et * (qy - py) };
 		}
 
@@ -5540,39 +5726,43 @@ public class WB_GeometryOp3D extends WB_GeometryOp2D {
 		return new double[] { px + t * (qx - px), py + t * (qy - py), pz + t * (qz - pz) };
 	}
 
-	public static double[] interpolateEaseIn(final double px, final double py, final double pz, final double qx,
-			final double qy, final double qz, final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeIn(t);
+	public static double[] interpolateEase(final double px, final double py, final double pz, final double qx,
+			final double qy, final double qz, final double t, final WB_Ease ease, final WB_Ease.EaseType type) {
+		double et;
+		switch (type) {
+		case IN:
+			et = ease.easeIn(t);
+			break;
+		case INOUT:
+			et = ease.easeInOut(t);
+			break;
+		case OUT:
+			et = ease.easeOut(t);
+			break;
+		default:
+			et = ease.easeIn(t);
+			break;
+		}
 		return new double[] { px + et * (qx - px), py + et * (qy - py), pz + et * (qz - pz) };
 	}
 
-	public static double[] interpolateEaseIn(final double px, final double py, final double qx, final double qy,
-			final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeIn(t);
-		return new double[] { px + et * (qx - px), py + et * (qy - py) };
-	}
-
-	public static double[] interpolateEaseInOut(final double px, final double py, final double pz, final double qx,
-			final double qy, final double qz, final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeInOut(t);
-		return new double[] { px + et * (qx - px), py + et * (qy - py), pz + et * (qz - pz) };
-	}
-
-	public static double[] interpolateEaseInOut(final double px, final double py, final double qx, final double qy,
-			final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeInOut(t);
-		return new double[] { px + et * (qx - px), py + et * (qy - py) };
-	}
-
-	public static double[] interpolateEaseOut(final double px, final double py, final double pz, final double qx,
-			final double qy, final double qz, final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeOut(t);
-		return new double[] { px + et * (qx - px), py + et * (qy - py), pz + et * (qz - pz) };
-	}
-
-	public static double[] interpolateEaseOut(final double px, final double py, final double qx, final double qy,
-			final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeOut(t);
+	public static double[] interpolateEase(final double px, final double py, final double qx, final double qy,
+			final double t, final WB_Ease ease, final WB_Ease.EaseType type) {
+		double et;
+		switch (type) {
+		case IN:
+			et = ease.easeIn(t);
+			break;
+		case INOUT:
+			et = ease.easeInOut(t);
+			break;
+		case OUT:
+			et = ease.easeOut(t);
+			break;
+		default:
+			et = ease.easeIn(t);
+			break;
+		}
 		return new double[] { px + et * (qx - px), py + et * (qy - py) };
 	}
 

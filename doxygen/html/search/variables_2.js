@@ -1,7 +1,7 @@
 var searchData=
 [
   ['b',['b',['../classwblut_1_1geom_1_1_w_b___geodesic.html#a046c1f18ef236da9998ca4a4c8c5736f',1,'wblut.geom.WB_Geodesic.b()'],['../classwblut_1_1geom_1_1_w_b___triangle.html#a06868797517a77c3e536ea4bf7c4f3fe',1,'wblut.geom.WB_Triangle.b()'],['../classwblut_1_1hemesh_1_1_h_e_c___geodesic.html#a9b75d781c97ea96ff78418131a892897',1,'wblut.hemesh.HEC_Geodesic.b()'],['../enumwblut_1_1geom_1_1_w_b___danzer_1_1_type.html#ae41a8b31d19b149d89637d167bc00e16',1,'wblut.geom.WB_Danzer.Type.B()']]],
-  ['back',['BACK',['../enumwblut_1_1geom_1_1_w_b___classification.html#a2e498bbd99349740e404d68a5734845d',1,'wblut.geom.WB_Classification.BACK()'],['../classwblut_1_1math_1_1_w_b___ease.html#acbca5ac239ed4fd1b2ca0811620130b8',1,'wblut.math.WB_Ease.back()']]],
+  ['back',['BACK',['../enumwblut_1_1geom_1_1_w_b___classification.html#a2e498bbd99349740e404d68a5734845d',1,'wblut.geom.WB_Classification.BACK()'],['../classwblut_1_1math_1_1_w_b___ease.html#af5ac5479c5b26296714dbc1d6bfa3c5d',1,'wblut.math.WB_Ease.back()']]],
   ['backexcl',['BACKEXCL',['../enumwblut_1_1geom_1_1_w_b___classification.html#afb07820acc7733763e418eeca1b903e1',1,'wblut::geom::WB_Classification']]],
   ['basecolor',['baseColor',['../classwblut_1_1hemesh_1_1_h_e_t___writer_s_t_l_1_1_materialise_s_t_l_color_model.html#af38165f1dd5430468f600528db43b5d5',1,'wblut::hemesh::HET_WriterSTL::MaterialiseSTLColorModel']]],
   ['bendaxis',['bendAxis',['../classwblut_1_1hemesh_1_1_h_e_m___bend.html#abeb3057f189a405a1accc0b796cc0e9e',1,'wblut::hemesh::HEM_Bend']]],
@@ -10,7 +10,7 @@ var searchData=
   ['blendfactor',['blendFactor',['../classwblut_1_1hemesh_1_1_h_e_s___catmull_clark.html#a454468866ff0eb9595ac9f9df4d9d9cf',1,'wblut::hemesh::HES_CatmullClark']]],
   ['blue',['BLUE',['../enumwblut_1_1geom_1_1_w_b___iso_values2_d_1_1_mode.html#a9f453306486ef53d4392cc29fdff2938',1,'wblut.geom.WB_IsoValues2D.Mode.BLUE()'],['../enumwblut_1_1geom_1_1_w_b___iso_values3_d_1_1_mode.html#a89eb20edf1034f43034416eca8448337',1,'wblut.geom.WB_IsoValues3D.Mode.BLUE()']]],
   ['bottomcap',['bottomcap',['../classwblut_1_1hemesh_1_1_h_e_c___capsule.html#abdff025a7dd4a3247d6d318a47eb2608',1,'wblut.hemesh.HEC_Capsule.bottomcap()'],['../classwblut_1_1hemesh_1_1_h_e_c___cylinder.html#a252b2fdb734c6e3a6d31b0f49ff76f9e',1,'wblut.hemesh.HEC_Cylinder.bottomcap()'],['../classwblut_1_1hemesh_1_1_h_e_c___sweep_tube.html#aede5a2918248f9412cbb6ca3e8f0030e',1,'wblut.hemesh.HEC_SweepTube.bottomcap()']]],
-  ['bounce',['bounce',['../classwblut_1_1math_1_1_w_b___ease.html#a0b8df00d81986d1f411f544eafe3362a',1,'wblut::math::WB_Ease']]],
+  ['bounce',['bounce',['../classwblut_1_1math_1_1_w_b___ease.html#ae306a04ebb312e8def55cf7bcee9750f',1,'wblut::math::WB_Ease']]],
   ['boundaries',['boundaries',['../classwblut_1_1hemesh_1_1_h_e___mesh.html#ae674131a4718cbd844e53f52c97d831c',1,'wblut::hemesh::HE_Mesh']]],
   ['boundary',['boundary',['../classwblut_1_1geom_1_1_w_b___iso_surface.html#a1665060aed0c89cdc8c63ec11286719f',1,'wblut.geom.WB_IsoSurface.boundary()'],['../classwblut_1_1geom_1_1_w_b___iso_surface2_d.html#ac8b5fb11b774633bb08cdfd5e83a8d4a',1,'wblut.geom.WB_IsoSurface2D.boundary()'],['../classwblut_1_1hemesh_1_1_h_e_c___iso_surface.html#ac19e4513ff6dad6fc6d46dfc04b3bafa',1,'wblut.hemesh.HEC_IsoSurface.boundary()']]],
   ['boundarypairs',['boundaryPairs',['../classwblut_1_1hemesh_1_1_h_e_m___mirror.html#a4055ebd8205ebff21143ea4d5f237060',1,'wblut::hemesh::HEM_Mirror']]],

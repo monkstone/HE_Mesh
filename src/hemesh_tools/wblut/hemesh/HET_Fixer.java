@@ -215,7 +215,7 @@ public class HET_Fixer {
 		VertexInfo vi;
 		WB_ProgressCounter counter = new WB_ProgressCounter(mesh.getNumberOfHalfedges(), 10);
 		tracker.setCounterStatus("HET_Fixer", "Classifying halfedges per vertex.", counter);
-		HE_MeshHalfedgeIterator heItr = mesh.heItr();
+		HE_HalfedgeIterator heItr = mesh.heItr();
 		HE_Halfedge he;
 		while (heItr.hasNext()) {
 			he = heItr.next();
@@ -506,6 +506,66 @@ public class HET_Fixer {
 		public WB_Segment getSegment() {
 			return segment;
 		}
+	}
+
+	public static void findTJunctions(final HE_Mesh mesh) {
+		List<HE_Halfedge> bhes = mesh.getAllBoundaryHalfedges();
+		HE_Vertex v;
+		HE_Halfedge heprev;
+		HE_Selection sel = new HE_Selection(mesh);
+		double ds2, de2, dse2;
+		for (HE_Halfedge current : bhes) {
+			heprev = current.getPrevInFace();
+			v = current.getStartVertex();
+			for (HE_Halfedge check : bhes) {
+				if (check != current && check != heprev) {
+					dse2 = WB_GeometryOp.getDistanceToSegment3D(v, check.getStartVertex(), check.getEndVertex());
+					if (WB_Epsilon.isZeroSq(dse2)) {
+						ds2 = WB_GeometryOp.getSqDistance3D(v, check.getStartVertex());
+						de2 = WB_GeometryOp.getSqDistance3D(v, check.getEndVertex());
+						if (!WB_Epsilon.isZeroSq(ds2) && !WB_Epsilon.isZeroSq(de2)) {
+							sel.add(v);
+							//
+							break;
+						}
+					}
+
+				}
+			}
+		}
+
+		mesh.addSelection("tjunctions", sel);
+
+	}
+
+	public static void fixTJunctions(final HE_Mesh mesh) {
+		List<HE_Halfedge> bhes = mesh.getAllBoundaryHalfedges();
+		HE_Vertex v;
+		HE_Halfedge heprev;
+		HE_Selection sel = new HE_Selection(mesh);
+		double ds2, de2, dse2;
+		for (HE_Halfedge current : bhes) {
+			heprev = current.getPrevInFace();
+			v = current.getStartVertex();
+			for (HE_Halfedge check : bhes) {
+				if (check != current && check != heprev) {
+					dse2 = WB_GeometryOp.getDistanceToSegment3D(v, check.getStartVertex(), check.getEndVertex());
+					if (WB_Epsilon.isZeroSq(dse2)) {
+						ds2 = WB_GeometryOp.getSqDistance3D(v, check.getStartVertex());
+						de2 = WB_GeometryOp.getSqDistance3D(v, check.getEndVertex());
+						if (!WB_Epsilon.isZeroSq(ds2) && !WB_Epsilon.isZeroSq(de2)) {
+							sel.add(v);
+							HET_MeshOp.splitEdge(mesh, check, v);
+							break;
+						}
+					}
+
+				}
+			}
+		}
+
+		mesh.addSelection("tjunctions", sel);
+
 	}
 
 }

@@ -4,11 +4,8 @@ import wblut.core.*;
 import wblut.hemesh.*;
 import wblut.geom.*;
 
-
 HE_Mesh hull;
 HE_MeshCollection panels;
-
-
 WB_Render render;
 
 void setup() {
@@ -20,8 +17,8 @@ void setup() {
   //panelize the hull
   HEMC_Panelizer multiCreator=new HEMC_Panelizer();
   multiCreator.setMesh(hull);
-  multiCreator.setThickness(4);
-  multiCreator.setOffset(-20);
+  multiCreator.setThickness(5);
+  
   panels=new HE_MeshCollection();
   panels.createThreaded(multiCreator);
 

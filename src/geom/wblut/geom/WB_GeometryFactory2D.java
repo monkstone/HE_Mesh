@@ -31,6 +31,7 @@ import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
 import com.vividsolutions.jts.operation.buffer.BufferOp;
 import com.vividsolutions.jts.operation.buffer.BufferParameters;
 import com.vividsolutions.jts.simplify.TopologyPreservingSimplifier;
@@ -45,7 +46,7 @@ public class WB_GeometryFactory2D {
 	/**
 	 *
 	 */
-	private final GeometryFactory JTSgf = new GeometryFactory();
+	private final GeometryFactory JTSgf = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL));
 	/**
 	 *
 	 */

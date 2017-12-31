@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -139,7 +139,7 @@ public class HEM_Inflate extends HEM_Modifier {
 				}
 				dv.normalizeSelf();
 				dv.mulSelf(factor);
-				newPositions[id] = v.add(dv);
+				newPositions[id] = v.getPosition().add(dv);
 				id++;
 			}
 			vItr = mesh.vItr();
@@ -196,7 +196,7 @@ public class HEM_Inflate extends HEM_Modifier {
 				}
 				dv.normalizeSelf();
 				dv.mulSelf(factor);
-				newPositions[id] = v.add(dv);
+				newPositions[id] = v.getPosition().add(dv);
 				id++;
 			}
 			vItr = selection.vItr();

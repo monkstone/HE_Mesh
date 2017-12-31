@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -2975,39 +2975,43 @@ public class WB_GeometryOp2D extends WB_GeometryOpGLU {
 		return new double[] { p.xd() + t * (q.xd() - p.xd()), p.yd() + t * (q.yd() - p.yd()) };
 	}
 
-	public static final double[] interpolateEaseIn2D(final double px, final double py, final double qx, final double qy,
-			final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeIn(t);
+	public static final double[] interpolateEase2D(final double px, final double py, final double qx, final double qy,
+			final double t, final WB_Ease ease, final WB_Ease.EaseType type) {
+		double et;
+		switch (type) {
+		case IN:
+			et = ease.easeIn(t);
+			break;
+		case INOUT:
+			et = ease.easeInOut(t);
+			break;
+		case OUT:
+			et = ease.easeOut(t);
+			break;
+		default:
+			et = ease.easeIn(t);
+			break;
+		}
 		return new double[] { px + et * (qx - px), py + et * (qy - py) };
 	}
 
-	public static final double[] interpolateEaseIn2D(final WB_Coord p, final WB_Coord q, final double t,
-			final WB_Ease.Ease ease) {
-		double et = ease.easeIn(t);
-		return new double[] { p.xd() + et * (q.xd() - p.xd()), p.yd() + et * (q.yd() - p.yd()) };
-	}
-
-	public static final double[] interpolateEaseInOut2D(final double px, final double py, final double qx,
-			final double qy, final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeInOut(t);
-		return new double[] { px + et * (qx - px), py + et * (qy - py) };
-	}
-
-	public static final double[] interpolateEaseInOut2D(final WB_Coord p, final WB_Coord q, final double t,
-			final WB_Ease.Ease ease) {
-		double et = ease.easeInOut(t);
-		return new double[] { p.xd() + et * (q.xd() - p.xd()), p.yd() + et * (q.yd() - p.yd()) };
-	}
-
-	public static final double[] interpolateEaseOut2D(final double px, final double py, final double qx,
-			final double qy, final double t, final WB_Ease.Ease ease) {
-		double et = ease.easeOut(t);
-		return new double[] { px + et * (qx - px), py + et * (qy - py) };
-	}
-
-	public static final double[] interpolateEaseOut2D(final WB_Coord p, final WB_Coord q, final double t,
-			final WB_Ease.Ease ease) {
-		double et = ease.easeOut(t);
+	public static final double[] interpolateEase2D(final WB_Coord p, final WB_Coord q, final double t,
+			final WB_Ease ease, final WB_Ease.EaseType type) {
+		double et;
+		switch (type) {
+		case IN:
+			et = ease.easeIn(t);
+			break;
+		case INOUT:
+			et = ease.easeInOut(t);
+			break;
+		case OUT:
+			et = ease.easeOut(t);
+			break;
+		default:
+			et = ease.easeIn(t);
+			break;
+		}
 		return new double[] { p.xd() + et * (q.xd() - p.xd()), p.yd() + et * (q.yd() - p.yd()) };
 	}
 

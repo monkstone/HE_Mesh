@@ -16,7 +16,7 @@ void setup() {
   container=new HE_Mesh(new HEC_Torus(120,320,16,64));
 
 
-  HEMC_VoronoiCellsPre multiCreator=new HEMC_VoronoiCellsPre();
+  HEMC_VoronoiCells multiCreator=new HEMC_VoronoiCells();
   multiCreator.setMesh(container,true);
  
   multiCreator.setOffset(2);

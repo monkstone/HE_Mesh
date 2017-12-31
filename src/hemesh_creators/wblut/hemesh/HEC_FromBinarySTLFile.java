@@ -27,22 +27,22 @@ import wblut.geom.WB_Triangle;
 public class HEC_FromBinarySTLFile extends HEC_Creator {
 
 	/**
-	 * 
+	 *
 	 */
 	private final byte[] buf = new byte[12];
 
 	/**
-	 * 
+	 *
 	 */
 	private String path;
 
 	/**
-	 * 
+	 *
 	 */
 	private double scale;
 
 	/**
-	 * 
+	 *
 	 */
 	public HEC_FromBinarySTLFile() {
 		super();
@@ -52,7 +52,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param path
 	 */
@@ -64,7 +64,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param path
 	 * @return
@@ -75,7 +75,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param f
 	 * @return
@@ -87,7 +87,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */
@@ -96,7 +96,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return
 	 */
@@ -105,7 +105,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param b
 	 * @return
@@ -115,7 +115,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param file
 	 * @return
@@ -137,7 +137,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param ds
 	 * @param result
@@ -156,7 +156,7 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.hemesh.creators.HEC_Creator#createBase()
 	 */
 	@Override
@@ -173,10 +173,11 @@ public class HEC_FromBinarySTLFile extends HEC_Creator {
 			// read num faces
 			ds.read(buf, 0, 4);
 			final int numFaces = bufferToInt();
-			final WB_Point a = new WB_Point();
-			final WB_Point b = new WB_Point();
-			final WB_Point c = new WB_Point();
+
 			for (int i = 0; i < numFaces; i++) {
+				final WB_Point a = new WB_Point();
+				final WB_Point b = new WB_Point();
+				final WB_Point c = new WB_Point();
 				// ignore face normal
 				ds.read(buf, 0, 12);
 				// face vertices

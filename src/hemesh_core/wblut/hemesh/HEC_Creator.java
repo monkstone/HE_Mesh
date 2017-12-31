@@ -37,6 +37,7 @@ public abstract class HEC_Creator extends HE_Machine {
 	protected WB_Vector zaxis;
 	/** Override. */
 	protected boolean override;
+	protected boolean override2D;
 	/** Use applet model coordinates. */
 	protected boolean toModelview;
 	/** Base Z-axis. */

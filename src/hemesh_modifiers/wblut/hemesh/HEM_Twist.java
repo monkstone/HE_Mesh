@@ -99,7 +99,7 @@ public class HEM_Twist extends HEM_Modifier {
 			while (vItr.hasNext()) {
 				v = vItr.next();
 				final double d = WB_GeometryOp3D.getDistance3D(v, twistAxis);
-				v.rotateAboutAxisSelf(d * angleFactor, twistAxis.getOrigin(), twistAxis.getDirection());
+				v.getPosition().rotateAboutAxisSelf(d * angleFactor, twistAxis.getOrigin(), twistAxis.getDirection());
 			}
 		}
 
@@ -121,7 +121,7 @@ public class HEM_Twist extends HEM_Modifier {
 			while (vItr.hasNext()) {
 				v = vItr.next();
 				final double d = WB_GeometryOp3D.getDistance3D(v, twistAxis);
-				v.rotateAboutAxisSelf(d * angleFactor, twistAxis.getOrigin(), twistAxis.getDirection());
+				v.getPosition().rotateAboutAxisSelf(d * angleFactor, twistAxis.getOrigin(), twistAxis.getDirection());
 			}
 		}
 

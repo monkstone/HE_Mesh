@@ -26,7 +26,7 @@ public class HEC_FromQuads extends HEC_Creator {
 
 	/**
 	 * Instantiates a new HEC_FromQuads.
-	 * 
+	 *
 	 */
 	public HEC_FromQuads() {
 		super();
@@ -35,7 +35,7 @@ public class HEC_FromQuads extends HEC_Creator {
 
 	/**
 	 * Instantiates a new HEC_FromQuads.
-	 * 
+	 *
 	 * @param qs
 	 *            the qs
 	 */
@@ -45,10 +45,10 @@ public class HEC_FromQuads extends HEC_Creator {
 	}
 
 	/**
-	 * Instantiates a new hE c_ from quads.
-	 * 
+	 * Instantiates a new HEC_FromQuads.
+	 *
 	 * @param qs
-	 *            the qs
+	 * 
 	 */
 	public HEC_FromQuads(final Collection<WB_Quad> qs) {
 		this();
@@ -57,7 +57,7 @@ public class HEC_FromQuads extends HEC_Creator {
 
 	/**
 	 * Sets the source quads.
-	 * 
+	 *
 	 * @param qs
 	 *            source quads
 	 * @return self
@@ -69,7 +69,7 @@ public class HEC_FromQuads extends HEC_Creator {
 
 	/**
 	 * Sets the source quads.
-	 * 
+	 *
 	 * @param qs
 	 *            source quads
 	 * @return self
@@ -87,7 +87,7 @@ public class HEC_FromQuads extends HEC_Creator {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see wblut.hemesh.HE_Creator#create()
 	 */
 	@Override

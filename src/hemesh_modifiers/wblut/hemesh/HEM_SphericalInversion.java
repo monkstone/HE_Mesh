@@ -148,13 +148,13 @@ public class HEM_SphericalInversion extends HEM_Modifier {
 				d.normalizeSelf();
 				surf = new WB_Point(center).addMulSelf(r, d);
 				d = surf.subToVector3D(v).mulSelf(2);
-				v.addSelf(d);
+				v.getPosition().addSelf(d);
 			} else {
 				d = WB_Vector.subToVector3D(v, center);
 				ri = d.normalizeSelf();
 				rf = r2 * Math.max(icutoff, 1.0 / ri);
 				v.set(center);
-				v.addMulSelf(rf, d);
+				v.getPosition().addMulSelf(rf, d);
 			}
 		}
 		return mesh;
@@ -187,14 +187,14 @@ public class HEM_SphericalInversion extends HEM_Modifier {
 				d.normalizeSelf();
 				surf = new WB_Point(center).addMulSelf(r, d);
 				d = WB_Vector.subToVector3D(v, surf);
-				v.addSelf(d);
+				v.getPosition().addSelf(d);
 			} else {
 				d = WB_Vector.subToVector3D(v, center);
 				ri = d.getLength();
 				d.normalizeSelf();
 				rf = r2 * Math.max(icutoff, 1.0 / ri);
 				v.set(center);
-				v.addMulSelf(rf, d);
+				v.getPosition().addMulSelf(rf, d);
 			}
 		}
 		return selection.parent;

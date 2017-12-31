@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -407,19 +407,9 @@ public class WB_Vector2D extends WB_MutableCoordinate2D implements WB_MutableCoo
 		return new WB_Vector2D(WB_GeometryOp2D.interpolate2D(v.xd(), v.yd(), w.xd(), w.yd(), f));
 	}
 
-	public static WB_Vector2D interpolateEaseIn(final WB_Coord v, final WB_Coord w, final double f,
-			final WB_Ease.Ease ease) {
-		return new WB_Vector2D(WB_GeometryOp2D.interpolateEaseIn2D(v.xd(), v.yd(), w.xd(), w.yd(), f, ease));
-	}
-
-	public static WB_Vector2D interpolateEaseOut(final WB_Coord v, final WB_Coord w, final double f,
-			final WB_Ease.Ease ease) {
-		return new WB_Vector2D(WB_GeometryOp2D.interpolateEaseOut2D(v.xd(), v.yd(), w.xd(), w.yd(), f, ease));
-	}
-
-	public static WB_Vector2D interpolateEaseInOut(final WB_Coord v, final WB_Coord w, final double f,
-			final WB_Ease.Ease ease) {
-		return new WB_Vector2D(WB_GeometryOp2D.interpolateEaseInOut2D(v.xd(), v.yd(), w.xd(), w.yd(), f, ease));
+	public static WB_Vector2D interpolateEase(final WB_Coord v, final WB_Coord w, final double f, final WB_Ease ease,
+			final WB_Ease.EaseType type) {
+		return new WB_Vector2D(WB_GeometryOp2D.interpolateEase2D(v.xd(), v.yd(), w.xd(), w.yd(), f, ease, type));
 	}
 
 	@Override

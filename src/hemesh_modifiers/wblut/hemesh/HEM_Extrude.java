@@ -340,7 +340,7 @@ public class HEM_Extrude extends HEM_Modifier {
 							n = _faceNormals.get(f.key());
 							he = f.getHalfedge();
 							do {
-								he.getVertex().addMulSelf(heights[i], n);
+								he.getVertex().getPosition().addMulSelf(heights[i], n);
 								he = he.getNextInFace();
 							} while (he != f.getHalfedge());
 						}
@@ -359,7 +359,7 @@ public class HEM_Extrude extends HEM_Modifier {
 						he = f.getHalfedge();
 						do {
 							final HE_Vertex v = he.getVertex();
-							v.addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
+							v.getPosition().addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
 							he = he.getNextInFace();
 						} while (he != f.getHalfedge());
 					}
@@ -459,7 +459,7 @@ public class HEM_Extrude extends HEM_Modifier {
 						n = _faceNormals.get(f.key());
 						he = f.getHalfedge();
 						do {
-							he.getVertex().addMulSelf(heights[i], n);
+							he.getVertex().getPosition().addMulSelf(heights[i], n);
 							he = he.getNextInFace();
 						} while (he != f.getHalfedge());
 					}
@@ -474,7 +474,7 @@ public class HEM_Extrude extends HEM_Modifier {
 					he = f.getHalfedge();
 					do {
 						final HE_Vertex v = he.getVertex();
-						v.addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
+						v.getPosition().addMulSelf(d.evaluate(v.xd(), v.yd(), v.zd()), n);
 						he = he.getNextInFace();
 					} while (he != f.getHalfedge());
 				}
@@ -575,7 +575,7 @@ public class HEM_Extrude extends HEM_Modifier {
 			final HE_Vertex eov = new HE_Vertex(outerHalfedges.get(i).getVertex());
 			eov.copyProperties(outerHalfedges.get(i).getVertex());
 			if (n != null) {
-				eov.addMulSelf(d, n);
+				eov.getPosition().addMulSelf(d, n);
 			}
 			extOuterVertices.add(eov);
 		}
@@ -583,7 +583,7 @@ public class HEM_Extrude extends HEM_Modifier {
 		for (int i = 0; i < vertices.size(); i++) {
 			final HE_Vertex v = vertices.get(i);
 			if (!outerVertices.contains(v)) {
-				v.addMulSelf(d, n);
+				v.getPosition().addMulSelf(d, n);
 			}
 		}
 		for (int i = 0; i < halfedges.size(); i++) {
@@ -727,7 +727,7 @@ public class HEM_Extrude extends HEM_Modifier {
 			final HE_Vertex eov = new HE_Vertex(outerHalfedges.get(i).getVertex());
 			eov.copyProperties(outerHalfedges.get(i).getVertex());
 			if (n != null) {
-				eov.addMulSelf(d, n);
+				eov.getPosition().addMulSelf(d, n);
 			}
 			extOuterVertices.add(eov);
 		}
@@ -735,7 +735,7 @@ public class HEM_Extrude extends HEM_Modifier {
 		for (int i = 0; i < vertices.size(); i++) {
 			final HE_Vertex v = vertices.get(i);
 			if (!outerVertices.contains(v)) {
-				v.addMulSelf(d, n);
+				v.getPosition().addMulSelf(d, n);
 			}
 		}
 		for (int i = 0; i < halfedges.size(); i++) {

@@ -76,8 +76,8 @@ public class HEMC_Panelizer extends HEMC_MultiCreator {
 		WB_Coord fc;
 		for (final HE_Face f : mesh.getFaces()) {
 			fc = f.getFaceCenter();
-			pc.setThickness(thickness.evaluate(fc.xd(), fc.yd(), fc.zd()));
-			pc.setOffset(offset.evaluate(fc.xd(), fc.yd(), fc.zd()));
+			pc.setThickness(-thickness.evaluate(fc.xd(), fc.yd(), fc.zd()));
+			pc.setOffset(-offset.evaluate(fc.xd(), fc.yd(), fc.zd()));
 			pc.setPolygon(f.toPolygon());
 			result.add(new HE_Mesh(pc));
 			id++;

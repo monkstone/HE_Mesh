@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -319,15 +319,17 @@ public class WB_Polygon extends WB_Ring implements WB_TriangleGenerator {
 						points.get(3));
 			} else {
 
-				if (numberOfContours == 2) {
+				if (numberOfContours > 1) {
 					final WB_Triangulation2D triangulation = new WB_PolygonTriangulatorJTS()
 							.triangulatePolygon2D(this.toPolygon2DOrtho(), optimize);
 					triangles = triangulation.getTriangles();
+
 				} else {
 					final WB_Triangulation2D triangulation = new WB_PolygonTriangulatorEarcut()
 							.triangulatePolygon2D(this.toPolygon2DOrtho());
 					triangles = triangulation.getTriangles();
 				}
+
 			}
 		}
 		return triangles;

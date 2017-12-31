@@ -35,7 +35,7 @@ public class HET_Texture {
 		while (vItr.hasNext()) {
 			vItr.next().clearUVW();
 		}
-		HE_MeshHalfedgeIterator heItr = mesh.heItr();
+		HE_HalfedgeIterator heItr = mesh.heItr();
 		while (heItr.hasNext()) {
 			heItr.next().clearUVW();
 		}

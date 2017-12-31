@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -12,14 +12,16 @@ package wblut.hemesh;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import com.vividsolutions.jts.algorithm.CGAlgorithms;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import wblut.core.WB_ProgressReporter.WB_ProgressCounter;
 import wblut.core.WB_ProgressReporter.WB_ProgressTracker;
 import wblut.geom.WB_Coord;
@@ -32,6 +34,7 @@ import wblut.geom.WB_Point;
 import wblut.geom.WB_Polygon;
 import wblut.geom.WB_Triangulate;
 import wblut.geom.WB_Triangulation2DWithPoints;
+import wblut.math.WB_Epsilon;
 
 /**
  *
@@ -40,7 +43,7 @@ class HET_PlanarPathTriangulator {
 	/**
 	 *
 	 */
-	private static GeometryFactory JTSgf = new GeometryFactory();
+	private static GeometryFactory JTSgf = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL));
 	/**
 	 *
 	 */
@@ -95,7 +98,7 @@ class HET_PlanarPathTriangulator {
 		WB_ProgressCounter counter = new WB_ProgressCounter(polygons.size(), 10);
 		tracker.setCounterStatus("HET_PlanarPathTriangulator", "Triangulating polygons.", counter);
 		for (final WB_Polygon poly : polygons) {
-			final int[] tris = poly.getTriangles(false);
+			final int[] tris = poly.getTriangles(true);
 			for (int i = 0; i < tris.length; i += 3) {
 				triangles.add(new WB_Coord[] { poly.getPoint(tris[i]), poly.getPoint(tris[i + 1]),
 						poly.getPoint(tris[i + 2]) });

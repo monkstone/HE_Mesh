@@ -366,6 +366,16 @@ public class WB_Render2D extends WB_Processing {
 		}
 	}
 
+	public void drawTriangle2D(final int[] tri, final WB_CoordCollection points) {
+		for (int i = 0; i < tri.length; i += 3) {
+			home.beginShape(PConstants.TRIANGLES);
+			vertex2D(points.get(tri[i]));
+			vertex2D(points.get(tri[i + 1]));
+			vertex2D(points.get(tri[i + 2]));
+			home.endShape();
+		}
+	}
+
 	/**
 	 *
 	 *

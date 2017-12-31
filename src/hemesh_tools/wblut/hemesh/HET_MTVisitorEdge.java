@@ -42,7 +42,7 @@ public class HET_MTVisitorEdge<E extends Object> {
 	 * @param mesh
 	 * @return
 	 */
-	public List<E> getEdgeInfo(final HE_MeshStructure mesh) {
+	public List<E> getEdgeInfo(final HE_HalfedgeStructure mesh) {
 		return visit(mesh.getEdges());
 	}
 

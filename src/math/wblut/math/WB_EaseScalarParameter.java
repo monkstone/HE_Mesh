@@ -23,12 +23,12 @@ public class WB_EaseScalarParameter implements WB_ScalarParameter {
 	double lowValue, highValue;
 	double rangeT, rangeValue;
 	boolean clamp;
-	WB_Ease.Ease ease;
+	WB_Ease ease;
 
 	WB_Ease.EaseType type;
 
 	public WB_EaseScalarParameter(final double lowT, final double highT, final double lowValue, final double highValue,
-			final WB_Ease.Ease ease, final WB_Ease.EaseType type) {
+			final WB_Ease ease, final WB_Ease.EaseType type) {
 		if (lowT <= highT) {
 			this.lowT = lowT;
 			this.highT = highT;
@@ -49,7 +49,7 @@ public class WB_EaseScalarParameter implements WB_ScalarParameter {
 	}
 
 	public WB_EaseScalarParameter(final double lowT, final double highT, final double lowValue, final double highValue,
-			final boolean clamp, final WB_Ease.Ease ease, final WB_Ease.EaseType type) {
+			final boolean clamp, final WB_Ease ease, final WB_Ease.EaseType type) {
 		if (lowT <= highT) {
 			this.lowT = lowT;
 			this.highT = highT;
@@ -70,7 +70,7 @@ public class WB_EaseScalarParameter implements WB_ScalarParameter {
 	}
 
 	public WB_EaseScalarParameter(final double lowT, final double highT, final double lowValue, final double highValue,
-			final WB_Ease.Ease ease) {
+			final WB_Ease ease) {
 		if (lowT <= highT) {
 			this.lowT = lowT;
 			this.highT = highT;
@@ -91,7 +91,7 @@ public class WB_EaseScalarParameter implements WB_ScalarParameter {
 	}
 
 	public WB_EaseScalarParameter(final double lowT, final double highT, final double lowValue, final double highValue,
-			final boolean clamp, final WB_Ease.Ease ease) {
+			final boolean clamp, final WB_Ease ease) {
 		if (lowT <= highT) {
 			this.lowT = lowT;
 			this.highT = highT;

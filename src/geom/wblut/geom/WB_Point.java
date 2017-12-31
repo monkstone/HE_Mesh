@@ -337,21 +337,11 @@ public class WB_Point extends WB_Vector {
 		return new WB_Point(WB_GeometryOp3D.interpolate(v.xd(), v.yd(), v.zd(), w.xd(), w.yd(), w.zd(), f));
 	}
 
-	public static WB_Point interpolateEaseIn(final WB_Coord v, final WB_Coord w, final double f,
-			final WB_Ease.Ease ease) {
-		return new WB_Point(WB_GeometryOp3D.interpolateEaseIn(v.xd(), v.yd(), v.zd(), w.xd(), w.yd(), w.zd(), f, ease));
-	}
+	public static WB_Point interpolateEase(final WB_Coord v, final WB_Coord w, final double f, final WB_Ease ease,
+			final WB_Ease.EaseType type) {
 
-	public static WB_Point interpolateEaseOut(final WB_Coord v, final WB_Coord w, final double f,
-			final WB_Ease.Ease ease) {
 		return new WB_Point(
-				WB_GeometryOp3D.interpolateEaseOut(v.xd(), v.yd(), v.zd(), w.xd(), w.yd(), w.zd(), f, ease));
-	}
-
-	public static WB_Point interpolateEaseInOut(final WB_Coord v, final WB_Coord w, final double f,
-			final WB_Ease.Ease ease) {
-		return new WB_Point(
-				WB_GeometryOp3D.interpolateEaseInOut(v.xd(), v.yd(), v.zd(), w.xd(), w.yd(), w.zd(), f, ease));
+				WB_GeometryOp3D.interpolateEase(v.xd(), v.yd(), v.zd(), w.xd(), w.yd(), w.zd(), f, ease, type));
 	}
 
 	/*

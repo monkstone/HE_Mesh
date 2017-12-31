@@ -31,6 +31,10 @@ public class HE_VertexIterator implements Iterator<HE_Vertex> {
 		_itr = vertices.iterator();
 	}
 
+	HE_VertexIterator(final HE_HalfedgeStructure mesh) {
+		_itr = mesh.vItr();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *

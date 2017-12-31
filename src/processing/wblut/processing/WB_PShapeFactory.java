@@ -21,10 +21,11 @@ import wblut.geom.WB_CoordCollection;
 import wblut.geom.WB_GeometryFactory;
 import wblut.geom.WB_Mesh;
 import wblut.geom.WB_Vector;
+import wblut.hemesh.HEC_IsoSkin;
 import wblut.hemesh.HE_Face;
 import wblut.hemesh.HE_Halfedge;
 import wblut.hemesh.HE_Mesh;
-import wblut.hemesh.HE_MeshStructure;
+import wblut.hemesh.HE_HalfedgeStructure;
 import wblut.hemesh.HE_Selection;
 import wblut.hemesh.HE_Vertex;
 
@@ -140,7 +141,7 @@ public class WB_PShapeFactory {
 	 * @param home
 	 * @return
 	 */
-	public static PShape createFacetedPShape(final HE_MeshStructure mesh, final double offset, final PApplet home) {
+	public static PShape createFacetedPShape(final HE_HalfedgeStructure mesh, final double offset, final PApplet home) {
 
 		final PShape retained = home.createShape();
 		retained.beginShape(PConstants.TRIANGLES);
@@ -309,7 +310,7 @@ public class WB_PShapeFactory {
 	 * @param home
 	 * @return
 	 */
-	public static PShape createFacettedPShape(final HE_MeshStructure mesh, final double offset, final PApplet home) {
+	public static PShape createFacettedPShape(final HE_HalfedgeStructure mesh, final double offset, final PApplet home) {
 		return createFacetedPShape(mesh, offset, home);
 	}
 
@@ -571,7 +572,7 @@ public class WB_PShapeFactory {
 	 * @param home
 	 * @return
 	 */
-	public static PShape createWireframePShape(final HE_MeshStructure mesh, final PApplet home) {
+	public static PShape createWireframePShape(final HE_HalfedgeStructure mesh, final PApplet home) {
 		final PShape retained = home.createShape();
 		if (mesh instanceof HE_Selection) {
 			((HE_Selection) mesh).collectEdgesByFace();
@@ -589,6 +590,76 @@ public class WB_PShapeFactory {
 		}
 		retained.endShape();
 		return retained;
+	}
+
+	public static PShape createSubstratePShape(final HEC_IsoSkin skin, final PApplet home) {
+
+		final PShape retained = home.createShape();
+		retained.beginShape(PApplet.LINES);
+		WB_Coord v;
+		wblut.hemesh.HEC_IsoSkin.Cell cell;
+		for (int i = 0; i < skin.getNumberOfLayers(); i++) {
+			for (int j = 0; j < skin.getCells()[0].length; j++) {
+				cell = skin.getCells()[i][j];
+
+				if (i == 0) {
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[0]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[1]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[0]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[2]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[1]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[3]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[2]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+					v = skin.getGridpositions()[i][cell.getCornerIndices()[3]];
+					retained.vertex(v.xf(), v.yf(), v.zf());
+
+				}
+				v = skin.getGridpositions()[i][cell.getCornerIndices()[0]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[0]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i][cell.getCornerIndices()[1]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[1]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i][cell.getCornerIndices()[2]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[2]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i][cell.getCornerIndices()[3]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[3]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[0]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[1]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[0]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[2]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[1]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[3]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[2]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+				v = skin.getGridpositions()[i + 1][cell.getCornerIndices()[3]];
+				retained.vertex(v.xf(), v.yf(), v.zf());
+
+			}
+		}
+		retained.endShape();
+		retained.disableStyle();
+		return retained;
+
 	}
 
 }

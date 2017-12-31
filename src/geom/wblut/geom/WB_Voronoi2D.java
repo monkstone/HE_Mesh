@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import com.vividsolutions.jts.algorithm.ConvexHull;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -20,10 +22,11 @@ import com.vividsolutions.jts.geom.GeometryCollection;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.PrecisionModel;
 import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 import com.vividsolutions.jts.triangulate.quadedge.QuadEdgeSubdivision;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
+import wblut.math.WB_Epsilon;
 
 /**
  *
@@ -1151,7 +1154,8 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		for (int i = 0; i < npolys; i++) {
@@ -1185,7 +1189,8 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] coordsArray = new Coordinate[coords.size()];
@@ -1225,12 +1230,14 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] coordsArray = new Coordinate[coords.size()];
 		coordsArray = coords.toArray(coordsArray);
-		final ConvexHull ch = new ConvexHull(coordsArray, new GeometryFactory());
+		final ConvexHull ch = new ConvexHull(coordsArray,
+				new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final Geometry hull = ch.getConvexHull();
 		for (int i = 0; i < npolys; i++) {
 			Polygon poly = (Polygon) polys.getGeometryN(i);
@@ -1269,12 +1276,14 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] coordsArray = new Coordinate[coords.size()];
 		coordsArray = coords.toArray(coordsArray);
-		final ConvexHull ch = new ConvexHull(coordsArray, new GeometryFactory());
+		final ConvexHull ch = new ConvexHull(coordsArray,
+				new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final Geometry hull = ch.getConvexHull();
 		for (int i = 0; i < npolys; i++) {
 			Polygon poly = (Polygon) polys.getGeometryN(i);
@@ -1315,12 +1324,14 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] bdcoordsArray = new Coordinate[bdcoords.size()];
 		bdcoordsArray = bdcoords.toArray(bdcoordsArray);
-		final Polygon hull = new GeometryFactory().createPolygon(bdcoordsArray);
+		final Polygon hull = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL))
+				.createPolygon(bdcoordsArray);
 		for (int i = 0; i < npolys; i++) {
 			Polygon poly = (Polygon) polys.getGeometryN(i);
 			final Geometry intersect = poly.intersection(hull);
@@ -1360,7 +1371,8 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 
@@ -1404,7 +1416,8 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 
@@ -1450,12 +1463,14 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		Coordinate[] bdcoordsArray = new Coordinate[bdcoords.size()];
 		bdcoordsArray = bdcoords.toArray(bdcoordsArray);
-		final Polygon hull = new GeometryFactory().createPolygon(bdcoordsArray);
+		final Polygon hull = new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL))
+				.createPolygon(bdcoordsArray);
 		for (int i = 0; i < npolys; i++) {
 			Polygon poly = (Polygon) polys.getGeometryN(i);
 			Geometry intersect = poly.intersection(hull);
@@ -1499,7 +1514,8 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		final Polygon hull = geometryfactory.toJTSPolygon2D(constraint);
@@ -1536,7 +1552,8 @@ class WB_Voronoi2D {
 		final DelaunayTriangulationBuilder dtb = new DelaunayTriangulationBuilder();
 		dtb.setSites(coords);
 		final QuadEdgeSubdivision qes = dtb.getSubdivision();
-		final GeometryCollection polys = (GeometryCollection) qes.getVoronoiDiagram(new GeometryFactory());
+		final GeometryCollection polys = (GeometryCollection) qes
+				.getVoronoiDiagram(new GeometryFactory(new PrecisionModel(WB_Epsilon.PRECISIONMODEL)));
 		final int npolys = polys.getNumGeometries();
 		final List<WB_VoronoiCell2D> result = new FastList<WB_VoronoiCell2D>();
 		final Geometry hull = geometryfactory.toJTSMultiPolygon2D(constraint);

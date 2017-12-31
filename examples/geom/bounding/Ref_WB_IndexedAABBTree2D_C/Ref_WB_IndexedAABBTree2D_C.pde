@@ -58,7 +58,7 @@ void draw() {
   
   int[] closest=tree.getClosestFace(new WB_Point(mouseX,mouseY));
   fill(255,0,0);
-  render.drawTriangle2D(closest,triangulation.getPoints());
+  render.drawTriangle2D(closest,triangulation.getPoints().toList());
   
    strokeWeight(2);
   stroke(0,0,255);

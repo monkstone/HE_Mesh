@@ -125,7 +125,7 @@ class WB_Triangulate3D extends WB_Triangulate2D {
 			}
 		}
 
-		final WB_Triangulation3D result = new WB_Triangulation3D(tetra, tri, edge);
+		final WB_Triangulation3D result = new WB_Triangulation3D(points, tetra, tri, edge);
 		return result;
 	}
 

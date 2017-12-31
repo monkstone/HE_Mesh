@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -251,9 +251,10 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 	 * @return
 	 */
 	public HEC_IsoSurfaceVOL2D setValues(final WB_ScalarParameter function, final double xi, final double yi,
-			final double dx, final double dy) {
-		this.values = new WB_IsoValues2D.Function2D(function, xi, yi, dx, dy);
-
+			final double dx, final double dy, final int width, final int height) {
+		this.values = new WB_IsoValues2D.Function2D(function, xi, yi, dx, dy, width, height);
+		resx = width - 1;
+		resy = height - 1;
 		return this;
 	}
 
@@ -280,7 +281,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 	public HEC_IsoSurfaceVOL2D setValues(final String path, final PApplet home, final int width, final int height) {
 		this.values = new WB_IsoValues2D.ImageGrid2D(path, home, width, height);
 		resx = values.getWidth() - 1;
-		resy = values.getWidth() - 1;
+		resy = values.getHeight() - 1;
 		return this;
 	}
 
@@ -297,7 +298,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 			final WB_IsoValues2D.Mode mode) {
 		this.values = new WB_IsoValues2D.ImageGrid2D(path, home, width, height, mode);
 		resx = values.getWidth() - 1;
-		resy = values.getWidth() - 1;
+		resy = values.getHeight() - 1;
 		return this;
 	}
 
@@ -312,7 +313,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 	public HEC_IsoSurfaceVOL2D setValues(final PImage image, final PApplet home, final int width, final int height) {
 		this.values = new WB_IsoValues2D.ImageGrid2D(image, home, width, height);
 		resx = values.getWidth() - 1;
-		resy = values.getWidth() - 1;
+		resy = values.getHeight() - 1;
 		return this;
 	}
 
@@ -329,7 +330,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 			final WB_IsoValues2D.Mode mode) {
 		this.values = new WB_IsoValues2D.ImageGrid2D(image, home, width, height, mode);
 		resx = values.getWidth() - 1;
-		resy = values.getWidth() - 1;
+		resy = values.getHeight() - 1;
 		return this;
 	}
 
@@ -341,7 +342,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 	public HEC_IsoSurfaceVOL2D setValues(final WB_IsoValues2D values) {
 		this.values = values;
 		resx = values.getWidth() - 1;
-		resy = values.getWidth() - 1;
+		resy = values.getHeight() - 1;
 		return this;
 	}
 
@@ -441,7 +442,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 		final double val0 = value(i, j);
 		final double val1 = value(i + 1, j);
 		xedge = new HE_Vertex(interp(isolevel, p0, p1, val0, val1));
-		xedge.addSelf(offset);
+		xedge.getPosition().addSelf(offset);
 		mesh.add(xedge);
 		xedges.put(index(i, j), xedge);
 		return xedge;
@@ -469,7 +470,7 @@ public class HEC_IsoSurfaceVOL2D extends HEC_Creator {
 		final double val0 = value(i, j);
 		final double val1 = value(i, j + 1);
 		yedge = new HE_Vertex(interp(isolevel, p0, p1, val0, val1));
-		yedge.addSelf(offset);
+		yedge.getPosition().addSelf(offset);
 		mesh.add(yedge);
 		yedges.put(index(i, j), yedge);
 		return yedge;

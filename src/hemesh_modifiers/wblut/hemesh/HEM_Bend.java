@@ -1,9 +1,9 @@
 /*
  * HE_Mesh  Frederik Vanhoutte - www.wblut.com
- * 
+ *
  * https://github.com/wblut/HE_Mesh
  * A Processing/Java library for for creating and manipulating polygonal meshes.
- * 
+ *
  * Public Domain: http://creativecommons.org/publicdomain/zero/1.0/
  */
 
@@ -135,7 +135,7 @@ public class HEM_Bend extends HEM_Modifier {
 				v = vItr.next();
 				final double d = WB_GeometryOp3D.getDistance3D(v, groundPlane);
 				if (!posOnly || d > 0) {
-					v.rotateAboutAxisSelf(d * angleFactor, bendAxis.getOrigin(), bendAxis.getDirection());
+					v.getPosition().rotateAboutAxisSelf(d * angleFactor, bendAxis.getOrigin(), bendAxis.getDirection());
 				}
 			}
 		}
@@ -157,7 +157,7 @@ public class HEM_Bend extends HEM_Modifier {
 				v = vItr.next();
 				final double d = WB_GeometryOp3D.getDistance3D(v, groundPlane);
 				if (!posOnly || d > 0) {
-					v.rotateAboutAxisSelf(d * angleFactor, bendAxis.getOrigin(), bendAxis.getDirection());
+					v.getPosition().rotateAboutAxisSelf(d * angleFactor, bendAxis.getOrigin(), bendAxis.getDirection());
 				}
 			}
 		}

@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+
 import wblut.geom.WB_AABBTree;
 import wblut.geom.WB_GeometryOp3D;
 import wblut.geom.WB_Point;
@@ -155,13 +156,13 @@ public class HEM_PolyLineInversion extends HEM_Modifier {
 				d.normalizeSelf();
 				surf = q.addMulSelf(r, d);
 				d = surf.subToVector3D(v).mulSelf(2);
-				v.addSelf(d);
+				v.getPosition().addSelf(d);
 			} else {
 				d = WB_Vector.subToVector3D(v, q);
 				ri = d.normalizeSelf();
 				rf = r2 * Math.max(icutoff, 1.0 / ri);
 				v.set(q);
-				v.addMulSelf(rf, d);
+				v.getPosition().addMulSelf(rf, d);
 			}
 		}
 		return mesh;
@@ -219,13 +220,13 @@ public class HEM_PolyLineInversion extends HEM_Modifier {
 				d.normalizeSelf();
 				surf = q.addMulSelf(r, d);
 				d = surf.subToVector3D(v).mulSelf(2);
-				v.addSelf(d);
+				v.getPosition().addSelf(d);
 			} else {
 				d = WB_Vector.subToVector3D(v, q);
 				ri = d.normalizeSelf();
 				rf = r2 * Math.max(icutoff, 1.0 / ri);
 				v.set(q);
-				v.addMulSelf(rf, d);
+				v.getPosition().addMulSelf(rf, d);
 			}
 		}
 		return selection.parent;

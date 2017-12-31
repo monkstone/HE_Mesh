@@ -163,7 +163,7 @@ public class HEM_Crocodile extends HEM_Modifier {
 				}
 			}
 			counter.increment();
-			v.addMulSelf(distance.evaluate(v.xd(), v.yd(), v.zd()), v.getVertexNormal());
+			v.getPosition().addMulSelf(distance.evaluate(v.xd(), v.yd(), v.zd()), v.getVertexNormal());
 		}
 		selection.parent.addSelection("spikes", this, spikes);
 		tracker.setStopStatus(this, "Exiting HEM_Crocodile.");
